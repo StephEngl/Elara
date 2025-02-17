@@ -1,20 +1,30 @@
 class World {
   character = new Character();
   enemies = [new PufferFish(), new PufferFish(), new PufferFish()];
+  light = new Light();
+  canvas;
   ctx;
 
   constructor (canvas) {
     this.ctx = canvas.getContext("2d");
+    this.canvas = canvas;
     this.draw();
   }
+
+
   draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.drawImage(this.light.img, this.light.x, this.light.y, this.light.width, this.light.height);
+
     this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.height, this.character.width);
-    for (let i = 0; i < this.enemies.length; i++) {
-        let offset_x = 150 * (i+1);
-        let offset_y = 50 * i;
 
-        this.ctx.drawImage(this.enemies[i].img, this.character.x + offset_x, this.character.y + offset_y, this.character.height, this.character.width);  
+    this.enemies.forEach(enemy => {
+      this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.height, enemy.width);
+    });
+
+    let self = this;
+    requestAnimationFrame(function() {
+      self.draw();
     }
-
-  }
+  )};
 }

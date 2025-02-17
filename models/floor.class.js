@@ -1,0 +1,3 @@
+class Floor extends MovableObject {
+    
+}
