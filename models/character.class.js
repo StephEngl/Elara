@@ -28,6 +28,23 @@ class Character extends MovableObject {
     "img/1_Sharkie/3_Swim/5.png",
     "img/1_Sharkie/3_Swim/6.png",
   ];
+
+  imagesLongIdle = [
+    "img/1_Sharkie/2_Long_IDLE/i1.png",
+    "img/1_Sharkie/2_Long_IDLE/I2.png",
+    "img/1_Sharkie/2_Long_IDLE/I3.png",
+    "img/1_Sharkie/2_Long_IDLE/I4.png",
+    "img/1_Sharkie/2_Long_IDLE/I5.png",
+    "img/1_Sharkie/2_Long_IDLE/I6.png",
+    "img/1_Sharkie/2_Long_IDLE/I7.png",
+    "img/1_Sharkie/2_Long_IDLE/I8.png",
+    "img/1_Sharkie/2_Long_IDLE/I9.png",
+    "img/1_Sharkie/2_Long_IDLE/I10.png",
+    "img/1_Sharkie/2_Long_IDLE/I11.png",
+    "img/1_Sharkie/2_Long_IDLE/I12.png",
+    "img/1_Sharkie/2_Long_IDLE/I13.png",
+    "img/1_Sharkie/2_Long_IDLE/I14.png",
+  ];
   speed = 10; //5
   world;
 
@@ -35,30 +52,61 @@ class Character extends MovableObject {
     super().loadImage("img/1_Sharkie/1_IDLE/1.png");
     this.loadImages(this.imagesSwim);
     this.loadImages(this.imagesIdle);
+    this.loadImages(this.imagesLongIdle);
+    this.applyGravity();
+    this.isLongIdleActive = false;
+    this.longIdleStartIndex = 9; // Index von I10 im imagesLongIdle Array
 
     this.animate();
   }
 
   animate() {
+    let idleTimer = 0;
+    const LONG_IDLE_THRESHOLD = 10000;
+
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
+        idleTimer = 0;
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.x -= this.speed;
         this.otherDirection = true;
+        idleTimer = 0;
       }
+      idleTimer += 1000 / 60;
       this.world.camera_x = -this.x + 50;
     }, 1000 / 60);
 
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.imagesSwim);
-      } else {
+        idleTimer = 0;
+      } else if (idleTimer >= LONG_IDLE_THRESHOLD) {
+        this.playLongIdleAnimation();
+      } 
+      else {
         this.playAnimation(this.imagesIdle);
       }
     }, 150);
+  }
+
+  playLongIdleAnimation() {
+    if (!this.isLongIdleActive) {
+      // Spiele die komplette Animation einmal ab
+      this.playAnimation(this.imagesLongIdle);
+      if (this.currentImage >= this.imagesLongIdle.length) {
+        this.isLongIdleActive = true;
+        this.currentImage = this.longIdleStartIndex;
+      }
+    } else {
+      // Spiele nur die letzten Bilder (I10-I14) in Schleife
+      let i = (this.currentImage - this.longIdleStartIndex) % (this.imagesLongIdle.length - this.longIdleStartIndex);
+      let path = this.imagesLongIdle[i + this.longIdleStartIndex];
+      this.img = this.imageCache[path];
+      this.currentImage++;
+    }
   }
 
   jump() {}
