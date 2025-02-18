@@ -1,5 +1,4 @@
 class Character extends MovableObject {
-  speed = 5;
   imagesIdle = [
     "img/1_Sharkie/1_IDLE/1.png",
     "img/1_Sharkie/1_IDLE/2.png",
@@ -29,6 +28,7 @@ class Character extends MovableObject {
     "img/1_Sharkie/3_Swim/5.png",
     "img/1_Sharkie/3_Swim/6.png",
   ];
+  speed = 5;
   world;
 
   constructor() {
@@ -48,10 +48,10 @@ class Character extends MovableObject {
       if (this.world.keyboard.LEFT) {
         this.x -= this.speed;
         this.otherDirection = true;
-      } 
-      
+      }
+      this.world.camera_x = -this.x + 10;
     }, 1000 / 60);
-    
+
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         //Walk animation
@@ -59,8 +59,7 @@ class Character extends MovableObject {
         let path = this.imagesSwim[i];
         this.img = this.imageCache[path];
         this.currentImage++;
-      }
-      else {
+      } else {
         let j = this.currentImage % this.imagesIdle.length; // let i = 7 % 6 => 1, Rest 1 -> i = 0,1,...,17,0,1,...,17,...
         let path = this.imagesIdle[j];
         this.img = this.imageCache[path];
