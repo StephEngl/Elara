@@ -1,7 +1,7 @@
 class Endboss extends MovableObject {
   height = 500;
   width = 500;
-  y = -50;
+  y = -80;
 
   imagesIntro = [
     "img/endboss/introduce/1.png",
