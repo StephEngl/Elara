@@ -28,7 +28,7 @@ class Character extends MovableObject {
     "img/1_Sharkie/3_Swim/5.png",
     "img/1_Sharkie/3_Swim/6.png",
   ];
-  speed = 5;
+  speed = 10; //5
   world;
 
   constructor() {
@@ -41,29 +41,22 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-      if (this.world.keyboard.RIGHT) {
+      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
       }
-      if (this.world.keyboard.LEFT) {
+      if (this.world.keyboard.LEFT && this.x > 0) {
         this.x -= this.speed;
         this.otherDirection = true;
       }
-      this.world.camera_x = -this.x + 10;
+      this.world.camera_x = -this.x + 50;
     }, 1000 / 60);
 
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        //Walk animation
-        let i = this.currentImage % this.imagesSwim.length; // let i = 7 % 6 => 1, Rest 1 -> i = 0,1,...,17,0,1,...,17,...
-        let path = this.imagesSwim[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+        this.playAnimation(this.imagesSwim);
       } else {
-        let j = this.currentImage % this.imagesIdle.length; // let i = 7 % 6 => 1, Rest 1 -> i = 0,1,...,17,0,1,...,17,...
-        let path = this.imagesIdle[j];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+        this.playAnimation(this.imagesIdle);
       }
     }, 150);
   }

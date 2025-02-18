@@ -7,7 +7,7 @@ class PufferFish extends MovableObject {
     "img/pufferFish/Swim/swim2.png",
     "img/pufferFish/Swim/swim3.png",
     "img/pufferFish/Swim/swim4.png",
-    "img/pufferFish/Swim/swim5.png"
+    "img/pufferFish/Swim/swim5.png",
   ];
 
   constructor() {
@@ -20,18 +20,10 @@ class PufferFish extends MovableObject {
   }
 
   animate() {
-
-  }
-
-  animate() {
     this.moveLeft(this.speed);
 
     setInterval(() => {
-      let i = this.currentImage % this.imagesIdle.length;
-      let path = this.imagesIdle[i];
-      this.img = this.imageCache[path];
-      this.currentImage++;
+      this.playAnimation(this.imagesIdle);
     }, 200);
   }
-
 }

@@ -1,8 +1,6 @@
 class World {
   character = new Character();
-  enemies = [new PufferFish(), new PufferFish(), new PufferFish()];
-  lights = [new Light()];
-  backgroundObjects = [];
+level = level1;
   canvas;
   ctx;
   keyboard;
@@ -12,31 +10,31 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.initializeBackgroundObjects();
+    // this.initializeBackgroundObjects();
     this.setWorld();
     this.draw();
   }
 
-  
-  initializeBackgroundObjects() {
-    const originalObjects = [
-      { imagePath: "img/3_Background/Layers/5_Water/L1.png", x: 0 },
-      { imagePath: "img/3_Background/Layers/5_Water/L2.png", x: 720 },
-      { imagePath: "img/3_Background/Layers/3_Fondo_1/L1.png", x: 0 },
-      { imagePath: "img/3_Background/Layers/3_Fondo_1/L2.png", x: 720 },
-      { imagePath: "img/3_Background/Layers/4_Fondo_2/L1.png", x: 0 },
-      { imagePath: "img/3_Background/Layers/4_Fondo_2/L2.png", x: 720 },
-      { imagePath: "img/3_Background/Layers/2_Floor/L2.png", x: 0 },
-      { imagePath: "img/3_Background/Layers/2_Floor/L1.png", x: 720 },
-    ];
-  
-    for (let i = -2; i <= 2; i++) {
-      originalObjects.forEach(obj => {
-        const x = i * 720 * 2 + obj.x;
-        this.backgroundObjects.push(new BackgroundObject(obj.imagePath, x));
-      });
-    }
-  }
+
+// initializeBackgroundObjects() {
+//   const originalObjects = [
+//     { imagePath: "img/3_Background/Layers/5_Water/L1.png", x: 0 },
+//     { imagePath: "img/3_Background/Layers/5_Water/L2.png", x: 720 },
+//     { imagePath: "img/3_Background/Layers/3_Fondo_1/L1.png", x: 0 },
+//     { imagePath: "img/3_Background/Layers/3_Fondo_1/L2.png", x: 720 },
+//     { imagePath: "img/3_Background/Layers/4_Fondo_2/L1.png", x: 0 },
+//     { imagePath: "img/3_Background/Layers/4_Fondo_2/L2.png", x: 720 },
+//     { imagePath: "img/3_Background/Layers/2_Floor/L2.png", x: 0 },
+//     { imagePath: "img/3_Background/Layers/2_Floor/L1.png", x: 720 },
+//   ];
+
+//   for (let i = -2; i <= 2; i++) {
+//     originalObjects.forEach(obj => {
+//       const x = i * 720 * 2 + obj.x;
+//       this.backgroundObjects.push(new BackgroundObject(obj.imagePath, x));
+//     });
+//   }
+// }
 
   setWorld() {
     this.character.world = this;
@@ -47,9 +45,9 @@ class World {
 
     this.ctx.translate(this.camera_x, 0);
 
-    this.addObjectsToMap(this.backgroundObjects);
-    this.addObjectsToMap(this.lights);
-    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.lights);
+    this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
 
     this.ctx.translate(-this.camera_x, 0);
