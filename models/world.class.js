@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-level = level1;
+  level = level1;
   canvas;
   ctx;
   keyboard;
@@ -15,26 +15,25 @@ level = level1;
     this.draw();
   }
 
+  // initializeBackgroundObjects() {
+  //   const originalObjects = [
+  //     { imagePath: "img/3_Background/Layers/5_Water/L1.png", x: 0 },
+  //     { imagePath: "img/3_Background/Layers/5_Water/L2.png", x: 720 },
+  //     { imagePath: "img/3_Background/Layers/3_Fondo_1/L1.png", x: 0 },
+  //     { imagePath: "img/3_Background/Layers/3_Fondo_1/L2.png", x: 720 },
+  //     { imagePath: "img/3_Background/Layers/4_Fondo_2/L1.png", x: 0 },
+  //     { imagePath: "img/3_Background/Layers/4_Fondo_2/L2.png", x: 720 },
+  //     { imagePath: "img/3_Background/Layers/2_Floor/L2.png", x: 0 },
+  //     { imagePath: "img/3_Background/Layers/2_Floor/L1.png", x: 720 },
+  //   ];
 
-// initializeBackgroundObjects() {
-//   const originalObjects = [
-//     { imagePath: "img/3_Background/Layers/5_Water/L1.png", x: 0 },
-//     { imagePath: "img/3_Background/Layers/5_Water/L2.png", x: 720 },
-//     { imagePath: "img/3_Background/Layers/3_Fondo_1/L1.png", x: 0 },
-//     { imagePath: "img/3_Background/Layers/3_Fondo_1/L2.png", x: 720 },
-//     { imagePath: "img/3_Background/Layers/4_Fondo_2/L1.png", x: 0 },
-//     { imagePath: "img/3_Background/Layers/4_Fondo_2/L2.png", x: 720 },
-//     { imagePath: "img/3_Background/Layers/2_Floor/L2.png", x: 0 },
-//     { imagePath: "img/3_Background/Layers/2_Floor/L1.png", x: 720 },
-//   ];
-
-//   for (let i = -2; i <= 2; i++) {
-//     originalObjects.forEach(obj => {
-//       const x = i * 720 * 2 + obj.x;
-//       this.backgroundObjects.push(new BackgroundObject(obj.imagePath, x));
-//     });
-//   }
-// }
+  //   for (let i = -2; i <= 2; i++) {
+  //     originalObjects.forEach(obj => {
+  //       const x = i * 720 * 2 + obj.x;
+  //       this.backgroundObjects.push(new BackgroundObject(obj.imagePath, x));
+  //     });
+  //   }
+  // }
 
   setWorld() {
     this.character.world = this;

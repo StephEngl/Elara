@@ -53,7 +53,10 @@ class Character extends MovableObject {
     this.loadImages(this.imagesSwim);
     this.loadImages(this.imagesIdle);
     this.loadImages(this.imagesLongIdle);
-    this.applyGravity();
+    // this.applyGravity();
+    this.spawn();
+    this.swimmingDown();
+    this.swimmingUp();
     this.isLongIdleActive = false;
     this.longIdleStartIndex = 9; // Index von I10 im imagesLongIdle Array
 
@@ -66,15 +69,28 @@ class Character extends MovableObject {
 
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-        this.x += this.speed;
-        this.otherDirection = false;
+        this.moveRight();
         idleTimer = 0;
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
-        this.x -= this.speed;
-        this.otherDirection = true;
+        this.moveLeft();
         idleTimer = 0;
       }
+      // if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+      //   this.jump();
+      //   idleTimer = 0;
+      // }
+      if (this.world.keyboard.UP && this.y > 0) {
+        this.speedY = 10;
+        this.swimmingUp();
+        idleTimer = 0;
+      }
+      if (this.world.keyboard.DOWN && this.y < 300) {
+        this.speedY = -10;
+        this.swimmingDown();
+        idleTimer = 0;
+      }
+
       idleTimer += 1000 / 60;
       this.world.camera_x = -this.x + 50;
     }, 1000 / 60);
@@ -85,11 +101,31 @@ class Character extends MovableObject {
         idleTimer = 0;
       } else if (idleTimer >= LONG_IDLE_THRESHOLD) {
         this.playLongIdleAnimation();
-      } 
-      else {
+      } else {
         this.playAnimation(this.imagesIdle);
       }
     }, 150);
+  }
+
+  spawn() {
+    setInterval(() => {
+      if (this.isAboveGround()) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 25);
+  }
+
+  swimmingUp() {
+    this.y -= this.speedY;
+    // this.speedY += this.acceleration;
+}
+
+  swimmingDown() {
+        this.y -= this.speedY;
+        // this.speedY += this.acceleration;
+        console.log(this.speedY);
+        
   }
 
   playLongIdleAnimation() {
@@ -102,12 +138,16 @@ class Character extends MovableObject {
       }
     } else {
       // Spiele nur die letzten Bilder (I10-I14) in Schleife
-      let i = (this.currentImage - this.longIdleStartIndex) % (this.imagesLongIdle.length - this.longIdleStartIndex);
+      let i =
+        (this.currentImage - this.longIdleStartIndex) %
+        (this.imagesLongIdle.length - this.longIdleStartIndex);
       let path = this.imagesLongIdle[i + this.longIdleStartIndex];
       this.img = this.imageCache[path];
       this.currentImage++;
     }
   }
 
-  jump() {}
+  jump() {
+    this.speedY = 30;
+  }
 }

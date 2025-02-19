@@ -10,6 +10,7 @@ class PufferFish extends MovableObject {
     "img/pufferFish/Swim/swim5.png",
   ];
 
+
   constructor() {
     super().loadImage("img/pufferFish/Swim/swim1.png");
     this.loadImages(this.imagesIdle);
@@ -20,7 +21,10 @@ class PufferFish extends MovableObject {
   }
 
   animate() {
-    this.moveLeft(this.speed);
+    setInterval(() => {
+      this.moveLeft(this.speed);
+      this.otherDirection = false;
+    }, 1000 / 60);
 
     setInterval(() => {
       this.playAnimation(this.imagesIdle);
