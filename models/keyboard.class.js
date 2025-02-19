@@ -4,5 +4,4 @@ RIGHT = false; //ArrowRight
 UP = false; //ArrowUp
 DOWN = false; //ArrowDown
 SPACE = false;
-
 }

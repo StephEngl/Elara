@@ -1,10 +1,10 @@
 body {
+    font-family: 'magical_neverland', Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url("img/bg_sea.jpg");
-    /* background-size: cover; */
+    background-image: url("img/bg_forest.jpg");
     background-position: center;
 }
 

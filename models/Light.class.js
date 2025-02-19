@@ -5,7 +5,7 @@ class Light extends MovableObject {
   speed = 0.2;
 
   constructor() {
-    super().loadImage("img/3_Background/Layers/1_Light/1.png");
+    super().loadImage("img/Elara/background/light/1.png");
 
     this.x = Math.random() * 500;
     this.animate();

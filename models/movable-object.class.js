@@ -1,6 +1,6 @@
 class MovableObject {
   x = 10;
-  y = 50; //130
+  y = 80; //130
   img;
   height = 200;
   width = 200;
@@ -21,7 +21,7 @@ class MovableObject {
   }
 
   isAboveGround() {
-    return this.y < 130;
+    return this.y < 230;
   }
 
   loadImage(path) {
@@ -47,7 +47,7 @@ class MovableObject {
   }
 
   moveLeft(speed) {
-    this.x -= this.speed;
+    this.x -= speed;
     this.otherDirection = true;
   }
 

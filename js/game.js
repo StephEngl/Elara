@@ -5,43 +5,40 @@ let keyboard = new Keyboard();
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
-
-
-  // console.log("My character is ", world.character);
 }
 
 window.addEventListener('keydown', (event) => {
-if (event.key === "ArrowRight") {
+if (event.code === "ArrowRight") {
   keyboard.RIGHT = true;
 }
-if (event.key === "ArrowLeft") {
+if (event.code === "ArrowLeft") {
   keyboard.LEFT = true;
 }
-if (event.key === "ArrowUp") {
+if (event.code === "ArrowUp") {
   keyboard.UP = true;
 }
-if (event.key === "ArrowDown") {
+if (event.code === "ArrowDown") {
   keyboard.DOWN = true;
 }
-if (event.key === " ") {
+if (event.code === "Space") {
   keyboard.SPACE = true;
 }
 });
 
 window.addEventListener('keyup', (event) => {
-  if (event.key === "ArrowRight") {
+  if (event.code === "ArrowRight") {
     keyboard.RIGHT = false;
   }
-  if (event.key === "ArrowLeft") {
+  if (event.code === "ArrowLeft") {
     keyboard.LEFT = false;
   }
-  if (event.key === "ArrowUp") {
+  if (event.code === "ArrowUp") {
     keyboard.UP = false;
   }
-  if (event.key === "ArrowDown") {
+  if (event.code === "ArrowDown") {
     keyboard.DOWN = false;
   }
-  if (event.key === " ") {
+  if (event.code === "Space") {
     keyboard.SPACE = false;
   }
   });
