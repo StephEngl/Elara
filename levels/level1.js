@@ -1,5 +1,15 @@
 const level1 = new Level(
-  [new LittleDragon(), new LittleDragon(), new LittleDragon(), new Endboss()],
+  [
+    new LittleDragon(),
+    new LittleDragon(),
+    new LittleDragon(),
+    new LittleDragon(),
+    new BlueSlime(),
+    new BlueSlime(),
+    new BlueSlime(),
+    new BlueSlime(),
+    new Endboss(),
+  ],
   [
     new Light("img/Elara/background/light/1.png"),
     new Light("img/Elara/background/light/2.png"),
@@ -44,7 +54,7 @@ const level1 = new Level(
     new BackgroundObject("img/Elara/background/ground.png", -720),
     new BackgroundObject("img/Elara/background/ground.png", 0),
     new BackgroundObject("img/Elara/background/ground.png", 720),
-    new BackgroundObject("img/Elara/background/ground.png", 720 * 2),   
+    new BackgroundObject("img/Elara/background/ground.png", 720 * 2),
     new BackgroundObject("img/Elara/background/ground.png", 720 * 3),
     new BackgroundObject("img/Elara/background/ground.png", 720 * 4),
     new BackgroundObject("img/Elara/background/ground.png", 720 * 5),
