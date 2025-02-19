@@ -51,6 +51,10 @@ class MovableObject {
     this.otherDirection = true;
   }
 
+  // isMoving() {
+  //   return this.speed != 0;
+  // }
+
   playAnimation(imagesToChange) {
     let i = this.currentImage % imagesToChange.length; // let i = 7 % 6 => 1, Rest 1 -> i = 0,1,...,17,0,1,...,17,...
     let path = imagesToChange[i];

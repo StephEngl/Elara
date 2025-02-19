@@ -89,7 +89,7 @@ class Character extends MovableObject {
       }
 
       this.idleTimer += 1000 / 60;
-      this.world.camera_x = -this.x + 50;
+      this.world.camera_x = -this.x + 30;
     }, 1000 / 60);
 
     setInterval(() => {
@@ -101,10 +101,7 @@ class Character extends MovableObject {
           this.playAnimation(this.imagesWalking);
           this.resetIdleTimer();
         }
-        if (this.world.keyboard.SPACE) {
-          this.playAnimation(this.imagesJump);
-          this.resetIdleTimer();
-        } else if (this.idleTimer >= this.longIdleThreshold) {
+        else if (this.idleTimer >= this.longIdleThreshold) {
           this.playAnimation(this.imagesLongIdle);
         } else {
           this.playAnimation(this.imagesIdle);

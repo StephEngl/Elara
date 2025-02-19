@@ -1,41 +1,26 @@
 class Endboss extends MovableObject {
-  height = 500;
-  width = 500;
-  y = -80;
+  height = 600;
+  width = 600;
+  y = -40;
 
   imagesIntro = [
-    "img/endboss/introduce/1.png",
-    "img/endboss/introduce/2.png",
-    "img/endboss/introduce/3.png",
-    "img/endboss/introduce/4.png",
-    "img/endboss/introduce/5.png",
-    "img/endboss/introduce/6.png",
-    "img/endboss/introduce/7.png",
-    "img/endboss/introduce/8.png",
-    "img/endboss/introduce/9.png",
-    "img/endboss/introduce/10.png",
+    "img/Elara/enemies/endboss/dragon/Walk1.png",
+    "img/Elara/enemies/endboss/dragon/Walk2.png",
+    "img/Elara/enemies/endboss/dragon/Walk3.png",
+    "img/Elara/enemies/endboss/dragon/Walk4.png",
+    "img/Elara/enemies/endboss/dragon/Walk5.png",
   ];
 
-  imagesFloating = [
-    "img/endboss/floating/1.png",
-    "img/endboss/floating/2.png",
-    "img/endboss/floating/3.png",
-    "img/endboss/floating/4.png",
-    "img/endboss/floating/5.png",
-    "img/endboss/floating/6.png",
-    "img/endboss/floating/7.png",
-    "img/endboss/floating/8.png",
-    "img/endboss/floating/9.png",
-    "img/endboss/floating/10.png",
-    "img/endboss/floating/11.png",
-    "img/endboss/floating/12.png",
-    "img/endboss/floating/13.png",
+  imagesIdle = [
+    "img/Elara/enemies/endboss/dragon/Idle1.png",
+    "img/Elara/enemies/endboss/dragon/Idle2.png",
+    "img/Elara/enemies/endboss/dragon/Idle3.png",
   ];
 
   constructor() {
     super().loadImage(this.imagesIntro[6]);
     this.loadImages(this.imagesIntro);
-    this.loadImages(this.imagesFloating);
+    this.loadImages(this.imagesIdle);
 
     this.x = 2200;
     this.animate();
@@ -44,7 +29,8 @@ class Endboss extends MovableObject {
   animate() {
     this.playAnimation(this.imagesIntro);
     setInterval(() => {
-      this.playAnimation(this.imagesFloating);
-    }, 200);
+      this.playAnimation(this.imagesIdle);
+      this.otherDirection = true;
+    }, 250);
   }
 }

@@ -1,5 +1,5 @@
 const level1 = new Level(
-  [new PufferFish(), new PufferFish(), new PufferFish(), new Endboss()],
+  [new LittleDragon(), new LittleDragon(), new LittleDragon(), new Endboss()],
   [
     new Light("img/Elara/background/light/1.png"),
     new Light("img/Elara/background/light/2.png"),
