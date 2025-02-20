@@ -83,6 +83,7 @@ class Character extends MovableObject {
   world;
   idleTimer = 0;
   longIdleThreshold = 10000;
+  animationInterval;
 
   constructor() {
     super().setImage("img/Elara/mage_elara/Jump/jump1.png");
@@ -119,9 +120,10 @@ class Character extends MovableObject {
       this.world.camera_x = -this.x + 30;
     }, 1000 / 60);
 
-    setInterval(() => {
+    this.animationInterval = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.imagesDying);
+        // clearInterval(this.animationInterval);
       } else if (this.isHurt()) {
         this.playAnimation(this.imagesHurt);
       } else if (this.isAboveGround()) {
