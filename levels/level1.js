@@ -69,4 +69,5 @@ const level1 = new Level(
     new BackgroundObject("img/Elara/background/ground.png", 720 * 4),
     new BackgroundObject("img/Elara/background/ground.png", 720 * 5),
   ]
+  [new Statusbar("img/Elara/statusbar/lifes/100.png")]
 );
