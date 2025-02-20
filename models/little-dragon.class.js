@@ -8,6 +8,12 @@ class LittleDragon extends MovableObject {
     "img/Elara/enemies/small_dragon/Walk3.png",
     "img/Elara/enemies/small_dragon/Walk4.png"
   ];
+  offset = {
+    top: 60,
+    right: 80,
+    bottom: 110,
+    left: 30,
+  };
 
 
   constructor() {

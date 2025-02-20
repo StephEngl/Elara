@@ -74,10 +74,10 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Death/death10.png",
   ];
   offset = {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    top: 90,
+    right: 140,
+    bottom: 120,
+    left: 40,
   };
   speed = 5; //5
   world;

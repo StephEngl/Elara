@@ -1,23 +1,16 @@
-class MovableObject {
-  x = 10;
-  y = 80; //130
-  img;
-  height = 200;
-  width = 200;
+class MovableObject extends DrawableObject {
   speed;
-  imageCache = {};
-  currentImage = 0;
   otherDirection = false;
   speedY = 0;
   acceleration = 2.5;
+  energy = 100;
+  lastHit;
   offset = {
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
   };
-  energy = 100;
-  lastHit;
 
   applyGravity() {
     setInterval(() => {
@@ -32,27 +25,6 @@ class MovableObject {
     return this.y < 230;
   }
 
-  setImage(path) {
-    this.img = new Image(); //this.img = document.getElemendById('image') <img id="image">
-    this.img.src = path;
-  }
-
-  /**
-   *
-   * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
-   */
-  loadImages(arr) {
-    arr.forEach((path) => {
-      let img = new Image();
-      img.src = path;
-      this.imageCache[path] = img;
-    });
-  }
-
-  draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-  }
-
   drawFrame(ctx) {
     if (
       this instanceof Character ||
@@ -63,6 +35,11 @@ class MovableObject {
       ctx.lineWidth = "5";
       ctx.strokeStyle = "blue";
       ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.lineWidth = "3";
+      ctx.strokeStyle = "red";
+      ctx.rect(this.x +this.offset.left, this.y+this.offset.top, this.width -this.offset.right, this.height - this.offset.bottom);
       ctx.stroke();
     }
   }
@@ -88,9 +65,7 @@ class MovableObject {
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
     timePassed = timePassed / 1000;
-    console.log(timePassed);
     return timePassed < 1;
-    
   }
 
   isDead() {

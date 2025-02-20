@@ -13,6 +13,12 @@ class BlueSlime extends MovableObject {
     "img/Elara/enemies/blue_slime/walk/walk8.png",
   
   ];
+  offset = {
+    top: 120,
+    right: 100,
+    bottom: 120,
+    left: 50,
+  };
 
 
   constructor() {
