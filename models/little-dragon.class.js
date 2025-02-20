@@ -11,7 +11,7 @@ class LittleDragon extends MovableObject {
 
 
   constructor() {
-    super().loadImage("img/Elara/enemies/small_dragon/Idle1.png");
+    super().setImage("img/Elara/enemies/small_dragon/Idle1.png");
     this.loadImages(this.imagesIdle);
 
     this.x = 500 + Math.random() * 3000;
@@ -22,6 +22,7 @@ class LittleDragon extends MovableObject {
   animate() {
     setInterval(() => {
       this.moveLeft(this.speed);
+      this.otherDirection = true;
     }, 1000 / 60);
 
     setInterval(() => {

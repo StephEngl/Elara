@@ -46,7 +46,6 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Idle/idle13.png",
     "img/Elara/mage_elara/Idle/idle14.png",
   ];
-
   imagesJump = [
     "img/Elara/mage_elara/Jump/jump1.png",
     "img/Elara/mage_elara/Jump/jump2.png",
@@ -56,18 +55,44 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Jump/jump6.png",
     "img/Elara/mage_elara/Jump/jump7.png",
   ];
+  imagesHurt = [
+    "img/Elara/mage_elara/Hurt/hurt1.png",
+    "img/Elara/mage_elara/Hurt/hurt2.png",
+    "img/Elara/mage_elara/Hurt/hurt3.png",
+    "img/Elara/mage_elara/Hurt/hurt4.png",
+  ];
+  imagesDying = [
+    "img/Elara/mage_elara/Death/death1.png",
+    "img/Elara/mage_elara/Death/death2.png",
+    "img/Elara/mage_elara/Death/death3.png",
+    "img/Elara/mage_elara/Death/death4.png",
+    "img/Elara/mage_elara/Death/death5.png",
+    "img/Elara/mage_elara/Death/death6.png",
+    "img/Elara/mage_elara/Death/death7.png",
+    "img/Elara/mage_elara/Death/death8.png",
+    "img/Elara/mage_elara/Death/death9.png",
+    "img/Elara/mage_elara/Death/death10.png",
+  ];
+  offset = {
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  };
   speed = 5; //5
   world;
   idleTimer = 0;
   longIdleThreshold = 10000;
 
   constructor() {
-    super().loadImage("img/Elara/mage_elara/Jump/jump1.png");
+    super().setImage("img/Elara/mage_elara/Jump/jump1.png");
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesIdle);
     this.loadImages(this.imagesLongIdle);
     this.loadImages(this.imagesJump);
+    this.loadImages(this.imagesHurt);
+    this.loadImages(this.imagesDying);
     this.applyGravity();
     this.isLongIdleActive = false;
     this.animate();
@@ -77,10 +102,12 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
+        this.otherDirection = false;
         this.resetIdleTimer();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft(this.speed);
+        this.otherDirection = true;
         this.resetIdleTimer();
       }
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -93,21 +120,24 @@ class Character extends MovableObject {
     }, 1000 / 60);
 
     setInterval(() => {
-      if (this.isAboveGround()) {
+      if (this.isDead()) {
+        this.playAnimation(this.imagesDying);
+      } else if (this.isHurt()) {
+        this.playAnimation(this.imagesHurt);
+      } else if (this.isAboveGround()) {
         this.playAnimation(this.imagesJump);
         this.resetIdleTimer();
       } else {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
           this.playAnimation(this.imagesWalking);
           this.resetIdleTimer();
-        }
-        else if (this.idleTimer >= this.longIdleThreshold) {
+        } else if (this.idleTimer >= this.longIdleThreshold) {
           this.playAnimation(this.imagesLongIdle);
         } else {
           this.playAnimation(this.imagesIdle);
         }
       }
-    },  200);
+    }, 200);
   }
 
   jump() {

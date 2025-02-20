@@ -16,7 +16,7 @@ class BlueSlime extends MovableObject {
 
 
   constructor() {
-    super().loadImage("img/Elara/enemies/blue_slime/walk/walk1.png");
+    super().setImage("img/Elara/enemies/blue_slime/walk/walk1.png");
     this.loadImages(this.imagesWalking);
 
     this.x = 1000 + Math.random() * 3000;
@@ -27,6 +27,7 @@ class BlueSlime extends MovableObject {
   animate() {
     setInterval(() => {
       this.moveLeft(this.speed);
+      this.otherDirection = true;
     }, 1000 / 60);
 
     setInterval(() => {
