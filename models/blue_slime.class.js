@@ -15,8 +15,8 @@ class BlueSlime extends MovableObject {
   ];
   offset = {
     top: 120,
-    right: 100,
-    bottom: 120,
+    right: 50,
+    bottom: 0,
     left: 50,
   };
 

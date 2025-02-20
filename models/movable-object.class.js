@@ -5,12 +5,6 @@ class MovableObject extends DrawableObject {
   acceleration = 2.5;
   energy = 100;
   lastHit;
-  offset = {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  };
 
   applyGravity() {
     setInterval(() => {
@@ -25,31 +19,16 @@ class MovableObject extends DrawableObject {
     return this.y < 230;
   }
 
-  drawFrame(ctx) {
-    if (
-      this instanceof Character ||
-      this instanceof LittleDragon ||
-      this instanceof BlueSlime
-    ) {
-      ctx.beginPath();
-      ctx.lineWidth = "5";
-      ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.lineWidth = "3";
-      ctx.strokeStyle = "red";
-      ctx.rect(this.x +this.offset.left, this.y+this.offset.top, this.width -this.offset.right, this.height - this.offset.bottom);
-      ctx.stroke();
-    }
-  }
-
   isColliding(mo) {
+    let cond1 = this.x + this.width - this.offset.right >= mo.x + mo.offset.left
+    let cond2 = this.x + this.offset.left <= mo.x + mo.width - mo.offset.right
+    let cond3 = this.y + this.height - this.offset.bottom >= mo.y + mo.offset.top 
+    let cond4 = this.y + this.offset.top <= mo.y + mo.height - mo.offset.bottom
     return (
-      this.x + this.width - this.offset.right >= mo.x + mo.offset.left &&
-      this.x + this.offset.left <= mo.x + mo.width - mo.offset.right &&
-      this.y + this.height - this.offset.bottom >= mo.y + mo.offset.top &&
-      this.y + this.offset.top <= mo.y + mo.height - mo.offset.bottom
+      cond1 &&
+      cond2 &&
+      cond3 &&
+      cond4
     );
   }
 

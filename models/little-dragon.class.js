@@ -10,8 +10,8 @@ class LittleDragon extends MovableObject {
   ];
   offset = {
     top: 60,
-    right: 80,
-    bottom: 110,
+    right: 50,
+    bottom: 50,
     left: 30,
   };
 

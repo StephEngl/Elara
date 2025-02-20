@@ -1,7 +1,10 @@
 class Endboss extends MovableObject {
-  height = 600;
-  width = 600;
-  y = -40;
+  offset = {
+    top: 300,
+    right: 100,
+    bottom: 150,
+    left: 150,
+  };
 
   imagesIntro = [
     "img/Elara/enemies/endboss/dragon/Walk1.png",
@@ -21,8 +24,10 @@ class Endboss extends MovableObject {
     super().setImage(this.imagesIntro[1]);
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesIdle);
-
     this.x = 3800;
+    this.height = 600;
+    this.width = 600;
+    this.y = -40;
     this.animate();
   }
 
