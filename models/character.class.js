@@ -81,21 +81,12 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Attack/attack5.png",
     "img/Elara/mage_elara/Attack/attack6.png",
     "img/Elara/mage_elara/Attack/attack7.png",
-  ]
-  imagesFireball = [
-    "img/Elara/mage_elara/Fire/fire1.png",
-    "img/Elara/mage_elara/Fire/fire2.png",
-    "img/Elara/mage_elara/Fire/fire3.png",
-    "img/Elara/mage_elara/Fire/fire4.png",
-    "img/Elara/mage_elara/Fire/fire5.png",
-    "img/Elara/mage_elara/Fire/fire6.png",
-    "img/Elara/mage_elara/Fire/fire7.png",
-    "img/Elara/mage_elara/Fire/fire8.png",
-    "img/Elara/mage_elara/Fire/fire9.png",
   ];
+
   world;
   idleTimer = 0;
   longIdleThreshold = 10000;
+  isAttacking = false;
   audioDyingSound = new Audio("assets/audio/elara_dying_sound.mp3");
   audioHittingSound = new Audio("assets/audio/hurting_sound.mp3");
   audioJumpingSound = new Audio("assets/audio/elara_jumping_sound.mp3");
@@ -116,6 +107,7 @@ class Character extends MovableObject {
     this.loadImages(this.imagesJump);
     this.loadImages(this.imagesHurt);
     this.loadImages(this.imagesDying);
+    this.loadImages(this.imagesAttack);
     this.applyGravity();
     this.isLongIdleActive = false;
     this.animate();
@@ -135,7 +127,7 @@ class Character extends MovableObject {
         this.otherDirection = true;
         this.resetIdleTimer();
       }
-      if (this.world.keyboard.UP && !this.isAboveGround()) {
+      if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
         this.resetIdleTimer();
       }

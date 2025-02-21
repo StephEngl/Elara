@@ -5,6 +5,8 @@ class World {
   camera_x;
   flyingObjects = [];
 
+
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -12,21 +14,35 @@ class World {
     this.setWorld();
     this.draw();
     this.checkCollisions();
+    this.run();
   }
 
   setWorld() {
     this.character.world = this;
   }
 
-  checkCollisions() {
+  run() {
     setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy) && this.character.energy > 0) {
-          this.character.hit();
-          this.statusbar.setPercentage(this.character.energy);
-        }
-      });
-    }, 200);
+      this.checkCollisions();
+      this.checkFlyingObjects();
+    }, 300);
+  }
+
+  checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy) && this.character.energy > 0) {
+        this.character.hit();
+        this.statusbar.setPercentage(this.character.energy);
+      }
+    });
+  }
+
+  checkFlyingObjects() {
+    if (this.keyboard.D) {
+      this.character.playAnimation(this.character.imagesAttack);
+      let fireball = new FlyingObject(this.character.x + this.character.offset.right, this.character.y + this.character.offset.top);
+      this.flyingObjects.push(fireball);
+    }
   }
 
   draw() {
@@ -41,9 +57,10 @@ class World {
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectsToMap(this.level.lights);
-    if(!gameOver) {
+    if (!gameOver) {
       this.addObjectsToMap(this.level.enemies);
     }
+    this.addObjectsToMap(this.flyingObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.foregroundObjects);
 

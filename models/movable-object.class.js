@@ -20,20 +20,21 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    return this.y < 230;
+    if (this instanceof FlyingObject) {
+      return true;
+    } else {
+      return this.y < 230;
+    }
   }
 
   isColliding(mo) {
-    let cond1 = this.x + this.width - this.offset.right >= mo.x + mo.offset.left
-    let cond2 = this.x + this.offset.left <= mo.x + mo.width - mo.offset.right
-    let cond3 = this.y + this.height - this.offset.bottom >= mo.y + mo.offset.top 
-    let cond4 = this.y + this.offset.top <= mo.y + mo.height - mo.offset.bottom
-    return (
-      cond1 &&
-      cond2 &&
-      cond3 &&
-      cond4
-    );
+    let cond1 =
+      this.x + this.width - this.offset.right >= mo.x + mo.offset.left;
+    let cond2 = this.x + this.offset.left <= mo.x + mo.width - mo.offset.right;
+    let cond3 =
+      this.y + this.height - this.offset.bottom >= mo.y + mo.offset.top;
+    let cond4 = this.y + this.offset.top <= mo.y + mo.height - mo.offset.bottom;
+    return cond1 && cond2 && cond3 && cond4;
   }
 
   hit() {
