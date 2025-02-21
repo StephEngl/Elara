@@ -20,21 +20,16 @@ class FlyingObject extends MovableObject {
     this.width = 50;
     this.height = 50;
     this.speedX = 10;
+    this.acceleration = 0.5;
+
     this.fire();
   }
 
   fire() {
     this.playAnimation(this.imagesFireball);
-    this.applyGravity();
+    // this.applyGravity();
     setInterval(() => {
-      this.x += 30;
-    }, 30);
-  }
-
-  playAnimation(imagesToChange) {
-    let i = this.currentImage % imagesToChange.length; // let i = 7 % 6 => 1, Rest 1 -> i = 0,1,...,17,0,1,...,17,...
-    let path = imagesToChange[i];
-    this.img = this.imageCache[path];
-    this.currentImage++;
+      this.x += 40;
+    }, 500);
   }
 }
