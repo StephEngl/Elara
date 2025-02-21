@@ -1,35 +1,57 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="img/Elara/mage_elara/Idle/idle1.png" type="image/x-icon">
-    <title>Elara und der verzauberte Hain</title>
-<style>
-  @font-face {
-    font-family: 'magical_neverland';
-    src: url("fonts/Magical Neverland.ttf");
-  }
-</style>
-    <link rel="stylesheet" href="style.css" />
-    <script src="models/drawable-objects.class.js"></script>
-    <script src="models/movable-object.class.js"></script>
-    <script src="models/light.class.js"></script>
-    <script src="models/background-object.class.js"></script>
-    <script src="models/character.class.js"></script>
-    <script src="models/little-dragon.class.js"></script>
-    <script src="models/blue_slime.class.js"></script>
-    <script src="models/statusbar.class.js"></script>
-    <script src="models/world.class.js"></script>
-    <script src="models/keyboard.class.js"></script>
-    <script src="models/level.class.js"></script>
-    <script src="models/endboss.class.js"></script>
-    <script src="levels/level1.js"></script>
-    <script src="js/game.js"></script>
-  </head>
-  <body onload="init()">
-    <h1>Elara und der verzauberte Hain</h1>
-
-    <canvas width="720px" height="480px" id="canvas"></canvas>
-  </body>
+  <html translate="no">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+        rel="shortcut icon"
+        href="img/Elara/mage_elara/Idle/idle1.png"
+        type="image/x-icon"
+      />
+      <title>Elara und der verzauberte Hain</title>
+      <style>
+        @font-face {
+          font-family: "magical_neverland";
+          src: url("fonts/Magical Neverland.ttf");
+        }
+      </style>
+      <link rel="stylesheet" href="style.css" />
+      <script src="models/drawable-objects.class.js"></script>
+      <script src="models/movable-object.class.js"></script>
+      <script src="models/light.class.js"></script>
+      <script src="models/background-object.class.js"></script>
+      <script src="models/character.class.js"></script>
+      <script src="models/little-dragon.class.js"></script>
+      <script src="models/blue_slime.class.js"></script>
+      <script src="models/statusbar.class.js"></script>
+      <script src="models/world.class.js"></script>
+      <script src="models/keyboard.class.js"></script>
+      <script src="models/level.class.js"></script>
+      <script src="models/endboss.class.js"></script>
+      <script src="models/flyingObject.class.js"></script>
+      <script src="levels/level1.js"></script>
+      <script src="js/game.js"></script>
+    </head>
+    <body onload="init()">
+      <div class="content">
+        <h1>Elara und der verzauberte Hain</h1>
+        <div class="canvas_container">
+          <canvas width="720px" height="480px" id="canvas"> </canvas>
+          <dialog id="orientationDialog">
+            <p>Please, turn your device to play</p>
+          </dialog>
+  
+          <dialog id="gameOverDialog">
+            <div class="dialog_container">
+              <h2>Game Over</h2>
+              <p>Dein Spiel ist zu Ende!</p>
+              <button id="restartButton">Neu starten</button>
+            </div>
+          </dialog>
+        </div>
+        
+      </div>
+    </body>
+  </html>
 </html>

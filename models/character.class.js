@@ -79,11 +79,10 @@ class Character extends MovableObject {
     bottom: 20,
     left: 40,
   };
-  speed = 5; //5
+  speed = 5;
   world;
   idleTimer = 0;
   longIdleThreshold = 10000;
-  animationInterval;
 
   constructor() {
     super().setImage("img/Elara/mage_elara/Jump/jump1.png");
@@ -97,6 +96,8 @@ class Character extends MovableObject {
     this.applyGravity();
     this.isLongIdleActive = false;
     this.animate();
+    this.deathAnimationFrame = 0;
+    this.deathAnimationComplete = false;
   }
 
   animate() {
@@ -120,10 +121,12 @@ class Character extends MovableObject {
       this.world.camera_x = -this.x + 30;
     }, 1000 / 60);
 
-    this.animationInterval = setInterval(() => {
+    setInterval(() => {
       if (this.isDead()) {
-        this.playAnimation(this.imagesDying);
-        // clearInterval(this.animationInterval);
+        this.playDeathAnimation(this.imagesDying);
+        if (this.deathAnimationComplete) {
+          stopGame();
+        }
       } else if (this.isHurt()) {
         this.playAnimation(this.imagesHurt);
       } else if (this.isAboveGround()) {
@@ -148,5 +151,21 @@ class Character extends MovableObject {
 
   resetIdleTimer() {
     this.idleTimer = 0;
+  }
+
+  playDeathAnimation() {
+    if (!this.deathAnimationComplete) {
+      this.img = this.imageCache[this.imagesDying[this.deathAnimationFrame]];
+      this.deathAnimationFrame++;
+      if (this.deathAnimationFrame >= this.imagesDying.length) {
+        this.deathAnimationComplete = true;
+        this.deathAnimationFrame = this.imagesDying.length - 2; // Setzt auf vorletztes Bild zurück
+      }
+    } else {
+      // Wechselt zwischen den letzten beiden Bildern
+      this.deathAnimationFrame =
+        this.imagesDying.length - 2 + (this.deathAnimationFrame % 2);
+      this.img = this.imageCache[this.imagesDying[this.deathAnimationFrame]];
+    }
   }
 }

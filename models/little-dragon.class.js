@@ -1,25 +1,23 @@
 class LittleDragon extends MovableObject {
-  y = 320;
-  width = 150;
-  height = 150;
   imagesIdle = [
     "img/Elara/enemies/small_dragon/Walk1.png",
     "img/Elara/enemies/small_dragon/Walk2.png",
     "img/Elara/enemies/small_dragon/Walk3.png",
     "img/Elara/enemies/small_dragon/Walk4.png"
   ];
-  offset = {
-    top: 60,
-    right: 50,
-    bottom: 50,
-    left: 30,
-  };
-
 
   constructor() {
     super().setImage("img/Elara/enemies/small_dragon/Idle1.png");
     this.loadImages(this.imagesIdle);
-
+    this.offset = {
+      top: 60,
+      right: 50,
+      bottom: 50,
+      left: 30,
+    };
+    this.y = 320;
+    this.width = 150;
+    this.height = 150;
     this.x = 500 + Math.random() * 3000;
     this.speed = 0.3 + Math.random() * 0.4;
     this.animate();

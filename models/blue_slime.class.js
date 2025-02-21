@@ -20,11 +20,9 @@ class BlueSlime extends MovableObject {
     left: 50,
   };
 
-
   constructor() {
     super().setImage("img/Elara/enemies/blue_slime/walk/walk1.png");
     this.loadImages(this.imagesWalking);
-
     this.x = 1000 + Math.random() * 3000;
     this.speed = 0.3 + Math.random() * 0.4;
     this.animate();
