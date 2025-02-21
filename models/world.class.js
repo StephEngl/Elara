@@ -1,11 +1,8 @@
 class World {
   character = new Character();
-  level = level1;
-  canvas;
-  ctx;
-  keyboard;
-  camera_x;
   statusbar = new Statusbar();
+  level = level1;
+  camera_x;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");

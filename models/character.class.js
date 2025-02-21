@@ -76,6 +76,9 @@ class Character extends MovableObject {
   world;
   idleTimer = 0;
   longIdleThreshold = 10000;
+  audioDyingSound = new Audio("assets/audio/elara_dying_sound.mp3");
+  audioHittingSound = new Audio("assets/audio/hurting_sound.mp3");
+  audioJumpingSound = new Audio("assets/audio/elara_jumping_sound.mp3");
 
   constructor() {
     super().setImage("img/Elara/mage_elara/Jump/jump1.png");
@@ -129,6 +132,7 @@ class Character extends MovableObject {
         }
       } else if (this.isHurt()) {
         this.playAnimation(this.imagesHurt);
+        this.audioHittingSound.play();
       } else if (this.isAboveGround()) {
         this.playAnimation(this.imagesJump);
         this.resetIdleTimer();
@@ -147,6 +151,7 @@ class Character extends MovableObject {
 
   jump() {
     this.speedY = 30;
+    this.audioJumpingSound.play();
   }
 
   resetIdleTimer() {
@@ -155,6 +160,8 @@ class Character extends MovableObject {
 
   playDeathAnimation() {
     if (!this.deathAnimationComplete) {
+      this.audioDyingSound.play();
+      this.audioDyingSound.playbackRate = 0.7;
       this.img = this.imageCache[this.imagesDying[this.deathAnimationFrame]];
       this.deathAnimationFrame++;
       if (this.deathAnimationFrame >= this.imagesDying.length) {

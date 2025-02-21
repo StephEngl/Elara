@@ -1,10 +1,14 @@
 class MovableObject extends DrawableObject {
-  speed;
-  otherDirection = false;
-  speedY = 0;
-  acceleration = 2.5;
-  energy = 100;
   lastHit;
+
+  constructor() {
+    super();
+    this.speed;
+    this.otherDirection = false;
+    this.speedY = 0;
+    this.acceleration = 2.5;
+    this.energy = 100;
+  }
 
   applyGravity() {
     setInterval(() => {
