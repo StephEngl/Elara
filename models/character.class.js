@@ -73,6 +73,26 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Death/death9.png",
     "img/Elara/mage_elara/Death/death10.png",
   ];
+  imagesAttack = [
+    "img/Elara/mage_elara/Attack/attack1.png",
+    "img/Elara/mage_elara/Attack/attack2.png",
+    "img/Elara/mage_elara/Attack/attack3.png",
+    "img/Elara/mage_elara/Attack/attack4.png",
+    "img/Elara/mage_elara/Attack/attack5.png",
+    "img/Elara/mage_elara/Attack/attack6.png",
+    "img/Elara/mage_elara/Attack/attack7.png",
+  ]
+  imagesFireball = [
+    "img/Elara/mage_elara/Fire/fire1.png",
+    "img/Elara/mage_elara/Fire/fire2.png",
+    "img/Elara/mage_elara/Fire/fire3.png",
+    "img/Elara/mage_elara/Fire/fire4.png",
+    "img/Elara/mage_elara/Fire/fire5.png",
+    "img/Elara/mage_elara/Fire/fire6.png",
+    "img/Elara/mage_elara/Fire/fire7.png",
+    "img/Elara/mage_elara/Fire/fire8.png",
+    "img/Elara/mage_elara/Fire/fire9.png",
+  ];
   world;
   idleTimer = 0;
   longIdleThreshold = 10000;
@@ -115,7 +135,7 @@ class Character extends MovableObject {
         this.otherDirection = true;
         this.resetIdleTimer();
       }
-      if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+      if (this.world.keyboard.UP && !this.isAboveGround()) {
         this.jump();
         this.resetIdleTimer();
       }

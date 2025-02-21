@@ -3,6 +3,7 @@ class World {
   statusbar = new Statusbar();
   level = level1;
   camera_x;
+  flyingObjects = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
