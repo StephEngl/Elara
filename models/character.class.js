@@ -73,19 +73,19 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Death/death9.png",
     "img/Elara/mage_elara/Death/death10.png",
   ];
-  offset = {
-    top: 90,
-    right: 100,
-    bottom: 20,
-    left: 40,
-  };
-  speed = 5;
   world;
   idleTimer = 0;
   longIdleThreshold = 10000;
 
   constructor() {
     super().setImage("img/Elara/mage_elara/Jump/jump1.png");
+    this.offset = {
+      top: 90,
+      right: 100,
+      bottom: 20,
+      left: 40,
+    };
+    this.speed = 5;
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesIdle);
