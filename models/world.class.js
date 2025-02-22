@@ -54,7 +54,6 @@ class World {
     }
   }
 
-
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && this.character.energy > 0) {
@@ -78,23 +77,7 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (!this.isPaused) {
-      this.ctx.translate(this.camera_x, 0);
-      this.addObjectsToMap(this.level.backgroundObjects);
-
-      this.ctx.translate(-this.camera_x, 0);
-      // Space for fixed objects//
-      this.addToMap(this.statusbar);
-      this.ctx.translate(this.camera_x, 0);
-
-      this.addObjectsToMap(this.level.lights);
-      if (!gameOver) {
-        this.addObjectsToMap(this.level.enemies);
-      }
-      this.addObjectsToMap(this.flyingObjects);
-      this.addToMap(this.character);
-      this.addObjectsToMap(this.level.foregroundObjects);
-
-      this.ctx.translate(-this.camera_x, 0);
+      this.drawGameElements();
     } else {
       this.drawPauseScreen();
     }
@@ -104,12 +87,46 @@ class World {
     });
   }
 
+  drawGameElements() {
+    this.ctx.translate(this.camera_x, 0);
+    this.drawGameObjects();
+    this.drawFixedObjects();
+    this.ctx.translate(-this.camera_x, 0);
+  }
+
+  drawGameObjects() { 
+    this.drawBackground();
+    this.drawLights();
+    if (!gameOver) this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.flyingObjects);
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.level.foregroundObjects);
+  }
+
+  drawBackground() {
+    this.addObjectsToMap(this.level.backgroundObjects);
+  }
+
+  drawLights() {
+    this.addObjectsToMap(this.level.lights);
+  }
+
+  drawFixedObjects() {
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusbar);
+    this.ctx.translate(this.camera_x, 0);
+  }
+
   drawPauseScreen() {
     this.ctx.font = "30px magical_neverland";
     this.ctx.fillStyle = "white";
     const text = "Spiel pausiert";
     const textWidth = this.ctx.measureText(text).width;
-    this.ctx.fillText(text, (this.canvas.width - textWidth) / 2, this.canvas.height / 2);
+    this.ctx.fillText(
+      text,
+      (this.canvas.width - textWidth) / 2,
+      this.canvas.height / 2
+    );
   }
 
   addObjectsToMap(objects) {
@@ -122,10 +139,8 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
-
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx);
-
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }
