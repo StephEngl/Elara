@@ -26,6 +26,7 @@ class World {
       if (!this.isPaused) {
         this.checkCollisions();
         this.checkFlyingObjects();
+        this.checkJumpingOn();
       }
     }, 300);
   }
@@ -59,6 +60,15 @@ class World {
       if (this.character.isColliding(enemy) && this.character.energy > 0) {
         this.character.hit();
         this.statusbar.setPercentage(this.character.energy);
+      }
+    });
+  }
+
+  checkJumpingOn() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isJumpedOn(enemy)) {
+        console.log(`Elara jumped on ${enemy}`);
+        
       }
     });
   }
