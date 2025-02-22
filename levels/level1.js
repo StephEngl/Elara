@@ -6,13 +6,13 @@ function initLevel() {
   level1 = new Level(
     [
       new LittleDragon(),
-      new LittleDragon(),
-      new LittleDragon(),
-      new LittleDragon(),
+      // new LittleDragon(),
+      // new LittleDragon(),
+      // new LittleDragon(),
       new BlueSlime(),
-      new BlueSlime(),
-      new BlueSlime(),
-      new BlueSlime(),
+      // new BlueSlime(),
+      // new BlueSlime(),
+      // new BlueSlime(),
       new Endboss(),
     ],
     [
