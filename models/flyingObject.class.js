@@ -27,7 +27,7 @@ class FlyingObject extends MovableObject {
   }
 
   fire(imagesAttack) {
-    this.applyGravity();
+    // this.applyGravity();
     const animationInterval = setInterval(() => {
       if (this.currentImageIndex >= imagesAttack.length) {
         clearInterval(animationInterval);

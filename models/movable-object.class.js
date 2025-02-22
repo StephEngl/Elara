@@ -28,13 +28,23 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(mo) {
-    let cond1 =
-      this.x + this.width - this.offset.right >= mo.x + mo.offset.left;
-    let cond2 = this.x + this.offset.left <= mo.x + mo.width - mo.offset.right;
-    let cond3 =
-      this.y + this.height - this.offset.bottom >= mo.y + mo.offset.top;
-    let cond4 = this.y + this.offset.top <= mo.y + mo.height - mo.offset.bottom;
+    let charX1 = this.x + this.offset.left;
+    let charX2 = this.x + this.width - this.offset.right;
+    let charY1 = this.y + this.offset.top;
+    let charY2 = this.y + this.height - this.offset.bottom;
+    let moX1 = mo.x + mo.offset.left;
+    let moX2 = mo.x + mo.width - mo.offset.right;
+    let moY1 = mo.y + mo.offset.top;
+    let moY2 = mo.y + mo.height - mo.offset.bottom;
+    let cond1 = charX2 >= moX1;
+    let cond2 = charX1 <= moX2;
+    let cond3 = charY2 >= moY1;
+    let cond4 = charY1 <= moY2;
     return cond1 && cond2 && cond3 && cond4;
+  }
+
+  isJumpedOn(mo) {
+    let cond1 = this.x;
   }
 
   hit() {
