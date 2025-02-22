@@ -145,6 +145,7 @@ class Character extends MovableObject {
       } else if (this.isHurt()) {
         this.playAnimation(this.imagesHurt);
         this.audioHittingSound.play();
+        this.resetIdleTimer();
       } else if (this.isAboveGround()) {
         this.playAnimation(this.imagesJump);
         this.resetIdleTimer();

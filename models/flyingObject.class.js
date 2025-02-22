@@ -21,15 +21,34 @@ class FlyingObject extends MovableObject {
     this.height = 50;
     this.speedX = 10;
     this.acceleration = 0.5;
+    this.currentImageIndex = 0;
 
-    this.fire();
+    this.fire(this.imagesFireball);
   }
 
-  fire() {
-    this.playAnimation(this.imagesFireball);
-    // this.applyGravity();
-    setInterval(() => {
-      this.x += 40;
-    }, 500);
+  fire(imagesAttack) {
+    this.applyGravity();
+    const animationInterval = setInterval(() => {
+      if (this.currentImageIndex >= imagesAttack.length) {
+        clearInterval(animationInterval);
+        this.remove();
+      } else {
+        this.animateFireball(imagesAttack);
+        this.x += 40;
+      }
+    }, 100);
+  }
+
+  animateFireball(imagesAttack) {
+    if (this.currentImageIndex < imagesAttack.length) {
+      let path = imagesAttack[this.currentImageIndex];
+      this.img = this.imageCache[path];
+      this.currentImageIndex++;
+    }
+  }
+
+  remove() {
+    // Implementieren Sie hier die Logik zum Entfernen des Objekts aus dem Spiel
+    console.log("Feuerball entfernt");
   }
 }

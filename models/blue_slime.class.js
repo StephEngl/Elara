@@ -13,6 +13,9 @@ class BlueSlime extends MovableObject {
     "img/Elara/enemies/blue_slime/walk/walk8.png",
   
   ];
+  imagesDying = [
+    
+  ]
   offset = {
     top: 120,
     right: 50,
