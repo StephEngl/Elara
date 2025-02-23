@@ -26,6 +26,7 @@ class World {
       if (!this.isPaused) {
         this.checkCollisions();
         this.checkFlyingObjects();
+        this.cleanupFlyingObjects(); 
         this.checkJumpingOn();
       }
     }, 300);
@@ -34,7 +35,7 @@ class World {
   startPauseCheck() {
     setInterval(() => {
       this.checkForPause();
-    }, 100); // Überprüft häufiger auf Pause-Eingabe
+    }, 100);
   }
 
   checkForPause() {
@@ -103,11 +104,11 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
   }
 
-  drawGameObjects() { 
+  drawGameObjects() {
     this.drawBackground();
     this.drawLights();
     if (!gameOver) this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.flyingObjects);
+    this.addObjectsToMap(this.flyingObjects.filter((obj) => !obj.shouldRemove));
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.foregroundObjects);
   }
@@ -136,6 +137,10 @@ class World {
       (this.canvas.width - textWidth) / 2,
       this.canvas.height / 2
     );
+  }
+
+  cleanupFlyingObjects() {
+    this.flyingObjects = this.flyingObjects.filter((obj) => !obj.shouldRemove);
   }
 
   addObjectsToMap(objects) {

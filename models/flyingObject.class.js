@@ -22,6 +22,7 @@ class FlyingObject extends MovableObject {
     this.speedX = 10;
     this.acceleration = 0.5;
     this.currentImageIndex = 0;
+    this.shouldRemove = false;
 
     this.fire(this.imagesFireball);
   }
@@ -49,6 +50,6 @@ class FlyingObject extends MovableObject {
 
   remove() {
     // Implementieren Sie hier die Logik zum Entfernen des Objekts aus dem Spiel
-    console.log("Feuerball entfernt");
+    this.shouldRemove = true;
   }
 }

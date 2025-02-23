@@ -17,7 +17,6 @@ class BlueSlime extends MovableObject {
     "img/Elara/enemies/blue_slime/dead/dead1.png",
     "img/Elara/enemies/blue_slime/dead/dead2.png",
     "img/Elara/enemies/blue_slime/dead/dead3.png",
-    // "";
   ]
   offset = {
     top: 120,
