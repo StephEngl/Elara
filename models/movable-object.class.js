@@ -46,7 +46,6 @@ class MovableObject extends DrawableObject {
   isJumpedOn(mo) {
     let charX1 = this.x + this.offset.left;
     let charX2 = this.x + this.width - this.offset.right;
-    let charY1 = this.y + this.offset.top;
     let charY2 = this.y + this.height - this.offset.bottom;
     let moX1 = mo.x + mo.offset.left;
     let moX2 = mo.x + mo.width - mo.offset.right;
@@ -54,8 +53,8 @@ class MovableObject extends DrawableObject {
     let moY2 = mo.y + mo.height - mo.offset.bottom;
 
     let horizontalOverlap = charX1 < moX2 && charX2 > moX1;
-    let verticalCondition = charY2 >= moY1 && charY2 < moY2;
-    let isAboveEnemy = charY1 < moY1;
+    let verticalCondition = charY2 >= moY1;
+    let isAboveEnemy = charY2 > moY2; 
 
     return horizontalOverlap && verticalCondition && isAboveEnemy;
   }
