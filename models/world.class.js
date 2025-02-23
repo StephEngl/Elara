@@ -38,9 +38,9 @@ class World {
   }
 
   checkForPause() {
-    if (this.keyboard.SPACE) {
+    if (this.keyboard.P) {
       this.togglePause();
-      this.keyboard.SPACE = false;
+      this.keyboard.P = false;
     }
   }
 
