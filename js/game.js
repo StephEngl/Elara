@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let isMuted = false;
 let gameOver = false;
+let gameOverMusic = new Audio ("assets/audio/game_over_music.mp3")
 
 function init() {
   element = document.getElementById("canvas");
@@ -26,7 +27,6 @@ function stopGame() {
     clearAllIntervals();
     world.stopLevel();
     showGameOverDialog();
-    let gameOverMusic = new Audio ("assets/audio/game_over_music.mp3")
     gameOverMusic.play();
     // weitere Aktionen nach dem Spielende ausführen
   }, 2000);
@@ -84,6 +84,8 @@ function restartGame() {
   dialog.close();
   // Hier Logik zum Zurücksetzen des Spielzustands einfügen
   gameOver = false;
+  gameOverMusic.pause();
+  init();
   // Spiel neu initialisieren
 }
 

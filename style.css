@@ -130,7 +130,7 @@ canvas {
   margin-bottom: 20px;
 }
 
-#restartButton {
+.gameOverButtons {
   background-color: #4caf50;
   border: none;
   color: white;
