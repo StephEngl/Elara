@@ -45,7 +45,9 @@ class World {
   }
 
   startLevel() {
-    this.level.playBackgroundMusic();
+    if (!this.isPaused && !isMuted) {
+      this.level.playBackgroundMusic();
+    }
   }
 
   stopLevel() {
@@ -63,11 +65,24 @@ class World {
   }
 
   muteAllSounds() {
-    this.audioElements.forEach(audio => audio.muted = true);
+    this.audioElements.forEach((audio) => {
+      audio.muted = true;
+      audio.pause();
+    });
+    if (this.level && this.level.backgroundMusic) {
+      this.level.backgroundMusic.muted = true;
+      this.level.backgroundMusic.pause();
+    }
   }
 
   unmuteAllSounds() {
-    this.audioElements.forEach(audio => audio.muted = false);
+    this.audioElements.forEach((audio) => {
+      audio.muted = false;
+    });
+    if (this.level && this.level.backgroundMusic) {
+      this.level.backgroundMusic.muted = false;
+      if (!this.isPaused) this.level.backgroundMusic.play();
+    }
   }
 
   startPauseCheck() {
@@ -86,12 +101,13 @@ class World {
   togglePause() {
     this.isPaused = !this.isPaused;
     if (this.isPaused) {
-      this.stopLevel()
+      this.stopLevel();
       console.log("Spiel pausiert");
       clearInterval(this.runInterval);
     } else {
       console.log("Spiel fortgesetzt");
       this.run();
+      if (!isMuted) this.startLevel();
     }
   }
 

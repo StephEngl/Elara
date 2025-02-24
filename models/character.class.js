@@ -118,6 +118,13 @@ class Character extends MovableObject {
     this.deathAnimationComplete = false;
   }
 
+  playSound(sound) {    
+    if (!this.world.isPaused && !isMuted) {
+      sound.play();
+      return sound
+    }
+  }
+
   animate() {
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -147,7 +154,7 @@ class Character extends MovableObject {
         }
       } else if (this.isHurt()) {
         this.playAnimation(this.imagesHurt);
-        this.audioHittingSound.play();
+        this.playSound(this.audioHittingSound);
         this.resetIdleTimer();
       } else if (this.isAboveGround()) {
         this.playAnimation(this.imagesJump);
@@ -167,7 +174,7 @@ class Character extends MovableObject {
 
   jump() {
     this.speedY = 30;
-    this.audioJumpingSound.play();
+    this.playSound(this.audioJumpingSound);
   }
 
   isJumpedOn(/** @type MovableObject */ mo) {
@@ -197,8 +204,7 @@ class Character extends MovableObject {
 
   playDeathAnimation() {
     if (!this.deathAnimationComplete) {
-      this.audioDyingSound.play();
-      this.audioDyingSound.playbackRate = 0.7;
+      this.playDyingSounds();
       this.img = this.imageCache[this.imagesDying[this.deathAnimationFrame]];
       this.deathAnimationFrame++;
       if (this.deathAnimationFrame >= this.imagesDying.length) {
@@ -211,5 +217,10 @@ class Character extends MovableObject {
         this.imagesDying.length - 2 + (this.deathAnimationFrame % 2);
       this.img = this.imageCache[this.imagesDying[this.deathAnimationFrame]];
     }
+  }
+
+  playDyingSounds() {
+    let dyingSound = this.playSound(this.audioDyingSound);
+    dyingSound.playbackRate = 0.7;
   }
 }

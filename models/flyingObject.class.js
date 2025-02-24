@@ -46,9 +46,4 @@ class FlyingObject extends MovableObject {
       this.currentImageIndex++;
     }
   }
-
-  remove() {
-    // Implementieren Sie hier die Logik zum Entfernen des Objekts aus dem Spiel
-    this.shouldRemove = true;
-  }
 }

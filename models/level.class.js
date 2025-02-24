@@ -6,7 +6,13 @@ class Level {
   level_end_x = 3600;
   backgroundMusic;
 
-  constructor(enemies, lights, backgroundObjects, foregroundObjects, backgroundMusicSrc) {
+  constructor(
+    enemies,
+    lights,
+    backgroundObjects,
+    foregroundObjects,
+    backgroundMusicSrc
+  ) {
     this.enemies = enemies;
     this.lights = lights;
     this.backgroundObjects = backgroundObjects;
@@ -16,7 +22,9 @@ class Level {
   }
 
   playBackgroundMusic() {
-    this.backgroundMusic.play();
+    if (!isMuted) {
+      this.backgroundMusic.play();
+    }
   }
 
   stopBackgroundMusic() {

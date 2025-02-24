@@ -1,12 +1,12 @@
-let canvas;
+let element;
 let world;
 let keyboard = new Keyboard();
 let isMuted = false;
 let gameOver = false;
 
 function init() {
-  canvas = document.getElementById("canvas");
-  world = new World(canvas, keyboard);
+  element = document.getElementById("canvas");
+  world = new World(element, keyboard);
   checkOrientation();
   window.addEventListener("resize", checkOrientation);
 }
@@ -24,57 +24,44 @@ function stopGame() {
   gameOver = true;
   setTimeout(() => {
     clearAllIntervals();
-    stopLevel()
+    world.stopLevel();
     showGameOverDialog();
     // weitere Aktionen nach dem Spielende ausführen
   }, 2000);
 }
 
 function toggleSound() {
-  const soundButton = document.getElementById('soundButton');
-  const soundIcon = document.getElementById('soundIcon');
-  
+  isMuted = !isMuted;
+  const soundButton = document.getElementById("soundButton");
+  const soundIcon = document.getElementById("soundIcon");
+
   if (isMuted) {
-    playSounds();
+    world.muteAllSounds();
     soundIcon.src = "assets/img/icons/speaker_mute.svg";
     soundIcon.alt = "Ton aus";
-    soundButton.setAttribute('aria-label', 'Ton aus');
+    soundButton.setAttribute("aria-label", "Ton ein");
   } else {
-    muteSounds();
+    world.unmuteAllSounds();
     soundIcon.src = "assets/img/icons/speaker_volume.svg";
     soundIcon.alt = "Ton ein";
-    soundButton.setAttribute('aria-label', 'Ton ein');
+    soundButton.setAttribute("aria-label", "Ton aus");
   }
-  
-  isMuted = !isMuted;
 }
 
-function muteSounds() {
-  world.audioElements.forEach(audio => {
-    audio.pause();
-  });
-  // Zusätzlich alle MovableObject-Sounds pausieren
-  world.character.audioElements.forEach(audio => {
-    audio.pause();
-  });
-  // Fügen Sie hier weitere MovableObjects hinzu, falls nötig
+function fullscreen() {
+  let divToFullscreen = document.getElementById("canvas_wrapper");
+  openFullscreen(divToFullscreen)
 }
 
-function playSounds() {
-  if (world.level && world.level.backgroundMusic) {
-    world.level.backgroundMusic.play();
-  }
-  // Hier keine weiteren Sounds abspielen, da sie nur bei Bedarf gestartet werden sollten
-  console.log("Sounds wurden eingeschaltet");
-}
-
-function openFullscreen() {
-  if (canvas.requestFullscreen) {
-    canvas.requestFullscreen();
-  } else if (canvas.webkitRequestFullscreen) { /* Safari */
-    canvas.webkitRequestFullscreen();
-  } else if (canvas.msRequestFullscreen) { /* IE11 */
-    canvas.msRequestFullscreen();
+function openFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.webkitRequestFullscreen) {
+    /* Safari */
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    /* IE11 */
+    element.msRequestFullscreen();
   }
 }
 

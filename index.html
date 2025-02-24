@@ -37,13 +37,13 @@
       <div class="content">
         <h1>Elara und der verzauberte Hain</h1>
         <div class="canvas_container">
-          <div class="canvas_wrapper">
+          <div class="canvas_wrapper" id="canvas_wrapper">
             <canvas width="720px" height="480px" id="canvas"> </canvas>
             <div class="control-buttons">
-              <button onclick="toggleSound()" id="soundButton" aria-label="Ton ein/aus">
-                <img src="assets/img/icons/speaker_mute.svg" alt="Ton ein" id="soundIcon">
+              <button onclick="toggleSound(); this.blur();" id="soundButton" aria-label="Ton ein/aus">
+                <img src="assets/img/icons/speaker_volume.svg" alt="Ton ein" id="soundIcon">
               </button>
-              <button onclick="openFullscreen()" id="fullscreenButton" aria-label="Vollbildmodus">
+              <button onclick="fullscreen()" id="fullscreenButton" aria-label="Vollbildmodus">
                 <img src="assets/img/icons/fullscreen_icon.svg" alt="Vollbild">
               </button>
             </div>

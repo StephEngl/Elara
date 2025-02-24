@@ -61,8 +61,8 @@ class Endboss extends MovableObject {
       if (world.character.x > 3300 && !this.hadFirstContact) {
         i = 0;
         this.hadFirstContact = true;
-        this.audioRoarIntro.play();
-        this.audioRoarIntro.playbackRate=0.8;
+        let roarIntroSound= this.createAudio(this.audioRoarIntro);
+        roarIntroSound.playbackRate=0.8;
       }
     }, 250);
   }

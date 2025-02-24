@@ -74,6 +74,6 @@ function initLevel() {
       new BackgroundObject("img/Elara/background/ground.png", 720 * 4),
       new BackgroundObject("img/Elara/background/ground.png", 720 * 5),
     ],
-    ["assets/audio/theme_lvl1.mp3"],
+    ["assets/audio/backgroundmusik_lvl1.mp3"],
   );
 }
