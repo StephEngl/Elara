@@ -5,6 +5,8 @@ class MovableObject extends DrawableObject {
     super();
     this.speed;
     this.otherDirection = false;
+    this.width = 150;
+    this.height = 150;
     this.speedY = 0;
     this.acceleration = 2.5;
     this.energy = 100;
@@ -15,6 +17,8 @@ class MovableObject extends DrawableObject {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
+      } else {
+        this.speedY = 0;
       }
     }, 1000 / 25);
   }
@@ -23,8 +27,19 @@ class MovableObject extends DrawableObject {
     if (this instanceof FlyingObject) {
       return true;
     } else {
-      return this.y < 230;
+      return this.y < 280;
     }
+  }
+
+  setOtherDirection(value) {
+    let directionChanged = this.otherDirection !== value;
+    this.otherDirection = value;
+
+    // if (directionChanged) {
+    //   let temp = this.offset.left;
+    //   this.offset.left = this.offset.right;
+    //   this.offset.right = temp;
+    // }
   }
 
   isColliding(mo) {
@@ -36,31 +51,22 @@ class MovableObject extends DrawableObject {
     let moX2 = mo.x + mo.width - mo.offset.right;
     let moY1 = mo.y + mo.offset.top;
     let moY2 = mo.y + mo.height - mo.offset.bottom;
-    let cond1 = charX2 >= moX1;
-    let cond2 = charX1 <= moX2;
-    let cond3 = charY2 >= moY1;
-    let cond4 = charY1 <= moY2;
-    return cond1 && cond2 && cond3 && cond4;
-  }
-
-  isJumpedOn(mo) {
-    let charX1 = this.x + this.offset.left;
-    let charX2 = this.x + this.width - this.offset.right;
-    let charY2 = this.y + this.height - this.offset.bottom;
-    let moX1 = mo.x + mo.offset.left;
-    let moX2 = mo.x + mo.width - mo.offset.right;
-    let moY1 = mo.y + mo.offset.top;
-    let moY2 = mo.y + mo.height - mo.offset.bottom;
-
-    let horizontalOverlap = charX1 < moX2 && charX2 > moX1;
-    let verticalCondition = charY2 >= moY1;
-    let isAboveEnemy = charY2 > moY2; 
-
-    return horizontalOverlap && verticalCondition && isAboveEnemy;
+    let charCollisionRect = this.getCurrentCollisionRect();
+    let moCollisionRect = mo.getCurrentCollisionRect();
+    let cond1 = charCollisionRect.x2  >= moCollisionRect.x1;
+    let cond2 = charCollisionRect.x1  <= moCollisionRect.x2;
+    let cond3 = charCollisionRect.y2  >= moCollisionRect.y1;
+    let cond4 = charCollisionRect.y1  <= moCollisionRect.y2;
+    let collisionDetected = cond1 && cond2 && cond3 && cond4
+    if (collisionDetected) {
+      console.log('collision detetced', charCollisionRect, moCollisionRect);
+    }
+    return collisionDetected;
   }
 
   hit() {
     this.energy -= 5;
+    console.log('character is hit', this.energy);
     if (this.energy < 0) {
       this.energy = 0;
     } else {
@@ -71,7 +77,11 @@ class MovableObject extends DrawableObject {
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
     timePassed = timePassed / 1000;
-    return timePassed < 1;
+    let isHurted = timePassed < 0.1;
+    if (isHurted) {
+      console.log('character is hurted', timePassed);
+    }
+    return isHurted;
   }
 
   isDead() {
@@ -91,5 +101,10 @@ class MovableObject extends DrawableObject {
     let path = imagesToChange[i];
     this.img = this.imageCache[path];
     this.currentImage++;
+  }
+
+  remove() {
+    // Implementieren Sie hier die Logik zum Entfernen des Objekts aus dem Spiel
+    this.shouldRemove = true;
   }
 }

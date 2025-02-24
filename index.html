@@ -25,36 +25,39 @@
       <script src="models/little-dragon.class.js"></script>
       <script src="models/blue_slime.class.js"></script>
       <script src="models/statusbar.class.js"></script>
-      <script src="models/world.class.js"></script>
       <script src="models/flyingObject.class.js"></script>
       <script src="models/keyboard.class.js"></script>
       <script src="models/level.class.js"></script>
       <script src="models/endboss.class.js"></script>
       <script src="levels/level1.js"></script>
+      <script src="models/world.class.js"></script>
       <script src="js/game.js"></script>
     </head>
     <body onload="init()">
       <div class="content">
         <h1>Elara und der verzauberte Hain</h1>
         <div class="canvas_container">
-          <canvas width="720px" height="480px" id="canvas"> </canvas>
+          <div class="canvas_wrapper">
+            <canvas width="720px" height="480px" id="canvas"> </canvas>
+            <button onclick="openFullscreen()" id="fullscreenButton" aria-label="Vollbildmodus">
+              <i class="fas fa-expand"></i>
+            </button>
+          </div>
           <dialog id="orientationDialog">
             <p>Please, turn your device to play</p>
           </dialog>
-  
+
           <dialog id="gameOverDialog">
             <div class="dialog_container">
               <h2>Game Over</h2>
               <p>Dein Spiel ist zu Ende!</p>
               <div>
-                <button id="restartButton">Beenden</button>
+                <button id="restartButton">Hauptmenü</button>
                 <button id="restartButton">Neu starten</button>
               </div>
-
             </div>
           </dialog>
         </div>
-        
       </div>
     </body>
   </html>

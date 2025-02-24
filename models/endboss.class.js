@@ -43,6 +43,7 @@ class Endboss extends MovableObject {
       bottom: 150,
       left: 150,
     };
+    this.setOtherDirection(true);
     this.animate();
   }
 
@@ -54,7 +55,7 @@ class Endboss extends MovableObject {
       } else {
         this.playAnimation(this.imagesIntro);
         this.moveLeft(this.speed);
-        this.otherDirection = true;
+        // this.otherDirection = true;
       }
       i++;
       if (world.character.x > 3300 && !this.hadFirstContact) {

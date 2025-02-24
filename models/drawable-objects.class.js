@@ -1,17 +1,20 @@
 class DrawableObject {
-  x = 10;
-  y = 80; //130
-  img;
-  height = 200;
-  width = 200;
   imageCache = {};
   currentImage = 0;
-  offset = {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  };
+
+  constructor() {
+    this.x = 10;
+    this.y;
+    this.img;
+    this.height;
+    this.width;
+    this.offset = {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    };
+  }
 
   setImage(path) {
     this.img = new Image(); //this.img = document.getElemendById('image') <img id="image">
@@ -50,12 +53,24 @@ class DrawableObject {
       ctx.beginPath();
       ctx.lineWidth = "3";
       ctx.strokeStyle = "red";
-      let objLeftBorder = this.x + this.offset.left;
-      let objUpperBorder = this.y+this.offset.top;
-      let objWidth = this.width - this.offset.left - this.offset.right;
-      let objHeight = this.height - this.offset.top - this.offset.bottom;
-      ctx.rect(objLeftBorder, objUpperBorder, objWidth, objHeight);
+      let rect = this.getCurrentCollisionRect();
+      ctx.rect(rect.x1, rect.y1, rect.width, rect.height);
       ctx.stroke();
     }
+  }
+
+  getCurrentCollisionRect() {
+    let objLeftBorder = this.x + this.offset.left;
+    let objUpperBorder = this.y + this.offset.top;
+    let objWidth = this.width - this.offset.left - this.offset.right;
+    let objHeight = this.height - this.offset.top - this.offset.bottom;
+    return {
+      x1: objLeftBorder,
+      y1: objUpperBorder,
+      width: objWidth,
+      height: objHeight,
+      x2: objLeftBorder + objWidth,
+      y2: objUpperBorder + objHeight
+    };
   }
 }

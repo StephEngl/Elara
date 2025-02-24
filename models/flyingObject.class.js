@@ -11,7 +11,6 @@ class FlyingObject extends MovableObject {
     "img/Elara/mage_elara/Fire/fire9.png",
   ];
 
-  //   x, y, width, height, speedX
   constructor(x, y) {
     super().setImage("img/Elara/mage_elara/Fire/fire1.png");
     this.loadImages(this.imagesFireball);

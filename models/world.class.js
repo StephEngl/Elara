@@ -24,10 +24,13 @@ class World {
   run() {
     this.runInterval = setInterval(() => {
       if (!this.isPaused) {
-        this.checkCollisions();
-        this.checkFlyingObjects();
-        this.cleanupFlyingObjects(); 
         this.checkJumpingOn();
+        if (!this.character.elaraJumpedOnEnemy) {
+          this.checkCollisions();
+        }
+        this.checkFlyingObjects();
+        this.cleanupFlyingObjects();
+        this.cleanupEnemies();
       }
     }, 300);
   }
@@ -67,8 +70,10 @@ class World {
 
   checkJumpingOn() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isJumpedOn(enemy)) {
+      if (this.character.isJumpedOn(enemy) && !enemy.isDying) {
         console.log(`Elara jumped on ${enemy}`);
+        enemy.die();
+        // Optional: Hier können Sie dem Charakter Punkte geben oder andere Aktionen auslösen
       }
     });
   }
@@ -141,6 +146,12 @@ class World {
 
   cleanupFlyingObjects() {
     this.flyingObjects = this.flyingObjects.filter((obj) => !obj.shouldRemove);
+  }
+
+  cleanupEnemies() {
+    this.level.enemies = this.level.enemies.filter(
+      (enemy) => !enemy.shouldRemove
+    );
   }
 
   addObjectsToMap(objects) {

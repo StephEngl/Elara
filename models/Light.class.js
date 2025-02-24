@@ -7,13 +7,14 @@ class Light extends MovableObject {
   constructor(imgPath, x) {
     super().setImage(imgPath);
     this.x = x;
+    this.otherDirection = true;
     this.animate();
   }
 
   animate() {
     setInterval(() => {
       this.moveLeft(this.speed);
-      this.otherDirection = true;
+      // this.otherDirection = true;
     }, 1000 / 60);
   }
 }

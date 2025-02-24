@@ -82,7 +82,6 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Attack/attack6.png",
     "img/Elara/mage_elara/Attack/attack7.png",
   ];
-
   world;
   idleTimer = 0;
   longIdleThreshold = 10000;
@@ -90,14 +89,16 @@ class Character extends MovableObject {
   audioDyingSound = new Audio("assets/audio/elara_dying_sound.mp3");
   audioHittingSound = new Audio("assets/audio/hurting_sound.mp3");
   audioJumpingSound = new Audio("assets/audio/elara_jumping_sound.mp3");
+  elaraJumpedOnEnemy = false;
 
   constructor() {
     super().setImage("img/Elara/mage_elara/Jump/jump1.png");
+    this.y = 270;
     this.offset = {
-      top: 90,
-      right: 100,
+      top: 70,
+      right: 75,
       bottom: 20,
-      left: 40,
+      left: 30,
     };
     this.speed = 5;
     this.loadImages(this.imagesIntro);
@@ -119,12 +120,12 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
-        this.otherDirection = false;
+        this.setOtherDirection(false);
         this.resetIdleTimer();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft(this.speed);
-        this.otherDirection = true;
+        this.setOtherDirection(true);
         this.resetIdleTimer();
       }
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -165,6 +166,27 @@ class Character extends MovableObject {
   jump() {
     this.speedY = 30;
     this.audioJumpingSound.play();
+  }
+
+  isJumpedOn(/** @type MovableObject */ mo) {
+    let isFalling = this.speedY < 0;
+    if (!isFalling) {
+      return false;
+    }
+    let charCollisionRect = this.getCurrentCollisionRect();
+    let moCollisionRect = mo.getCurrentCollisionRect();
+    if (charCollisionRect.y2 < moCollisionRect.y1) {
+      return false;
+    }
+    let charMid = (charCollisionRect.x1 + charCollisionRect.x2) / 2;
+    let moMid = (moCollisionRect.x1 + moCollisionRect.x2) / 2;
+    let tolerance = (charCollisionRect.x2 - charCollisionRect.x1) / 2;
+    tolerance = 60;
+    let moBoundLeft = moMid - tolerance;
+    let moBoundRight = moMid + tolerance;
+    let horizontalOverlap = charMid >= moBoundLeft && charMid <= moBoundRight;
+    this.elaraJumpedOnEnemy = horizontalOverlap;
+    return horizontalOverlap;
   }
 
   resetIdleTimer() {
