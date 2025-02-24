@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
     this.speedY = 0;
     this.acceleration = 2.5;
     this.energy = 100;
+    this.isDying = false;
   }
 
   setWorld(world) {

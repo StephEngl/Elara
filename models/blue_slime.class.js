@@ -28,7 +28,6 @@ class BlueSlime extends MovableObject {
       left: 50,
     };
     this.speed = 0.3 + Math.random() * 0.4;
-    this.isDying = false;
     this.setOtherDirection(true);
     this.animate();
   }

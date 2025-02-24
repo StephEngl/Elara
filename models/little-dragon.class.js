@@ -19,7 +19,7 @@ class LittleDragon extends MovableObject {
     this.y = 310;
     this.offset = {
       top: 60,
-      right: 30,
+      right: 50,
       bottom: 50,
       left: 30,
     };
@@ -37,7 +37,11 @@ class LittleDragon extends MovableObject {
     }, 1000 / 60);
 
     setInterval(() => {
-      this.playAnimation(this.imagesIdle);
+      if (this.isDying) {
+        this.playAnimation(this.imagesDying);
+      } else {
+        this.playAnimation(this.imagesIdle);
+      }
     }, 200);
   }
 

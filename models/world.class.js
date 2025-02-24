@@ -34,6 +34,7 @@ class World {
         this.checkFlyingObjects();
         this.cleanupFlyingObjects();
         this.cleanupEnemies();
+        this.cleanupCharacter()
       }
     }, 300);
   }
@@ -194,6 +195,10 @@ class World {
       (this.canvas.width - textWidth) / 2,
       this.canvas.height / 2
     );
+  }
+
+  cleanupCharacter() {
+    this.world.character = this.world.character.filter((obj) => !obj.shouldRemove);
   }
 
   cleanupFlyingObjects() {

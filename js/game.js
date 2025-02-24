@@ -26,6 +26,8 @@ function stopGame() {
     clearAllIntervals();
     world.stopLevel();
     showGameOverDialog();
+    let gameOverMusic = new Audio ("assets/audio/game_over_music.mp3")
+    gameOverMusic.play();
     // weitere Aktionen nach dem Spielende ausführen
   }, 2000);
 }
