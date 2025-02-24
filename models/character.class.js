@@ -82,17 +82,14 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Attack/attack6.png",
     "img/Elara/mage_elara/Attack/attack7.png",
   ];
-  world;
   idleTimer = 0;
   longIdleThreshold = 10000;
   isAttacking = false;
-  audioDyingSound = this.world.createAudio("assets/audio/elara_dying_sound.mp3");
-  audioHittingSound = new Audio("assets/audio/hurting_sound.mp3");
-  audioJumpingSound = new Audio("assets/audio/elara_jumping_sound.mp3");
   elaraJumpedOnEnemy = false;
 
   constructor() {
     super().setImage("img/Elara/mage_elara/Jump/jump1.png");
+    this.setWorld(world);
     this.y = 270;
     this.offset = {
       top: 70,
@@ -109,6 +106,11 @@ class Character extends MovableObject {
     this.loadImages(this.imagesHurt);
     this.loadImages(this.imagesDying);
     this.loadImages(this.imagesAttack);
+    this.audioDyingSound = this.createAudio(
+      "assets/audio/elara_dying_sound.mp3"
+    );
+    this.audioHittingSound = this.createAudio("assets/audio/hurting_sound.mp3");
+    this.audioJumpingSound = this.createAudio("assets/audio/elara_jumping_sound.mp3");
     this.applyGravity();
     this.isLongIdleActive = false;
     this.animate();

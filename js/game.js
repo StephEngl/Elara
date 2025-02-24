@@ -24,6 +24,7 @@ function stopGame() {
   gameOver = true;
   setTimeout(() => {
     clearAllIntervals();
+    stopLevel()
     showGameOverDialog();
     // weitere Aktionen nach dem Spielende ausführen
   }, 2000);
@@ -49,16 +50,21 @@ function toggleSound() {
 }
 
 function muteSounds() {
-  // Implementieren Sie hier die Logik zum Stummschalten der Sounds
-  audioElements.forEach(audio => {
+  world.audioElements.forEach(audio => {
     audio.pause();
-    audio.currentTime = 0;
   });
-  console.log("Sounds wurden stummgeschaltet");
+  // Zusätzlich alle MovableObject-Sounds pausieren
+  world.character.audioElements.forEach(audio => {
+    audio.pause();
+  });
+  // Fügen Sie hier weitere MovableObjects hinzu, falls nötig
 }
 
 function playSounds() {
-  // Implementieren Sie hier die Logik zum Einschalten der Sounds
+  if (world.level && world.level.backgroundMusic) {
+    world.level.backgroundMusic.play();
+  }
+  // Hier keine weiteren Sounds abspielen, da sie nur bei Bedarf gestartet werden sollten
   console.log("Sounds wurden eingeschaltet");
 }
 

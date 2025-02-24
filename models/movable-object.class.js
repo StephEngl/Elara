@@ -1,5 +1,6 @@
 class MovableObject extends DrawableObject {
   lastHit;
+  world;
 
   constructor() {
     super();
@@ -10,6 +11,14 @@ class MovableObject extends DrawableObject {
     this.speedY = 0;
     this.acceleration = 2.5;
     this.energy = 100;
+  }
+
+  setWorld(world) {
+    this.world = world;
+  }
+
+  createAudio(src) {
+    return this.world ? this.world.createAudio(src) : new Audio(src);
   }
 
   applyGravity() {

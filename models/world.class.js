@@ -27,6 +27,7 @@ class World {
     this.runInterval = setInterval(() => {
       if (!this.isPaused) {
         this.checkJumpingOn();
+        this.startLevel();
         if (!this.character.elaraJumpedOnEnemy) {
           this.checkCollisions();
         }
@@ -41,6 +42,32 @@ class World {
     if (this.level && this.level.backgroundMusic) {
       this.audioElements.push(this.level.backgroundMusic);
     }
+  }
+
+  startLevel() {
+    this.level.playBackgroundMusic();
+  }
+
+  stopLevel() {
+    this.level.stopBackgroundMusic();
+  }
+
+  addAudio(audio) {
+    this.audioElements.push(audio);
+  }
+
+  createAudio(src) {
+    let audio = new Audio(src);
+    this.addAudio(audio);
+    return audio;
+  }
+
+  muteAllSounds() {
+    this.audioElements.forEach(audio => audio.muted = true);
+  }
+
+  unmuteAllSounds() {
+    this.audioElements.forEach(audio => audio.muted = false);
   }
 
   startPauseCheck() {
@@ -59,6 +86,7 @@ class World {
   togglePause() {
     this.isPaused = !this.isPaused;
     if (this.isPaused) {
+      this.stopLevel()
       console.log("Spiel pausiert");
       clearInterval(this.runInterval);
     } else {
