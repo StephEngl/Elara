@@ -198,7 +198,7 @@ class World {
   }
 
   cleanupCharacter() {
-    this.world.character = this.world.character.filter((obj) => !obj.shouldRemove);
+    // this.world.character = this.world.character.filter((obj) => !obj.shouldRemove);
   }
 
   cleanupFlyingObjects() {

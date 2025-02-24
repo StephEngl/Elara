@@ -3,7 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let isMuted = false;
 let gameOver = false;
-let gameOverMusic = new Audio ("assets/audio/game_over_music.mp3")
+let gameOverMusic = new Audio("assets/audio/game_over_music.mp3");
 
 function init() {
   element = document.getElementById("canvas");
@@ -52,7 +52,7 @@ function toggleSound() {
 
 function fullscreen() {
   let divToFullscreen = document.getElementById("canvas_wrapper");
-  openFullscreen(divToFullscreen)
+  openFullscreen(divToFullscreen);
 }
 
 function openFullscreen(element) {
@@ -85,6 +85,7 @@ function restartGame() {
   // Hier Logik zum Zurücksetzen des Spielzustands einfügen
   gameOver = false;
   gameOverMusic.pause();
+  console.log("pause modus ist", world.isPaused);
   init();
   // Spiel neu initialisieren
 }
