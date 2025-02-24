@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let isMuted = false;
 let gameOver = false;
 
 function init() {
@@ -26,6 +27,39 @@ function stopGame() {
     showGameOverDialog();
     // weitere Aktionen nach dem Spielende ausführen
   }, 2000);
+}
+
+function toggleSound() {
+  const soundButton = document.getElementById('soundButton');
+  const soundIcon = document.getElementById('soundIcon');
+  
+  if (isMuted) {
+    playSounds();
+    soundIcon.src = "assets/img/icons/speaker_mute.svg";
+    soundIcon.alt = "Ton aus";
+    soundButton.setAttribute('aria-label', 'Ton aus');
+  } else {
+    muteSounds();
+    soundIcon.src = "assets/img/icons/speaker_volume.svg";
+    soundIcon.alt = "Ton ein";
+    soundButton.setAttribute('aria-label', 'Ton ein');
+  }
+  
+  isMuted = !isMuted;
+}
+
+function muteSounds() {
+  // Implementieren Sie hier die Logik zum Stummschalten der Sounds
+  audioElements.forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+  console.log("Sounds wurden stummgeschaltet");
+}
+
+function playSounds() {
+  // Implementieren Sie hier die Logik zum Einschalten der Sounds
+  console.log("Sounds wurden eingeschaltet");
 }
 
 function openFullscreen() {

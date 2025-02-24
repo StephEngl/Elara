@@ -86,7 +86,7 @@ class Character extends MovableObject {
   idleTimer = 0;
   longIdleThreshold = 10000;
   isAttacking = false;
-  audioDyingSound = new Audio("assets/audio/elara_dying_sound.mp3");
+  audioDyingSound = this.world.createAudio("assets/audio/elara_dying_sound.mp3");
   audioHittingSound = new Audio("assets/audio/hurting_sound.mp3");
   audioJumpingSound = new Audio("assets/audio/elara_jumping_sound.mp3");
   elaraJumpedOnEnemy = false;

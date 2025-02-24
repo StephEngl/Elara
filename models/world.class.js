@@ -4,6 +4,7 @@ class World {
   level = level1;
   camera_x;
   flyingObjects = [];
+  audioElements = [];
   isPaused = false;
   runInterval = null;
 
@@ -14,6 +15,7 @@ class World {
     this.setWorld();
     this.draw();
     this.run();
+    this.addBackgroundMusicToAudioElements();
     this.startPauseCheck();
   }
 
@@ -33,6 +35,12 @@ class World {
         this.cleanupEnemies();
       }
     }, 300);
+  }
+
+  addBackgroundMusicToAudioElements() {
+    if (this.level && this.level.backgroundMusic) {
+      this.audioElements.push(this.level.backgroundMusic);
+    }
   }
 
   startPauseCheck() {

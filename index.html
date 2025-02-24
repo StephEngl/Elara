@@ -39,14 +39,18 @@
         <div class="canvas_container">
           <div class="canvas_wrapper">
             <canvas width="720px" height="480px" id="canvas"> </canvas>
-            <button onclick="openFullscreen()" id="fullscreenButton" aria-label="Vollbildmodus">
-              <i class="fas fa-expand"></i>
-            </button>
+            <div class="control-buttons">
+              <button onclick="toggleSound()" id="soundButton" aria-label="Ton ein/aus">
+                <img src="assets/img/icons/speaker_mute.svg" alt="Ton ein" id="soundIcon">
+              </button>
+              <button onclick="openFullscreen()" id="fullscreenButton" aria-label="Vollbildmodus">
+                <img src="assets/img/icons/fullscreen_icon.svg" alt="Vollbild">
+              </button>
+            </div>
           </div>
           <dialog id="orientationDialog">
             <p>Please, turn your device to play</p>
           </dialog>
-
           <dialog id="gameOverDialog">
             <div class="dialog_container">
               <h2>Game Over</h2>
