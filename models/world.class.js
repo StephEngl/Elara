@@ -16,7 +16,7 @@ class World {
     this.draw();
     this.run();
     this.addBackgroundMusicToAudioElements();
-    this.startPauseCheck();
+    // this.startPauseCheck();
   }
 
   setWorld() {
@@ -34,7 +34,7 @@ class World {
         this.checkFlyingObjects();
         this.cleanupFlyingObjects();
         this.cleanupEnemies();
-        this.cleanupCharacter()
+        this.cleanupCharacter();
       }
     }, 300);
   }
@@ -86,18 +86,18 @@ class World {
     }
   }
 
-  startPauseCheck() {
-    setInterval(() => {
-      this.checkForPause();
-    }, 100);
-  }
+  // startPauseCheck() {
+  //   setInterval(() => {
+  //     this.checkForPause();
+  //   }, 100);
+  // }
 
-  checkForPause() {
-    if (this.keyboard.P) {
-      this.togglePause();
-      this.keyboard.P = false;
-    }
-  }
+  // checkForPause() {
+  //   if (this.keyboard.P) {
+  //     this.togglePause();
+  //     this.keyboard.P = false;
+  //   }
+  // }
 
   togglePause() {
     this.isPaused = !this.isPaused;

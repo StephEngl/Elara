@@ -106,6 +106,15 @@ class MovableObject extends DrawableObject {
     this.x -= speed;
   }
 
+  playSound(sound) {
+    console.log("Status isPaused: ", this.world.isPaused);
+        
+    if (!this.world.isPaused && !isMuted) {
+      sound.play();
+      return sound
+    }
+  }
+
   playAnimation(imagesToChange) {
     let i = this.currentImage % imagesToChange.length; // let i = 7 % 6 => 1, Rest 1 -> i = 0,1,...,17,0,1,...,17,...
     let path = imagesToChange[i];

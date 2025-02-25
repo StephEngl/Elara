@@ -118,13 +118,6 @@ class Character extends MovableObject {
     this.deathAnimationComplete = false;
   }
 
-  playSound(sound) {    
-    if (!this.world.isPaused && !isMuted) {
-      sound.play();
-      return sound
-    }
-  }
-
   animate() {
     this.startMovementInterval();
     this.startAnimationInterval();
@@ -210,53 +203,6 @@ class Character extends MovableObject {
       this.playAnimation(this.imagesIdle);
     }
   }
-
-  // animate() {
-  //   setInterval(() => {
-  //     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-  //       this.moveRight();
-  //       this.setOtherDirection(false);
-  //       this.resetIdleTimer();
-  //     }
-  //     if (this.world.keyboard.LEFT && this.x > 0) {
-  //       this.moveLeft(this.speed);
-  //       this.setOtherDirection(true);
-  //       this.resetIdleTimer();
-  //     }
-  //     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-  //       this.jump();
-  //       this.resetIdleTimer();
-  //     }
-
-  //     this.idleTimer += 1000 / 60;
-  //     this.world.camera_x = -this.x + 30;
-  //   }, 1000 / 60);
-
-  //   setInterval(() => {
-  //     if (this.isDead()) {
-  //       this.playDeathAnimation(this.imagesDying);
-  //       if (this.deathAnimationComplete) {
-  //         stopGame();
-  //       }
-  //     } else if (this.isHurt()) {
-  //       this.playAnimation(this.imagesHurt);
-  //       this.playSound(this.audioHittingSound);
-  //       this.resetIdleTimer();
-  //     } else if (this.isAboveGround()) {
-  //       this.playAnimation(this.imagesJump);
-  //       this.resetIdleTimer();
-  //     } else {
-  //       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-  //         this.playAnimation(this.imagesWalking);
-  //         this.resetIdleTimer();
-  //       } else if (this.idleTimer >= this.longIdleThreshold) {
-  //         this.playAnimation(this.imagesLongIdle);
-  //       } else {
-  //         this.playAnimation(this.imagesIdle);
-  //       }
-  //     }
-  //   }, 200);
-  // }
 
   jump() {
     this.speedY = 30;

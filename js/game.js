@@ -7,9 +7,11 @@ let gameOverMusic = new Audio("assets/audio/game_over_music.mp3");
 
 function init() {
   element = document.getElementById("canvas");
-  world = new World(element, keyboard);
+
+  // world = new World(element, keyboard);
   checkOrientation();
   window.addEventListener("resize", checkOrientation);
+  showStartScreen();
 }
 
 function checkOrientation() {
@@ -19,6 +21,22 @@ function checkOrientation() {
   } else {
     dialog.close();
   }
+}
+
+function showStartScreen() {
+  if (gameOver) {
+    closeGameOverDialog();
+    document.querySelector('.startScreenContainer').style.display = 'flex';
+  }
+  startScreenDialog.showModal();
+}
+
+function startGame() {
+  document.getElementById('startScreenDialog').close();
+  document.querySelector('.startScreenContainer').style.display = 'none';
+  // Hier können Sie den Code zum Starten des Spiels einfügen
+  initLevel();
+  world = new World(element, keyboard);
 }
 
 function stopGame() {
@@ -50,6 +68,32 @@ function toggleSound() {
   }
 }
 
+function clearAllIntervals() {
+  for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
+function showGameOverDialog() {
+  const dialog = document.getElementById("gameOverDialog");
+  dialog.showModal();
+  document
+    .getElementById("restartButton")
+    .addEventListener("click", restartGame);
+}
+
+function restartGame() {
+  closeGameOverDialog();
+  // Hier Logik zum Zurücksetzen des Spielzustands einfügen
+  init();
+  // Spiel neu initialisieren
+}
+
+function closeGameOverDialog() {
+  const dialog = document.getElementById("gameOverDialog");
+  dialog.close();
+  gameOver = false;
+  gameOverMusic.pause();
+}
+
 function fullscreen() {
   let divToFullscreen = document.getElementById("canvas_wrapper");
   openFullscreen(divToFullscreen);
@@ -65,29 +109,6 @@ function openFullscreen(element) {
     /* IE11 */
     element.msRequestFullscreen();
   }
-}
-
-function clearAllIntervals() {
-  for (let i = 1; i < 9999; i++) window.clearInterval(i);
-}
-
-function showGameOverDialog() {
-  const dialog = document.getElementById("gameOverDialog");
-  dialog.showModal();
-  document
-    .getElementById("restartButton")
-    .addEventListener("click", restartGame);
-}
-
-function restartGame() {
-  const dialog = document.getElementById("gameOverDialog");
-  dialog.close();
-  // Hier Logik zum Zurücksetzen des Spielzustands einfügen
-  gameOver = false;
-  gameOverMusic.pause();
-  console.log("pause modus ist", world.isPaused);
-  init();
-  // Spiel neu initialisieren
 }
 
 window.addEventListener("keydown", (event) => {
@@ -107,7 +128,8 @@ window.addEventListener("keydown", (event) => {
     keyboard.D = true;
   }
   if (event.code === "KeyP") {
-    keyboard.P = true;
+    // keyboard.P = true;
+    world.togglePause();
   }
 });
 
@@ -127,9 +149,9 @@ window.addEventListener("keyup", (event) => {
   if (event.code === "KeyD") {
     keyboard.D = false;
   }
-  if (event.code === "KeyP") {
-    keyboard.P = false;
-  }
+  // if (event.code === "KeyP") {
+  //   keyboard.P = false;
+  // }
 });
 
 // window.addEventListener('keyup', (event) => {

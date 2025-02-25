@@ -26,7 +26,6 @@ class Endboss extends MovableObject {
     "img/Elara/enemies/endboss/dragon/Idle3.png",
   ];
   hadFirstContact = false;
-  audioRoarIntro = new Audio("assets/audio/enboss_dragon_roar.mp3");
 
   constructor() {
     super().setImage(this.imagesIntro[1]);
@@ -43,6 +42,7 @@ class Endboss extends MovableObject {
       bottom: 150,
       left: 150,
     };
+    this.audioRoarIntro = this.createAudio("assets/audio/endboss_dragon_roar.mp3");
     this.setOtherDirection(true);
     this.animate();
   }
@@ -61,7 +61,7 @@ class Endboss extends MovableObject {
       if (world.character.x > 3300 && !this.hadFirstContact) {
         i = 0;
         this.hadFirstContact = true;
-        let roarIntroSound= this.createAudio(this.audioRoarIntro);
+        let roarIntroSound= this.playSound(this.audioRoarIntro);
         roarIntroSound.playbackRate=0.8;
       }
     }, 250);

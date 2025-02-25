@@ -40,24 +40,64 @@
           <div class="canvas_wrapper" id="canvas_wrapper">
             <canvas width="720px" height="480px" id="canvas"> </canvas>
             <div class="control-buttons">
-              <button onclick="toggleSound(); this.blur();" id="soundButton" aria-label="Ton ein/aus">
-                <img src="assets/img/icons/speaker_volume.svg" alt="Ton ein" id="soundIcon">
+              <button
+                onclick="toggleSound(); this.blur();"
+                id="soundButton"
+                aria-label="Ton ein/aus"
+              >
+                <img
+                  src="assets/img/icons/speaker_volume.svg"
+                  alt="Ton ein"
+                  id="soundIcon"
+                />
               </button>
-              <button onclick="fullscreen(); this.blur();" id="fullscreenButton" aria-label="Vollbildmodus">
-                <img src="assets/img/icons/fullscreen_icon.svg" alt="Vollbild">
+              <button
+                onclick="fullscreen(); this.blur();"
+                id="fullscreenButton"
+                aria-label="Vollbildmodus"
+              >
+                <img
+                  src="assets/img/icons/fullscreen_icon.svg"
+                  alt="Vollbild"
+                />
               </button>
+            </div>
+            <div class="startScreenContainer">
+              <dialog id="startScreenDialog">
+                <h2>Willkommen zu Elara und der verzauberte Hain</h2>
+                <p>
+                  Hilf Elara, den verzauberten Hain zu erkunden und seine
+                  Geheimnisse zu lüften!
+                </p>
+                <button onclick="startGame()" class="startButton">
+                  Spiel starten
+                </button>
+              </dialog>
             </div>
           </div>
           <dialog id="orientationDialog">
             <p>Please, turn your device to play</p>
           </dialog>
+
           <dialog id="gameOverDialog">
             <div class="dialog_container">
               <h2>Game Over</h2>
               <p>Dein Spiel ist zu Ende!</p>
               <div>
-                <button onclick="goBacktoMenu()" class="gameOverButtons" id="backToMenuButton">Hauptmenü</button>
-                <button onclick="restartGame()" class="gameOverButtons" id="restartButton">Neu starten</button>
+                <button
+                  onclick="showStartScreen()"
+                  class="gameOverButtons"
+                  id="backToMenuButton"
+                >
+                  Hauptmenü
+                </button>
+                <button
+                  onclick="restartGame()"
+                  class="gameOverButtons"
+                  id="restartButton"
+                >
+                  Neu starten
+                </button>
               </div>
             </div>
           </dialog>
