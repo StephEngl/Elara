@@ -55,23 +55,51 @@ canvas {
 }
 
 #startScreenDialog {
-  padding: 20px;
   background: rgba(0, 0, 0, 0.8);
   color: white;
   border: none;
   border-radius: 10px;
   font-family: "magical_neverland", Arial, Helvetica, sans-serif;
   text-align: center;
-  width: 80%;
+  max-width: 80%;
+  max-height: 80%;
 }
 
 #startScreenDialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
 
+.startScreenContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Verteilt den Platz zwischen den Elementen */
+  position: relative; /* Für die absolute Positionierung des Zauberbuchs */
+}
+
+.characterImage {
+  width: 20%; /* Anpassen der Bildgröße */
+  margin-right: 16px; /* Abstand zum Text */
+}
+
+.textContainer {
+  flex-grow: 1; /* Nimmt den restlichen Platz ein */
+  text-align: left; /* Text links ausrichten */
+  word-break: break-word;
+}
+
+.startScreenAssetsContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.spellbookImage {
+  width: 10%; /* 30% der Größe des Elara-Bildes */
+}
+
 #startScreenDialog h2 {
   font-size: 24px;
   margin-bottom: 10px;
+  text-align: center; /* Überschrift zentrieren */
 }
 
 #startScreenDialog p {

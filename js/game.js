@@ -4,7 +4,6 @@ let keyboard = new Keyboard();
 let isMuted = false;
 let gameOver = false;
 let gameOverMusic = new Audio("assets/audio/game_over_music.mp3");
-let startAgain = false;
 
 function init() {
   element = document.getElementById("canvas");
@@ -72,7 +71,6 @@ function clearAllIntervals() {
 
 function restartGame() {
   closeGameOverDialog();
-  // startAgain = true;
   init();
   startGame();
 }

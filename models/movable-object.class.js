@@ -75,7 +75,7 @@ class MovableObject extends DrawableObject {
   }
 
   hit() {
-    this.energy -= 10;
+    this.energy -= 5;
     console.log('character is hit', this.energy);
     if (this.energy < 0) {
       this.energy = 0;
@@ -87,7 +87,7 @@ class MovableObject extends DrawableObject {
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
     timePassed = timePassed / 1000;
-    let isHurted = timePassed < 0.1;
+    let isHurted = timePassed < 1;
     if (isHurted) {
       console.log('character is hurted', timePassed);
     }
