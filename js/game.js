@@ -26,14 +26,14 @@ function checkOrientation() {
 function showStartScreen() {
   if (gameOver) {
     closeGameOverDialog();
-    document.querySelector('.startScreenContainer').style.display = 'flex';
+    document.querySelector(".startScreenContainer").style.display = "flex";
   }
   startScreenDialog.showModal();
 }
 
 function startGame() {
-  document.getElementById('startScreenDialog').close();
-  document.querySelector('.startScreenContainer').style.display = 'none';
+  document.getElementById("startScreenDialog").close();
+  document.querySelector(".startScreenContainer").style.display = "none";
   // Hier können Sie den Code zum Starten des Spiels einfügen
   initLevel();
   world = new World(element, keyboard);
@@ -112,84 +112,41 @@ function openFullscreen(element) {
 }
 
 window.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowRight") {
-    keyboard.RIGHT = true;
-  }
-  if (event.code === "ArrowLeft") {
-    keyboard.LEFT = true;
-  }
-  if (event.code === "ArrowUp") {
-    keyboard.UP = true;
-  }
-  if (event.code === "Space") {
-    keyboard.SPACE = true;
-  }
-  if (event.code === "KeyD") {
-    keyboard.D = true;
-  }
-  if (event.code === "KeyP") {
-    // keyboard.P = true;
-    world.togglePause();
+  switch (event.code) {
+    case "ArrowRight":
+      keyboard.RIGHT = true;
+      break;
+    case "ArrowLeft":
+      keyboard.LEFT = true;
+      break;
+    case "Space":
+      keyboard.SPACE = true;
+      break;
+    case "KeyF":
+      keyboard.F = true;
+      break;
+    case "KeyP":
+      world.togglePause();
+      break;
+    default:
+      console.log("Unhandled key released:", event.code);
+      break;
   }
 });
 
 window.addEventListener("keyup", (event) => {
-  if (event.code === "ArrowRight") {
-    keyboard.RIGHT = false;
+  switch (event.code) {
+    case "ArrowLeft":
+      keyboard.LEFT = false;
+      break;
+    case "ArrowRight":
+      keyboard.RIGHT = false;
+      break;
+    case "Space":
+      keyboard.SPACE = false;
+      break;
+    case "KeyD":
+      keyboard.D = false;
+      break;
   }
-  if (event.code === "ArrowLeft") {
-    keyboard.LEFT = false;
-  }
-  if (event.code === "ArrowUp") {
-    keyboard.UP = false;
-  }
-  if (event.code === "Space") {
-    keyboard.SPACE = false;
-  }
-  if (event.code === "KeyD") {
-    keyboard.D = false;
-  }
-  // if (event.code === "KeyP") {
-  //   keyboard.P = false;
-  // }
 });
-
-// window.addEventListener('keyup', (event) => {
-//   switch (event.code) {
-//     case 'ArrowLeft':
-//       this.LEFT = false;
-//       break;
-//     case 'ArrowRight':
-//       this.RIGHT = false;
-//       break;
-//     case 'ArrowUp':
-//       this.UP = false;
-//       break;
-//     case 'ArrowDown':
-//       this.DOWN = false;
-//       break;
-//     case 'Space':
-//       this.SPACE = false;
-//       break;
-//   }
-// });
-
-// window.addEventListener('keydown', (event) => {
-//   switch (event.code) {
-//     case 'ArrowRight':
-//       keyboard.RIGHT = true;
-//       break;
-//     case 'ArrowLeft':
-//       keyboard.LEFT = true;
-//       break;
-//     case 'ArrowUp':
-//       keyboard.UP = true;
-//       break;
-//     case 'ArrowDown':
-//       keyboard.DOWN = true;
-//       break;
-//     case 'Space':
-//       keyboard.SPACE = true;
-//       break;
-//   }
-// });

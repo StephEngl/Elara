@@ -86,19 +86,6 @@ class World {
     }
   }
 
-  // startPauseCheck() {
-  //   setInterval(() => {
-  //     this.checkForPause();
-  //   }, 100);
-  // }
-
-  // checkForPause() {
-  //   if (this.keyboard.P) {
-  //     this.togglePause();
-  //     this.keyboard.P = false;
-  //   }
-  // }
-
   togglePause() {
     this.isPaused = !this.isPaused;
     if (this.isPaused) {
@@ -132,7 +119,7 @@ class World {
   }
 
   checkFlyingObjects() {
-    if (this.keyboard.D) {
+    if (this.keyboard.F) {
       this.character.playAnimation(this.character.imagesAttack);
       let fireball = new FlyingObject(
         this.character.x + this.character.offset.right,
