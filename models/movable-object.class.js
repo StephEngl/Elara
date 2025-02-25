@@ -75,7 +75,7 @@ class MovableObject extends DrawableObject {
   }
 
   hit() {
-    this.energy -= 5;
+    this.energy -= 10;
     console.log('character is hit', this.energy);
     if (this.energy < 0) {
       this.energy = 0;

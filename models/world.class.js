@@ -16,7 +16,6 @@ class World {
     this.draw();
     this.run();
     this.addBackgroundMusicToAudioElements();
-    // this.startPauseCheck();
   }
 
   setWorld() {

@@ -4,11 +4,10 @@ let keyboard = new Keyboard();
 let isMuted = false;
 let gameOver = false;
 let gameOverMusic = new Audio("assets/audio/game_over_music.mp3");
+let startAgain = false;
 
 function init() {
   element = document.getElementById("canvas");
-
-  // world = new World(element, keyboard);
   checkOrientation();
   window.addEventListener("resize", checkOrientation);
   showStartScreen();
@@ -34,7 +33,6 @@ function showStartScreen() {
 function startGame() {
   document.getElementById("startScreenDialog").close();
   document.querySelector(".startScreenContainer").style.display = "none";
-  // Hier können Sie den Code zum Starten des Spiels einfügen
   initLevel();
   world = new World(element, keyboard);
 }
@@ -72,19 +70,16 @@ function clearAllIntervals() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
+function restartGame() {
+  closeGameOverDialog();
+  // startAgain = true;
+  init();
+  startGame();
+}
+
 function showGameOverDialog() {
   const dialog = document.getElementById("gameOverDialog");
   dialog.showModal();
-  document
-    .getElementById("restartButton")
-    .addEventListener("click", restartGame);
-}
-
-function restartGame() {
-  closeGameOverDialog();
-  // Hier Logik zum Zurücksetzen des Spielzustands einfügen
-  init();
-  // Spiel neu initialisieren
 }
 
 function closeGameOverDialog() {
