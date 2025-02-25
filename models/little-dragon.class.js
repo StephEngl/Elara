@@ -1,19 +1,19 @@
 class LittleDragon extends MovableObject {
   imagesIdle = [
-    "img/Elara/enemies/small_dragon/Walk1.png",
-    "img/Elara/enemies/small_dragon/Walk2.png",
-    "img/Elara/enemies/small_dragon/Walk3.png",
-    "img/Elara/enemies/small_dragon/Walk4.png",
+    "assets/img/enemies/small_dragon/Walk1.png",
+    "assets/img/enemies/small_dragon/Walk2.png",
+    "assets/img/enemies/small_dragon/Walk3.png",
+    "assets/img/enemies/small_dragon/Walk4.png",
   ];
   imagesDying = [
-    "img/Elara/enemies/small_dragon/Death1.png",
-    "img/Elara/enemies/small_dragon/Death2.png",
-    "img/Elara/enemies/small_dragon/Death3.png",
-    "img/Elara/enemies/small_dragon/Death4.png",
+    "assets/img/enemies/small_dragon/Death1.png",
+    "assets/img/enemies/small_dragon/Death2.png",
+    "assets/img/enemies/small_dragon/Death3.png",
+    "assets/img/enemies/small_dragon/Death4.png",
   ];
 
   constructor() {
-    super().setImage("img/Elara/enemies/small_dragon/Idle1.png");
+    super().setImage("assets/img/enemies/small_dragon/Idle1.png");
     this.loadImages(this.imagesIdle);
     this.loadImages(this.imagesDying);
     this.y = 310;

@@ -47,7 +47,7 @@ class DrawableObject {
     ) {
       ctx.beginPath();
       ctx.lineWidth = "5";
-      ctx.strokeStyle = "blue";
+      ctx.strokeStyle = "transparent";
       ctx.rect(this.x, this.y, this.width, this.height);
       ctx.stroke();
       ctx.beginPath();
@@ -70,7 +70,26 @@ class DrawableObject {
       width: objWidth,
       height: objHeight,
       x2: objLeftBorder + objWidth,
-      y2: objUpperBorder + objHeight
+      y2: objUpperBorder + objHeight,
     };
+  }
+
+  /**
+   * Checks if this object is colliding with another movable object.
+   * @param {DrawableObject} drawObj - The other movable object to check for collision with.
+   * @returns {boolean} - True if the objects are colliding, false otherwise.
+   */
+  isColliding(drawObj) {
+    let charCollisionRect = this.getCurrentCollisionRect();
+    let doCollisionRect = drawObj.getCurrentCollisionRect();
+    let cond1 = charCollisionRect.x2 >= doCollisionRect.x1;
+    let cond2 = charCollisionRect.x1 <= doCollisionRect.x2;
+    let cond3 = charCollisionRect.y2 >= doCollisionRect.y1;
+    let cond4 = charCollisionRect.y1 <= doCollisionRect.y2;
+    let collisionDetected = cond1 && cond2 && cond3 && cond4;
+    if (collisionDetected) {
+      console.log("collision detetced", charCollisionRect, doCollisionRect);
+    }
+    return collisionDetected;
   }
 }

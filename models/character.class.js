@@ -183,7 +183,7 @@ class Character extends MovableObject {
       this.playDeathAnimation();
       this.resetIdleTimer();
     } else {
-      this.remove();
+      this.setRemoveState();
       stopGame();
     }
   }

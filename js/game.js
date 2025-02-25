@@ -138,8 +138,8 @@ window.addEventListener("keyup", (event) => {
     case "Space":
       keyboard.SPACE = false;
       break;
-    case "KeyD":
-      keyboard.D = false;
+    case "KeyF":
+      keyboard.F = false;
       break;
   }
 });

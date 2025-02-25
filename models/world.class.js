@@ -27,15 +27,17 @@ class World {
       if (!this.isPaused) {
         this.checkJumpingOn();
         this.startLevel();
-        if (!this.character.elaraJumpedOnEnemy) {
-          this.checkCollisions();
-        }
         this.checkFlyingObjects();
         this.cleanupFlyingObjects();
         this.cleanupEnemies();
         this.cleanupCharacter();
       }
-    }, 300);
+    }, 200);
+    this.collisionInterval = setInterval(() => {
+      if (!this.isPaused && !this.character.elaraJumpedOnEnemy) {
+        this.checkCollisions();
+      }
+    }, 50);
   }
 
   addBackgroundMusicToAudioElements() {

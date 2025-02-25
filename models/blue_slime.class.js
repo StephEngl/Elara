@@ -1,22 +1,22 @@
 class BlueSlime extends MovableObject {
   imagesWalking = [
-    "img/Elara/enemies/blue_slime/walk/walk1.png",
-    "img/Elara/enemies/blue_slime/walk/walk2.png",
-    "img/Elara/enemies/blue_slime/walk/walk3.png",
-    "img/Elara/enemies/blue_slime/walk/walk4.png",
-    "img/Elara/enemies/blue_slime/walk/walk5.png",
-    "img/Elara/enemies/blue_slime/walk/walk6.png",
-    "img/Elara/enemies/blue_slime/walk/walk7.png",
-    "img/Elara/enemies/blue_slime/walk/walk8.png",
+    "assets/img/enemies/blue_slime/walk/walk1.png",
+    "assets/img/enemies/blue_slime/walk/walk2.png",
+    "assets/img/enemies/blue_slime/walk/walk3.png",
+    "assets/img/enemies/blue_slime/walk/walk4.png",
+    "assets/img/enemies/blue_slime/walk/walk5.png",
+    "assets/img/enemies/blue_slime/walk/walk6.png",
+    "assets/img/enemies/blue_slime/walk/walk7.png",
+    "assets/img/enemies/blue_slime/walk/walk8.png",
   ];
   imagesDying = [
-    "img/Elara/enemies/blue_slime/dead/dead1.png",
-    "img/Elara/enemies/blue_slime/dead/dead2.png",
-    "img/Elara/enemies/blue_slime/dead/dead3.png",
+    "assets/img/enemies/blue_slime/dead/dead1.png",
+    "assets/img/enemies/blue_slime/dead/dead2.png",
+    "assets/img/enemies/blue_slime/dead/dead3.png",
   ];
 
   constructor() {
-    super().setImage("img/Elara/enemies/blue_slime/walk/walk1.png");
+    super().setImage("assets/img/enemies/blue_slime/walk/walk1.png");
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesDying);
     this.y = 260;

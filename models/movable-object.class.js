@@ -1,3 +1,8 @@
+/**
+ * @class MovableObject
+ * @extends DrawableObject
+ * Represents a movable object in the game.
+ */
 class MovableObject extends DrawableObject {
   lastHit;
   world;
@@ -14,14 +19,26 @@ class MovableObject extends DrawableObject {
     this.isDying = false;
   }
 
+  /**
+   * Sets the game world for this object.
+   * @param {World} world - The game world.
+   */
   setWorld(world) {
     this.world = world;
   }
 
+  /**
+   * Creates an audio object.
+   * @param {string} src - The source URL of the audio file.
+   * @returns {HTMLAudioElement} - The audio element.
+   */
   createAudio(src) {
     return this.world ? this.world.createAudio(src) : new Audio(src);
   }
 
+  /**
+   * Applies gravity to the object, causing it to fall.
+   */
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -33,6 +50,10 @@ class MovableObject extends DrawableObject {
     }, 1000 / 25);
   }
 
+  /**
+   * Checks if the object is above the ground.
+   * @returns {boolean} - True if the object is above the ground, false otherwise.
+   */
   isAboveGround() {
     if (this instanceof FlyingObject) {
       return true;
@@ -41,6 +62,10 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * Sets the otherDirection property and potentially swaps the offset values.
+   * @param {boolean} value - The new value for the otherDirection property.
+   */
   setOtherDirection(value) {
     let directionChanged = this.otherDirection !== value;
     this.otherDirection = value;
@@ -52,31 +77,24 @@ class MovableObject extends DrawableObject {
     // }
   }
 
-  isColliding(mo) {
-    let charX1 = this.x + this.offset.left;
-    let charX2 = this.x + this.width - this.offset.right;
-    let charY1 = this.y + this.offset.top;
-    let charY2 = this.y + this.height - this.offset.bottom;
-    let moX1 = mo.x + mo.offset.left;
-    let moX2 = mo.x + mo.width - mo.offset.right;
-    let moY1 = mo.y + mo.offset.top;
-    let moY2 = mo.y + mo.height - mo.offset.bottom;
-    let charCollisionRect = this.getCurrentCollisionRect();
-    let moCollisionRect = mo.getCurrentCollisionRect();
-    let cond1 = charCollisionRect.x2  >= moCollisionRect.x1;
-    let cond2 = charCollisionRect.x1  <= moCollisionRect.x2;
-    let cond3 = charCollisionRect.y2  >= moCollisionRect.y1;
-    let cond4 = charCollisionRect.y1  <= moCollisionRect.y2;
-    let collisionDetected = cond1 && cond2 && cond3 && cond4
-    if (collisionDetected) {
-      console.log('collision detetced', charCollisionRect, moCollisionRect);
+  /**
+   * Handles the logic for when the character is hit, reducing energy based on conditions.
+   */
+  hit() {
+    console.log("enemy isdying: ", this.isDying);
+    if (!this.isHurt() && !this.isAboveGround() && !this.elaraJumpedOnEnemy) {
+      // Wenn der Charakter nicht springt und nicht auf einen Gegner gesprungen ist,
+      this.reduceEnergy();
     }
-    return collisionDetected;
   }
 
-  hit() {
+  /**
+   * Reduces the character's energy and updates the lastHit timestamp.
+   */
+  reduceEnergy() {
     this.energy -= 5;
-    console.log('character is hit', this.energy);
+    console.log("character is hit", this.energy);
+
     if (this.energy < 0) {
       this.energy = 0;
     } else {
@@ -84,37 +102,60 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * Checks if the character is currently hurt (recently hit)
+   * for giving back time for showing hurt-animation.
+   * @returns {boolean} True if the character is hurt, false otherwise.
+   */
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
     timePassed = timePassed / 1000;
-    let isHurted = timePassed < 1;
+    let isHurted = timePassed < 0.8; //showing 4 images from hurt state (200ms)
     if (isHurted) {
-      console.log('character is hurted', timePassed);
+      console.log("character is hurted", timePassed, isHurted);
     }
     return isHurted;
   }
 
+  /**
+   * Checks if the character is dead (energy is zero).
+   * @returns {boolean} True if the character is dead, false otherwise.
+   */
   isDead() {
     return this.energy == 0;
   }
 
+  /**
+   * Moves the character to the right.
+   */
   moveRight() {
     this.x += this.speed;
   }
 
+  /**
+   * Moves the character to the left.
+   * @param {number} speed - The speed at which to move the character to the left.
+   */
   moveLeft(speed) {
     this.x -= speed;
   }
 
+  /**
+   * Plays a sound if the game is not paused and not muted.
+   * @param {HTMLAudioElement} sound - The sound element to play.
+   * @returns {HTMLAudioElement | undefined} The sound element if played, undefined otherwise.
+   */
   playSound(sound) {
-    console.log("Status isPaused: ", this.world.isPaused);
-        
     if (!this.world.isPaused && !isMuted) {
       sound.play();
-      return sound
+      return sound;
     }
   }
 
+  /**
+   * Plays an animation by cycling through a set of images.
+   * @param {string[]} imagesToChange - An array of image paths to use for the animation.
+   */
   playAnimation(imagesToChange) {
     let i = this.currentImage % imagesToChange.length; // let i = 7 % 6 => 1, Rest 1 -> i = 0,1,...,17,0,1,...,17,...
     let path = imagesToChange[i];
@@ -122,8 +163,11 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  /**
+   * Removes the object from the game.
+   */
   remove() {
     // Implementieren Sie hier die Logik zum Entfernen des Objekts aus dem Spiel
-    this.shouldRemove = true;
+    this.remove();
   }
 }

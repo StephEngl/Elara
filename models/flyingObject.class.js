@@ -31,7 +31,7 @@ class FlyingObject extends MovableObject {
     const animationInterval = setInterval(() => {
       if (this.currentImageIndex >= imagesAttack.length) {
         clearInterval(animationInterval);
-        this.remove();
+        this.setRemoveState();
       } else {
         this.animateFireball(imagesAttack);
         this.x += 40;
