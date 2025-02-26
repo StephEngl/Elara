@@ -22,19 +22,17 @@ class FlyingObject extends MovableObject {
     this.acceleration = 0.5;
     this.currentImageIndex = 0;
     this.shouldRemove = false;
-
     this.fire(this.imagesFireball);
   }
 
   fire(imagesAttack) {
     // this.applyGravity();
     const animationInterval = setInterval(() => {
+      this.animateFireball(imagesAttack);
+      this.x += 40;
       if (this.currentImageIndex >= imagesAttack.length) {
         clearInterval(animationInterval);
-        this.remove();
-      } else {
-        this.animateFireball(imagesAttack);
-        this.x += 40;
+        this.shouldRemove = true;
       }
     }, 100);
   }

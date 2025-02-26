@@ -29,7 +29,7 @@ class World {
         this.checkJumpingOn();
         this.startBackgroundMusic();
         this.checkFlyingObjects();
-        this.cleanupFlyingObjects();
+        this.removeFireballs()
         this.cleanupEnemies();
         this.cleanupCharacter();
       }
@@ -190,6 +190,10 @@ class World {
     }
   }
 
+  removeFireballs() {
+    this.flyingObjects = this.flyingObjects.filter((obj) => !obj.shouldRemove);
+  }
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (!this.isPaused) {
@@ -214,7 +218,7 @@ class World {
     this.drawBackground();
     this.drawLights();
     if (!gameOver) this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.flyingObjects.filter((obj) => !obj.shouldRemove));
+    this.addObjectsToMap(this.flyingObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.collectableObjects);
     this.addObjectsToMap(this.level.foregroundObjects);
@@ -249,10 +253,6 @@ class World {
 
   cleanupCharacter() {
     // this.world.character = this.world.character.filter((obj) => !obj.shouldRemove);
-  }
-
-  cleanupFlyingObjects() {
-    this.flyingObjects = this.flyingObjects.filter((obj) => !obj.shouldRemove);
   }
 
   cleanupEnemies() {
