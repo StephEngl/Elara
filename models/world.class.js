@@ -40,7 +40,7 @@ class World {
         this.checkCollisions(this.level.enemies);
         this.checkCollisions(this.level.collectableObjects);
       }
-    }, 50);
+    }, 20);
   }
 
   // Sound functions
@@ -195,7 +195,7 @@ class World {
       this.character.playAnimation(this.character.imagesAttack);
       let fireball = new FlyingObject(
         this.character.x + this.character.offset.right,
-        this.character.y + this.character.offset.top
+        this.character.y + this.character.offset.top, this.character.otherDirection
       );
       this.flyingObjects.push(fireball);
       this.decreaseCrystalbar();

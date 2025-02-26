@@ -11,7 +11,7 @@ class FlyingObject extends MovableObject {
     "img/Elara/mage_elara/Fire/fire9.png",
   ];
 
-  constructor(x, y) {
+  constructor(x, y, isMovingLeft) {
     super().setImage("img/Elara/mage_elara/Fire/fire1.png");
     this.loadImages(this.imagesFireball);
     this.x = x;
@@ -21,6 +21,7 @@ class FlyingObject extends MovableObject {
     this.speedX = 10;
     this.acceleration = 0.5;
     this.currentImageIndex = 0;
+    this.isMovingLeft = isMovingLeft;
     this.fire(this.imagesFireball);
   }
 
@@ -28,7 +29,12 @@ class FlyingObject extends MovableObject {
     // this.applyGravity();
     const animationInterval = setInterval(() => {
       this.animateFireball(imagesAttack);
-      this.x += 40;
+      if (this.isMovingLeft) {
+        this.x -= 40;
+     } else {
+        this.x += 40;
+      }
+
       if (this.currentImageIndex >= imagesAttack.length) {
         clearInterval(animationInterval);
         this.shouldRemove = true;
