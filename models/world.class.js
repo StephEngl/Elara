@@ -5,6 +5,7 @@ class World {
   camera_x;
   flyingObjects = [];
   audioElements = [];
+  collectableObjects = [new Crystal()];
   isPaused = false;
   runInterval = null;
 
@@ -26,7 +27,7 @@ class World {
     this.runInterval = setInterval(() => {
       if (!this.isPaused) {
         this.checkJumpingOn();
-        this.startLevel();
+        this.startBackgroundMusic();
         this.checkFlyingObjects();
         this.cleanupFlyingObjects();
         this.cleanupEnemies();
@@ -46,13 +47,13 @@ class World {
     }
   }
 
-  startLevel() {
+  startBackgroundMusic() {
     if (!this.isPaused && !isMuted) {
       this.level.playBackgroundMusic();
     }
   }
 
-  stopLevel() {
+  stopBackgroundMusic() {
     this.level.stopBackgroundMusic();
   }
 
@@ -90,13 +91,13 @@ class World {
   togglePause() {
     this.isPaused = !this.isPaused;
     if (this.isPaused) {
-      this.stopLevel();
+      this.stopBackgroundMusic();
       console.log("Spiel pausiert");
       clearInterval(this.runInterval);
     } else {
       console.log("Spiel fortgesetzt");
       this.run();
-      if (!isMuted) this.startLevel();
+      if (!isMuted) this.startBackgroundMusic();
     }
   }
 
@@ -157,6 +158,7 @@ class World {
     this.addObjectsToMap(this.flyingObjects.filter((obj) => !obj.shouldRemove));
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.foregroundObjects);
+    this.addObjectsToMap(this.level.collectableObjects);
   }
 
   drawBackground() {

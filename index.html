@@ -18,17 +18,20 @@
       </style>
       <link rel="stylesheet" href="style.css" />
       <script src="models/drawable-objects.class.js"></script>
+      <script src="models/collectable-objects.class.js"></script>
       <script src="models/movable-object.class.js"></script>
       <script src="models/light.class.js"></script>
       <script src="models/background-object.class.js"></script>
       <script src="models/character.class.js"></script>
       <script src="models/little-dragon.class.js"></script>
       <script src="models/blue_slime.class.js"></script>
+      <script src="models/endboss.class.js"></script>
       <script src="models/statusbar.class.js"></script>
       <script src="models/flyingObject.class.js"></script>
       <script src="models/keyboard.class.js"></script>
+      <script src="models/crystal.class.js"></script>
+      <script src="models/flower.class.js"></script>
       <script src="models/level.class.js"></script>
-      <script src="models/endboss.class.js"></script>
       <script src="levels/level1.js"></script>
       <script src="models/world.class.js"></script>
       <script src="js/game.js"></script>
@@ -65,16 +68,27 @@
             <div class="startScreenContainer">
               <dialog id="startScreenDialog">
                 <div class="startScreenContent">
-                  <img class="characterImage" src="assets/img/game_objects/elara_startscreen.png" alt="Elara" />
+                  <img
+                    class="characterImage"
+                    src="assets/img/game_objects/elara_startscreen.png"
+                    alt="Elara"
+                  />
                   <div class="textContainer">
                     <h2>Willkommen zu Elara und der verzauberte Hain</h2>
-                    <p>Hilf Elara, den verzauberten Hain zu erkunden und seine Geheimnisse zu lüften!</p>
+                    <p>
+                      Hilf Elara, den verzauberten Hain zu erkunden und seine
+                      Geheimnisse zu lüften!
+                    </p>
                     <div class="startScreenAssetsContainer">
-                      <button onclick="startGame()" class="startButton">Spiel starten</button>
-                      <img class="spellbookImage" src="assets/img/game_objects/spellbook.png" alt="Zauberbuch" />
+                      <button onclick="startGame()" class="startButton">
+                        Spiel starten
+                      </button>
+                      <img
+                        class="spellbookImage"
+                        src="assets/img/game_objects/spellbook.png"
+                        alt="Zauberbuch"
+                      />
                     </div>
-                    
-
                   </div>
                 </div>
               </dialog>

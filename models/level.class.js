@@ -5,13 +5,14 @@ class Level {
   foregroundObjects;
   level_end_x = 3600;
   backgroundMusic;
+  collectableObjects;
 
   constructor(
     enemies,
     lights,
     backgroundObjects,
     foregroundObjects,
-    backgroundMusicSrc
+    backgroundMusicSrc, collectableObjects
   ) {
     this.enemies = enemies;
     this.lights = lights;
@@ -19,6 +20,7 @@ class Level {
     this.foregroundObjects = foregroundObjects;
     this.backgroundMusic = new Audio(backgroundMusicSrc);
     this.backgroundMusic.loop = true; // Musik wird in Schleife abgespielt
+    this.collectableObjects = collectableObjects;
   }
 
   playBackgroundMusic() {

@@ -164,10 +164,10 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Removes the object from the game.
+   * Sets remove status for removing the object from the game.
    */
   remove() {
     // Implementieren Sie hier die Logik zum Entfernen des Objekts aus dem Spiel
-    this.remove();
+    this.shouldRemove = true;
   }
 }
