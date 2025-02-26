@@ -5,7 +5,6 @@ class World {
   camera_x;
   flyingObjects = [];
   audioElements = [];
-  // collectableObjects = [new Crystal()];
   isPaused = false;
   runInterval = null;
 
@@ -31,7 +30,6 @@ class World {
         this.checkFlyingObjects();
         this.cleanupFlyingObjects();
         this.cleanupEnemies();
-        this.cleanupItems();
         this.cleanupCharacter();
       }
     }, 200);
@@ -39,11 +37,11 @@ class World {
       if (!this.isPaused && !this.character.elaraJumpedOnEnemy) {
         this.checkCollisions(this.level.enemies);
         this.checkCollisions(this.level.collectableObjects);
-
       }
     }, 50);
   }
 
+  // Sound functions
   addBackgroundMusicToAudioElements() {
     if (this.level && this.level.backgroundMusic) {
       this.audioElements.push(this.level.backgroundMusic);
@@ -91,6 +89,7 @@ class World {
     }
   }
 
+  // Pause function
   togglePause() {
     this.isPaused = !this.isPaused;
     if (this.isPaused) {
@@ -104,21 +103,60 @@ class World {
     }
   }
 
+  // Collision check
   checkCollisions(target) {
     target.forEach((element) => {
-      if (this.level.enemies === target) {
-        if (this.character.isColliding(element) && this.character.energy > 0) {
+      if (this.character.isColliding(element)) {
+        if (target === this.level.enemies && this.character.energy > 0) {
           this.character.hit();
           this.statusbar.setPercentage(this.character.energy);
+        } else if (target === this.level.collectableObjects) {
+          this.collectItem(element);
         }
       }
-      if (this.level.collectableObjects === target) {
-
-      }
-
     });
   }
 
+  // Collect Item
+  collectItem(item) {
+    console.log("Item collected:", item);
+    this.applyItemEffect(item);
+    this.playItemCollectSound(item);
+    this.removeItemFromLevel(item);
+  }
+
+  applyItemEffect(item) {
+    if (item instanceof Flower) {
+      this.increaseCharacterEnergy();
+    } else if (item instanceof Crystal) {
+      // this.character.increaseFireAttack();
+    }
+  }
+
+  increaseCharacterEnergy() {
+    this.character.energy = Math.min(this.character.energy + 10, 100);
+    this.statusbar.setPercentage(this.character.energy);
+  }
+
+  removeItemFromLevel(item) {
+    this.level.collectableObjects = this.level.collectableObjects.filter(
+      (obj) => obj !== item
+    );
+  }
+
+  playItemCollectSound(item) {
+    const soundKey =
+      item instanceof Flower
+        ? "flower"
+        : item instanceof Crystal
+        ? "crystal"
+        : null;
+    if (soundKey && !isMuted) {
+      sounds.collectibles[soundKey].play();
+    }
+  }
+
+  // Ceck Jumping on Enemys
   checkJumpingOn() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isJumpedOn(enemy) && !enemy.isDying) {
@@ -207,12 +245,6 @@ class World {
   cleanupEnemies() {
     this.level.enemies = this.level.enemies.filter(
       (enemy) => !enemy.shouldRemove
-    );
-  }
-
-  cleanupItems() {
-    this.level.collectableObjects = this.level.collectableObjects.filter(
-      (item) => !item.shouldRemove
     );
   }
 

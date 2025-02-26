@@ -3,7 +3,7 @@ let level1;
 function initLevel() {
   level1 = new Level(
     [
-      // new LittleDragon(),
+      new LittleDragon(),
       // new LittleDragon(),
       // new LittleDragon(),
       // new LittleDragon(),

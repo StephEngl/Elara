@@ -5,7 +5,7 @@
  */
 class MovableObject extends DrawableObject {
   lastHit;
-  world;
+
 
   constructor() {
     super();
@@ -19,13 +19,6 @@ class MovableObject extends DrawableObject {
     this.isDying = false;
   }
 
-  /**
-   * Sets the game world for this object.
-   * @param {World} world - The game world.
-   */
-  setWorld(world) {
-    this.world = world;
-  }
 
   /**
    * Creates an audio object.

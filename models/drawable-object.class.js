@@ -1,6 +1,7 @@
 class DrawableObject {
   imageCache = {};
   currentImage = 0;
+  world;
 
   constructor() {
     this.x = 10;
@@ -15,6 +16,14 @@ class DrawableObject {
       left: 0,
     };
   }
+
+    /**
+   * Sets the game world for this object.
+   * @param {World} world - The game world.
+   */
+    setWorld(world) {
+      this.world = world;
+    }
 
   setImage(path) {
     this.img = new Image(); //this.img = document.getElemendById('image') <img id="image">
