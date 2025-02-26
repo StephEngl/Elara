@@ -1,6 +1,7 @@
 class World {
   character = new Character();
   statusbar = new Statusbar();
+  crystalbar = new Crystalbar();
   level = level1;
   camera_x;
   flyingObjects = [];
@@ -219,6 +220,7 @@ class World {
   drawFixedObjects() {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusbar);
+    this.addToMap(this.crystalbar);
     this.ctx.translate(this.camera_x, 0);
   }
 
