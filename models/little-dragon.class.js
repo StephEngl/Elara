@@ -48,7 +48,7 @@ class LittleDragon extends MovableObject {
   die() {
     this.isDying = true;
     setTimeout(() => {
-      this.remove();
+      this.shouldRemove = true;
     }, 800); // Nach 800ms (4 Bilder bei 200ms Intervall ) wird das Objekt entfernt
   }
 }

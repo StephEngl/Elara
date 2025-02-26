@@ -29,8 +29,9 @@ class World {
         this.checkJumpingOn();
         this.startBackgroundMusic();
         this.checkFlyingObjects();
-        this.removeFireballs()
-        this.cleanupEnemies();
+        this.checkFireballCollisions();
+        this.flyingObjects = this.removeObjectsFromGame(this.flyingObjects);
+        this.level.enemies = this.removeObjectsFromGame(this.level.enemies);
         this.cleanupCharacter();
       }
     }, 200);
@@ -104,7 +105,7 @@ class World {
     }
   }
 
-  // Collision check
+  // Collision checks
   checkCollisions(target) {
     target.forEach((element) => {
       if (this.character.isColliding(element)) {
@@ -115,6 +116,17 @@ class World {
           this.collectItem(element);
         }
       }
+    });
+  }
+
+  checkFireballCollisions() {
+    this.flyingObjects.forEach((fireball) => {
+      this.level.enemies.forEach((enemy) => {
+        if (fireball.isColliding(enemy)) {
+          enemy.die();
+          fireball.shouldRemove = true;
+        }
+      });
     });
   }
 
@@ -190,8 +202,8 @@ class World {
     }
   }
 
-  removeFireballs() {
-    this.flyingObjects = this.flyingObjects.filter((obj) => !obj.shouldRemove);
+  removeObjectsFromGame(objectArrayToRemove) {
+    return objectArrayToRemove.filter((obj) => !obj.shouldRemove);
   }
 
   draw() {

@@ -15,6 +15,8 @@ class DrawableObject {
       bottom: 0,
       left: 0,
     };
+    this.shouldRemove = false;
+
   }
 
     /**

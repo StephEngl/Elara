@@ -7,7 +7,7 @@ function initLevel() {
       // new LittleDragon(),
       // new LittleDragon(),
       // new LittleDragon(),
-      // new BlueSlime(),
+      new BlueSlime(),
       // new BlueSlime(),
       // new BlueSlime(),
       // new BlueSlime(),

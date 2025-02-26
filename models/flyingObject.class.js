@@ -21,7 +21,6 @@ class FlyingObject extends MovableObject {
     this.speedX = 10;
     this.acceleration = 0.5;
     this.currentImageIndex = 0;
-    this.shouldRemove = false;
     this.fire(this.imagesFireball);
   }
 
