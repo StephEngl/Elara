@@ -1,8 +1,12 @@
 const sounds = {
     character: {},
     blueSlime: {},
-    littleDragon: {},
-    dragonBoss: {},
+    littleDragon: {
+        dyingSound: new Audio ("assets/audio/littleDragon_deathcry.mp3"),
+    },
+    dragonBoss: {
+        roar: new Audio ("assets/audio/endboss_dragon_roar.mp3"),
+    },
     environment: {},
     collectibles: {
         crystal: new Audio ("assets/audio/collectCrystal.mp3"),

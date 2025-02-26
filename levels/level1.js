@@ -4,7 +4,7 @@ function initLevel() {
   level1 = new Level(
     [
       new LittleDragon(),
-      // new LittleDragon(),
+      new LittleDragon(),
       // new LittleDragon(),
       // new LittleDragon(),
       new BlueSlime(),
@@ -76,9 +76,9 @@ function initLevel() {
     [
       new Crystal(),
       new Crystal(),
-      // new Crystal(),
-      // new Crystal(),
-      // new Flower(),
+      new Crystal(),
+      new Crystal(),
+      new Flower(),
       // new Flower(),
       // new Flower(),
       new Flower(),

@@ -40,7 +40,7 @@ function stopGame() {
   gameOver = true;
   setTimeout(() => {
     clearAllIntervals();
-    world.stopLevel();
+    world.stopBackgroundMusic();
     showGameOverDialog();
     gameOverMusic.play();
     // weitere Aktionen nach dem Spielende ausführen

@@ -25,12 +25,20 @@ class Endboss extends MovableObject {
     "assets/img/enemies/endboss/dragon/Idle2.png",
     "assets/img/enemies/endboss/dragon/Idle3.png",
   ];
+  imagesDying = [
+    "assets/img/enemies/endboss/dragon/Death1.png",
+    "assets/img/enemies/endboss/dragon/Death2.png",
+    "assets/img/enemies/endboss/dragon/Death3.png",
+    "assets/img/enemies/endboss/dragon/Death4.png",
+    "assets/img/enemies/endboss/dragon/Death5.png",
+  ]
   hadFirstContact = false;
 
   constructor() {
     super().setImage(this.imagesIntro[1]);
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesIdle);
+    this.loadImages(this.imagesDying);
     this.x = 4000; //3800
     this.y = -40;
     this.height = 600;
@@ -42,7 +50,7 @@ class Endboss extends MovableObject {
       bottom: 150,
       left: 150,
     };
-    this.audioRoarIntro = this.createAudio("assets/audio/endboss_dragon_roar.mp3");
+    // this.audioRoarIntro = this.createAudio("assets/audio/endboss_dragon_roar.mp3");
     this.setOtherDirection(true);
     this.animate();
   }
@@ -55,15 +63,23 @@ class Endboss extends MovableObject {
       } else {
         this.playAnimation(this.imagesIntro);
         this.moveLeft(this.speed);
+
         // this.otherDirection = true;
       }
       i++;
       if (world.character.x > 3300 && !this.hadFirstContact) {
         i = 0;
         this.hadFirstContact = true;
-        let roarIntroSound= this.playSound(this.audioRoarIntro);
-        roarIntroSound.playbackRate=0.8;
+        sounds.dragonBoss.roar.play();
+        sounds.dragonBoss.roar.playbackRate=0.8;
       }
     }, 250);
+  }
+
+  die() {
+    this.isDying = true;
+    setTimeout(() => {
+      this.shouldRemove = true;
+    }, 800);
   }
 }

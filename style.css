@@ -46,7 +46,7 @@ canvas {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('assets/img/backgrounds/start_screen_bg.png');
+  background-image: url("assets/img/backgrounds/start_screen_bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -107,19 +107,22 @@ canvas {
   margin-bottom: 20px;
 }
 
-.startButton {
-  background-color: #4caf50;
+.startButton, .gameOverButtons {
+  background-image: url("assets/img/game_objects/button.png");
+  background-position: center;
   border: none;
-  color: white;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
   font-family: inherit;
+}
+
+.startButton:hover, .gameOverButtons:hover {
+  scale: 1.03;
 }
 
 .control-buttons {
@@ -130,7 +133,8 @@ canvas {
   gap: 10px; /* Abstand zwischen den Buttons */
 }
 
-#soundButton, #fullscreenButton {
+#soundButton,
+#fullscreenButton {
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -142,11 +146,13 @@ canvas {
   align-items: center;
 }
 
-#soundButton:hover, #fullscreenButton:hover {
+#soundButton:hover,
+#fullscreenButton:hover {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-#soundButton img, #fullscreenButton img {
+#soundButton img,
+#fullscreenButton img {
   width: 16px; /* oder die gewünschte Größe */
   height: 16px;
 }
@@ -167,7 +173,8 @@ canvas {
 
 /* Smartphone */
 @media only screen and (max-width: 720px) {
-  canvas, .canvas_container {
+  canvas,
+  .canvas_container {
     width: 100%;
   }
 }
@@ -182,7 +189,8 @@ canvas {
     right: 16px;
   }
 
-  canvas, .canvas_container {
+  canvas,
+  .canvas_container {
     height: 100vh;
   }
 }
@@ -213,7 +221,7 @@ canvas {
   margin-bottom: 20px;
 }
 
-.gameOverButtons {
+/* .gameOverButtons {
   background-color: #4caf50;
   border: none;
   color: white;
@@ -226,4 +234,4 @@ canvas {
   cursor: pointer;
   border-radius: 5px;
   font-family: inherit;
-}
+} */
