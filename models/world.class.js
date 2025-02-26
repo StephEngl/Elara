@@ -31,6 +31,7 @@ class World {
         this.checkFlyingObjects();
         this.cleanupFlyingObjects();
         this.cleanupEnemies();
+        this.cleanupItems();
         this.cleanupCharacter();
       }
     }, 200);
@@ -112,7 +113,7 @@ class World {
         }
       }
       if (this.level.collectableObjects === target) {
-        
+
       }
 
     });
@@ -206,6 +207,12 @@ class World {
   cleanupEnemies() {
     this.level.enemies = this.level.enemies.filter(
       (enemy) => !enemy.shouldRemove
+    );
+  }
+
+  cleanupItems() {
+    this.level.collectableObjects = this.level.collectableObjects.filter(
+      (item) => !item.shouldRemove
     );
   }
 

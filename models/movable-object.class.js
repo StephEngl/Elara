@@ -162,12 +162,4 @@ class MovableObject extends DrawableObject {
     this.img = this.imageCache[path];
     this.currentImage++;
   }
-
-  /**
-   * Sets remove status for removing the object from the game.
-   */
-  remove() {
-    // Implementieren Sie hier die Logik zum Entfernen des Objekts aus dem Spiel
-    this.shouldRemove = true;
-  }
 }
