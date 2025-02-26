@@ -12,7 +12,8 @@ class Level {
     lights,
     backgroundObjects,
     foregroundObjects,
-    backgroundMusicSrc, collectableObjects
+    backgroundMusicSrc,
+    collectableObjects
   ) {
     this.enemies = enemies;
     this.lights = lights;

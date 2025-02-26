@@ -3,11 +3,11 @@ let level1;
 function initLevel() {
   level1 = new Level(
     [
-      new LittleDragon(),
       // new LittleDragon(),
       // new LittleDragon(),
       // new LittleDragon(),
-      new BlueSlime(),
+      // new LittleDragon(),
+      // new BlueSlime(),
       // new BlueSlime(),
       // new BlueSlime(),
       // new BlueSlime(),
@@ -73,6 +73,15 @@ function initLevel() {
       new BackgroundObject("img/Elara/background/ground.png", 720 * 5),
     ],
     ["assets/audio/backgroundmusik_lvl1.mp3"],
-    []
+    [
+      new Crystal(),
+      // new Crystal(),
+      // new Crystal(),
+      // new Crystal(),
+      // new Flower(),
+      // new Flower(),
+      // new Flower(),
+      new Flower(),
+    ]
   );
 }

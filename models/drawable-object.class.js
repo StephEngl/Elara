@@ -43,7 +43,8 @@ class DrawableObject {
       this instanceof LittleDragon ||
       this instanceof BlueSlime ||
       this instanceof Endboss ||
-      this instanceof FlyingObject
+      this instanceof FlyingObject ||
+      this instanceof CollectableObject
     ) {
       ctx.beginPath();
       ctx.lineWidth = "5";

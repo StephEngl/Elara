@@ -5,7 +5,7 @@ class World {
   camera_x;
   flyingObjects = [];
   audioElements = [];
-  collectableObjects = [new Crystal()];
+  // collectableObjects = [new Crystal()];
   isPaused = false;
   runInterval = null;
 
@@ -157,8 +157,8 @@ class World {
     if (!gameOver) this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.flyingObjects.filter((obj) => !obj.shouldRemove));
     this.addToMap(this.character);
-    this.addObjectsToMap(this.level.foregroundObjects);
     this.addObjectsToMap(this.level.collectableObjects);
+    this.addObjectsToMap(this.level.foregroundObjects);
   }
 
   drawBackground() {
