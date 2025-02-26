@@ -36,7 +36,9 @@ class World {
     }, 200);
     this.collisionInterval = setInterval(() => {
       if (!this.isPaused && !this.character.elaraJumpedOnEnemy) {
-        this.checkCollisions();
+        this.checkCollisions(this.level.enemies);
+        this.checkCollisions(this.level.collectableObjects);
+
       }
     }, 50);
   }
@@ -101,12 +103,18 @@ class World {
     }
   }
 
-  checkCollisions() {
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && this.character.energy > 0) {
-        this.character.hit();
-        this.statusbar.setPercentage(this.character.energy);
+  checkCollisions(target) {
+    target.forEach((element) => {
+      if (this.level.enemies === target) {
+        if (this.character.isColliding(element) && this.character.energy > 0) {
+          this.character.hit();
+          this.statusbar.setPercentage(this.character.energy);
+        }
       }
+      if (this.level.collectableObjects === target) {
+        
+      }
+
     });
   }
 
