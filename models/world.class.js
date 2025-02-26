@@ -130,7 +130,7 @@ class World {
     if (item instanceof Flower) {
       this.increaseCharacterEnergy();
     } else if (item instanceof Crystal) {
-      // this.character.increaseFireAttack();
+      this.increaseCrystalbar();
     }
   }
 
@@ -139,10 +139,14 @@ class World {
     this.statusbar.setPercentage(this.character.energy);
   }
 
-  removeItemFromLevel(item) {
-    this.level.collectableObjects = this.level.collectableObjects.filter(
-      (obj) => obj !== item
-    );
+  increaseCrystalbar() {
+    this.crystalbar.loadingLevel++;
+    this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel);
+  }
+
+  decreaseCrystalbar() {
+    this.crystalbar.loadingLevel--;
+    this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel);
   }
 
   playItemCollectSound(item) {
@@ -157,6 +161,12 @@ class World {
     }
   }
 
+  removeItemFromLevel(item) {
+    this.level.collectableObjects = this.level.collectableObjects.filter(
+      (obj) => obj !== item
+    );
+  }
+
   // Ceck Jumping on Enemys
   checkJumpingOn() {
     this.level.enemies.forEach((enemy) => {
@@ -169,13 +179,14 @@ class World {
   }
 
   checkFlyingObjects() {
-    if (this.keyboard.F) {
+    if (this.keyboard.F && this.crystalbar.loadingLevel > 0) {
       this.character.playAnimation(this.character.imagesAttack);
       let fireball = new FlyingObject(
         this.character.x + this.character.offset.right,
         this.character.y + this.character.offset.top
       );
       this.flyingObjects.push(fireball);
+      this.decreaseCrystalbar();
     }
   }
 

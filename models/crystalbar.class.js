@@ -26,15 +26,15 @@ class Crystalbar extends DrawableObject {
   }
 
   resolveImageIndex() {
-    if ((this.loadingLevel = 5)) {
+    if ((5 <= this.loadingLevel)) {
       return 5;
-    } else if ((this.loadingLevel = 4)) {
+    } else if ((4 === this.loadingLevel)) {
       return 4;
-    } else if ((this.loadingLevel = 3)) {
+    } else if ((3 === this.loadingLevel)) {
       return 3;
-    } else if ((this.loadingLevel = 2)) {
+    } else if ((2 === this.loadingLevel)) {
       return 2;
-    } else if ((this.loadingLevel = 1)) {
+    } else if ((1 === this.loadingLevel)) {
       return 1;
     } else {
       return 0;

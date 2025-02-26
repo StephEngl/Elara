@@ -75,7 +75,7 @@ function initLevel() {
     ["assets/audio/backgroundmusik_lvl1.mp3"],
     [
       new Crystal(),
-      // new Crystal(),
+      new Crystal(),
       // new Crystal(),
       // new Crystal(),
       // new Flower(),
