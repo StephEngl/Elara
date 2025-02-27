@@ -127,7 +127,7 @@ canvas {
   scale: 1.03;
 }
 
-.mobile-buttons {
+.mobile-buttons-left {
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -135,12 +135,20 @@ canvas {
   gap: 20px; /* Abstand zwischen den Buttons */
 }
 
+.mobile-buttons-right {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px; 
+}
+
 .arrow-icon.mirror {
   transform: scaleX(-1);
 }
 
 .arrow-icon.rotate-up {
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
 }
 
 .control-buttons {
@@ -151,11 +159,7 @@ canvas {
   gap: 16px; /* Abstand zwischen den Buttons */
 }
 
-#playPauseButton,
-#soundButton,
-#fullscreenButton,
-#moveLeftButton,
-#moveRightButton {
+.mobile-buttons {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -167,18 +171,11 @@ canvas {
   align-items: center;
 }
 
-#playPauseButton:hover,
-#soundButton:hover,
-#fullscreenButton:hover,
-#moveLeftButton:hover,
-#moveRightButton:hover {
+.mobile-buttons:hover {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-#soundButton img,
-#fullscreenButton img,
-#moveLeftButton img,
-#moveRightButton img {
+.mobile-buttons img {
   width: 20px; /* oder die gewünschte Größe */
   height: 20px;
 }

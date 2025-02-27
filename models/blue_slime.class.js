@@ -34,7 +34,7 @@ class BlueSlime extends MovableObject {
 
   animate() {
     setInterval(() => {
-      this.moveLeft(this.speed);
+      this.moveLeft(this.speed, false, true);
       // this.switchDirection();
     }, 1000 / 60);
 

@@ -45,11 +45,16 @@
           <div class="canvas_wrapper" id="canvas_wrapper">
             <canvas width="720px" height="480px" id="canvas"> </canvas>
             <!-- Mobile Buttons -->
-            <div class="mobile-buttons">
+            <div class="mobile-buttons-left">
               <button
-                onclick="world.moveLeft(); this.blur();"
                 id="moveLeftButton"
+                class="mobile-buttons"
                 aria-label="Nach links laufen"
+                ontouchstart="world.character.moveLeft(world.character.speed, true)"
+                ontouchend="world.character.stopMoving()"
+                onmousedown="world.character.moveLeft(world.character.speed, true)"
+                onmouseup="world.character.stopMoving()"
+                onmouseleave="world.character.stopMoving()"
               >
                 <img
                   src="assets/img/icons/arrow-left.svg"
@@ -58,29 +63,63 @@
                 />
               </button>
               <button
-                onclick="world.moveRight(); this.blur();"
                 id="moveRightButton"
+                class="mobile-buttons"
                 aria-label="Nach rechts laufen"
+                ontouchstart="world.character.moveRight(true)"
+                ontouchend="world.character.stopMoving()"
               >
-              <img src="assets/img/icons/arrow-left.svg" alt="Pfeil rechts" class="arrow-icon mirror" />
+                <img
+                  src="assets/img/icons/arrow-left.svg"
+                  alt="Pfeil rechts"
+                  class="arrow-icon mirror"
+                />
+              </button>
+            </div>
+            <div class="mobile-buttons-right">
+              <button
+                onclick="world.character.jump(); this.blur();"
+                id="jumpingButton"
+                class="mobile-buttons"
+                aria-label="Springen"
+              >
+                <img
+                  src="assets/img/icons/arrow-left.svg"
+                  alt="Pfeil hoch"
+                  class="arrow-icon rotate-up"
+                />
+              </button>
+              <button
+                onclick="world.world.fire(world.imagesFire); this.blur();"
+                id="firaAttackButton"
+                class="mobile-buttons"
+                aria-label="Feuerattacke"
+              >
+                <img
+                  src="assets/img/icons/flame-icon.svg"
+                  alt="Fackel"
+                  class="arrow-icon"
+                />
               </button>
             </div>
             <!-- Controlbuttons -->
             <div class="control-buttons">
               <button
-              onclick="world.togglePause(); this.blur();"
-              id="playPauseButton"
-              aria-label="Spiel starten oder pausieren"
-            >
-              <img
-                src="assets/img/icons/play_pause_icon.svg"
-                alt="Play/Pause Icon"
-                class="icon"
-              />
-            </button>
+                onclick="world.togglePause(); this.blur();"
+                id="playPauseButton"
+                class="mobile-buttons"
+                aria-label="Spiel starten oder pausieren"
+              >
+                <img
+                  src="assets/img/icons/play_pause_icon.svg"
+                  alt="Play/Pause Icon"
+                  class="icon"
+                />
+              </button>
               <button
                 onclick="toggleSound(); this.blur();"
                 id="soundButton"
+                class="mobile-buttons"
                 aria-label="Ton ein/aus"
               >
                 <img
@@ -92,6 +131,7 @@
               <button
                 onclick="fullscreen(); this.blur();"
                 id="fullscreenButton"
+                class="mobile-buttons"
                 aria-label="Vollbildmodus"
               >
                 <img

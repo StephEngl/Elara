@@ -32,7 +32,7 @@ class LittleDragon extends MovableObject {
 
   animate() {
     setInterval(() => {
-      this.moveLeft(this.speed);
+      this.moveLeft(this.speed, false, true);
       // this.otherDirection = true;
     }, 1000 / 60);
 
