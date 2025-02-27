@@ -195,6 +195,18 @@ canvas {
   }
 }
 
+@media (hover: none) and (orientation: portrait) {
+  #orientationDialog {
+    display: block;
+  }
+}
+
+@media (hover: none) and (orientation: landscape) {
+  #orientationDialog {
+    display: none;
+  }
+}
+
 #gameOverDialog {
   padding: 20px;
   background: rgba(0, 0, 0, 0.8);
