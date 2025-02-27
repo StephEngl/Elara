@@ -180,6 +180,15 @@ canvas {
   height: 20px;
 }
 
+.orientation-dialog-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
 #orientationDialog {
   padding: 20px;
   background: rgba(0, 0, 0, 0.8);
@@ -219,14 +228,23 @@ canvas {
 }
 
 @media (hover: none) and (orientation: portrait) {
-  #orientationDialog {
-    display: block;
+  .orientation-dialog-container, #orientationDialog {
+    display: flex;
+  }
+
+  .canvas_container, h1 {
+    display: none;
   }
 }
 
 @media (hover: none) and (orientation: landscape) {
-  #orientationDialog {
+  .orientation-dialog-container, #orientationDialog {
     display: none;
+  }
+  .canvas_container, h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

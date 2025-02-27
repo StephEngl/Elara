@@ -40,6 +40,11 @@
     </head>
     <body onload="init()">
       <div class="content">
+        <div class="orientation-dialog-container">
+          <dialog id="orientationDialog">
+            <p>Please, turn your device to play</p>
+          </dialog>
+        </div>
         <h1>Elara und der verzauberte Hain</h1>
         <div class="canvas_container">
           <div class="canvas_wrapper" id="canvas_wrapper">
@@ -54,7 +59,6 @@
                 ontouchend="world.character.releaseLeft();"
                 onmousedown="world.character.pressLeft();"
                 onmouseup="world.character.releaseLeft();"
-                style="-webkit-touch-callout: none; -webkit-user-select: none"
               >
                 <img
                   src="assets/img/icons/arrow-left.svg"
@@ -70,7 +74,6 @@
                 ontouchend="world.character.releaseRight();"
                 onmousedown="world.character.pressRight();"
                 onmouseup="world.character.releaseRight();"
-                style="-webkit-touch-callout: none; -webkit-user-select: none"
               >
                 <img
                   src="assets/img/icons/arrow-left.svg"
@@ -172,10 +175,7 @@
               </dialog>
             </div>
           </div>
-          <dialog id="orientationDialog">
-            <p>Please, turn your device to play</p>
-          </dialog>
-
+          
           <dialog id="gameOverDialog">
             <div class="dialog_container">
               <h2>Game Over</h2>
