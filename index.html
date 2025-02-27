@@ -44,7 +44,40 @@
         <div class="canvas_container">
           <div class="canvas_wrapper" id="canvas_wrapper">
             <canvas width="720px" height="480px" id="canvas"> </canvas>
+            <!-- Mobile Buttons -->
+            <div class="mobile-buttons">
+              <button
+                onclick="world.moveLeft(); this.blur();"
+                id="moveLeftButton"
+                aria-label="Nach links laufen"
+              >
+                <img
+                  src="assets/img/icons/arrow-left.svg"
+                  alt="Pfeil links"
+                  calss="arrow-icon"
+                />
+              </button>
+              <button
+                onclick="world.moveRight(); this.blur();"
+                id="moveRightButton"
+                aria-label="Nach rechts laufen"
+              >
+              <img src="assets/img/icons/arrow-left.svg" alt="Pfeil rechts" class="arrow-icon mirror" />
+              </button>
+            </div>
+            <!-- Controlbuttons -->
             <div class="control-buttons">
+              <button
+              onclick="world.togglePause(); this.blur();"
+              id="playPauseButton"
+              aria-label="Spiel starten oder pausieren"
+            >
+              <img
+                src="assets/img/icons/play_pause_icon.svg"
+                alt="Play/Pause Icon"
+                class="icon"
+              />
+            </button>
               <button
                 onclick="toggleSound(); this.blur();"
                 id="soundButton"

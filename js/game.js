@@ -7,19 +7,9 @@ let gameOverMusic = new Audio("assets/audio/game_over_music.mp3");
 
 function init() {
   element = document.getElementById("canvas");
-  // checkOrientation();
-  window.addEventListener("resize", checkOrientation);
+  // window.addEventListener("resize", checkOrientation);
   showStartScreen();
 }
-
-// function checkOrientation() {
-//   const dialog = document.getElementById("orientationDialog");
-//   if (window.innerHeight > window.innerWidth) {
-//     dialog.showModal();
-//   } else {
-//     dialog.close();
-//   }
-// }
 
 function showStartScreen() {
   if (gameOver) {

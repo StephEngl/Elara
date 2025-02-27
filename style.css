@@ -107,7 +107,8 @@ canvas {
   margin-bottom: 20px;
 }
 
-.startButton, .gameOverButtons {
+.startButton,
+.gameOverButtons {
   background-image: url("assets/img/game_objects/button.png");
   background-position: center;
   border: none;
@@ -121,22 +122,42 @@ canvas {
   font-family: inherit;
 }
 
-.startButton:hover, .gameOverButtons:hover {
+.startButton:hover,
+.gameOverButtons:hover {
   scale: 1.03;
+}
+
+.mobile-buttons {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 20px; /* Abstand zwischen den Buttons */
+}
+
+.arrow-icon.mirror {
+  transform: scaleX(-1);
+}
+
+.arrow-icon.rotate-up {
+  transform: rotate(-90deg);
 }
 
 .control-buttons {
   position: absolute;
-  bottom: 10px;
+  top: 10px;
   right: 10px;
   display: flex;
-  gap: 10px; /* Abstand zwischen den Buttons */
+  gap: 16px; /* Abstand zwischen den Buttons */
 }
 
+#playPauseButton,
 #soundButton,
-#fullscreenButton {
-  width: 25px;
-  height: 25px;
+#fullscreenButton,
+#moveLeftButton,
+#moveRightButton {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.7);
   border: none;
@@ -146,15 +167,20 @@ canvas {
   align-items: center;
 }
 
+#playPauseButton:hover,
 #soundButton:hover,
-#fullscreenButton:hover {
+#fullscreenButton:hover,
+#moveLeftButton:hover,
+#moveRightButton:hover {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
 #soundButton img,
-#fullscreenButton img {
-  width: 16px; /* oder die gewünschte Größe */
-  height: 16px;
+#fullscreenButton img,
+#moveLeftButton img,
+#moveRightButton img {
+  width: 20px; /* oder die gewünschte Größe */
+  height: 20px;
 }
 
 #orientationDialog {
