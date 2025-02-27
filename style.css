@@ -140,7 +140,7 @@ canvas {
   bottom: 20px;
   right: 20px;
   display: flex;
-  gap: 20px;
+  gap: 24px;
 }
 
 .arrow-icon.mirror {
@@ -160,10 +160,10 @@ canvas {
 }
 
 .mobile-buttons {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.5);
   border: none;
   cursor: pointer;
   display: flex;
@@ -172,12 +172,12 @@ canvas {
 }
 
 .mobile-buttons:hover {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .mobile-buttons img {
-  width: 20px; /* oder die gewünschte Größe */
-  height: 20px;
+  width: 24px; /* oder die gewünschte Größe */
+  height: 24px;
 }
 
 .orientation-dialog-container {
