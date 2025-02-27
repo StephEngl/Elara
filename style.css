@@ -11,6 +11,17 @@ h1 {
   margin-top: -50px;
 }
 
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center; /* Überschrift zentrieren */
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -96,17 +107,6 @@ canvas {
   width: 10%; /* 30% der Größe des Elara-Bildes */
 }
 
-#startScreenDialog h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  text-align: center; /* Überschrift zentrieren */
-}
-
-#startScreenDialog p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
 .startButton,
 .gameOverButtons {
   background-image: url("assets/img/game_objects/button.png");
@@ -140,7 +140,7 @@ canvas {
   bottom: 20px;
   right: 20px;
   display: flex;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .arrow-icon.mirror {
@@ -245,28 +245,3 @@ canvas {
 #gameOverDialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
-
-#gameOverDialog h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-#gameOverDialog p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-/* .gameOverButtons {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: inherit;
-} */

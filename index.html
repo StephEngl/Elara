@@ -50,11 +50,11 @@
                 id="moveLeftButton"
                 class="mobile-buttons"
                 aria-label="Nach links laufen"
-                ontouchstart="world.character.moveLeft(world.character.speed, true)"
-                ontouchend="world.character.stopMoving()"
-                onmousedown="world.character.moveLeft(world.character.speed, true)"
-                onmouseup="world.character.stopMoving()"
-                onmouseleave="world.character.stopMoving()"
+                ontouchstart="event.preventDefault(); world.character.pressLeft();"
+                ontouchend="world.character.releaseLeft();"
+                onmousedown="world.character.pressLeft();"
+                onmouseup="world.character.releaseLeft();"
+                style="-webkit-touch-callout: none; -webkit-user-select: none"
               >
                 <img
                   src="assets/img/icons/arrow-left.svg"
@@ -66,8 +66,11 @@
                 id="moveRightButton"
                 class="mobile-buttons"
                 aria-label="Nach rechts laufen"
-                ontouchstart="world.character.moveRight(true)"
-                ontouchend="world.character.stopMoving()"
+                ontouchstart="event.preventDefault(); world.character.pressRight();"
+                ontouchend="world.character.releaseRight();"
+                onmousedown="world.character.pressRight();"
+                onmouseup="world.character.releaseRight();"
+                style="-webkit-touch-callout: none; -webkit-user-select: none"
               >
                 <img
                   src="assets/img/icons/arrow-left.svg"
@@ -78,7 +81,7 @@
             </div>
             <div class="mobile-buttons-right">
               <button
-                onclick="world.character.jump(); this.blur();"
+                ontouchstart="event.preventDefault(); world.character.pressJump(); this.blur();"
                 id="jumpingButton"
                 class="mobile-buttons"
                 aria-label="Springen"
@@ -90,7 +93,7 @@
                 />
               </button>
               <button
-                onclick="world.setFireButtonPressed(); this.blur();"
+                ontouchstart="event.preventDefault(); world.setFireButtonPressed(); this.blur();"
                 id="firaAttackButton"
                 class="mobile-buttons"
                 aria-label="Feuerattacke"

@@ -5,8 +5,7 @@
  */
 class MovableObject extends DrawableObject {
   lastHit;
-  moving = false;
-  moveInterval = null;
+
 
   constructor() {
     super();
@@ -19,6 +18,7 @@ class MovableObject extends DrawableObject {
     this.energy = 100;
     this.isDying = false;
   }
+
 
   /**
    * Creates an audio object.
@@ -119,59 +119,18 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Moves the object to the right.
-   * @param {boolean} [continuous=false] - If true, moves continuously. If false, moves once.
+   * Moves the character to the right.
    */
-  moveRight(continuous = false) {
-    if (this.x < this.world.level.level_end_x) {
-      this.moving = true;
-      if (continuous) {
-        this.moveInterval = setInterval(() => {
-          if (this.x < this.world.level.level_end_x) {
-            this.x += this.speed;
-          } else {
-            this.stopMoving();
-          }
-        }, 50);
-      } else {
-        this.x += this.speed;
-      }
-    }
+  moveRight() {
+    this.x += this.speed;
   }
 
   /**
-   * Moves the object to the left.
-   * @param {number} speed - The speed at which to move the object to the left.
-   * @param {boolean} [continuous=false] - If true, moves continuously. If false, moves once.
+   * Moves the character to the left.
+   * @param {number} speed - The speed at which to move the character to the left.
    */
-  moveLeft(speed, continuous = false, ignoreLeftBoundary = false) {
-    if (this.x > 0) {
-      this.moving = true;
-      if (continuous) {
-        this.moveInterval = setInterval(() => {
-          if (ignoreLeftBoundary || this.x > 0) {
-            this.x -= speed;
-          } else {
-            this.stopMoving();
-          }
-        }, 50);
-      } else {
-        this.x -= speed;
-      }
-    }
-  }
-
-  /**
-   * Stops the character's movement.
-   * This method clears the movement interval and sets the moving flag to false.
-   * It should be called when the character needs to stop moving, such as when
-   * the user releases a movement button or when the character collides with an obstacle.
-   *
-   * @returns {void}
-   */
-  stopMoving() {
-    this.moving = false;
-    clearInterval(this.moveInterval);
+  moveLeft(speed) {
+    this.x -= speed;
   }
 
   /**

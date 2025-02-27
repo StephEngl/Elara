@@ -240,6 +240,30 @@ class Character extends MovableObject {
     this.idleTimer = 0;
   }
 
+  // Mobile buttons to keypress
+  pressRight() {
+    this.world.keyboard.RIGHT = true;
+  }
+  
+  releaseRight() {
+    this.world.keyboard.RIGHT = false;
+  }
+
+  pressLeft() {
+    this.world.keyboard.LEFT = true;
+  }
+  
+  releaseLeft() {
+    this.world.keyboard.LEFT = false;
+  }
+  
+  pressJump() {
+    if (!this.isAboveGround()) {
+      this.jump();
+    }
+  }
+
+// Character Dying
   playDeathAnimation() {
     if (!this.deathAnimationComplete) {
       this.playDyingSounds();
