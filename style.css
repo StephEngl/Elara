@@ -175,6 +175,11 @@ canvas {
   align-items: center;
 }
 
+.mobile-buttons-left,
+.mobile-buttons-right {
+  display: none;
+}
+
 .mobile-buttons:hover {
   background-color: rgba(255, 255, 255, 0.6);
 }
@@ -207,6 +212,10 @@ canvas {
   background: rgba(0, 0, 0, 0.5);
 }
 
+.d_none {
+  display: none;
+}
+
 /* Smartphone */
 @media only screen and (max-width: 720px) {
   canvas,
@@ -232,20 +241,31 @@ canvas {
 }
 
 @media (hover: none) and (orientation: portrait) {
-  .orientation-dialog-container, #orientationDialog {
+  .orientation-dialog-container,
+  #orientationDialog {
     display: flex;
   }
 
-  .canvas_container, h1 {
+  .canvas_container,
+  h1 {
     display: none;
   }
 }
 
 @media (hover: none) and (orientation: landscape) {
-  .orientation-dialog-container, #orientationDialog {
+  .orientation-dialog-container,
+  #orientationDialog {
     display: none;
   }
-  .canvas_container, h1, .mobile-buttons-left {
+
+  .mobile-buttons-left,
+  .mobile-buttons-right {
+    display: flex;
+  }
+
+  .canvas_container,
+  h1,
+  .mobile-buttons-left {
     display: flex;
     justify-content: center;
     align-items: center;
