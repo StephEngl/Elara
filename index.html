@@ -48,6 +48,21 @@
       <script src="js/game.js"></script>
     </head>
     <body onload="init()">
+      <!-- Startscreen -->
+      <div class="startScreenContainer">
+        <div class="textContainer">
+          <h2>Willkommen zu Elara und der verzauberte Hain</h2>
+          <!-- <p>
+            Hilf Elara, den verzauberten Hain zu erkunden und seine
+            Geheimnisse zu lüften!
+          </p> -->
+          <div class="startScreenAssetsContainer">
+            <button onclick="startGame()" class="startButton">
+              Spiel starten
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="content">
         <div class="orientation-dialog-container">
           <dialog id="orientationDialog">
@@ -162,34 +177,7 @@
                 />
               </button>
             </div>
-            <div class="startScreenContainer">
-              <dialog id="startScreenDialog">
-                <div class="startScreenContent">
-                  <img
-                    class="characterImage"
-                    src="assets/img/game_objects/elara_startscreen.png"
-                    alt="Elara"
-                  />
-                  <div class="textContainer">
-                    <h2>Willkommen zu Elara und der verzauberte Hain</h2>
-                    <p>
-                      Hilf Elara, den verzauberten Hain zu erkunden und seine
-                      Geheimnisse zu lüften!
-                    </p>
-                    <div class="startScreenAssetsContainer">
-                      <button onclick="startGame()" class="startButton">
-                        Spiel starten
-                      </button>
-                      <img
-                        class="spellbookImage"
-                        src="assets/img/game_objects/spellbook.png"
-                        alt="Zauberbuch"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </dialog>
-            </div>
+            
           </div>
 
           <dialog id="gameOverDialog">

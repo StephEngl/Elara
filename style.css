@@ -13,7 +13,7 @@ h1 {
 
 h2 {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-top: 36px;
   text-align: center; /* Überschrift zentrieren */
 }
 
@@ -27,7 +27,7 @@ p {
 }
 
 .content {
-  display: flex;
+  display: none; /* nicht sichtbar zu Beginn*/
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -121,45 +121,18 @@ canvas {
 }
 
 .startScreenContainer {
+  background-image: url("assets/img/game_objects/startscreen_bg.png");
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("assets/img/backgrounds/start_screen_bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
-}
-
-#startScreenDialog {
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-family: "magical_neverland", Arial, Helvetica, sans-serif;
-  text-align: center;
-  max-width: 80%;
-  max-height: 80%;
-}
-
-#startScreenDialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.startScreenContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Verteilt den Platz zwischen den Elementen */
-  position: relative; /* Für die absolute Positionierung des Zauberbuchs */
-}
-
-.characterImage {
-  width: 20%; /* Anpassen der Bildgröße */
-  margin-right: 16px; /* Abstand zum Text */
 }
 
 .textContainer {
@@ -170,7 +143,7 @@ canvas {
 
 .startScreenAssetsContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .spellbookImage {

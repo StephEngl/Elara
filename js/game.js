@@ -15,12 +15,12 @@ function showStartScreen() {
     closeGameOverDialog();
     document.querySelector(".startScreenContainer").style.display = "flex";
   }
-  startScreenDialog.showModal();
 }
 
 function startGame() {
-  document.getElementById("startScreenDialog").close();
   document.querySelector(".startScreenContainer").style.display = "none";
+  document.querySelector(".content").style.display = "flex";
+
   showLoadingSpinner();
   initLevel();
   setTimeout(() => {
