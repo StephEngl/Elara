@@ -63,7 +63,7 @@ class DrawableObject {
       ctx.stroke();
       ctx.beginPath();
       ctx.lineWidth = "3";
-      ctx.strokeStyle = "red";
+      ctx.strokeStyle = "transparent";
       let rect = this.getCurrentCollisionRect();
       ctx.rect(rect.x1, rect.y1, rect.width, rect.height);
       ctx.stroke();
