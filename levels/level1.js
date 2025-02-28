@@ -8,7 +8,7 @@ function initLevel() {
       // new LittleDragon(),
       // new LittleDragon(),
       new BlueSlime(),
-      // new BlueSlime(),
+      new BlueSlime(),
       // new BlueSlime(),
       // new BlueSlime(),
       new Endboss(),
@@ -81,7 +81,7 @@ function initLevel() {
       new Flower(),
       // new Flower(),
       // new Flower(),
-      new Flower(),
+      // new Flower(),
     ]
   );
 }

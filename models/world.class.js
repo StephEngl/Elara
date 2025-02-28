@@ -99,8 +99,9 @@ class World {
       this.setEnemyAnimationState(true);
       clearInterval(this.runInterval);
     } else {
-      this.run();
+
       this.setEnemyAnimationState(false);
+      this.run();
       if (!isMuted) this.startBackgroundMusic();
     }
   }

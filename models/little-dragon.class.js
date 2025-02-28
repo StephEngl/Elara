@@ -10,6 +10,8 @@ class LittleDragon extends MovableObject {
     "assets/img/enemies/small_dragon/Death2.png",
     "assets/img/enemies/small_dragon/Death3.png",
     "assets/img/enemies/small_dragon/Death4.png",
+    "assets/img/enemies/small_dragon/Death4.png",
+    "assets/img/enemies/small_dragon/Death4.png",
   ];
 
   constructor() {
@@ -50,6 +52,6 @@ class LittleDragon extends MovableObject {
     sounds.littleDragon.dyingSound.play();
     setTimeout(() => {
       this.shouldRemove = true;
-    }, 600); // Nach 800ms (4 Bilder bei 200ms Intervall ) wird das Objekt entfernt
+    }, 800); // Nach 700ms (4 Bilder bei 200ms Intervall ) wird das Objekt entfernt
   }
 }

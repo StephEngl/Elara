@@ -21,8 +21,23 @@ function showStartScreen() {
 function startGame() {
   document.getElementById("startScreenDialog").close();
   document.querySelector(".startScreenContainer").style.display = "none";
+  showLoadingSpinner();
   initLevel();
-  world = new World(element, keyboard);
+  setTimeout(() => {
+    hideLoadingSpinner();
+    world = new World(element, keyboard);
+  }, 1500);
+}
+
+function showLoadingSpinner() {
+  document.getElementById("loading-spinner").style.display = "flex";
+  document.querySelector(".spinner-content").style.display = "flex";
+  document.querySelector(".flame-effect").style.display = "block";
+}
+
+function hideLoadingSpinner() {
+  document.getElementById("loading-spinner").style.display = "none";
+  document.querySelector(".control-buttons").style.display = "flex";
 }
 
 function stopGame() {
@@ -79,7 +94,7 @@ function closeGameOverDialog() {
 // Fullscreen
 function toggleFullscreen() {
   let elem = document.documentElement;
-  
+
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
     if (elem.requestFullscreen) {
       elem.requestFullscreen();

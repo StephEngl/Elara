@@ -9,7 +9,7 @@ const sounds = {
   blueSlime: {
     attack: new Audio(),
     hurt: new Audio(),
-    die: new Audio(),
+    die: new Audio("assets/audio/slime_die.mp3"),
   },
   littleDragon: {
     attack: new Audio(),
