@@ -7,7 +7,6 @@ let gameOverMusic = new Audio("assets/audio/game_over_music.mp3");
 
 function init() {
   element = document.getElementById("canvas");
-  // window.addEventListener("resize", checkOrientation);
   showStartScreen();
 }
 
@@ -77,20 +76,22 @@ function closeGameOverDialog() {
   gameOverMusic.pause();
 }
 
-function fullscreen() {
-  let divToFullscreen = document.getElementById("canvas_wrapper");
-  openFullscreen(divToFullscreen);
-}
-
-function openFullscreen(element) {
-  if (element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if (element.webkitRequestFullscreen) {
-    /* Safari */
-    element.webkitRequestFullscreen();
-  } else if (element.msRequestFullscreen) {
-    /* IE11 */
-    element.msRequestFullscreen();
+// Fullscreen
+function toggleFullscreen() {
+  let elem = document.documentElement;
+  
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
   }
 }
 

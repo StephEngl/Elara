@@ -4,6 +4,15 @@
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+      />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, minimal-ui"
+      />
       <link
         rel="shortcut icon"
         href="img/Elara/mage_elara/Idle/idle1.png"
@@ -135,7 +144,7 @@
                 />
               </button>
               <button
-                onclick="fullscreen(); this.blur();"
+                onclick="toggleFullscreen(); this.blur();"
                 id="fullscreenButton"
                 class="mobile-buttons"
                 aria-label="Vollbildmodus"
@@ -175,7 +184,7 @@
               </dialog>
             </div>
           </div>
-          
+
           <dialog id="gameOverDialog">
             <div class="dialog_container">
               <h2>Game Over</h2>

@@ -22,6 +22,10 @@ p {
   margin-bottom: 20px;
 }
 
+.d_none {
+  display: none;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -241,7 +245,7 @@ canvas {
   .orientation-dialog-container, #orientationDialog {
     display: none;
   }
-  .canvas_container, h1 {
+  .canvas_container, h1, .mobile-buttons-left {
     display: flex;
     justify-content: center;
     align-items: center;

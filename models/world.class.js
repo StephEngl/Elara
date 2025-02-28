@@ -96,13 +96,17 @@ class World {
     this.isPaused = !this.isPaused;
     if (this.isPaused) {
       this.stopBackgroundMusic();
-      console.log("Spiel pausiert");
+      this.setEnemyAnimationState(true);
       clearInterval(this.runInterval);
     } else {
-      console.log("Spiel fortgesetzt");
       this.run();
+      this.setEnemyAnimationState(false);
       if (!isMuted) this.startBackgroundMusic();
     }
+  }
+
+  setEnemyAnimationState(isAnimationPaused) {
+    this.level.enemies.forEach((enemy) => (enemy.isPaused = isAnimationPaused));
   }
 
   // Collision checks
@@ -191,15 +195,19 @@ class World {
   }
 
   checkFlyingObjects() {
-    if ((this.keyboard.F || this.fireButtonPressed) && this.crystalbar.loadingLevel > 0) {
+    if (
+      (this.keyboard.F || this.fireButtonPressed) &&
+      this.crystalbar.loadingLevel > 0
+    ) {
       this.character.playAnimation(this.character.imagesAttack);
       let fireball = new FlyingObject(
         this.character.x + this.character.offset.right,
-        this.character.y + this.character.offset.top, this.character.otherDirection
+        this.character.y + this.character.offset.top,
+        this.character.otherDirection
       );
       this.flyingObjects.push(fireball);
       this.decreaseCrystalbar();
-      this.fireButtonPressed = false; 
+      this.fireButtonPressed = false;
     }
   }
 

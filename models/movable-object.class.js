@@ -6,7 +6,6 @@
 class MovableObject extends DrawableObject {
   lastHit;
 
-
   constructor() {
     super();
     this.speed;
@@ -17,8 +16,8 @@ class MovableObject extends DrawableObject {
     this.acceleration = 2.5;
     this.energy = 100;
     this.isDying = false;
+    this.isPaused = false;
   }
-
 
   /**
    * Creates an audio object.
@@ -122,7 +121,9 @@ class MovableObject extends DrawableObject {
    * Moves the character to the right.
    */
   moveRight() {
-    this.x += this.speed;
+    if(!this.isPaused){
+      this.x += this.speed;
+    }
   }
 
   /**
@@ -130,8 +131,9 @@ class MovableObject extends DrawableObject {
    * @param {number} speed - The speed at which to move the character to the left.
    */
   moveLeft(speed) {
-    this.x -= speed;
-  }
+    if(!this.isPaused){
+      this.x -= speed;
+    }  }
 
   /**
    * Plays a sound if the game is not paused and not muted.
