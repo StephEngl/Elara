@@ -22,10 +22,6 @@ p {
   margin-bottom: 20px;
 }
 
-.d_none {
-  display: none;
-}
-
 .content {
   display: none; /* nicht sichtbar zu Beginn*/
   flex-direction: column;
@@ -51,6 +47,7 @@ p {
 }
 
 #loading-spinner {
+  background-color: black;
   position: absolute;
   top: 0;
   left: 0;
@@ -144,10 +141,6 @@ canvas {
 .startScreenAssetsContainer {
   display: flex;
   justify-content: center;
-}
-
-.spellbookImage {
-  width: 10%; /* 30% der Größe des Elara-Bildes */
 }
 
 .startButton,
@@ -249,10 +242,6 @@ canvas {
 
 #orientationDialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
-}
-
-.d_none {
-  display: none;
 }
 
 /* Smartphone */

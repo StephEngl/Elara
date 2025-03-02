@@ -152,7 +152,7 @@ class World {
   }
 
   increaseCharacterEnergy() {
-    this.character.energy = Math.min(this.character.energy + 10, 100);
+    this.character.energy = Math.min(this.character.energy + 50, 100);
     this.statusbar.setPercentage(this.character.energy);
   }
 

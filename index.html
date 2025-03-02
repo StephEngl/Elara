@@ -57,18 +57,20 @@
             Geheimnisse zu lüften!
           </p> -->
           <div class="startScreenAssetsContainer">
-            <button onclick="startGame()" class="startButton">
+            <button onclick="startGame()" class="startButton" autofocus>
               Spiel starten
             </button>
           </div>
         </div>
       </div>
       <div class="content">
+        <!-- Orientation Dialog -->
         <div class="orientation-dialog-container">
           <dialog id="orientationDialog">
             <p>Please, turn your device to play</p>
           </dialog>
         </div>
+        <!-- Main Screen -->
         <h1>Elara und der verzauberte Hain</h1>
         <div class="canvas_container">
           <div class="canvas_wrapper" id="canvas_wrapper">
@@ -76,7 +78,11 @@
             <!-- Loading Spinner -->
             <div id="loading-spinner" class="spellbook-container">
               <div class="spinner-content">
-                <img src="assets/img/game_objects/spellbook.png" alt="Spellbook Loading" class="spellbook">
+                <img
+                  src="assets/img/game_objects/spellbook.png"
+                  alt="Spellbook Loading"
+                  class="spellbook"
+                />
               </div>
               <div class="flame-effect"></div>
             </div>
@@ -177,9 +183,8 @@
                 />
               </button>
             </div>
-            
           </div>
-
+          <!-- Game Over Screen -->
           <dialog id="gameOverDialog">
             <div class="dialog_container">
               <h2>Game Over</h2>

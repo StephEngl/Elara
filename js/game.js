@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let isMuted = false;
 let gameOver = false;
+let restart = false;
 let gameOverMusic = new Audio("assets/audio/game_over_music.mp3");
 
 function init() {
@@ -12,15 +13,19 @@ function init() {
 
 function showStartScreen() {
   if (gameOver) {
-    closeGameOverDialog();
+    restart = true;
     document.querySelector(".startScreenContainer").style.display = "flex";
+    document.querySelector(".content").style.display = "none";
+    closeGameOverDialog();
   }
 }
 
 function startGame() {
   document.querySelector(".startScreenContainer").style.display = "none";
+  if (restart) {
+    world.ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
   document.querySelector(".content").style.display = "flex";
-
   showLoadingSpinner();
   initLevel();
   setTimeout(() => {
@@ -37,7 +42,28 @@ function showLoadingSpinner() {
 
 function hideLoadingSpinner() {
   document.getElementById("loading-spinner").style.display = "none";
+  document.querySelector(".spinner-content").style.display = "none";
+  document.querySelector(".flame-effect").style.display = "none";
   document.querySelector(".control-buttons").style.display = "flex";
+}
+
+function restartGame() {
+  restart = true;
+  closeGameOverDialog();
+  init();
+  startGame();
+}
+
+function showGameOverDialog() {
+  const dialog = document.getElementById("gameOverDialog");
+  dialog.showModal();
+}
+
+function closeGameOverDialog() {
+  const dialog = document.getElementById("gameOverDialog");
+  dialog.close();
+  gameOver = false;
+  gameOverMusic.pause();
 }
 
 function stopGame() {
@@ -48,7 +74,7 @@ function stopGame() {
     showGameOverDialog();
     gameOverMusic.play();
     // weitere Aktionen nach dem Spielende ausführen
-  }, 2000);
+  }, 1000);
 }
 
 function toggleSound() {
@@ -71,24 +97,6 @@ function toggleSound() {
 
 function clearAllIntervals() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
-}
-
-function restartGame() {
-  closeGameOverDialog();
-  init();
-  startGame();
-}
-
-function showGameOverDialog() {
-  const dialog = document.getElementById("gameOverDialog");
-  dialog.showModal();
-}
-
-function closeGameOverDialog() {
-  const dialog = document.getElementById("gameOverDialog");
-  dialog.close();
-  gameOver = false;
-  gameOverMusic.pause();
 }
 
 // Fullscreen
