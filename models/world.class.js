@@ -75,6 +75,14 @@ class World {
       audio.muted = true;
       audio.pause();
     });
+    Object.values(sounds).forEach((category) => {
+      Object.values(category).forEach((sound) => {
+        if (sound instanceof Audio) {
+          sound.muted = true;
+          audio.pause();
+        }
+      });
+    });
     if (this.level && this.level.backgroundMusic) {
       this.level.backgroundMusic.muted = true;
       this.level.backgroundMusic.pause();
@@ -84,6 +92,13 @@ class World {
   unmuteAllSounds() {
     this.audioElements.forEach((audio) => {
       audio.muted = false;
+    });
+    Object.values(sounds).forEach((category) => {
+      Object.values(category).forEach((sound) => {
+        if (sound instanceof Audio) {
+          sound.muted = false;
+        }
+      });
     });
     if (this.level && this.level.backgroundMusic) {
       this.level.backgroundMusic.muted = false;
@@ -99,7 +114,6 @@ class World {
       this.setEnemyAnimationState(true);
       clearInterval(this.runInterval);
     } else {
-
       this.setEnemyAnimationState(false);
       this.run();
       if (!isMuted) this.startBackgroundMusic();

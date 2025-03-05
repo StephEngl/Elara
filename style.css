@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "magical_neverland";
+  src: url("fonts/Magical Neverland.ttf");
+}
+
 body {
   font-family: "magical_neverland", Arial, Helvetica, sans-serif;
   height: 100vh;
@@ -168,7 +173,7 @@ canvas {
   bottom: 20px;
   left: 20px;
   display: flex;
-  gap: 20px; /* Abstand zwischen den Buttons */
+  gap: 20px;
 }
 
 .mobile-buttons-right {
@@ -192,7 +197,7 @@ canvas {
   position: absolute;
   top: 10px;
   right: 10px;
-  gap: 16px; /* Abstand zwischen den Buttons */
+  gap: 16px;
 }
 
 .mobile-buttons {
@@ -217,7 +222,7 @@ canvas {
 }
 
 .mobile-buttons img {
-  width: 24px; /* oder die gewünschte Größe */
+  width: 24px;
   height: 24px;
 }
 
@@ -230,7 +235,7 @@ canvas {
   display: none;
 }
 
-#orientationDialog {
+#orientation-dialog {
   padding: 20px;
   background: rgba(0, 0, 0, 0.8);
   color: white;
@@ -240,7 +245,7 @@ canvas {
   text-align: center;
 }
 
-#orientationDialog::backdrop {
+#orientation-dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -270,7 +275,7 @@ canvas {
 
 @media (hover: none) and (orientation: portrait) {
   .orientation-dialog-container,
-  #orientationDialog {
+  #orientation-dialog {
     display: flex;
   }
 
@@ -282,7 +287,7 @@ canvas {
 
 @media (hover: none) and (orientation: landscape) {
   .orientation-dialog-container,
-  #orientationDialog {
+  #orientation-dialog {
     display: none;
   }
 
@@ -318,4 +323,25 @@ canvas {
 .game-over-buttons-container {
   display: flex;
   gap: 24px;
+}
+
+.keyboard-explanation-container {
+display: flex;
+}
+
+.key {
+  background: #333;
+  text-align: center;
+  color: #eee;
+  border-radius: 0.3em;
+  margin: 0.5em;
+  width: 2.5em;
+  box-sizing: border-box;
+  border: 1px solid #444;
+  box-shadow: 0 0.2em 0 0.05em #222;
+  border-bottom-color: #555;
+}
+
+.key-space {
+  width: 8em;
 }
