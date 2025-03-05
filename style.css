@@ -118,7 +118,7 @@ canvas {
 }
 
 .startScreenContainer {
-  background-image: url("assets/img/game_objects/startscreen_bg.png");
+  background-image: url("assets/img/game_objects/startscreen_bg.jpg");
   position: absolute;
   top: 0;
   left: 0;

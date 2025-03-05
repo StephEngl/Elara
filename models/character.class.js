@@ -89,7 +89,6 @@ class Character extends MovableObject {
 
   constructor() {
     super().setImage("img/Elara/mage_elara/Jump/jump1.png");
-    this.setWorld(world);
     this.y = 270;
     this.offset = {
       top: 70,
@@ -98,6 +97,28 @@ class Character extends MovableObject {
       left: 30,
     };
     this.speed = 5;
+    this.loadAllImages();
+    this.loadAudio();
+    this.applyGravity();
+    this.isLongIdleActive = false;
+    this.animate();
+    this.deathAnimationFrame = 0;
+    this.deathAnimationComplete = false;
+    this.deathAnimationInterval = null; // Intervall für die normale Todesanimation
+    this.finalDeathAnimationInterval = null; // Intervall für das schnelle Blinken
+  }
+
+  loadAudio() {
+    this.audioDyingSound = this.createAudio(
+      "assets/audio/elara_dying_sound.mp3"
+    );
+    this.audioHittingSound = this.createAudio("assets/audio/hurting_sound.mp3");
+    this.audioJumpingSound = this.createAudio(
+      "assets/audio/elara_jumping_sound.mp3"
+    );
+  }
+
+  loadAllImages() {
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesIdle);
@@ -106,20 +127,6 @@ class Character extends MovableObject {
     this.loadImages(this.imagesHurt);
     this.loadImages(this.imagesDying);
     this.loadImages(this.imagesAttack);
-    this.audioDyingSound = this.createAudio(
-      "assets/audio/elara_dying_sound.mp3"
-    );
-    this.audioHittingSound = this.createAudio("assets/audio/hurting_sound.mp3");
-    this.audioJumpingSound = this.createAudio(
-      "assets/audio/elara_jumping_sound.mp3"
-    );
-    this.applyGravity();
-    this.isLongIdleActive = false;
-    this.animate();
-    this.deathAnimationFrame = 0;
-    this.deathAnimationComplete = false;
-    this.deathAnimationInterval = null; // Intervall für die normale Todesanimation
-    this.finalDeathAnimationInterval = null; // Intervall für das schnelle Blinken
   }
 
   animate() {
@@ -244,7 +251,7 @@ class Character extends MovableObject {
   pressRight() {
     this.world.keyboard.RIGHT = true;
   }
-  
+
   releaseRight() {
     this.world.keyboard.RIGHT = false;
   }
@@ -252,18 +259,18 @@ class Character extends MovableObject {
   pressLeft() {
     this.world.keyboard.LEFT = true;
   }
-  
+
   releaseLeft() {
     this.world.keyboard.LEFT = false;
   }
-  
+
   pressJump() {
     if (!this.isAboveGround()) {
       this.jump();
     }
   }
 
-// Character Dying
+  // Character Dying
   playDeathAnimation() {
     if (!this.deathAnimationComplete) {
       this.playDyingSounds();

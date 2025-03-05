@@ -34,7 +34,7 @@ class Endboss extends MovableObject {
   ]
   hadFirstContact = false;
 
-  constructor() {
+  constructor(sounds) {
     super().setImage(this.imagesIntro[1]);
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesIdle);
@@ -50,7 +50,7 @@ class Endboss extends MovableObject {
       bottom: 150,
       left: 150,
     };
-    // this.audioRoarIntro = this.createAudio("assets/audio/endboss_dragon_roar.mp3");
+    // this.world.addAudio(sounds.roar);
     this.setOtherDirection(true);
     this.animate();
   }
@@ -63,7 +63,6 @@ class Endboss extends MovableObject {
       } else {
         this.playAnimation(this.imagesIntro);
         this.moveLeft(this.speed);
-
         // this.otherDirection = true;
       }
       i++;
@@ -73,13 +72,18 @@ class Endboss extends MovableObject {
         sounds.dragonBoss.roar.play();
         sounds.dragonBoss.roar.playbackRate=0.8;
       }
+      if (this.isDying) {
+        this.playAnimation(this.imagesDying);
+      }
     }, 250);
   }
 
   die() {
     this.isDying = true;
+    sounds.dragonBoss.roar.play();
+    sounds.dragonBoss.roar.playbackRate=0.8;
     setTimeout(() => {
       this.shouldRemove = true;
-    }, 800);
+    }, 1000);
   }
 }

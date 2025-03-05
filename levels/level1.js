@@ -11,7 +11,7 @@ function initLevel() {
       new BlueSlime(),
       // new BlueSlime(),
       // new BlueSlime(),
-      new Endboss(),
+      new Endboss(sounds.dragonBoss),
     ],
     [
       new Light("img/Elara/background/light/1.png", 0),
@@ -78,10 +78,9 @@ function initLevel() {
       new Crystal(),
       new Crystal(),
       new Crystal(),
+      new Crystal(),
+      new Crystal(),
       new Flower(),
-      // new Flower(),
-      // new Flower(),
-      // new Flower(),
     ]
   );
 }
