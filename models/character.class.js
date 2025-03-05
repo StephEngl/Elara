@@ -247,29 +247,6 @@ class Character extends MovableObject {
     this.idleTimer = 0;
   }
 
-  // Mobile buttons to keypress
-  pressRight() {
-    this.world.keyboard.RIGHT = true;
-  }
-
-  releaseRight() {
-    this.world.keyboard.RIGHT = false;
-  }
-
-  pressLeft() {
-    this.world.keyboard.LEFT = true;
-  }
-
-  releaseLeft() {
-    this.world.keyboard.LEFT = false;
-  }
-
-  pressJump() {
-    if (!this.isAboveGround()) {
-      this.jump();
-    }
-  }
-
   // Character Dying
   playDeathAnimation() {
     if (!this.deathAnimationComplete) {
@@ -278,7 +255,7 @@ class Character extends MovableObject {
       this.deathAnimationFrame++;
       if (this.deathAnimationFrame >= this.imagesDying.length) {
         this.deathAnimationComplete = true;
-        this.deathAnimationFrame = this.imagesDying.length - 2; // Setzt auf das letzte Bild
+
       }
     } else {
       // Wechselt zwischen den letzten beiden Bildern

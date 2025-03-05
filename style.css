@@ -3,7 +3,7 @@ body {
   height: 100vh;
   margin: 0;
 
-  background-image: url("img/bg_forest.jpg");
+  background-image: url("assets/img/backgrounds/bg_forest.jpg");
   background-position: center;
 }
 
@@ -14,7 +14,7 @@ h1 {
 h2 {
   font-size: 24px;
   margin-top: 36px;
-  text-align: center; /* Überschrift zentrieren */
+  text-align: center;
 }
 
 p {
@@ -23,7 +23,7 @@ p {
 }
 
 .content {
-  display: none; /* nicht sichtbar zu Beginn*/
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -117,8 +117,8 @@ canvas {
   flex-grow: 1;
 }
 
-.startScreenContainer {
-  background-image: url("assets/img/game_objects/startscreen_bg.jpg");
+.start-screen-container {
+  background-image: url("assets/img/backgrounds/startscreen-bg.png");
   position: absolute;
   top: 0;
   left: 0;
@@ -128,23 +128,23 @@ canvas {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
-.textContainer {
+.text-container {
   flex-grow: 1; /* Nimmt den restlichen Platz ein */
   text-align: left; /* Text links ausrichten */
   word-break: break-word;
 }
 
-.startScreenAssetsContainer {
+.start-screen-assets-container {
   display: flex;
   justify-content: center;
 }
 
-.startButton,
-.gameOverButtons {
+.start-button,
+.game-over-buttons {
   background-image: url("assets/img/game_objects/button.png");
   background-position: center;
   border: none;
@@ -158,8 +158,8 @@ canvas {
   font-family: inherit;
 }
 
-.startButton:hover,
-.gameOverButtons:hover {
+.start-button:hover,
+.game-over-buttons:hover {
   scale: 1.03;
 }
 
@@ -300,18 +300,22 @@ canvas {
   }
 }
 
-#gameOverDialog {
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
+#game-over-container {
+  background-image: url("assets/img/backgrounds/game-over-bg.jpg");
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border: none;
-  border-radius: 10px;
   font-family: "magical_neverland", Arial, Helvetica, sans-serif;
   text-align: center;
-  width: 80%;
-  max-width: 300px;
+  width: 100vw;
+  height: 100vh;
 }
 
-#gameOverDialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+.game-over-buttons-container {
+  display: flex;
+  gap: 24px;
 }

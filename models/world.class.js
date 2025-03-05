@@ -197,7 +197,7 @@ class World {
 
   checkFlyingObjects() {
     if (
-      (this.keyboard.F || this.fireButtonPressed) &&
+      (this.keyboard.F || fireButtonPressed) &&
       this.crystalbar.loadingLevel > 0
     ) {
       this.character.playAnimation(this.character.imagesAttack);
@@ -208,12 +208,8 @@ class World {
       );
       this.flyingObjects.push(fireball);
       this.decreaseCrystalbar();
-      this.fireButtonPressed = false;
+      fireButtonPressed = false;
     }
-  }
-
-  setFireButtonPressed() {
-    this.fireButtonPressed = true;
   }
 
   removeObjectsFromGame(objectArrayToRemove) {

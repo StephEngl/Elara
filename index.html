@@ -33,11 +33,11 @@
       <script src="models/background-object.class.js"></script>
       <script src="models/character.class.js"></script>
       <script src="models/little-dragon.class.js"></script>
-      <script src="models/blue_slime.class.js"></script>
+      <script src="models/blue-slime.class.js"></script>
       <script src="models/endboss.class.js"></script>
       <script src="models/statusbar.class.js"></script>
       <script src="models/crystalbar.class.js"></script>
-      <script src="models/flyingObject.class.js"></script>
+      <script src="models/flying-object.class.js"></script>
       <script src="models/keyboard.class.js"></script>
       <script src="models/crystal.class.js"></script>
       <script src="models/flower.class.js"></script>
@@ -49,11 +49,11 @@
     </head>
     <body onload="init()">
       <!-- Startscreen -->
-      <div class="startScreenContainer">
-        <div class="textContainer">
+      <div class="start-screen-container">
+        <div class="text-container">
           <h2>Willkommen zu Elara und der verzauberte Hain</h2>
-          <div class="startScreenAssetsContainer">
-            <button onclick="startGame()" class="startButton" autofocus>
+          <div class="start-screen-assets-container">
+            <button onclick="startGame()" class="start-button" autofocus>
               Spiel starten
             </button>
           </div>
@@ -85,13 +85,12 @@
             <!-- Mobile Buttons -->
             <div class="mobile-buttons-left">
               <button
-                id="moveLeftButton"
                 class="mobile-buttons"
                 aria-label="Nach links laufen"
-                ontouchstart="event.preventDefault(); world.character.pressLeft();"
-                ontouchend="world.character.releaseLeft();"
-                onmousedown="world.character.pressLeft();"
-                onmouseup="world.character.releaseLeft();"
+                ontouchstart="event.preventDefault(); pressLeft();"
+                ontouchend="releaseLeft();"
+                onmousedown="pressLeft();"
+                onmouseup="releaseLeft();"
               >
                 <img
                   src="assets/img/icons/arrow-left.svg"
@@ -100,13 +99,12 @@
                 />
               </button>
               <button
-                id="moveRightButton"
                 class="mobile-buttons"
                 aria-label="Nach rechts laufen"
-                ontouchstart="event.preventDefault(); world.character.pressRight();"
-                ontouchend="world.character.releaseRight();"
-                onmousedown="world.character.pressRight();"
-                onmouseup="world.character.releaseRight();"
+                ontouchstart="event.preventDefault(); pressRight();"
+                ontouchend="releaseRight();"
+                onmousedown="pressRight();"
+                onmouseup="releaseRight();"
               >
                 <img
                   src="assets/img/icons/arrow-left.svg"
@@ -117,8 +115,8 @@
             </div>
             <div class="mobile-buttons-right">
               <button
-                ontouchstart="event.preventDefault(); world.setFireButtonPressed(); this.blur();"
-                id="firaAttackButton"
+                ontouchstart="event.preventDefault(); setFireButtonPressed(); this.blur();"
+                onmousedown="setFireButtonPressed()";
                 class="mobile-buttons"
                 aria-label="Feuerattacke"
               >
@@ -129,8 +127,8 @@
                 />
               </button>
               <button
-                ontouchstart="event.preventDefault(); world.character.pressJump(); this.blur();"
-                id="jumpingButton"
+                ontouchstart="event.preventDefault(); pressJump(); this.blur();"
+                onmousedown="pressJump()";
                 class="mobile-buttons"
                 aria-label="Springen"
               >
@@ -180,29 +178,30 @@
               </button>
             </div>
           </div>
-          <!-- Game Over Screen -->
-          <dialog id="gameOverDialog">
-            <div class="dialog_container">
-              <h2>Game Over</h2>
-              <p>Dein Spiel ist zu Ende!</p>
-              <div>
-                <button
-                  onclick="showStartScreen()"
-                  class="gameOverButtons"
-                  id="backToMenuButton"
-                >
-                  Hauptmenü
-                </button>
-                <button
-                  onclick="restartGame()"
-                  class="gameOverButtons"
-                  id="restartButton"
-                >
-                  Neu starten
-                </button>
-              </div>
-            </div>
-          </dialog>
+          
+        </div>
+      </div>
+      <!-- Game Over Screen -->
+      <div id="game-over-container">
+        <div class="dialog-container">
+          <h2>Game Over</h2>
+          <p>Dein Spiel ist zu Ende!</p>
+          <div class="game-over-buttons-container">
+            <button
+              onclick="showStartScreen()"
+              class="game-over-buttons"
+              id="backToMenuButton"
+            >
+              Hauptmenü
+            </button>
+            <button
+              onclick="restartGame()"
+              class="game-over-buttons"
+              id="restartButton"
+            >
+              Neu starten
+            </button>
+          </div>
         </div>
       </div>
     </body>

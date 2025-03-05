@@ -1,6 +1,7 @@
 let element;
 let world;
 let keyboard = new Keyboard();
+fireButtonPressed = false;
 let isMuted = false;
 let gameOver = false;
 let restart = false;
@@ -14,14 +15,14 @@ function init() {
 function showStartScreen() {
   if (gameOver) {
     restart = true;
-    document.querySelector(".startScreenContainer").style.display = "flex";
+    document.querySelector(".start-screen-container").style.display = "flex";
     document.querySelector(".content").style.display = "none";
     closeGameOverDialog();
   }
 }
 
 function startGame() {
-  document.querySelector(".startScreenContainer").style.display = "none";
+  document.querySelector(".start-screen-container").style.display = "none";
   if (restart) {
     world.ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
@@ -55,13 +56,12 @@ function restartGame() {
 }
 
 function showGameOverDialog() {
-  const dialog = document.getElementById("gameOverDialog");
-  dialog.showModal();
+  document.querySelector(".content").style.display = "none";
+  document.getElementById("game-over-container").style.display = "flex";
 }
 
 function closeGameOverDialog() {
-  const dialog = document.getElementById("gameOverDialog");
-  dialog.close();
+  document.getElementById("game-over-container").style.display = "none";
   gameOver = false;
   gameOverMusic.pause();
 }
@@ -73,7 +73,6 @@ function stopGame() {
     world.stopBackgroundMusic();
     showGameOverDialog();
     gameOverMusic.play();
-    // weitere Aktionen nach dem Spielende ausführen
   }, 1000);
 }
 
@@ -118,6 +117,34 @@ function toggleFullscreen() {
   }
 }
 
+// Mobile buttons to keypress
+function pressRight() {
+  keyboard.RIGHT = true;
+}
+
+function releaseRight() {
+  keyboard.RIGHT = false;
+}
+
+function pressLeft() {
+  keyboard.LEFT = true;
+}
+
+function releaseLeft() {
+  keyboard.LEFT = false;
+}
+
+function pressJump() {
+  if (!world.character.isAboveGround()) {
+    world.character.jump();
+  }
+}
+
+function setFireButtonPressed() {
+  this.fireButtonPressed = true;
+}
+
+// Event Listener for key-events
 window.addEventListener("keydown", (event) => {
   switch (event.code) {
     case "ArrowRight":
