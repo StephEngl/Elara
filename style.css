@@ -138,14 +138,16 @@ canvas {
 }
 
 .text-container {
-  flex-grow: 1; /* Nimmt den restlichen Platz ein */
-  text-align: left; /* Text links ausrichten */
+  display: flex;
+  text-align: left;
   word-break: break-word;
+  flex-direction: column;
 }
 
 .start-screen-assets-container {
   display: flex;
   justify-content: center;
+  gap: 16px;
 }
 
 .start-button,
@@ -326,7 +328,8 @@ canvas {
 }
 
 .keyboard-explanation-container {
-display: flex;
+  display: flex;
+  justify-content: center;
 }
 
 .key {
@@ -344,4 +347,23 @@ display: flex;
 
 .key-space {
   width: 8em;
+}
+
+dialog {
+  /* position: fixed; */
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px black;
+  color: white;
+}
+
+dialog > h2 {
+  margin-bottom: 36px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
 }

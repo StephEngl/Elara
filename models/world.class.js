@@ -32,7 +32,6 @@ class World {
         this.checkFireballCollisions();
         this.flyingObjects = this.removeObjectsFromGame(this.flyingObjects);
         this.level.enemies = this.removeObjectsFromGame(this.level.enemies);
-        this.cleanupCharacter();
       }
     }, 200);
     this.collisionInterval = setInterval(() => {
@@ -285,10 +284,6 @@ class World {
       (this.canvas.width - textWidth) / 2,
       this.canvas.height / 2
     );
-  }
-
-  cleanupCharacter() {
-    // this.world.character = this.world.character.filter((obj) => !obj.shouldRemove);
   }
 
   cleanupEnemies() {

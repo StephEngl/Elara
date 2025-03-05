@@ -1,7 +1,7 @@
 let element;
 let world;
 let keyboard = new Keyboard();
-fireButtonPressed = false;
+let fireButtonPressed = false;
 let isMuted = false;
 let gameOver = false;
 let restart = false;
