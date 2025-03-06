@@ -255,7 +255,7 @@ class World {
    * Decreases the crystal bar's loading level.
    */
   decreaseCrystalbar() {
-    this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel - 20);
+    this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel - 1);
   }
 
   removeObjectsFromGame(objectArrayToRemove) {

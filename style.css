@@ -7,7 +7,6 @@ body {
   font-family: "magical_neverland", Arial, Helvetica, sans-serif;
   height: 100vh;
   margin: 0;
-
   background-image: url("assets/img/backgrounds/bg_forest.jpg");
   background-position: center;
 }
@@ -124,7 +123,7 @@ canvas {
 }
 
 .start-screen-container {
-  background-image: url("assets/img/backgrounds/startscreen-bg.png");
+  background-image: url("assets/img/backgrounds/bg_startscreen.png");
   position: absolute;
   top: 0;
   left: 0;
@@ -152,7 +151,7 @@ canvas {
 }
 
 .start-button,
-.game-over-buttons {
+.endscreen-buttons {
   background-image: url("assets/img/game_objects/button.png");
   background-position: center;
   border: none;
@@ -167,7 +166,7 @@ canvas {
 }
 
 .start-button:hover,
-.game-over-buttons:hover {
+.endscreen-buttons:hover {
   scale: 1.03;
 }
 
@@ -308,8 +307,8 @@ canvas {
   }
 }
 
-#game-over-container {
-  background-image: url("assets/img/backgrounds/game-over-bg.jpg");
+#game-over-container, #win-screen-container {
+  background-image: url("assets/img/backgrounds/bg_game-over.jpg");
   display: none;
   justify-content: center;
   align-items: center;
@@ -323,9 +322,17 @@ canvas {
   height: 100vh;
 }
 
-.game-over-buttons-container {
+#win-screen-container {
+  background-image: url("assets/img/backgrounds/bg_win.jpg");
+}
+
+.endscreen-buttons-container {
   display: flex;
   gap: 24px;
+}
+
+.dialog-container {
+  margin-top: -150px;
 }
 
 .keyboard-explanation-container {
@@ -351,7 +358,6 @@ canvas {
 }
 
 dialog {
-  /* position: fixed; */
   background-color: rgba(0, 0, 0, 0.9);
   padding: 20px;
   border-radius: 12px;

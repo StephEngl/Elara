@@ -28,8 +28,7 @@ const sounds = {
     flower: new Audio("assets/audio/collectFlower.mp3"),
   },
   other: {
-    menu: new Audio(),
-    gameWon: new Audio(),
-    gameOver: new Audio(),
+    gameWon: new Audio("assets/audio/bg-music-game-won.mp3"),
+    gameOver: new Audio("assets/audio/game_over_music.mp3"),
   },
 };

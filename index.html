@@ -124,8 +124,8 @@
             </div>
             <div class="mobile-buttons-right">
               <button
-                ontouchstart="event.preventDefault(); setFireButtonPressed(); this.blur();"
-                onmousedown="setFireButtonPressed()"
+                ontouchstart="event.preventDefault(); pressFireButton(); this.blur();"
+                onmousedown="pressFireButton()"
                 ;
                 class="mobile-buttons"
                 aria-label="Feuerattacke"
@@ -191,7 +191,7 @@
           </div>
         </div>
         <!-- Keyboard Explanation -->
-        <div class="keyboard-explanation-container">
+        <!-- <div class="keyboard-explanation-container">
           <div class="key">
             <span>◀</span>
           </div>
@@ -208,23 +208,46 @@
             <span>P</span>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- Game Over Screen -->
       <div id="game-over-container">
         <div class="dialog-container">
           <h2>Game Over</h2>
           <p>Dein Spiel ist zu Ende!</p>
-          <div class="game-over-buttons-container">
+          <div class="endscreen-buttons-container">
             <button
               onclick="showStartScreen()"
-              class="game-over-buttons"
+              class="endscreen-buttons"
               id="backToMenuButton"
             >
               Hauptmenü
             </button>
             <button
               onclick="restartGame()"
-              class="game-over-buttons"
+              class="endscreen-buttons"
+              id="restartButton"
+            >
+              Neu starten
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Win Screen -->
+      <div id="win-screen-container">
+        <div class="dialog-container">
+          <h2>Herzlichen Glückwunsch</h2>
+          <p>Du hast den verwunschenen Hain befreit</p>
+          <div class="endscreen-buttons-container">
+            <button
+              onclick="showStartScreen()"
+              class="endscreen-buttons"
+              id="backToMenuButton"
+            >
+              Hauptmenü
+            </button>
+            <button
+              onclick="restartGame()"
+              class="endscreen-buttons"
               id="restartButton"
             >
               Neu starten

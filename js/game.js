@@ -3,9 +3,9 @@ let world;
 let keyboard = new Keyboard();
 let fireButtonPressed = false;
 let isMuted = false;
+let gameIsWon = false;
 let gameOver = false;
 let restart = false;
-let gameOverMusic = new Audio("assets/audio/game_over_music.mp3");
 
 function init() {
   element = document.getElementById("canvas");
@@ -13,11 +13,12 @@ function init() {
 }
 
 function showStartScreen() {
-  if (gameOver) {
+  if (gameOver || gameIsWon) {
     restart = true;
     document.querySelector(".start-screen-container").style.display = "flex";
     document.querySelector(".content").style.display = "none";
-    closeGameOverDialog();
+    closeGameOverScreen();
+    closeWinScreen();
   }
 }
 
@@ -50,20 +51,38 @@ function hideLoadingSpinner() {
 
 function restartGame() {
   restart = true;
-  closeGameOverDialog();
+  closeGameOverScreen();
+  closeWinScreen();
   init();
   startGame();
 }
 
-function showGameOverDialog() {
+function showGameOverScreen() {
   document.querySelector(".content").style.display = "none";
   document.getElementById("game-over-container").style.display = "flex";
 }
 
-function closeGameOverDialog() {
+function closeGameOverScreen() {
   document.getElementById("game-over-container").style.display = "none";
   gameOver = false;
-  gameOverMusic.pause();
+  sounds.other.gameOver.pause();
+}
+
+function showWinScreen() {
+  gameIsWon = true;
+  setTimeout(() => {
+    clearAllIntervals();
+    document.querySelector(".content").style.display = "none";
+    document.getElementById("win-screen-container").style.display = "flex";
+    world.stopBackgroundMusic();
+    sounds.other.gameWon.play();
+  }, 1000);
+}
+
+function closeWinScreen() {
+  document.getElementById("win-screen-container").style.display = "none";
+  gameIsWon = false;
+  sounds.other.gameWon.pause();
 }
 
 function stopGame() {
@@ -71,8 +90,8 @@ function stopGame() {
   setTimeout(() => {
     clearAllIntervals();
     world.stopBackgroundMusic();
-    showGameOverDialog();
-    gameOverMusic.play();
+    showGameOverScreen();
+    sounds.other.gameOver.play();
   }, 1000);
 }
 
@@ -134,14 +153,14 @@ function releaseLeft() {
   keyboard.LEFT = false;
 }
 
+function pressFireButton() {
+  fireButtonPressed = true;
+}
+
 function pressJump() {
   if (!world.character.isAboveGround()) {
     world.character.jump();
   }
-}
-
-function setFireButtonPressed() {
-  this.fireButtonPressed = true;
 }
 
 // Event Listener for key-events
