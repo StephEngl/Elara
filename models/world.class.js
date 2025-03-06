@@ -5,7 +5,6 @@ class World {
   level = level1;
   camera_x;
   flyingObjects = [];
-  audioElements = [];
   runInterval = null;
 
   constructor(canvas, keyboard) {
@@ -45,14 +44,18 @@ class World {
   }
 
   // Collision checks
-  checkCollisions(target) {
-    target.forEach((element) => {
-      if (this.character.isColliding(element)) {
-        if (target === this.level.enemies && this.character.energy > 0) {
+  checkCollisions(targets) {
+    targets.forEach((target) => {
+      if (target.isDying) {
+        console.log("Enemy is dying", target);
+        return;
+      }
+      if (this.character.isColliding(target)) {
+        if (targets === this.level.enemies && this.character.energy > 0) {
           this.character.hit();
           this.statusbar.setPercentage(this.character.energy);
-        } else if (target === this.level.collectableObjects) {
-          this.collectItem(element);
+        } else if (targets === this.level.collectableObjects) {
+          this.collectItem(target);
         }
       }
     });
@@ -168,13 +171,6 @@ class World {
       this.character.otherDirection
     );
   }
-
-  // /**
-  //  * Decreases the crystal bar's loading level.
-  //  */
-  // decreaseCrystalbar() {
-  //   this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel - 1);
-  // }
 
   removeObjectsFromGame(objectArrayToRemove) {
     return objectArrayToRemove.filter((obj) => !obj.shouldRemove);

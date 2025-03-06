@@ -143,7 +143,7 @@ function showWinScreen() {
     clearAllIntervals();
     document.querySelector(".content").style.display = "none";
     document.getElementById("win-screen-container").style.display = "flex";
-    world.stopBackgroundMusic();
+    stopBackgroundMusic();
     sounds.other.gameWon.play();
   }, 1000);
 }
@@ -158,7 +158,7 @@ function stopGame() {
   gameOver = true;
   setTimeout(() => {
     clearAllIntervals();
-    world.stopBackgroundMusic();
+    stopBackgroundMusic();
     showGameOverScreen();
     sounds.other.gameOver.play();
   }, 1000);
@@ -170,22 +170,46 @@ function clearAllIntervals() {
 
 // Fullscreen
 function toggleFullscreen() {
-  let elem = document.documentElement;
+  const elem = document.documentElement;
+  isFullscreen() ? exitFullscreen() : enterFullscreen(elem);
+}
 
-  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-    }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
+function isFullscreen() {
+  return document.fullscreenElement || document.webkitFullscreenElement;
+}
+
+function enterFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) {
+    elem.webkitRequestFullscreen();
   }
 }
+
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
+// function toggleFullscreen() {
+//   let elem = document.documentElement;
+
+//   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+//     if (elem.requestFullscreen) {
+//       elem.requestFullscreen();
+//     } else if (elem.webkitRequestFullscreen) {
+//       elem.webkitRequestFullscreen();
+//     }
+//   } else {
+//     if (document.exitFullscreen) {
+//       document.exitFullscreen();
+//     } else if (document.webkitExitFullscreen) {
+//       document.webkitExitFullscreen();
+//     }
+//   }
+// }
 
 // Mobile buttons to keypress
 function pressRight() {
