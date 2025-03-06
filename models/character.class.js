@@ -227,6 +227,7 @@ class Character extends MovableObject {
       this.resetIdleTimer();
     } else {
       this.remove();
+      gameOver = true;
       stopGame();
     }
   }

@@ -106,7 +106,8 @@ class Endboss extends MovableObject {
     sounds.dragonBoss.roar.playbackRate = 0.8;
     setTimeout(() => {
       this.shouldRemove = true;
-      showWinScreen();
+      gameWon = true;
+      stopGame();
     }, 1000);
   }
 }
