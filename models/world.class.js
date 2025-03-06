@@ -40,20 +40,6 @@ class World {
     }, 20);
   }
 
-  // Pause function
-  togglePause() {
-    isPaused = !isPaused;
-    if (isPaused) {
-      stopBackgroundMusic();
-      this.setEnemyAnimationState(true);
-      clearInterval(this.runInterval);
-    } else {
-      this.setEnemyAnimationState(false);
-      this.run();
-      if (!isMuted) startBackgroundMusic();
-    }
-  }
-
   setEnemyAnimationState(isAnimationPaused) {
     this.level.enemies.forEach((enemy) => (enemy.isPaused = isAnimationPaused));
   }

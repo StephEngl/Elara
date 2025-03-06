@@ -104,6 +104,20 @@ function unmuteAllSounds() {
   }
 }
 
+ // Pause function
+ function togglePause() {
+  isPaused = !isPaused;
+  if (isPaused) {
+    stopBackgroundMusic();
+    world.setEnemyAnimationState(true);
+    clearInterval(world.runInterval);
+  } else {
+    world.setEnemyAnimationState(false);
+    world.run();
+    if (!isMuted) startBackgroundMusic();
+  }
+}
+
 function restartGame() {
   restart = true;
   closeGameOverScreen();
@@ -216,7 +230,7 @@ window.addEventListener("keydown", (event) => {
       keyboard.F = true;
       break;
     case "KeyP":
-      world.togglePause();
+      togglePause();
       break;
     default:
       console.log("Unhandled key released:", event.code);
