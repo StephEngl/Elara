@@ -6,7 +6,6 @@ class World {
   camera_x;
   flyingObjects = [];
   audioElements = [];
-  isPaused = false;
   runInterval = null;
 
   constructor(canvas, keyboard) {
@@ -16,7 +15,6 @@ class World {
     this.setWorld();
     this.draw();
     this.run();
-    this.addBackgroundMusicToAudioElements();
   }
 
   setWorld() {
@@ -25,9 +23,9 @@ class World {
 
   run() {
     this.runInterval = setInterval(() => {
-      if (!this.isPaused) {
+      if (!isPaused) {
         this.checkJumpingOn();
-        this.startBackgroundMusic();
+        startBackgroundMusic();
         this.checkFlyingObjects();
         this.checkFireballCollisions();
         this.flyingObjects = this.removeObjectsFromGame(this.flyingObjects);
@@ -35,87 +33,24 @@ class World {
       }
     }, 200);
     this.collisionInterval = setInterval(() => {
-      if (!this.isPaused && !this.character.elaraJumpedOnEnemy) {
+      if (!isPaused && !this.character.elaraJumpedOnEnemy) {
         this.checkCollisions(this.level.enemies);
         this.checkCollisions(this.level.collectableObjects);
       }
     }, 20);
   }
 
-  // Sound functions
-  addBackgroundMusicToAudioElements() {
-    if (this.level && this.level.backgroundMusic) {
-      this.audioElements.push(this.level.backgroundMusic);
-    }
-  }
-
-  startBackgroundMusic() {
-    if (!this.isPaused && !isMuted) {
-      this.level.playBackgroundMusic();
-    }
-  }
-
-  stopBackgroundMusic() {
-    this.level.stopBackgroundMusic();
-  }
-
-  addAudio(audio) {
-    this.audioElements.push(audio);
-  }
-
-  createAudio(src) {
-    let audio = new Audio(src);
-    this.addAudio(audio);
-    return audio;
-  }
-
-  muteAllSounds() {
-    this.audioElements.forEach((audio) => {
-      audio.muted = true;
-      audio.pause();
-    });
-    Object.values(sounds).forEach((category) => {
-      Object.values(category).forEach((sound) => {
-        if (sound instanceof Audio) {
-          sound.muted = true;
-          sound.pause();
-        }
-      });
-    });
-    if (this.level && this.level.backgroundMusic) {
-      this.level.backgroundMusic.muted = true;
-      this.level.backgroundMusic.pause();
-    }
-  }
-
-  unmuteAllSounds() {
-    this.audioElements.forEach((audio) => {
-      audio.muted = false;
-    });
-    Object.values(sounds).forEach((category) => {
-      Object.values(category).forEach((sound) => {
-        if (sound instanceof Audio) {
-          sound.muted = false;
-        }
-      });
-    });
-    if (this.level && this.level.backgroundMusic) {
-      this.level.backgroundMusic.muted = false;
-      if (!this.isPaused) this.level.backgroundMusic.play();
-    }
-  }
-
   // Pause function
   togglePause() {
-    this.isPaused = !this.isPaused;
-    if (this.isPaused) {
-      this.stopBackgroundMusic();
+    isPaused = !isPaused;
+    if (isPaused) {
+      stopBackgroundMusic();
       this.setEnemyAnimationState(true);
       clearInterval(this.runInterval);
     } else {
       this.setEnemyAnimationState(false);
       this.run();
-      if (!isMuted) this.startBackgroundMusic();
+      if (!isMuted) startBackgroundMusic();
     }
   }
 
@@ -150,7 +85,6 @@ class World {
 
   // Collect Item
   collectItem(item) {
-    console.log("Item collected:", item);
     this.applyItemEffect(item);
     this.playItemCollectSound(item);
     this.removeItemFromLevel(item);
@@ -261,7 +195,7 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    if (!this.isPaused) {
+    if (!isPaused) {
       this.drawGameElements();
     } else {
       this.drawPauseScreen();

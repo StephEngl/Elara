@@ -74,7 +74,7 @@ class MovableObject extends DrawableObject {
    */
   hit() {
     console.log("enemy isdying: ", this.isDying);
-    if (!this.isHurt() && !this.isAboveGround() && !this.elaraJumpedOnEnemy) {
+    if (!this.isHurt() && !this.isAboveGround() && !this.elaraJumpedOnEnemy && !this.isDying) {
       // Wenn der Charakter nicht springt und nicht auf einen Gegner gesprungen ist,
       this.reduceEnergy();
     }
@@ -85,8 +85,6 @@ class MovableObject extends DrawableObject {
    */
   reduceEnergy() {
     this.energy -= 10;
-    // console.log("character is hit", this.energy);
-
     if (this.energy < 0) {
       this.energy = 0;
     } else {

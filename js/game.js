@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let fireButtonPressed = false;
 let isMuted = false;
+let isPaused = false; 
 let gameIsWon = false;
 let gameOver = false;
 let restart = false;
@@ -49,6 +50,60 @@ function hideLoadingSpinner() {
   document.querySelector(".control-buttons").style.display = "flex";
 }
 
+function toggleSound() {
+  isMuted = !isMuted;
+  const soundButton = document.getElementById("sound-button");
+  const soundIcon = document.getElementById("sound-icon");
+
+  if (isMuted) {
+    muteAllSounds();
+    soundIcon.src = "assets/img/icons/speaker_mute.svg";
+    soundIcon.alt = "Ton aus";
+    soundButton.setAttribute("aria-label", "Ton ein");
+  } else {
+    unmuteAllSounds();
+    soundIcon.src = "assets/img/icons/speaker_volume.svg";
+    soundIcon.alt = "Ton ein";
+    soundButton.setAttribute("aria-label", "Ton aus");
+  }
+}
+
+// Sound functions
+function startBackgroundMusic() {
+  if (!isPaused && !isMuted) {
+    world.level.playBackgroundMusic();
+  }
+}
+
+function stopBackgroundMusic() {
+  world.level.stopBackgroundMusic();
+}
+
+function muteAllSounds() {
+  Object.values(sounds).forEach((category) => {
+    Object.values(category).forEach((sound) => {
+      sound.muted = true;
+      sound.pause();
+    });
+  });
+  if (world.level && world.level.backgroundMusic) {
+    world.level.backgroundMusic.muted = true;
+    world.level.backgroundMusic.pause();
+  }
+}
+
+function unmuteAllSounds() {
+  Object.values(sounds).forEach((category) => {
+    Object.values(category).forEach((sound) => {
+      sound.muted = false;
+    });
+  });
+  if (world.level && world.level.backgroundMusic) {
+    world.level.backgroundMusic.muted = false;
+    if (!world.isPaused) world.level.backgroundMusic.play();
+  }
+}
+
 function restartGame() {
   restart = true;
   closeGameOverScreen();
@@ -93,24 +148,6 @@ function stopGame() {
     showGameOverScreen();
     sounds.other.gameOver.play();
   }, 1000);
-}
-
-function toggleSound() {
-  isMuted = !isMuted;
-  const soundButton = document.getElementById("sound-button");
-  const soundIcon = document.getElementById("sound-icon");
-
-  if (isMuted) {
-    world.muteAllSounds();
-    soundIcon.src = "assets/img/icons/speaker_mute.svg";
-    soundIcon.alt = "Ton aus";
-    soundButton.setAttribute("aria-label", "Ton ein");
-  } else {
-    world.unmuteAllSounds();
-    soundIcon.src = "assets/img/icons/speaker_volume.svg";
-    soundIcon.alt = "Ton ein";
-    soundButton.setAttribute("aria-label", "Ton aus");
-  }
 }
 
 function clearAllIntervals() {

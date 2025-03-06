@@ -102,7 +102,7 @@ class Character extends MovableObject {
     this.applyGravity();
     this.isLongIdleActive = false;
     this.animate();
-    this.deathAnimationFrame = 0;
+    this.defeatedAnimationFrame = 0;
     this.deathAnimationComplete = false;
     this.deathAnimationInterval = null; // Intervall für die normale Todesanimation
     this.finalDeathAnimationInterval = null; // Intervall für das schnelle Blinken
@@ -113,13 +113,9 @@ class Character extends MovableObject {
    * @method loadAudio
    */
   loadAudio() {
-    this.audioDyingSound = this.createAudio(
-      "assets/audio/elara_dying_sound.mp3"
-    );
-    this.audioHittingSound = this.createAudio("assets/audio/hurting_sound.mp3");
-    this.audioJumpingSound = this.createAudio(
-      "assets/audio/elara_jumping_sound.mp3"
-    );
+    this.audioDefeated = sounds.character.ko;
+    this.audioHit = sounds.character.hurt;
+    this.audioJump = sounds.character.jump;
   }
 
   /**
@@ -227,7 +223,7 @@ class Character extends MovableObject {
  */
   handleDeathState() {
     if (!this.deathAnimationComplete) {
-      this.playDeathAnimation();
+      this.playDefeatedAnimation();
       this.resetIdleTimer();
     } else {
       this.remove();
@@ -241,7 +237,7 @@ class Character extends MovableObject {
  */
   handleHurtState() {
     this.playAnimation(this.imagesHurt);
-    this.playSound(this.audioHittingSound);
+    this.audioHit.play();
     this.resetIdleTimer();
   }
 
@@ -275,7 +271,7 @@ class Character extends MovableObject {
  */
   jump() {
     this.speedY = 30;
-    this.playSound(this.audioJumpingSound);
+    this.audioJump.play();
   }
 
   /**
@@ -315,32 +311,32 @@ class Character extends MovableObject {
 
 /**
  * Plays the death animation.
- * @method playDeathAnimation
+ * @method playDefeatedAnimation
  */
-  playDeathAnimation() {
+  playDefeatedAnimation() {
     if (!this.deathAnimationComplete) {
-      this.playDyingSounds();
-      this.img = this.imageCache[this.imagesDying[this.deathAnimationFrame]];
-      this.deathAnimationFrame++;
-      if (this.deathAnimationFrame >= this.imagesDying.length) {
+      this.playDefeatedSound();
+      this.img = this.imageCache[this.imagesDying[this.defeatedAnimationFrame]];
+      this.defeatedAnimationFrame++;
+      if (this.defeatedAnimationFrame >= this.imagesDying.length) {
         this.deathAnimationComplete = true;
       }
     } else {
       // Wechselt zwischen den letzten beiden Bildern
-      this.deathAnimationFrame++;
+      this.defeatedAnimationFrame++;
       const animationLength = this.imagesDying.length;
-      this.deathAnimationFrame =
-        (this.deathAnimationFrame % 2) + (animationLength - 2);
-      this.img = this.imageCache[this.imagesDying[this.deathAnimationFrame]];
+      this.defeatedAnimationFrame =
+        (this.defeatedAnimationFrame % 2) + (animationLength - 2);
+      this.img = this.imageCache[this.imagesDying[this.defeatedAnimationFrame]];
     }
   }
 
   /**
- * Plays the dying sounds.
- * @method playDyingSounds
+ * Plays the sound when character is defeated.
+ * @method playDefeatedSound
  */
-  playDyingSounds() {
-    let dyingSound = this.playSound(this.audioDyingSound);
-    dyingSound.playbackRate = 0.7;
+  playDefeatedSound() {
+    this.audioDefeated.play();
+    this.audioDefeated.playbackRate = 0.7;
   }
 }
