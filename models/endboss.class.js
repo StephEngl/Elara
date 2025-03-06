@@ -67,6 +67,7 @@ class Endboss extends MovableObject {
       bottom: 150,
       left: 150,
     };
+    this.otherDirection = true;
   }
 
   /**

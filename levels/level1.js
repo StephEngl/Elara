@@ -74,8 +74,9 @@ function initLevel() {
     ],
     ["assets/audio/backgroundmusik_lvl1.mp3"],
     [
-      new Crystal(),
-      new Crystal(),
+      Crystal.createFixedCrystal(300, 200),
+      Crystal.createFixedCrystal(400, 150),
+      Crystal.createFixedCrystal(500, 200),
       new Crystal(),
       new Crystal(),
       new Crystal(),

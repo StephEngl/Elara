@@ -1,43 +1,38 @@
 class Crystalbar extends DrawableObject {
-  imagesCrystalbar = [
-    "assets/img/game_objects/statusbars/crystalbar_0.png",
-    "assets/img/game_objects/statusbars/crystalbar_20.png",
-    "assets/img/game_objects/statusbars/crystalbar_40.png",
-    "assets/img/game_objects/statusbars/crystalbar_60.png",
-    "assets/img/game_objects/statusbars/crystalbar_80.png",
-    "assets/img/game_objects/statusbars/crystalbar_100.png",
-  ];
-  loadingLevel = 0;
+  collectedCrystals = 0;
+  crystalImage = new Image();
 
   constructor() {
     super();
-    this.loadImages(this.imagesCrystalbar);
-    this.x = 20;
-    this.y = 65;
-    this.width = 150;
-    this.height = 35;
-    this.setLoadingLevel(0);
+    this.crystalImage.src = "assets/img/game_objects/fire-crystal.png";
+    this.x = 190;
+    this.y = 25;
+    this.width = 30;
+    this.height = 30;
   }
 
-  setLoadingLevel(loadingLevel) {
-    this.loadingLevel = loadingLevel;
-    let imagePath = this.imagesCrystalbar[this.resolveImageIndex()];
-    this.img = this.imageCache[imagePath];
+  draw(ctx) {
+    // Zeichne das Kristallbild
+    ctx.drawImage(this.crystalImage, this.x, this.y, this.width, this.height);
+
+    // Zeichne die Anzahl der gesammelten Kristalle
+    ctx.font = "20px magical_neverland";
+    ctx.fillStyle = "white";
+    ctx.fillText(
+      this.collectedCrystals,
+      this.x + this.width + 5,
+      this.y + this.height - 5
+    );
   }
 
-  resolveImageIndex() {
-    if ((5 <= this.loadingLevel)) {
-      return 5;
-    } else if ((4 === this.loadingLevel)) {
-      return 4;
-    } else if ((3 === this.loadingLevel)) {
-      return 3;
-    } else if ((2 === this.loadingLevel)) {
-      return 2;
-    } else if ((1 === this.loadingLevel)) {
-      return 1;
-    } else {
-      return 0;
-    }
+  /**
+   * Erhöhe die Anzahl der gesammelten Kristalle
+   */
+  increaseCrystalCount() {
+    this.collectedCrystals++;
+  }
+
+  decreaseCrystalCount() {
+    this.collectedCrystals--;
   }
 }

@@ -85,7 +85,7 @@ class MovableObject extends DrawableObject {
    */
   reduceEnergy() {
     this.energy -= 10;
-    console.log("character is hit", this.energy);
+    // console.log("character is hit", this.energy);
 
     if (this.energy < 0) {
       this.energy = 0;
@@ -104,7 +104,7 @@ class MovableObject extends DrawableObject {
     timePassed = timePassed / 1000;
     let isHurted = timePassed < 0.8; //showing 4 images from hurt state (200ms)
     if (isHurted) {
-      console.log("character is hurted", timePassed, isHurted);
+      // console.log("character is hurted", timePassed, isHurted);
     }
     return isHurted;
   }

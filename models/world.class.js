@@ -170,13 +170,11 @@ class World {
   }
 
   increaseCrystalbar() {
-    this.crystalbar.loadingLevel++;
-    this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel);
+    this.crystalbar.increaseCrystalCount();
   }
 
   decreaseCrystalbar() {
-    this.crystalbar.loadingLevel--;
-    this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel);
+    this.crystalbar.decreaseCrystalCount();
   }
 
   playItemCollectSound(item) {
@@ -223,8 +221,7 @@ class World {
    */
   shouldCreateFireball() {
     return (
-      (this.keyboard.F || fireButtonPressed) &&
-      this.crystalbar.loadingLevel > 0
+      (this.keyboard.F || fireButtonPressed) && this.crystalbar.collectedCrystals > 0
     );
   }
 
@@ -251,12 +248,12 @@ class World {
     );
   }
 
-  /**
-   * Decreases the crystal bar's loading level.
-   */
-  decreaseCrystalbar() {
-    this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel - 1);
-  }
+  // /**
+  //  * Decreases the crystal bar's loading level.
+  //  */
+  // decreaseCrystalbar() {
+  //   this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel - 1);
+  // }
 
   removeObjectsFromGame(objectArrayToRemove) {
     return objectArrayToRemove.filter((obj) => !obj.shouldRemove);

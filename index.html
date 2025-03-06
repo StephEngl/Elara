@@ -57,14 +57,24 @@
               <div class="key key-text"><span>P(ause)</span></div>
             </div>
             <div class="button-container">
-              <button onclick="document.getElementById('dialog').close()" class="start-button">Schließen</button>
+              <button
+                onclick="document.getElementById('dialog').close()"
+                class="start-button"
+              >
+                Schließen
+              </button>
             </div>
           </dialog>
           <div class="start-screen-assets-container">
             <button onclick="startGame()" class="start-button" autofocus>
               Spiel starten
             </button>
-            <button onclick="document.getElementById('dialog').showModal()" class="start-button">Tastenbelegung</button>
+            <button
+              onclick="document.getElementById('dialog').showModal()"
+              class="start-button"
+            >
+              Tastenbelegung
+            </button>
           </div>
         </div>
       </div>
@@ -190,25 +200,7 @@
             </div>
           </div>
         </div>
-        <!-- Keyboard Explanation -->
-        <!-- <div class="keyboard-explanation-container">
-          <div class="key">
-            <span>◀</span>
-          </div>
-          <div class="key key-space">
-            <span>SPRUNG</span>
-          </div>
-          <div class="key">
-            <span>▶</span>
-          </div>
-          <div class="key">
-            <span>F</span>
-          </div>
-          <div class="key">
-            <span>P</span>
-          </div>
-        </div>
-      </div> -->
+      </div>
       <!-- Game Over Screen -->
       <div id="game-over-container">
         <div class="dialog-container">
