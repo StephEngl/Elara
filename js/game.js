@@ -78,8 +78,8 @@ function stopGame() {
 
 function toggleSound() {
   isMuted = !isMuted;
-  const soundButton = document.getElementById("soundButton");
-  const soundIcon = document.getElementById("soundIcon");
+  const soundButton = document.getElementById("sound-button");
+  const soundIcon = document.getElementById("sound-icon");
 
   if (isMuted) {
     world.muteAllSounds();

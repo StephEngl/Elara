@@ -32,6 +32,11 @@ class BlueSlime extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Animates the BlueSlime's movement and appearance.
+   * Handles walking and dying animations in separate intervals.
+   * @method animate
+   */
   animate() {
     setInterval(() => {
       this.moveLeft(this.speed, false, true);
@@ -47,6 +52,11 @@ class BlueSlime extends MovableObject {
     }, 200);
   }
 
+  /**
+   * Triggers the death sequence for the BlueSlime.
+   * Plays a death sound and schedules the object for removal after 600ms.
+   * @method die
+   */
   die() {
     this.isDying = true;
     sounds.blueSlime.die.play();

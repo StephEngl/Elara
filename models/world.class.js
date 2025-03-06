@@ -78,7 +78,7 @@ class World {
       Object.values(category).forEach((sound) => {
         if (sound instanceof Audio) {
           sound.muted = true;
-          audio.pause();
+          sound.pause();
         }
       });
     });

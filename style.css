@@ -51,6 +51,13 @@ p {
   align-items: center;
 }
 
+canvas {
+  background-color: black;
+  display: block;
+  flex-grow: 1;
+}
+
+
 #loading-spinner {
   background-color: black;
   position: absolute;
@@ -114,12 +121,6 @@ p {
     opacity: 0.9;
     transform: scale(1.05);
   }
-}
-
-canvas {
-  background-color: black;
-  display: block;
-  flex-grow: 1;
 }
 
 .start-screen-container {

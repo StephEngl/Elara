@@ -108,6 +108,10 @@ class Character extends MovableObject {
     this.finalDeathAnimationInterval = null; // Intervall für das schnelle Blinken
   }
 
+  /**
+   * Loads audio files for character actions.
+   * @method loadAudio
+   */
   loadAudio() {
     this.audioDyingSound = this.createAudio(
       "assets/audio/elara_dying_sound.mp3"
@@ -118,6 +122,10 @@ class Character extends MovableObject {
     );
   }
 
+  /**
+   * Loads all character images.
+   * @method loadAllImages
+   */
   loadAllImages() {
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesWalking);
@@ -129,11 +137,19 @@ class Character extends MovableObject {
     this.loadImages(this.imagesAttack);
   }
 
+  /**
+   * Starts the animation and movement intervals for the character.
+   * @method animate
+   */
   animate() {
     this.startMovementInterval();
     this.startAnimationInterval();
   }
 
+  /**
+   * Sets up the movement interval for the character.
+   * @method startMovementInterval
+   */
   startMovementInterval() {
     setInterval(() => {
       if (!this.isDead()) {
@@ -144,6 +160,10 @@ class Character extends MovableObject {
     }, 1000 / 60);
   }
 
+  /**
+   * Handles character movement based on keyboard input.
+   * @method handleMovement
+   */
   handleMovement() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
@@ -159,20 +179,36 @@ class Character extends MovableObject {
     this.resetIdleTimer();
   }
 
+  /**
+   * Updates the idle timer.
+   * @method updateIdleTimer
+   */
   updateIdleTimer() {
     this.idleTimer += 1000 / 60;
   }
 
+  /**
+   * Updates the camera position based on the character's position.
+   * @method updateCameraPosition
+   */
   updateCameraPosition() {
     this.world.camera_x = -this.x + 30;
   }
 
+  /**
+   * Sets up the animation interval for the character.
+   * @method startAnimationInterval
+   */
   startAnimationInterval() {
     setInterval(() => {
       this.updateCharacterState();
     }, 200);
   }
 
+  /**
+   * Updates the character's state based on various conditions (dead, hurt, jumping, etc.).
+   * @method updateCharacterState
+   */
   updateCharacterState() {
     if (this.isDead()) {
       this.handleDeathState();
@@ -185,6 +221,10 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+ * Handles the character's death state.
+ * @method handleDeathState
+ */
   handleDeathState() {
     if (!this.deathAnimationComplete) {
       this.playDeathAnimation();
@@ -195,17 +235,29 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+ * Handles the character's hurt state.
+ * @method handleHurtState
+ */
   handleHurtState() {
     this.playAnimation(this.imagesHurt);
     this.playSound(this.audioHittingSound);
     this.resetIdleTimer();
   }
 
+  /**
+ * Handles the character's jump state.
+ * @method handleJumpState
+ */
   handleJumpState() {
     this.playAnimation(this.imagesJump);
     this.resetIdleTimer();
   }
 
+  /**
+ * Handles the character's state when on the ground.
+ * @method handleGroundState
+ */
   handleGroundState() {
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
       this.playAnimation(this.imagesWalking);
@@ -217,11 +269,21 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+ * Makes the character jump.
+ * @method jump
+ */
   jump() {
     this.speedY = 30;
     this.playSound(this.audioJumpingSound);
   }
 
+  /**
+ * Checks if the character jumped on an enemy.
+ * @method isJumpedOn
+ * @param {MovableObject} mo - The movable object to check collision with.
+ * @returns {boolean} - True if the character jumped on the enemy, false otherwise.
+ */
   isJumpedOn(/** @type MovableObject */ mo) {
     let isFalling = this.speedY < 0;
     if (!isFalling) {
@@ -243,11 +305,18 @@ class Character extends MovableObject {
     return horizontalOverlap;
   }
 
+  /**
+ * Resets the idle timer.
+ * @method resetIdleTimer
+ */
   resetIdleTimer() {
     this.idleTimer = 0;
   }
 
-  // Character Dying
+/**
+ * Plays the death animation.
+ * @method playDeathAnimation
+ */
   playDeathAnimation() {
     if (!this.deathAnimationComplete) {
       this.playDyingSounds();
@@ -255,7 +324,6 @@ class Character extends MovableObject {
       this.deathAnimationFrame++;
       if (this.deathAnimationFrame >= this.imagesDying.length) {
         this.deathAnimationComplete = true;
-
       }
     } else {
       // Wechselt zwischen den letzten beiden Bildern
@@ -267,6 +335,10 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+ * Plays the dying sounds.
+ * @method playDyingSounds
+ */
   playDyingSounds() {
     let dyingSound = this.playSound(this.audioDyingSound);
     dyingSound.playbackRate = 0.7;
