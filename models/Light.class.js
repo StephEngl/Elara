@@ -11,10 +11,13 @@ class Light extends MovableObject {
     this.animate();
   }
 
+  /**
+ * Starts the animation for the light object.
+ * @method animate
+ */
   animate() {
     setInterval(() => {
       this.moveLeft(this.speed);
-      // this.otherDirection = true;
     }, 1000 / 60);
   }
 }

@@ -31,30 +31,48 @@ class Endboss extends MovableObject {
     "assets/img/enemies/endboss/dragon/Death3.png",
     "assets/img/enemies/endboss/dragon/Death4.png",
     "assets/img/enemies/endboss/dragon/Death5.png",
-  ]
+  ];
   hadFirstContact = false;
 
-  constructor(sounds) {
+  constructor() {
     super().setImage(this.imagesIntro[1]);
+    this.loadAllImages();
+    this.setObjectProperties();
+    this.animate();
+  }
+
+  /**
+   * Loads all images for the Endboss.
+   * @method loadAllImages
+   */
+  loadAllImages() {
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesIdle);
     this.loadImages(this.imagesDying);
-    this.x = 4000; //3800
-    this.y = -40;
+  }
+
+  /**
+   * Sets the object properties for the Endboss.
+   * @method setObjectProperties
+   */
+  setObjectProperties() {
     this.height = 600;
     this.width = 600;
     this.speed = 10;
+    this.x = 4000; //3800
+    this.y = -40;
     this.offset = {
       top: 300,
       right: 100,
       bottom: 150,
       left: 150,
     };
-    // this.world.addAudio(sounds.roar);
-    this.setOtherDirection(true);
-    this.animate();
   }
 
+  /**
+   * Animates the Endboss, including intro and idle animations.
+   * @method animate
+   */
   animate() {
     let i = 0;
     setInterval(() => {
@@ -63,14 +81,13 @@ class Endboss extends MovableObject {
       } else {
         this.playAnimation(this.imagesIntro);
         this.moveLeft(this.speed);
-        // this.otherDirection = true;
       }
       i++;
       if (world.character.x > 3300 && !this.hadFirstContact) {
         i = 0;
         this.hadFirstContact = true;
         sounds.dragonBoss.roar.play();
-        sounds.dragonBoss.roar.playbackRate=0.8;
+        sounds.dragonBoss.roar.playbackRate = 0.8;
       }
       if (this.isDying) {
         this.playAnimation(this.imagesDying);
@@ -78,10 +95,14 @@ class Endboss extends MovableObject {
     }, 250);
   }
 
+  /**
+   * Initiates the dying sequence for the Endboss.
+   * @method die
+   */
   die() {
     this.isDying = true;
     sounds.dragonBoss.roar.play();
-    sounds.dragonBoss.roar.playbackRate=0.8;
+    sounds.dragonBoss.roar.playbackRate = 0.8;
     setTimeout(() => {
       this.shouldRemove = true;
     }, 1000);

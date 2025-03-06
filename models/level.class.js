@@ -20,16 +20,24 @@ class Level {
     this.backgroundObjects = backgroundObjects;
     this.foregroundObjects = foregroundObjects;
     this.backgroundMusic = new Audio(backgroundMusicSrc);
-    this.backgroundMusic.loop = true; // Musik wird in Schleife abgespielt
+    this.backgroundMusic.loop = true;
     this.collectableObjects = collectableObjects;
   }
 
+  /**
+   * Plays the background music for the level.
+   * @method playBackgroundMusic
+   */
   playBackgroundMusic() {
     if (!isMuted) {
       this.backgroundMusic.play();
     }
   }
 
+  /**
+   * Stops the background music for the level.
+   * @method stopBackgroundMusic
+   */
   stopBackgroundMusic() {
     this.backgroundMusic.pause();
     this.backgroundMusic.currentTime = 0;

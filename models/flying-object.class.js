@@ -14,24 +14,39 @@ class FlyingObject extends MovableObject {
   constructor(x, y, isMovingLeft) {
     super().setImage("img/Elara/mage_elara/Fire/fire1.png");
     this.loadImages(this.imagesFireball);
+    this.setObjectProperties(x, y);
+    this.currentImageIndex = 0;
+    this.isMovingLeft = isMovingLeft;
+    this.fire(this.imagesFireball);
+  }
+
+  /**
+   * Sets the object properties for the flying object.
+   * @method setObjectProperties
+   * @param {number} x - The x-coordinate.
+   * @param {number} y - The y-coordinate.
+   */
+  setObjectProperties(x, y) {
     this.x = x;
     this.y = y;
     this.width = 50;
     this.height = 50;
     this.speedX = 10;
     this.acceleration = 0.5;
-    this.currentImageIndex = 0;
-    this.isMovingLeft = isMovingLeft;
-    this.fire(this.imagesFireball);
   }
 
+  /**
+   * Initiates the firing animation and movement.
+   * @method fire
+   * @param {string[]} imagesAttack - Array of image paths for the animation.
+   */
   fire(imagesAttack) {
     // this.applyGravity();
     const animationInterval = setInterval(() => {
       this.animateFireball(imagesAttack);
       if (this.isMovingLeft) {
         this.x -= 40;
-     } else {
+      } else {
         this.x += 40;
       }
 
@@ -42,6 +57,11 @@ class FlyingObject extends MovableObject {
     }, 100);
   }
 
+  /**
+   * Animates the fireball by updating the image.
+   * @method animateFireball
+   * @param {string[]} imagesAttack - Array of image paths for the animation.
+   */
   animateFireball(imagesAttack) {
     if (this.currentImageIndex < imagesAttack.length) {
       let path = imagesAttack[this.currentImageIndex];

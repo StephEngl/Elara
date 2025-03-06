@@ -16,26 +16,45 @@ class LittleDragon extends MovableObject {
 
   constructor() {
     super().setImage("assets/img/enemies/small_dragon/Idle1.png");
+    this.loadAllImages();
+    this.setObjectProperties();
+    this.isDying = false;
+    this.otherDirection = true;
+    this.animate();
+  }
+
+  /**
+   * Loads all images for the LittleDragon.
+   * @method loadAllImages
+   */
+  loadAllImages() {
     this.loadImages(this.imagesIdle);
     this.loadImages(this.imagesDying);
+  }
+
+  /**
+   * Sets the object properties for the LittleDragon.
+   * @method setObjectProperties
+   */
+  setObjectProperties() {
     this.y = 310;
+    this.x = 500 + Math.random() * 3000;
     this.offset = {
       top: 60,
       right: 50,
       bottom: 50,
       left: 30,
     };
-    this.x = 500 + Math.random() * 3000;
     this.speed = 0.3 + Math.random() * 0.4;
-    this.isDying = false;
-    this.otherDirection = true;
-    this.animate();
   }
 
+  /**
+   * Animates the LittleDragon, including movement and animation.
+   * @method animate
+   */
   animate() {
     setInterval(() => {
       this.moveLeft(this.speed, false, true);
-      // this.otherDirection = true;
     }, 1000 / 60);
 
     setInterval(() => {
@@ -47,11 +66,15 @@ class LittleDragon extends MovableObject {
     }, 200);
   }
 
+  /**
+   * Initiates the dying sequence for the LittleDragon.
+   * @method die
+   */
   die() {
     this.isDying = true;
     sounds.littleDragon.dyingSound.play();
     setTimeout(() => {
       this.shouldRemove = true;
-    }, 800); // Nach 700ms (4 Bilder bei 200ms Intervall ) wird das Objekt entfernt
+    }, 800);
   }
 }

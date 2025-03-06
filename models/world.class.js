@@ -208,21 +208,54 @@ class World {
     });
   }
 
+  /**
+   * Checks if a fireball should be created and creates one if necessary.
+   */
   checkFlyingObjects() {
-    if (
+    if (this.shouldCreateFireball()) {
+      this.createFireball();
+    }
+  }
+
+  /**
+   * Checks if the conditions to create a fireball are met.
+   * @returns {boolean} True if a fireball should be created, false otherwise.
+   */
+  shouldCreateFireball() {
+    return (
       (this.keyboard.F || fireButtonPressed) &&
       this.crystalbar.loadingLevel > 0
-    ) {
-      this.character.playAnimation(this.character.imagesAttack);
-      let fireball = new FlyingObject(
-        this.character.x + this.character.offset.right,
-        this.character.y + this.character.offset.top,
-        this.character.otherDirection
-      );
-      this.flyingObjects.push(fireball);
-      this.decreaseCrystalbar();
-      fireButtonPressed = false;
-    }
+    );
+  }
+
+  /**
+   * Creates a new fireball and adds it to the flyingObjects array.
+   */
+  createFireball() {
+    this.character.playAnimation(this.character.imagesAttack);
+    const fireball = this.createNewFireball();
+    this.flyingObjects.push(fireball);
+    this.decreaseCrystalbar();
+    fireButtonPressed = false;
+  }
+
+  /**
+   * Creates a new FlyingObject (fireball).
+   * @returns {FlyingObject} The new FlyingObject.
+   */
+  createNewFireball() {
+    return new FlyingObject(
+      this.character.x + this.character.offset.right,
+      this.character.y + this.character.offset.top,
+      this.character.otherDirection
+    );
+  }
+
+  /**
+   * Decreases the crystal bar's loading level.
+   */
+  decreaseCrystalbar() {
+    this.crystalbar.setLoadingLevel(this.crystalbar.loadingLevel - 20);
   }
 
   removeObjectsFromGame(objectArrayToRemove) {

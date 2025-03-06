@@ -18,23 +18,30 @@ class DrawableObject {
     this.shouldRemove = false;
   }
 
-    /**
-   * Sets the game world for this object.
-   * @param {World} world - The game world.
-   */
-    setWorld(world) {
-      this.world = world;
-    }
+/**
+ * Sets the game world for this object.
+ * @method setWorld
+ * @param {World} world - The game world.
+ */
+  setWorld(world) {
+    this.world = world;
+  }
 
+/**
+ * Sets the image for the object.
+ * @method setImage
+ * @param {string} path - The path to the image.
+ */
   setImage(path) {
     this.img = new Image(); //this.img = document.getElemendById('image') <img id="image">
     this.img.src = path;
   }
 
-  /**
-   *
-   * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
-   */
+/**
+ * Loads images into the imageCache.
+ * @method loadImages
+ * @param {string[]} arr - Array of image paths.
+ */
   loadImages(arr) {
     arr.forEach((path) => {
       let img = new Image();
@@ -43,10 +50,20 @@ class DrawableObject {
     });
   }
 
+  /**
+ * Draws the object on the canvas.
+ * @method draw
+ * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+ */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
+  /**
+ * Draws a frame around the object (for debugging).
+ * @method drawFrame
+ * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+ */
   drawFrame(ctx) {
     if (
       this instanceof Character ||
@@ -70,6 +87,11 @@ class DrawableObject {
     }
   }
 
+  /**
+ * Gets the current collision rectangle.
+ * @method getCurrentCollisionRect
+ * @returns {Object} - Object with x1, y1, width, height, x2, y2.
+ */
   getCurrentCollisionRect() {
     let objLeftBorder = this.x + this.offset.left;
     let objUpperBorder = this.y + this.offset.top;
@@ -85,11 +107,12 @@ class DrawableObject {
     };
   }
 
-  /**
-   * Checks if this object is colliding with another movable object.
-   * @param {DrawableObject} drawObj - The other movable object to check for collision with.
-   * @returns {boolean} - True if the objects are colliding, false otherwise.
-   */
+/**
+ * Checks if the object is colliding with another object.
+ * @method isColliding
+ * @param {DrawableObject} drawObj - The other object to check collision with.
+ * @returns {boolean} - True if colliding, false otherwise.
+ */
   isColliding(drawObj) {
     let charCollisionRect = this.getCurrentCollisionRect();
     let doCollisionRect = drawObj.getCurrentCollisionRect();
@@ -104,9 +127,10 @@ class DrawableObject {
     return collisionDetected;
   }
 
-  /**
-   * Sets remove status for removing the object from the game.
-   */
+/**
+ * Marks the object for removal.
+ * @method remove
+ */
   remove() {
     this.shouldRemove = true;
   }
