@@ -152,6 +152,7 @@ class World {
     this.character.playAnimation(this.character.imagesAttack);
     const fireball = this.createNewFireball();
     this.flyingObjects.push(fireball);
+    sounds.character.attack.play();
     this.decreaseCrystalbar();
     fireButtonPressed = false;
   }

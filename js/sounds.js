@@ -1,7 +1,6 @@
 const sounds = {
   character: {
-    attack: new Audio("assets/audio/fireball_sound.mp3"),
-    // battlecry: new Audio(),
+    attack: new Audio("assets/audio/fireball-sound.mp3"),
     hurt: new Audio("assets/audio/elara_hurting_sound.mp3"),
     jump: new Audio("assets/audio/elara_jumping_sound.mp3"),
     ko: new Audio("assets/audio/elara_defeated_sound.mp3"),
