@@ -357,16 +357,23 @@ canvas {
   width: 8em;
 }
 
+.key-text {
+  width: 4em;
+}
+
 dialog {
   background-color: rgba(0, 0, 0, 0.9);
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 5px 20px black;
   color: white;
+  border: none;
 }
 
 dialog > h2 {
   margin-bottom: 36px;
+  font-weight: 100;
+
 }
 
 .button-container {
