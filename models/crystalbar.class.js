@@ -11,11 +11,28 @@ class Crystalbar extends DrawableObject {
     this.height = 30;
   }
 
+  /**
+   * Zeichnet den Kristall und die Anzahl der gesammelten Kristalle.
+   * @param {CanvasRenderingContext2D} ctx - Der Canvas Rendering Kontext.
+   */
   draw(ctx) {
-    // Zeichne das Kristallbild
-    ctx.drawImage(this.crystalImage, this.x, this.y, this.width, this.height);
+    this.drawCrystalImage(ctx);
+    this.drawCollectedCrystals(ctx);
+  }
 
-    // Zeichne die Anzahl der gesammelten Kristalle
+  /**
+   * Zeichnet das Kristallbild auf dem Canvas.
+   * @param {CanvasRenderingContext2D} ctx - Der Canvas Rendering Kontext.
+   */
+  drawCrystalImage(ctx) {
+    ctx.drawImage(this.crystalImage, this.x, this.y, this.width, this.height);
+  }
+
+  /**
+   * Zeichnet die Anzahl der gesammelten Kristalle auf dem Canvas.
+   * @param {CanvasRenderingContext2D} ctx - Der Canvas Rendering Kontext.
+   */
+  drawCollectedCrystals(ctx) {
     ctx.font = "20px magical_neverland";
     ctx.fillStyle = "white";
     ctx.fillText(
@@ -26,12 +43,17 @@ class Crystalbar extends DrawableObject {
   }
 
   /**
-   * Erhöhe die Anzahl der gesammelten Kristalle
+   * Increases the number of collected crystals.
+   * @method increaseCrystalCount
    */
   increaseCrystalCount() {
     this.collectedCrystals++;
   }
 
+  /**
+   * Decreases the number of collected crystals.
+   * @method decreaseCrystalCount
+   */
   decreaseCrystalCount() {
     this.collectedCrystals--;
   }
