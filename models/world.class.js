@@ -8,44 +8,89 @@ class World {
   flyingObjects = [];
   runInterval = null;
 
+  /**
+   * @param {HTMLCanvasElement} canvas - The canvas element to draw on.
+   * @param {Keyboard} keyboard - The keyboard input handler.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.endboss = this.level.enemies[this.level.enemies.length -1]
+    this.endboss = this.level.enemies[this.level.enemies.length - 1];
     this.setWorld();
     this.draw();
     this.run();
   }
 
+  /**
+   * Sets the world reference for the character.
+   */
   setWorld() {
     this.character.setWorld(this);
   }
 
-  run() {
-    this.runInterval = setInterval(() => {
-      if (!isPaused) {
-        startBackgroundMusic();
-        this.checkFlyingObjects();
-        this.checkFireballCollisions();
-        this.flyingObjects = this.removeObjectsFromGame(this.flyingObjects);
-        this.level.enemies = this.removeObjectsFromGame(this.level.enemies);
-      }
-    }, 200);
-    this.collisionInterval = setInterval(() => {
-      if (!isPaused) {
-        this.checkJumpingOn();
-        this.checkCollisionsWithEnemy(this.level.enemies);
-        this.checkCollisionsWithCollectible(this.level.collectableObjects);
-      }
-    }, 20);
-  }
+  /**
+ * Starts the game loop.
+ */
+run() {
+  this.startMainLoop();
+  this.startCollisionLoop();
+}
 
+/**
+ * Starts the main game loop for background music, flying objects and cleaning up.
+ */
+startMainLoop() {
+  this.runInterval = setInterval(() => {
+    if (!isPaused) {
+      this.updateGameElements();
+    }
+  }, 200);
+}
+
+/**
+ * Updates the game elements in the main loop.
+ */
+updateGameElements() {
+  startBackgroundMusic();
+  this.checkFlyingObjects();
+  this.checkFireballCollisions();
+  this.flyingObjects = this.removeObjectsFromGame(this.flyingObjects);
+  this.level.enemies = this.removeObjectsFromGame(this.level.enemies);
+}
+
+/**
+ * Starts the collision detection loop.
+ */
+startCollisionLoop() {
+  this.collisionInterval = setInterval(() => {
+    if (!isPaused) {
+      this.handleCollisions();
+    }
+  }, 20);
+}
+
+/**
+ * Handles all collision checks.
+ */
+handleCollisions() {
+  this.checkJumpingOn();
+  this.checkCollisionsWithEnemy(this.level.enemies);
+  this.checkCollisionsWithCollectible(this.level.collectableObjects);
+}
+
+  /**
+   * Sets the animation state for all enemies.
+   * @param {boolean} isAnimationPaused - Whether the animation is paused.
+   */
   setEnemyAnimationState(isAnimationPaused) {
     this.level.enemies.forEach((enemy) => (enemy.isPaused = isAnimationPaused));
   }
 
-  // Collision checks
+  /**
+   * Checks for collisions between the character and enemies.
+   * @param {MovableObject[]} enemies - The array of enemies to check collisions with.
+   */
   checkCollisionsWithEnemy(enemies) {
     enemies.forEach((enemy) => {
       if (enemy.isDying) {
@@ -60,14 +105,21 @@ class World {
     });
   }
 
+  /**
+   * Checks for collisions between the character and collectible objects.
+   * @param {MovableObject[]} objects - The array of collectible objects.
+   */
   checkCollisionsWithCollectible(objects) {
     objects.forEach((object) => {
       if (this.character.isColliding(object)) {
         this.collectItem(object);
-        }
-      });
+      }
+    });
   }
 
+  /**
+   * Checks for collisions between fireballs and enemies.
+   */
   checkFireballCollisions() {
     this.flyingObjects.forEach((fireball) => {
       this.level.enemies.forEach((enemy) => {
@@ -79,13 +131,20 @@ class World {
     });
   }
 
-  // Collect Item
+  /**
+   * Collects an item, applying its effect and playing a sound.
+   * @param {MovableObject} item - The item to collect.
+   */
   collectItem(item) {
     this.applyItemEffect(item);
     this.playItemCollectSound(item);
     this.removeItemFromLevel(item);
   }
 
+  /**
+   * Applies the effect of a collected item.
+   * @param {MovableObject} item - The item to apply the effect of.
+   */
   applyItemEffect(item) {
     switch (true) {
       case item instanceof Flower:
@@ -97,19 +156,33 @@ class World {
     }
   }
 
+  /**
+   * Increases the character's energy.
+   */
   increaseCharacterEnergy() {
     this.character.energy = Math.min(this.character.energy + 50, 100);
     this.statusbar.setPercentage(this.character.energy);
   }
 
+  /**
+   * Increases the crystal bar's count.
+   * @param {number} energyLevel - The amount to increase the crystal count by.
+   */
   increaseCrystalbar(energyLevel) {
     this.crystalbar.increaseCrystalCount(energyLevel);
   }
 
+  /**
+   * Decreases the crystal bar's count.
+   */
   decreaseCrystalbar() {
     this.crystalbar.decreaseCrystalCount();
   }
 
+  /**
+   * Plays the sound for collecting an item.
+   * @param {MovableObject} item - The item that was collected.
+   */
   playItemCollectSound(item) {
     const soundKey =
       item instanceof Flower
@@ -122,13 +195,19 @@ class World {
     }
   }
 
+  /**
+   * Removes an item from the level's collectible objects.
+   * @param {MovableObject} item - The item to remove.
+   */
   removeItemFromLevel(item) {
     this.level.collectableObjects = this.level.collectableObjects.filter(
       (obj) => obj !== item
     );
   }
 
-  // Ceck Jumping on Enemys
+  /**
+   * Checks if the character jumped on an enemy and kills the enemy if so.
+   */
   checkJumpingOn() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isJumpedOn(enemy) && !enemy.isDying) {
@@ -186,10 +265,18 @@ class World {
     );
   }
 
+  /**
+   * Removes objects from the game that are marked for removal.
+   * @param {MovableObject[]} objectArrayToRemove - The array of objects to filter.
+   * @returns {MovableObject[]} - The filtered array of objects.
+   */
   removeObjectsFromGame(objectArrayToRemove) {
     return objectArrayToRemove.filter((obj) => !obj.shouldRemove);
   }
 
+  /**
+   * Draws all game elements on the canvas.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (!isPaused) {
@@ -203,6 +290,9 @@ class World {
     });
   }
 
+  /**
+   * Draws the game elements.
+   */
   drawGameElements() {
     this.ctx.translate(this.camera_x, 0);
     this.drawGameObjects();
@@ -210,6 +300,9 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
   }
 
+  /**
+   * Draws the game objects.
+   */
   drawGameObjects() {
     this.drawBackground();
     this.drawLights();
@@ -222,14 +315,23 @@ class World {
     this.addObjectsToMap(this.level.foregroundObjects);
   }
 
+  /**
+   * Draws the background objects.
+   */
   drawBackground() {
     this.addObjectsToMap(this.level.backgroundObjects);
   }
 
+  /**
+   * Draws the light objects.
+   */
   drawLights() {
     this.addObjectsToMap(this.level.lights);
   }
 
+  /**
+   * Draws the fixed objects (statusbar, crystalbar).
+   */
   drawFixedObjects() {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusbar);
@@ -237,6 +339,9 @@ class World {
     this.ctx.translate(this.camera_x, 0);
   }
 
+  /**
+   * Draws the pause screen.
+   */
   drawPauseScreen() {
     this.ctx.font = "30px magical_neverland";
     this.ctx.fillStyle = "white";
@@ -249,18 +354,20 @@ class World {
     );
   }
 
-  cleanupEnemies() {
-    this.level.enemies = this.level.enemies.filter(
-      (enemy) => !enemy.shouldRemove
-    );
-  }
-
+  /**
+   * Adds an array of objects to the map.
+   * @param {MovableObject[]} objects - The array of objects to add.
+   */
   addObjectsToMap(objects) {
     objects.forEach((obj) => {
       this.addToMap(obj);
     });
   }
 
+  /**
+   * Adds a single object to the map.
+   * @param {MovableObject} mo - The object to add.
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -272,6 +379,10 @@ class World {
     }
   }
 
+  /**
+   * Flips the image horizontally.
+   * @param {MovableObject} mo - The object to flip.
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -279,6 +390,10 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * Restores the image after flipping.
+   * @param {MovableObject} mo - The object to restore.
+   */
   flipImageBack(mo) {
     this.ctx.restore();
     mo.x = mo.x * -1;

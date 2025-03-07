@@ -8,7 +8,6 @@ let gameWon = false;
 let gameOver = false;
 
 /**
- * @method init
  * Initializes the game by getting the canvas element and showing the start screen.
  */
 function init() {
@@ -18,7 +17,6 @@ function init() {
 }
 
 /**
- * @method showStartScreen
  * Displays the start screen and hides the game content.
  */
 function showStartScreen() {
@@ -30,6 +28,12 @@ function showStartScreen() {
   document.querySelector(".content").style.display = "none";
 }
 
+/**
+ * Generates a unique random position with a minimum distance from existing positions.
+ * @param {number[]} usedPositions - Array of already used positions.
+ * @param {number} [minDistance=300] - Minimum distance between positions.
+ * @returns {number} The new unique random position.
+ */
 function getUniqueRandomPosition(usedPositions, minDistance = 300) {
   let newPosition;
   do {
@@ -43,9 +47,7 @@ function getUniqueRandomPosition(usedPositions, minDistance = 300) {
 }
 
 /**
- * @method startGame
- * Starts the game by hiding the start screen, initializing the level,
- * and creating a new World instance after a short delay.
+ * Starts the game by hiding the start screen, initializing the level, and creating a new World instance.
  */
 function startGame() {
   document.querySelector(".start-screen-container").style.display = "none";
@@ -60,8 +62,7 @@ function startGame() {
 }
 
 /**
- * @method showLoadingSpinner
- * Displays the loading spinner and related elements.
+ * Displays the loading spinner.
  */
 function showLoadingSpinner() {
   document.getElementById("loading-spinner").style.display = "flex";
@@ -70,8 +71,7 @@ function showLoadingSpinner() {
 }
 
 /**
- * @method hideLoadingSpinner
- * Hides the loading spinner and related elements, and shows control buttons.
+ * Hides the loading spinner and shows control buttons.
  */
 function hideLoadingSpinner() {
   document.getElementById("loading-spinner").style.display = "none";
@@ -80,11 +80,16 @@ function hideLoadingSpinner() {
   document.querySelector(".control-buttons").style.display = "flex";
 }
 
-// Local Storage
+/**
+ * Saves the isMuted state to local storage.
+ */
 function saveToLocalStorage() {
   localStorage.setItem("isMuted", JSON.stringify(isMuted));
 }
 
+/**
+ * Retrieves the isMuted state from local storage.
+ */
 function getFromLocalStorage() {
   let isMutedFromLocalStorage = JSON.parse(localStorage.getItem("isMuted"));
   if (null != isMutedFromLocalStorage) {
@@ -93,8 +98,7 @@ function getFromLocalStorage() {
 }
 
 /**
- * @method togglePause
- * Toggles the game's pause state, stopping or resuming animations and sounds accordingly.
+ * Toggles the game's pause state.
  */
 function togglePause() {
   isPaused = !isPaused;
@@ -110,8 +114,7 @@ function togglePause() {
 }
 
 /**
- * @method restartGame
- * Restarts the game by reinitializing and starting a new game.
+ * Restarts the game.
  */
 function restartGame() {
   closeGameOverScreen();
@@ -121,8 +124,7 @@ function restartGame() {
 }
 
 /**
- * @method showGameOverScreen
- * Displays the game over screen and hides the game content.
+ * Displays the game over screen.
  */
 function showGameOverScreen() {
   gameOver = true;
@@ -131,8 +133,7 @@ function showGameOverScreen() {
 }
 
 /**
- * @method closeGameOverScreen
- * Hides the game over screen and resets the game over state.
+ * Hides the game over screen.
  */
 function closeGameOverScreen() {
   gameOver = false;
@@ -141,8 +142,7 @@ function closeGameOverScreen() {
 }
 
 /**
- * @method showWinScreen
- * Displays the win screen, set the game won state and hides the game content.
+ * Displays the win screen.
  */
 function showWinScreen() {
   gameWon = true;
@@ -151,8 +151,7 @@ function showWinScreen() {
 }
 
 /**
- * @method closeWinScreen
- * Hides the win screen, resets the game won state, and stops the victory sound.
+ * Hides the win screen.
  */
 function closeWinScreen() {
   gameWon = false;
@@ -161,9 +160,7 @@ function closeWinScreen() {
 }
 
 /**
- * @method stopGame
- * Ends the game, clears intervals, stops background music, and shows appropriate end screen.
- * @param {boolean} endstatus - The game end status (gameOver or gameIsWon).
+ * Ends the game, clears intervals, stops background music, and shows the appropriate end screen.
  */
 function stopGame() {
   setTimeout(() => {
@@ -181,16 +178,14 @@ function stopGame() {
 }
 
 /**
- * @method clearAllIntervals
- * Clears all active intervals to stop ongoing game processes.
+ * Clears all active intervals.
  */
 function clearAllIntervals() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 /**
- * @method toggleFullscreen
- * Toggles the fullscreen mode of the game.
+ * Toggles fullscreen mode.
  */
 function toggleFullscreen() {
   const elem = document.documentElement;
@@ -198,17 +193,16 @@ function toggleFullscreen() {
 }
 
 /**
- * @method isFullscreen
- * @returns {boolean} True if the game is in fullscreen mode, false otherwise.
+ * Checks if the game is in fullscreen mode.
+ * @returns {boolean} True if in fullscreen, false otherwise.
  */
 function isFullscreen() {
   return document.fullscreenElement || document.webkitFullscreenElement;
 }
 
 /**
- * @method enterFullscreen
- * @param {HTMLElement} elem - The element to make fullscreen.
- * Enters fullscreen mode for the specified element.
+ * Enters fullscreen mode.
+ * @param {HTMLElement} element - The element to make fullscreen.
  */
 function enterFullscreen(elem) {
   if (elem.requestFullscreen) {
@@ -219,7 +213,6 @@ function enterFullscreen(elem) {
 }
 
 /**
- * @method exitFullscreen
  * Exits fullscreen mode.
  */
 function exitFullscreen() {
@@ -231,7 +224,6 @@ function exitFullscreen() {
 }
 
 /**
- * @method pressRight
  * Simulates pressing the right arrow key.
  */
 function pressRight() {
@@ -239,7 +231,6 @@ function pressRight() {
 }
 
 /**
- * @method releaseRight
  * Simulates releasing the right arrow key.
  */
 function releaseRight() {
@@ -247,7 +238,6 @@ function releaseRight() {
 }
 
 /**
- * @method pressLeft
  * Simulates pressing the left arrow key.
  */
 function pressLeft() {
@@ -255,7 +245,6 @@ function pressLeft() {
 }
 
 /**
- * @method releaseLeft
  * Simulates releasing the left arrow key.
  */
 function releaseLeft() {
@@ -263,7 +252,6 @@ function releaseLeft() {
 }
 
 /**
- * @method pressFireButton
  * Simulates pressing the fire button.
  */
 function pressFireButton() {
@@ -271,19 +259,17 @@ function pressFireButton() {
 }
 
 /**
- * @method pressJump
- * Makes the character jump if it's on the ground.
+ * Simulates pressing the jump button.
  */
 function pressJump() {
-  if (!world.character.isAboveGround()) {
+  if (world && world.character && !world.character.isAboveGround()) {
     world.character.jump();
   }
 }
 
 /**
- * @method handleKeyDown
- * Handles the `keydown` event to update the state of the keyboard object or trigger specific actions.
- * @param {KeyboardEvent} event - The keyboard event triggered when a key is pressed.
+ * Handles keydown events.
+ * @param {KeyboardEvent} event - The keyboard event.
  */
 window.addEventListener("keydown", (event) => {
   switch (event.code) {
@@ -309,9 +295,8 @@ window.addEventListener("keydown", (event) => {
 });
 
 /**
- * @method handleKeyUp
- * Handles the `keyup` event to update the state of the keyboard object when a key is released.
- * @param {KeyboardEvent} event - The keyboard event triggered when a key is released.
+ * Handles keyup events.
+ * @param {KeyboardEvent} event - The keyboard event.
  */
 window.addEventListener("keyup", (event) => {
   switch (event.code) {

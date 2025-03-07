@@ -31,6 +31,9 @@ let sounds = {
   },
 };
 
+/**
+ * Handles the game's sound state based on `isMuted`.
+ */
 function handleSoundState() {
   const soundButton = document.getElementById("sound-button");
   const soundIcon = document.getElementById("sound-icon");
@@ -45,8 +48,7 @@ function handleSoundState() {
 }
 
 /**
- * @method toggleSound
- * Toggles the game sound on and off, updating UI elements accordingly.
+ * Toggles the game sound on and off.
  */
 function toggleSound() {
   isMuted = !isMuted;
@@ -54,8 +56,7 @@ function toggleSound() {
 }
 
 /**
- * @method setSoundIconMuted
- * Sets the sound icon properties for muted state.
+ * Sets the sound icon to the muted state.
  * @param {HTMLElement} icon - The sound icon element.
  * @param {HTMLElement} button - The sound button element.
  */
@@ -66,8 +67,7 @@ function setSoundIconMuted(icon, button) {
 }
 
 /**
- * @method setSoundIconUnmuted
- * Sets the sound icon properties for unmuted state.
+ * Sets the sound icon to the unmuted state.
  * @param {HTMLElement} icon - The sound icon element.
  * @param {HTMLElement} button - The sound button element.
  */
@@ -78,8 +78,7 @@ function setSoundIconUnmuted(icon, button) {
 }
 
 /**
- * @method startBackgroundMusic
- * Starts playing the background music if the game is not paused or muted.
+ * Starts playing the background music if not paused or muted.
  */
 function startBackgroundMusic() {
   if (!isPaused && !isMuted) {
@@ -88,7 +87,6 @@ function startBackgroundMusic() {
 }
 
 /**
- * @method stopBackgroundMusic
  * Stops the background music.
  */
 function stopBackgroundMusic() {
@@ -96,8 +94,7 @@ function stopBackgroundMusic() {
 }
 
 /**
- * @method muteAllSounds
- * Mutes all game sounds including background music.
+ * Mutes all game sounds, including background music.
  */
 function muteAllSounds() {
   Object.values(sounds).forEach((category) => {
@@ -114,8 +111,7 @@ function muteAllSounds() {
 }
 
 /**
- * @method unmuteAllSounds
- * Unmutes all game sounds and resumes background music if the game is not paused.
+ * Unmutes all game sounds and resumes background music if not paused.
  */
 function unmuteAllSounds() {
   Object.values(sounds).forEach((category) => {
