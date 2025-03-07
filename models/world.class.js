@@ -4,6 +4,7 @@ class World {
   crystalbar = new Crystalbar();
   level = level1;
   camera_x;
+  lastFireballTime = 0;
   flyingObjects = [];
   runInterval = null;
 
@@ -146,9 +147,12 @@ class World {
    * @returns {boolean} True if a fireball should be created, false otherwise.
    */
   shouldCreateFireball() {
+    const currentTime = Date.now();
+    const cooldownPeriod = 150;
     return (
       (this.keyboard.F || fireButtonPressed) &&
-      this.crystalbar.collectedCrystals > 0
+      this.crystalbar.collectedCrystals > 0 &&
+      currentTime - this.lastFireballTime >= cooldownPeriod
     );
   }
 
@@ -162,6 +166,7 @@ class World {
     sounds.character.attack.play();
     this.decreaseCrystalbar();
     fireButtonPressed = false;
+    this.lastFireballTime = Date.now();
   }
 
   /**
