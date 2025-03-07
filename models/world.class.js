@@ -80,11 +80,13 @@ class World {
   }
 
   applyItemEffect(item) {
-    if (item instanceof Flower) {
-      this.increaseCharacterEnergy();
-    }
-    if (item instanceof Crystal) {
-      this.increaseCrystalbar(item.getEnergyLevel());
+    switch (true) {
+      case item instanceof Flower:
+        this.increaseCharacterEnergy();
+        break;
+      case item instanceof Crystal:
+        this.increaseCrystalbar(item.getEnergyLevel());
+        break;
     }
   }
 
@@ -145,7 +147,8 @@ class World {
    */
   shouldCreateFireball() {
     return (
-      (this.keyboard.F || fireButtonPressed) && this.crystalbar.collectedCrystals > 0
+      (this.keyboard.F || fireButtonPressed) &&
+      this.crystalbar.collectedCrystals > 0
     );
   }
 
@@ -200,8 +203,10 @@ class World {
   drawGameObjects() {
     this.drawBackground();
     this.drawLights();
-    if (!gameOver) this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.flyingObjects);
+    if (!gameOver) {
+      this.addObjectsToMap(this.level.enemies);
+      this.addObjectsToMap(this.flyingObjects);
+    }
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.collectableObjects);
     this.addObjectsToMap(this.level.foregroundObjects);

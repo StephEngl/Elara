@@ -12,7 +12,7 @@ class Crystal extends CollectableObject {
     this.setImage(imgSrc);
     this.energyLevel = energyLevel;
     this.x = x || this.generateXPosition();
-    this.y = y || 150 + Math.random() * 100;
+    this.y = y || 150 + Math.random() * 50;
   }
 
   /**

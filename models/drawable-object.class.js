@@ -4,7 +4,7 @@ class DrawableObject {
   world;
 
   constructor() {
-    this.x = 10;
+    this.x = 100;
     this.y;
     this.img;
     this.height;
