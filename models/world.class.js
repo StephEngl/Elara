@@ -52,7 +52,7 @@ class World {
         return;
       }
       if (this.character.isColliding(enemy)) {
-        if (this.character.energy > 0 && !this.character.isJumpedOn) {
+        if (this.character.energy > 0) {
           this.character.hit();
           this.statusbar.setPercentage(this.character.energy);
         }
