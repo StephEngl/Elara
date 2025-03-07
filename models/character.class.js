@@ -207,7 +207,7 @@ class Character extends MovableObject {
    * @method updateCameraPosition
    */
   updateCameraPosition() {
-    this.world.camera_x = -this.x + 30;
+    this.world.camera_x = -this.x + 50;
   }
 
   /**

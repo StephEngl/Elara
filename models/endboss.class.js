@@ -25,6 +25,31 @@ class Endboss extends MovableObject {
     "assets/img/enemies/endboss/dragon/Idle2.png",
     "assets/img/enemies/endboss/dragon/Idle3.png",
   ];
+  imagesWalking = [
+    "assets/img/enemies/endboss/dragon/Walk1.png",
+    "assets/img/enemies/endboss/dragon/Walk2.png",
+    "assets/img/enemies/endboss/dragon/Walk3.png",
+    "assets/img/enemies/endboss/dragon/Walk4.png",
+    "assets/img/enemies/endboss/dragon/Walk5.png",
+  ];
+  imagesAttack = [
+    "assets/img/enemies/endboss/dragon/Attack1.png",
+    "assets/img/enemies/endboss/dragon/Attack2.png",
+    "assets/img/enemies/endboss/dragon/Attack3.png",
+    "assets/img/enemies/endboss/dragon/Attack4.png",
+  ];
+  imagesFireattack = [
+    "assets/img/enemies/endboss/dragon/Fire_Attack1.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack2.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack3.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack4.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack5.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack6.png",
+  ];
+  imagesHurt = [
+    "assets/img/enemies/endboss/dragon/Hurt1.png",
+    "assets/img/enemies/endboss/dragon/Hurt2.png",
+  ];
   imagesDying = [
     "assets/img/enemies/endboss/dragon/Death1.png",
     "assets/img/enemies/endboss/dragon/Death2.png",
@@ -35,8 +60,10 @@ class Endboss extends MovableObject {
   hadFirstContact = false;
 
   constructor() {
-    super().setImage(this.imagesIntro[1]);
+    super();
+    this.setImage(this.imagesIntro[1]);
     this.loadAllImages();
+    this.loadAudio();
     this.setObjectProperties();
     this.animate();
   }
@@ -48,6 +75,9 @@ class Endboss extends MovableObject {
   loadAllImages() {
     this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesIdle);
+    this.loadImages(this.imagesWalking);
+    this.loadImages(this.imagesAttack);
+    this.loadImages(this.imagesFireattack);
     this.loadImages(this.imagesDying);
   }
 
@@ -68,6 +98,14 @@ class Endboss extends MovableObject {
       left: 150,
     };
     this.otherDirection = true;
+  }
+
+  /**
+   * Loads audio files for endboss actions.
+   * @method loadAudio
+   */
+  loadAudio() {
+    this.audioEndbossRoar = sounds.dragonBoss.roar;
   }
 
   /**
@@ -102,8 +140,8 @@ class Endboss extends MovableObject {
    */
   die() {
     this.isDying = true;
-    sounds.dragonBoss.roar.play();
-    sounds.dragonBoss.roar.playbackRate = 0.8;
+    audioEndbossRoar.play();
+    audioEndbossRoar.playbackRate = 0.8;
     setTimeout(() => {
       this.shouldRemove = true;
       gameWon = true;
