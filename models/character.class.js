@@ -275,11 +275,15 @@ class Character extends MovableObject {
   handleGroundState() {
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
       this.playAnimation(this.imagesWalking);
+      sounds.character.footsteps.play();
       this.resetIdleTimer();
     } else if (this.idleTimer >= this.longIdleThreshold) {
       this.playAnimation(this.imagesLongIdle);
+      sounds.character.footsteps.pause();
     } else {
       this.playAnimation(this.imagesIdle);
+      sounds.character.footsteps.pause();
+
     }
   }
 
