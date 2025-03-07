@@ -5,12 +5,12 @@ function initLevel() {
     [
       new LittleDragon(),
       new LittleDragon(),
-      // new LittleDragon(),
+      new LittleDragon(),
       // new LittleDragon(),
       new BlueSlime(),
       new BlueSlime(),
-      // new BlueSlime(),
-      // new BlueSlime(),
+      new BlueSlime(),
+      new BlueSlime(),
       new Endboss(sounds.dragonBoss),
     ],
     [
@@ -74,14 +74,16 @@ function initLevel() {
     ],
     ["assets/audio/bg-music-lvl1.mp3"],
     [
-      Crystal.createFixedCrystal(300, 200),
-      Crystal.createFixedCrystal(400, 150),
-      Crystal.createFixedCrystal(500, 200),
+      new Crystal(300, 200, "assets/img/game_objects/fire-crystal.png"),
+      new Crystal(400, 150, "assets/img/game_objects/fire-crystal.png"),
+      new Crystal(500, 200, "assets/img/game_objects/fire-crystal.png"),
+      new Crystal(3200, 350, "assets/img/game_objects/fire-crystal-large.png", 5),
       new Crystal(),
       new Crystal(),
       new Crystal(),
       new Crystal(),
-      new Flower(),
+      new Flower(-500),
+      new Flower(3305),
     ]
   );
 }

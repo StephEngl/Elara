@@ -46,8 +46,8 @@ class Crystalbar extends DrawableObject {
    * Increases the number of collected crystals.
    * @method increaseCrystalCount
    */
-  increaseCrystalCount() {
-    this.collectedCrystals++;
+  increaseCrystalCount(energyLevel) {
+    this.collectedCrystals += energyLevel;
   }
 
   /**

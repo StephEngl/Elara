@@ -83,24 +83,17 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Attack/attack7.png",
   ];
   idleTimer = 0;
+  // isLongIdleActive = false;
   longIdleThreshold = 10000;
   isAttacking = false;
   elaraJumpedOnEnemy = false;
 
   constructor() {
-    super().setImage("img/Elara/mage_elara/Jump/jump1.png");
-    this.y = 270;
-    this.offset = {
-      top: 70,
-      right: 75,
-      bottom: 20,
-      left: 30,
-    };
-    this.speed = 5;
+    super();
+    this.setObjectProperties();
     this.loadAllImages();
     this.loadAudio();
     this.applyGravity();
-    this.isLongIdleActive = false;
     this.animate();
     this.defeatedAnimationFrame = 0;
     this.deathAnimationComplete = false;
@@ -109,13 +102,19 @@ class Character extends MovableObject {
   }
 
   /**
-   * Loads audio files for character actions.
-   * @method loadAudio
+   * Sets the object properties for the Charakter.
+   * @method setObjectProperties
    */
-  loadAudio() {
-    this.audioDefeated = sounds.character.ko;
-    this.audioHit = sounds.character.hurt;
-    this.audioJump = sounds.character.jump;
+  setObjectProperties() {
+    this.setImage("img/Elara/mage_elara/Jump/jump1.png");
+    this.y = 270;
+    this.speed = 5;
+    this.offset = {
+      top: 70,
+      right: 75,
+      bottom: 20,
+      left: 30,
+    };
   }
 
   /**
@@ -131,6 +130,16 @@ class Character extends MovableObject {
     this.loadImages(this.imagesHurt);
     this.loadImages(this.imagesDying);
     this.loadImages(this.imagesAttack);
+  }
+
+  /**
+   * Loads audio files for character actions.
+   * @method loadAudio
+   */
+  loadAudio() {
+    this.audioCharakterDefeated = sounds.character.ko;
+    this.audioCharakterHit = sounds.character.hurt;
+    this.audioCharakterJump = sounds.character.jump;
   }
 
   /**
@@ -165,7 +174,7 @@ class Character extends MovableObject {
       this.moveRight();
       this.setOtherDirection(false);
     }
-    if (this.world.keyboard.LEFT && this.x > 0) {
+    if (this.world.keyboard.LEFT && this.x > -680) {
       this.moveLeft(this.speed);
       this.setOtherDirection(true);
     }
@@ -173,6 +182,14 @@ class Character extends MovableObject {
       this.jump();
     }
     this.resetIdleTimer();
+  }
+
+  /**
+   * Resets the idle timer.
+   * @method resetIdleTimer
+   */
+  resetIdleTimer() {
+    this.idleTimer = 0;
   }
 
   /**
@@ -218,9 +235,9 @@ class Character extends MovableObject {
   }
 
   /**
- * Handles the character's death state.
- * @method handleDeathState
- */
+   * Handles the character's death state.
+   * @method handleDeathState
+   */
   handleDeathState() {
     if (!this.deathAnimationComplete) {
       this.playDefeatedAnimation();
@@ -233,28 +250,28 @@ class Character extends MovableObject {
   }
 
   /**
- * Handles the character's hurt state.
- * @method handleHurtState
- */
+   * Handles the character's hurt state.
+   * @method handleHurtState
+   */
   handleHurtState() {
     this.playAnimation(this.imagesHurt);
-    this.audioHit.play();
+    this.audioCharakterHit.play();
     this.resetIdleTimer();
   }
 
   /**
- * Handles the character's jump state.
- * @method handleJumpState
- */
+   * Handles the character's jump state.
+   * @method handleJumpState
+   */
   handleJumpState() {
     this.playAnimation(this.imagesJump);
     this.resetIdleTimer();
   }
 
   /**
- * Handles the character's state when on the ground.
- * @method handleGroundState
- */
+   * Handles the character's state when on the ground.
+   * @method handleGroundState
+   */
   handleGroundState() {
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
       this.playAnimation(this.imagesWalking);
@@ -267,20 +284,20 @@ class Character extends MovableObject {
   }
 
   /**
- * Makes the character jump.
- * @method jump
- */
+   * Makes the character jump.
+   * @method jump
+   */
   jump() {
     this.speedY = 30;
-    this.audioJump.play();
+    this.audioCharakterJump.play();
   }
 
   /**
- * Checks if the character jumped on an enemy.
- * @method isJumpedOn
- * @param {MovableObject} mo - The movable object to check collision with.
- * @returns {boolean} - True if the character jumped on the enemy, false otherwise.
- */
+   * Checks if the character jumped on an enemy.
+   * @method isJumpedOn
+   * @param {MovableObject} mo - The movable object to check collision with.
+   * @returns {boolean} - True if the character jumped on the enemy, false otherwise.
+   */
   isJumpedOn(/** @type MovableObject */ mo) {
     let isFalling = this.speedY < 0;
     if (!isFalling) {
@@ -303,17 +320,9 @@ class Character extends MovableObject {
   }
 
   /**
- * Resets the idle timer.
- * @method resetIdleTimer
- */
-  resetIdleTimer() {
-    this.idleTimer = 0;
-  }
-
-/**
- * Plays the death animation.
- * @method playDefeatedAnimation
- */
+   * Plays the death animation.
+   * @method playDefeatedAnimation
+   */
   playDefeatedAnimation() {
     if (!this.deathAnimationComplete) {
       this.playDefeatedSound();
@@ -333,11 +342,11 @@ class Character extends MovableObject {
   }
 
   /**
- * Plays the sound when character is defeated.
- * @method playDefeatedSound
- */
+   * Plays the sound when character is defeated.
+   * @method playDefeatedSound
+   */
   playDefeatedSound() {
-    this.audioDefeated.play();
-    this.audioDefeated.playbackRate = 0.7;
+    this.audioCharakterDefeated.play();
+    this.audioCharakterDefeated.playbackRate = 0.7;
   }
 }

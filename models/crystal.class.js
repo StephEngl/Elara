@@ -1,10 +1,18 @@
 class Crystal extends CollectableObject {
   static lastX = 700;
+  energyLevel;
 
-  constructor(x, y) {
-    super().setImage("assets/img/game_objects/fire-crystal.png");
+  constructor(
+    x,
+    y,
+    imgSrc = "assets/img/game_objects/fire-crystal.png",
+    energyLevel = 1
+  ) {
+    super();
+    this.setImage(imgSrc);
+    this.energyLevel = energyLevel;
     this.x = x || this.generateXPosition();
-    this.y = y || 150 + Math.random() * 150;
+    this.y = y || 150 + Math.random() * 100;
   }
 
   /**
@@ -18,15 +26,7 @@ class Crystal extends CollectableObject {
     return newX;
   }
 
-  /**
-   * Creates a crystal with fixed x-position
-   * @param {number} x - The fixed x-position
-   * @returns {Crystal} - The crystal with the fixed x-position
-   */
-  static createFixedCrystal(x, y) {
-    const crystal = new Crystal(x, y);
-    crystal.x = x;
-    crystal.y = y;
-    return crystal;
+  getEnergyLevel() {
+    return this.energyLevel;
   }
 }

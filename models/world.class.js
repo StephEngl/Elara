@@ -82,8 +82,9 @@ class World {
   applyItemEffect(item) {
     if (item instanceof Flower) {
       this.increaseCharacterEnergy();
-    } else if (item instanceof Crystal) {
-      this.increaseCrystalbar();
+    }
+    if (item instanceof Crystal) {
+      this.increaseCrystalbar(item.getEnergyLevel());
     }
   }
 
@@ -92,8 +93,8 @@ class World {
     this.statusbar.setPercentage(this.character.energy);
   }
 
-  increaseCrystalbar() {
-    this.crystalbar.increaseCrystalCount();
+  increaseCrystalbar(energyLevel) {
+    this.crystalbar.increaseCrystalCount(energyLevel);
   }
 
   decreaseCrystalbar() {
