@@ -80,7 +80,7 @@ class DrawableObject {
       ctx.stroke();
       ctx.beginPath();
       ctx.lineWidth = "3";
-      ctx.strokeStyle = "red";
+      ctx.strokeStyle = "transparent";
       let rect = this.getCurrentCollisionRect();
       ctx.rect(rect.x1, rect.y1, rect.width, rect.height);
       ctx.stroke();
@@ -121,9 +121,6 @@ class DrawableObject {
     let cond3 = charCollisionRect.y2 >= doCollisionRect.y1;
     let cond4 = charCollisionRect.y1 <= doCollisionRect.y2;
     let collisionDetected = cond1 && cond2 && cond3 && cond4;
-    // if (collisionDetected) {
-    //   console.log("collision detected", charCollisionRect, doCollisionRect);
-    // }
     return collisionDetected;
   }
 
