@@ -14,6 +14,7 @@ let restart = false;
  */
 function init() {
   element = document.getElementById("canvas");
+  getFromLocalStorage();
   showStartScreen();
 }
 
@@ -41,7 +42,6 @@ function getUniqueRandomPosition(usedPositions, minDistance = 300) {
   );
   usedPositions.push(newPosition);
 
-  // return 100;
   return newPosition;
 }
 
@@ -156,10 +156,11 @@ function muteAllSounds() {
       sound.pause();
     });
   });
-  if (world.level && world.level.backgroundMusic) {
-    world.level.backgroundMusic.muted = true;
-    world.level.backgroundMusic.pause();
-  }
+  saveToLocalStorage();
+  // if (world.level && world.level.backgroundMusic) {
+  //   world.level.backgroundMusic.muted = true;
+  //   world.level.backgroundMusic.pause();
+  // }
 }
 
 /**
@@ -172,9 +173,22 @@ function unmuteAllSounds() {
       sound.muted = false;
     });
   });
-  if (world.level && world.level.backgroundMusic) {
-    world.level.backgroundMusic.muted = false;
-    if (!world.isPaused) world.level.backgroundMusic.play();
+  saveToLocalStorage();
+  // if (world.level && world.level.backgroundMusic) {
+  //   world.level.backgroundMusic.muted = false;
+  //   if (!world.isPaused) world.level.backgroundMusic.play();
+  // }
+}
+
+// Local Storage
+function saveToLocalStorage() {
+  localStorage.setItem("sounds", JSON.stringify(sounds));
+}
+
+function getFromLocalStorage() {
+  let mySounds = JSON.parse(localStorage.getItem("sounds"));
+  if (null != mySounds) {
+    sounds = mySounds;
   }
 }
 
