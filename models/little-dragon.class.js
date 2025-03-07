@@ -72,8 +72,8 @@ class LittleDragon extends MovableObject {
    * @method die
    */
   die() {
-    this.isDying = true;
     sounds.littleDragon.ko.play();
+    this.isDying = true;
     setTimeout(() => {
       this.shouldRemove = true;
     }, 800);

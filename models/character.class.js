@@ -85,7 +85,7 @@ class Character extends MovableObject {
   idleTimer = 0;
   longIdleThreshold = 10000;
   isAttacking = false;
-  elaraJumpedOnEnemy = false;
+  jumpedOnEnemy = false;
 
   constructor() {
     super();
@@ -95,7 +95,7 @@ class Character extends MovableObject {
     this.applyGravity();
     this.animate();
     this.defeatedAnimationFrame = 0;
-    this.deathAnimationComplete = false;
+    this.defeatedAnimationComplete = false;
     this.deathAnimationInterval = null; // Intervall für die normale Todesanimation
     this.finalDeathAnimationInterval = null; // Intervall für das schnelle Blinken
   }
@@ -139,6 +139,7 @@ class Character extends MovableObject {
     this.audioCharakterDefeated = sounds.character.ko;
     this.audioCharakterHit = sounds.character.hurt;
     this.audioCharakterJump = sounds.character.jump;
+    this.audioCharakterFootsteps = sounds.character.footsteps;
   }
 
   /**
@@ -240,9 +241,8 @@ class Character extends MovableObject {
    * @method handleDeathState
    */
   handleDeathState() {
-    if (!this.deathAnimationComplete) {
+    if (!this.defeatedAnimationComplete) {
       this.playDefeatedAnimation();
-      this.resetIdleTimer();
     } else {
       this.remove();
       gameOver = true;
@@ -257,6 +257,7 @@ class Character extends MovableObject {
   handleHurtState() {
     this.playAnimation(this.imagesHurt);
     this.audioCharakterHit.play();
+    this.audioCharakterFootsteps.pause();
     this.resetIdleTimer();
   }
 
@@ -276,13 +277,13 @@ class Character extends MovableObject {
   handleGroundState() {
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
       this.playAnimation(this.imagesWalking);
-      sounds.character.footsteps.play();
+      this.audioCharakterFootsteps.play();
     } else if (this.idleTimer >= this.longIdleThreshold) {
       this.playAnimation(this.imagesLongIdle);
-      sounds.character.footsteps.pause();
+      this.audioCharakterFootsteps.pause();
     } else {
       this.playAnimation(this.imagesIdle);
-      sounds.character.footsteps.pause();
+      this.audioCharakterFootsteps.pause();
     }
   }
 
@@ -314,12 +315,13 @@ class Character extends MovableObject {
     let charMid = (charCollisionRect.x1 + charCollisionRect.x2) / 2;
     let moMid = (moCollisionRect.x1 + moCollisionRect.x2) / 2;
     let tolerance = (charCollisionRect.x2 - charCollisionRect.x1) / 2;
-    tolerance = 60;
     let moBoundLeft = moMid - tolerance;
     let moBoundRight = moMid + tolerance;
     let horizontalOverlap = charMid >= moBoundLeft && charMid <= moBoundRight;
-    this.elaraJumpedOnEnemy = horizontalOverlap;
-    return horizontalOverlap;
+    this.jumpedOnEnemy = horizontalOverlap;
+    console.log("Elara jumped on enemy?", this.jumpedOnEnemy);
+    
+    return this.jumpedOnEnemy;
   }
 
   /**
@@ -327,20 +329,11 @@ class Character extends MovableObject {
    * @method playDefeatedAnimation
    */
   playDefeatedAnimation() {
-    if (!this.deathAnimationComplete) {
-      this.playDefeatedSound();
+    if (this.defeatedAnimationFrame < this.imagesDying.length) {
       this.img = this.imageCache[this.imagesDying[this.defeatedAnimationFrame]];
       this.defeatedAnimationFrame++;
-      if (this.defeatedAnimationFrame >= this.imagesDying.length) {
-        this.deathAnimationComplete = true;
-      }
     } else {
-      // Wechselt zwischen den letzten beiden Bildern
-      this.defeatedAnimationFrame++;
-      const animationLength = this.imagesDying.length;
-      this.defeatedAnimationFrame =
-        (this.defeatedAnimationFrame % 2) + (animationLength - 2);
-      this.img = this.imageCache[this.imagesDying[this.defeatedAnimationFrame]];
+      this.defeatedAnimationComplete = true;
     }
   }
 

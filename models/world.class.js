@@ -12,6 +12,7 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.endboss = this.level.enemies[this.level.enemies.length -1]
     this.setWorld();
     this.draw();
     this.run();
@@ -24,7 +25,6 @@ class World {
   run() {
     this.runInterval = setInterval(() => {
       if (!isPaused) {
-        this.checkJumpingOn();
         startBackgroundMusic();
         this.checkFlyingObjects();
         this.checkFireballCollisions();
@@ -33,9 +33,10 @@ class World {
       }
     }, 200);
     this.collisionInterval = setInterval(() => {
-      if (!isPaused && !this.character.elaraJumpedOnEnemy) {
-        this.checkCollisions(this.level.enemies);
-        this.checkCollisions(this.level.collectableObjects);
+      if (!isPaused) {
+        this.checkJumpingOn();
+        this.checkCollisionsWithEnemy(this.level.enemies);
+        this.checkCollisionsWithCollectible(this.level.collectableObjects);
       }
     }, 20);
   }
@@ -45,21 +46,26 @@ class World {
   }
 
   // Collision checks
-  checkCollisions(targets) {
-    targets.forEach((target) => {
-      if (target.isDying) {
-        console.log("Enemy is dying", target);
+  checkCollisionsWithEnemy(enemies) {
+    enemies.forEach((enemy) => {
+      if (enemy.isDying) {
         return;
       }
-      if (this.character.isColliding(target)) {
-        if (targets === this.level.enemies && this.character.energy > 0) {
+      if (this.character.isColliding(enemy)) {
+        if (this.character.energy > 0 && !this.character.isJumpedOn) {
           this.character.hit();
           this.statusbar.setPercentage(this.character.energy);
-        } else if (targets === this.level.collectableObjects) {
-          this.collectItem(target);
         }
       }
     });
+  }
+
+  checkCollisionsWithCollectible(objects) {
+    objects.forEach((object) => {
+      if (this.character.isColliding(object)) {
+        this.collectItem(object);
+        }
+      });
   }
 
   checkFireballCollisions() {
@@ -128,7 +134,6 @@ class World {
       if (this.character.isJumpedOn(enemy) && !enemy.isDying) {
         console.log(`Elara jumped on ${enemy}`);
         enemy.die();
-        // Optional: Hier können Sie dem Charakter Punkte geben oder andere Aktionen auslösen
       }
     });
   }

@@ -50,14 +50,7 @@ class MovableObject extends DrawableObject {
    * @param {boolean} value - The new value for the otherDirection property.
    */
   setOtherDirection(value) {
-    let directionChanged = this.otherDirection !== value;
     this.otherDirection = value;
-
-    // if (directionChanged) {
-    //   let temp = this.offset.left;
-    //   this.offset.left = this.offset.right;
-    //   this.offset.right = temp;
-    // }
   }
 
   /**
@@ -89,11 +82,10 @@ class MovableObject extends DrawableObject {
    * @returns {boolean} True if the character is hurt, false otherwise.
    */
   isHurt() {
-    let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
+    let timePassed = new Date().getTime() - this.lastHit;
     timePassed = timePassed / 1000;
     let isHurted = timePassed < 0.8; //showing 4 images from hurt state (200ms)
     if (isHurted) {
-      // console.log("character is hurted", timePassed, isHurted);
     }
     return isHurted;
   }

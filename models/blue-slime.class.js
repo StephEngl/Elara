@@ -67,8 +67,8 @@ class BlueSlime extends MovableObject {
    * @method die
    */
   die() {
-    this.isDying = true;
     sounds.blueSlime.ko.play();
+    this.isDying = true;
     setTimeout(() => {
       this.shouldRemove = true;
     }, 600); // Nach 600ms (3 Bilder bei 200ms Intervall) wird das Objekt entfernt
