@@ -83,7 +83,6 @@ class Character extends MovableObject {
     "img/Elara/mage_elara/Attack/attack7.png",
   ];
   idleTimer = 0;
-  // isLongIdleActive = false;
   longIdleThreshold = 10000;
   isAttacking = false;
   elaraJumpedOnEnemy = false;
@@ -173,15 +172,17 @@ class Character extends MovableObject {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.setOtherDirection(false);
+      this.resetIdleTimer();
     }
     if (this.world.keyboard.LEFT && this.x > -680) {
       this.moveLeft(this.speed);
       this.setOtherDirection(true);
+      this.resetIdleTimer();
     }
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.jump();
+      this.resetIdleTimer();
     }
-    this.resetIdleTimer();
   }
 
   /**
@@ -265,7 +266,7 @@ class Character extends MovableObject {
    */
   handleJumpState() {
     this.playAnimation(this.imagesJump);
-    this.resetIdleTimer();
+    sounds.character.footsteps.pause();
   }
 
   /**
@@ -276,14 +277,12 @@ class Character extends MovableObject {
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
       this.playAnimation(this.imagesWalking);
       sounds.character.footsteps.play();
-      this.resetIdleTimer();
     } else if (this.idleTimer >= this.longIdleThreshold) {
       this.playAnimation(this.imagesLongIdle);
       sounds.character.footsteps.pause();
     } else {
       this.playAnimation(this.imagesIdle);
       sounds.character.footsteps.pause();
-
     }
   }
 
