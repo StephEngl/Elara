@@ -6,7 +6,6 @@ let isMuted = false;
 let isPaused = false;
 let gameWon = false;
 let gameOver = false;
-let restart = false;
 
 /**
  * @method init
@@ -21,11 +20,9 @@ function init() {
 /**
  * @method showStartScreen
  * Displays the start screen and hides the game content.
- * Also handles game restart scenarios.
  */
 function showStartScreen() {
   if (gameOver || gameWon) {
-    restart = true;
     closeGameOverScreen();
     closeWinScreen();
   }
@@ -52,15 +49,13 @@ function getUniqueRandomPosition(usedPositions, minDistance = 300) {
  */
 function startGame() {
   document.querySelector(".start-screen-container").style.display = "none";
-  if (restart) {
-    world.ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
   document.querySelector(".content").style.display = "flex";
   showLoadingSpinner();
   initLevel();
   setTimeout(() => {
     hideLoadingSpinner();
     world = new World(element, keyboard);
+    handleSoundState();
   }, 1500);
 }
 
@@ -85,12 +80,7 @@ function hideLoadingSpinner() {
   document.querySelector(".control-buttons").style.display = "flex";
 }
 
-/**
- * @method toggleSound
- * Toggles the game sound on and off, updating UI elements accordingly.
- */
-function toggleSound() {
-  isMuted = !isMuted;
+function handleSoundState() {
   const soundButton = document.getElementById("sound-button");
   const soundIcon = document.getElementById("sound-icon");
 
@@ -101,6 +91,15 @@ function toggleSound() {
     unmuteAllSounds();
     setSoundIconUnmuted(soundIcon, soundButton);
   }
+}
+
+/**
+ * @method toggleSound
+ * Toggles the game sound on and off, updating UI elements accordingly.
+ */
+function toggleSound() {
+  isMuted = !isMuted;
+handleSoundState();
 }
 
 /**
@@ -156,11 +155,11 @@ function muteAllSounds() {
       sound.pause();
     });
   });
+  if (world.level && world.level.backgroundMusic) {
+    world.level.backgroundMusic.muted = true;
+    world.level.backgroundMusic.pause();
+  }
   saveToLocalStorage();
-  // if (world.level && world.level.backgroundMusic) {
-  //   world.level.backgroundMusic.muted = true;
-  //   world.level.backgroundMusic.pause();
-  // }
 }
 
 /**
@@ -173,22 +172,22 @@ function unmuteAllSounds() {
       sound.muted = false;
     });
   });
+  if (world.level && world.level.backgroundMusic) {
+    world.level.backgroundMusic.muted = false;
+    if (!world.isPaused) world.level.backgroundMusic.play();
+  }
   saveToLocalStorage();
-  // if (world.level && world.level.backgroundMusic) {
-  //   world.level.backgroundMusic.muted = false;
-  //   if (!world.isPaused) world.level.backgroundMusic.play();
-  // }
 }
 
 // Local Storage
 function saveToLocalStorage() {
-  localStorage.setItem("sounds", JSON.stringify(sounds));
+  localStorage.setItem("isMuted", JSON.stringify(isMuted));
 }
 
 function getFromLocalStorage() {
-  let mySounds = JSON.parse(localStorage.getItem("sounds"));
-  if (null != mySounds) {
-    sounds = mySounds;
+  let isMutedFromLocalStorage = JSON.parse(localStorage.getItem("isMuted"));
+  if (null != isMutedFromLocalStorage) {
+    isMuted = isMutedFromLocalStorage;
   }
 }
 
@@ -214,7 +213,6 @@ function togglePause() {
  * Restarts the game by reinitializing and starting a new game.
  */
 function restartGame() {
-  restart = true;
   closeGameOverScreen();
   closeWinScreen();
   init();
