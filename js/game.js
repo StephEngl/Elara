@@ -32,6 +32,19 @@ function showStartScreen() {
   document.querySelector(".content").style.display = "none";
 }
 
+function getUniqueRandomPosition(usedPositions, minDistance = 300) {
+  let newPosition;
+  do {
+    newPosition = 500 + Math.random() * 3000;
+  } while (
+    usedPositions.some((pos) => Math.abs(pos - newPosition) < minDistance)
+  );
+  usedPositions.push(newPosition);
+
+  // return 100;
+  return newPosition;
+}
+
 /**
  * @method startGame
  * Starts the game by hiding the start screen, initializing the level,

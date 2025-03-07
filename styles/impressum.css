@@ -65,7 +65,7 @@ footer {
   color: white;
   display: flex;
   justify-content: center;
-  padding: 16px;
+  margin-bottom: 16px;
   width: 100%;
   max-width: 1440px;
 }

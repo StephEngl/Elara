@@ -15,12 +15,22 @@ class BlueSlime extends MovableObject {
     "assets/img/enemies/blue_slime/dead/dead3.png",
   ];
 
-  constructor() {
-    super().setImage("assets/img/enemies/blue_slime/walk/walk1.png");
+  constructor(x) {
+    super();
+    this.loadAllImages();
+    this.setObjectProperties(x);
+    this.animate();
+  }
+
+  loadAllImages() {
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesDying);
+  }
+
+  setObjectProperties(x) {
+    this.setImage("assets/img/enemies/blue_slime/walk/walk1.png");
     this.y = 260;
-    this.x = 1000 + Math.random() * 3000;
+    this.x = x;
     this.offset = {
       top: 120,
       right: 50,
@@ -28,8 +38,8 @@ class BlueSlime extends MovableObject {
       left: 50,
     };
     this.speed = 0.3 + Math.random() * 0.4;
-    this.setOtherDirection(true);
-    this.animate();
+    this.isDying = false;
+    this.otherDirection = true;
   }
 
   /**

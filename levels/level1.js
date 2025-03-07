@@ -1,16 +1,16 @@
 let level1;
+let usedPositions = [];
 
 function initLevel() {
   level1 = new Level(
     [
-      new LittleDragon(),
-      new LittleDragon(),
-      new LittleDragon(),
-      // new LittleDragon(),
-      new BlueSlime(),
-      new BlueSlime(),
-      new BlueSlime(),
-      new BlueSlime(),
+      new LittleDragon(getUniqueRandomPosition(usedPositions)),
+      new LittleDragon(getUniqueRandomPosition(usedPositions)),
+      new LittleDragon(getUniqueRandomPosition(usedPositions)),
+      new BlueSlime(getUniqueRandomPosition(usedPositions)),
+      new BlueSlime(getUniqueRandomPosition(usedPositions)),
+      new BlueSlime(getUniqueRandomPosition(usedPositions)),
+      new BlueSlime(getUniqueRandomPosition(usedPositions)),
       new Endboss(sounds.dragonBoss),
     ],
     [
@@ -77,7 +77,12 @@ function initLevel() {
       new Crystal(300, 200, "assets/img/game_objects/fire-crystal.png"),
       new Crystal(400, 150, "assets/img/game_objects/fire-crystal.png"),
       new Crystal(500, 200, "assets/img/game_objects/fire-crystal.png"),
-      new Crystal(3210, 350, "assets/img/game_objects/fire-crystal-large.png", 5),
+      new Crystal(
+        3210,
+        350,
+        "assets/img/game_objects/fire-crystal-large.png",
+        5
+      ),
       new Crystal(),
       new Crystal(),
       new Crystal(),

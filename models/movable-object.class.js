@@ -20,15 +20,6 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Creates an audio object.
-   * @param {string} src - The source URL of the audio file.
-   * @returns {HTMLAudioElement} - The audio element.
-   */
-  createAudio(src) {
-    return this.world ? this.world.createAudio(src) : new Audio(src);
-  }
-
-  /**
    * Applies gravity to the object, causing it to fall.
    */
   applyGravity() {

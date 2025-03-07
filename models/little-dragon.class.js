@@ -14,12 +14,10 @@ class LittleDragon extends MovableObject {
     "assets/img/enemies/small_dragon/Death4.png",
   ];
 
-  constructor() {
-    super().setImage("assets/img/enemies/small_dragon/Idle1.png");
+  constructor(x) {
+    super();
     this.loadAllImages();
-    this.setObjectProperties();
-    this.isDying = false;
-    this.otherDirection = true;
+    this.setObjectProperties(x);
     this.animate();
   }
 
@@ -36,9 +34,10 @@ class LittleDragon extends MovableObject {
    * Sets the object properties for the LittleDragon.
    * @method setObjectProperties
    */
-  setObjectProperties() {
+  setObjectProperties(x) {
+    this.setImage("assets/img/enemies/small_dragon/Idle1.png");
     this.y = 310;
-    this.x = 500 + Math.random() * 3000;
+    this.x = x;
     this.offset = {
       top: 60,
       right: 50,
@@ -46,6 +45,8 @@ class LittleDragon extends MovableObject {
       left: 30,
     };
     this.speed = 0.3 + Math.random() * 0.4;
+    this.isDying = false;
+    this.otherDirection = true;
   }
 
   /**
