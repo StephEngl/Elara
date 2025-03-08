@@ -14,8 +14,9 @@ let sounds = {
   },
   dragonBoss: {
     roar: new Audio("assets/audio/endboss_dragon_roar.mp3"),
-    attack: new Audio(),
-    hurt: new Audio(),
+    attack: new Audio("assets/audio/endboss_dragon_fire_attack.mp3"),
+    hurt: new Audio("assets/audio/endboss_dragon_hurt.mp3"),
+    ko: new Audio("assets/audio/endboss_dragon_defeated.mp3"),
   },
   environment: {
     background: new Audio("assets/audio/bg-music-lvl1.mp3"),
