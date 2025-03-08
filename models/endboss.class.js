@@ -209,7 +209,7 @@ class Endboss extends MovableObject {
   }
 
   checkFirebreathAttack() {
-    if (this.isPlayerInRange() && this.canFire() && !isPaused) {
+    if (this.isPlayerInRange() && this.canFire()  && !isPaused) {
       this.createDragonFire();
       this.lastFireballTime = Date.now();
     }
@@ -220,7 +220,12 @@ class Endboss extends MovableObject {
   }
 
   createDragonFire() {
-    const fireball = new FlyingObject(this.x + 100, this.y + 180, true, true);
+    const fireball = new FlyingObject(
+      this.x -20,
+      this.y + 230,
+      true,
+      true
+    );
     world.flyingObjects.push(fireball);
     this.audioEndbossFire.play();
   }
@@ -231,7 +236,7 @@ class Endboss extends MovableObject {
   }
 
   isPlayerInRange() {
-    return Math.abs(this.x - world.character.x) < 150;
+    return Math.abs(this.x - world.character.x) < 200;
   }
 
   handleDyingState() {
