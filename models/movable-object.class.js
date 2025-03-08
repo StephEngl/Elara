@@ -17,6 +17,7 @@ class MovableObject extends DrawableObject {
     this.energy = 100;
     this.isDying = false;
     this.isPaused = false;
+    this.isHurted = false;
   }
 
   /**
@@ -56,22 +57,19 @@ class MovableObject extends DrawableObject {
   /**
    * Handles the logic for when the character is hit, reducing energy based on conditions.
    */
-  hit() {
-    console.log("enemy isdying: ", this.isDying);
+  hit(damage = 10) {
     if (!this.isHurt() && !this.isAboveGround() && !this.elaraJumpedOnEnemy) {
-      // Wenn der Charakter nicht springt und nicht auf einen Gegner gesprungen ist,
-      this.reduceEnergy();
+      this.reduceEnergy(damage);
     }
   }
 
   /**
    * Reduces the character's energy and updates the lastHit timestamp.
    */
-  reduceEnergy() {
-    this.energy -= 10;
-    if (this.energy < 0) {
-      this.energy = 0;
-    } else {
+  reduceEnergy(damage) {
+    this.energy -= damage;
+    if (this.energy < 0) this.energy = 0;
+    else {
       this.lastHit = new Date().getTime();
     }
   }
@@ -115,20 +113,18 @@ class MovableObject extends DrawableObject {
     if (!this.isPaused) {
       this.x -= speed;
     }
-  }
-
+  }  
   /**
-   * Plays a sound if the game is not paused and not muted.
-   * @param {HTMLAudioElement} sound - The sound element to play.
-   * @returns {HTMLAudioElement | undefined} The sound element if played, undefined otherwise.
-   */
-  playSound(sound) {
-    if (!this.world.isPaused && !isMuted) {
-      sound.play();
-      return sound;
-    }
-  }
-
+  * Plays a sound if the game is not paused and not muted.
+  * @param {HTMLAudioElement} sound - The sound element to play.
+  * @returns {HTMLAudioElement | undefined} The sound element if played, undefined otherwise.
+  */
+ playSound(sound) {
+   if (!this.world.isPaused && !isMuted) {
+     sound.play();
+     return sound;
+   }
+ }
   /**
    * Plays an animation by cycling through a set of images.
    * @param {string[]} imagesToChange - An array of image paths to use for the animation.
