@@ -106,10 +106,14 @@ function togglePause() {
     stopBackgroundMusic();
     world.setEnemyAnimationState(true);
     clearInterval(world.runInterval);
+    muteAllSounds();
   } else {
     world.setEnemyAnimationState(false);
     world.run();
-    if (!isMuted) startBackgroundMusic();
+    if (!isMuted) {
+      unmuteAllSounds();
+      startBackgroundMusic();
+    }
   }
 }
 
