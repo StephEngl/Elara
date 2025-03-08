@@ -10,14 +10,24 @@ class FlyingObject extends MovableObject {
     "img/Elara/mage_elara/Fire/fire8.png",
     "img/Elara/mage_elara/Fire/fire9.png",
   ];
+  imagesFireBreath = [
+    "assets/img/enemies/endboss/dragon/Fire_Attack1.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack2.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack3.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack4.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack5.png",
+    "assets/img/enemies/endboss/dragon/Fire_Attack6.png",
+  ];
 
-  constructor(x, y, isMovingLeft) {
-    super().setImage("img/Elara/mage_elara/Fire/fire1.png");
-    this.loadImages(this.imagesFireball);
-    this.setObjectProperties(x, y);
+  constructor(x, y, isMovingLeft, isBossFire = false) {
+    super();
+    this.isBossFire = isBossFire;
+    this.otherDirection = isMovingLeft;
+    this.setObjectProperties(x, y, isBossFire);
+    this.loadImages(isBossFire ? this.imagesFireBreath : this.imagesFireball);
+    this.setImage(isBossFire ? this.imagesFireBreath[0] : this.imagesFireball[0]);
     this.currentImageIndex = 0;
-    this.isMovingLeft = isMovingLeft;
-    this.fire(this.imagesFireball);
+    this.fire(isBossFire ? this.imagesFireBreath : this.imagesFireball);
   }
 
   /**
@@ -26,13 +36,12 @@ class FlyingObject extends MovableObject {
    * @param {number} x - The x-coordinate.
    * @param {number} y - The y-coordinate.
    */
-  setObjectProperties(x, y) {
+  setObjectProperties(x, y, isBossFire) {
     this.x = x;
     this.y = y;
-    this.width = 50;
-    this.height = 50;
-    this.speedX = 10;
-    this.acceleration = 0.5;
+    this.width = isBossFire ? 250 : 50;
+    this.height = isBossFire ? 250 : 50;
+    this.speedX = isBossFire ? 20 : 40;
   }
 
   /**
@@ -41,20 +50,19 @@ class FlyingObject extends MovableObject {
    * @param {string[]} imagesAttack - Array of image paths for the animation.
    */
   fire(imagesAttack) {
-    // this.applyGravity();
     const animationInterval = setInterval(() => {
       this.animateFireball(imagesAttack);
-      if (this.isMovingLeft) {
-        this.x -= 40;
-      } else {
-        this.x += 40;
-      }
+      this.updatePosition();
 
       if (this.currentImageIndex >= imagesAttack.length) {
         clearInterval(animationInterval);
         this.shouldRemove = true;
       }
     }, 100);
+  }
+
+  updatePosition() {
+    this.x += this.otherDirection ? -this.speedX : this.speedX;
   }
 
   /**
