@@ -319,7 +319,6 @@ class Character extends MovableObject {
     let moBoundRight = moMid + tolerance;
     let horizontalOverlap = charMid >= moBoundLeft && charMid <= moBoundRight;
     this.jumpedOnEnemy = horizontalOverlap;
-    console.log("Elara jumped on enemy?", this.jumpedOnEnemy);
     
     return this.jumpedOnEnemy;
   }
