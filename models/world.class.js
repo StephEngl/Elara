@@ -372,9 +372,6 @@ class World {
    */
   addObjectsToMap(objects) {
     objects.forEach((obj) => {
-      if (obj instanceof FlyingObject) {
-        obj.otherDirection = obj.isMovingLeft;
-      }
       this.addToMap(obj);
     });
   }

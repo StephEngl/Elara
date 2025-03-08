@@ -4,13 +4,13 @@ function initLevel() {
   let usedPositions = [];
   level1 = new Level(
     [
-      new LittleDragon(getUniqueRandomPosition(usedPositions)),
-      new LittleDragon(getUniqueRandomPosition(usedPositions)),
-      new LittleDragon(getUniqueRandomPosition(usedPositions)),
-      new LittleDragon(getUniqueRandomPosition(usedPositions)),
-      new BlueSlime(getUniqueRandomPosition(usedPositions)),
-      new BlueSlime(getUniqueRandomPosition(usedPositions)),
-      new BlueSlime(getUniqueRandomPosition(usedPositions)),
+      // new LittleDragon(getUniqueRandomPosition(usedPositions)),
+      // new LittleDragon(getUniqueRandomPosition(usedPositions)),
+      // new LittleDragon(getUniqueRandomPosition(usedPositions)),
+      // new LittleDragon(getUniqueRandomPosition(usedPositions)),
+      // new BlueSlime(getUniqueRandomPosition(usedPositions)),
+      // new BlueSlime(getUniqueRandomPosition(usedPositions)),
+      // new BlueSlime(getUniqueRandomPosition(usedPositions)),
       new Endboss(sounds.dragonBoss),
     ],
     [
