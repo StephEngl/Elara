@@ -30,54 +30,58 @@ class World {
   }
 
   /**
- * Starts the game loop.
- */
-run() {
-  this.startMainLoop();
-  this.startCollisionLoop();
-}
+   * Starts the game loop.
+   */
+  run() {
+    this.startMainLoop();
+    this.startCollisionLoop();
+  }
 
-/**
- * Starts the main game loop for background music, flying objects and cleaning up.
- */
-startMainLoop() {
-  this.runInterval = setInterval(() => {
-    if (!isPaused) {
-      this.updateGameElements();
-    }
-  }, 200);
-}
+  /** this.character.x > 3200
+   * Starts the main game loop for background music, flying objects and cleaning up.
+   */
+  startMainLoop() {
+    this.runInterval = setInterval(() => {
+      
+      if (!isPaused) {
+        if (this.character.x > 500 && !this.endboss.isActive) {
+          this.endboss.activate();
+        }
+        this.updateGameElements();
+      }
+    }, 200);
+  }
 
-/**
- * Updates the game elements in the main loop.
- */
-updateGameElements() {
-  startBackgroundMusic();
-  this.checkFlyingObjects();
-  this.checkFireballCollisions();
-  this.flyingObjects = this.removeObjectsFromGame(this.flyingObjects);
-  this.level.enemies = this.removeObjectsFromGame(this.level.enemies);
-}
+  /**
+   * Updates the game elements in the main loop.
+   */
+  updateGameElements() {
+    startBackgroundMusic();
+    this.checkFlyingObjects();
+    this.checkFireballCollisions();
+    this.flyingObjects = this.removeObjectsFromGame(this.flyingObjects);
+    this.level.enemies = this.removeObjectsFromGame(this.level.enemies);
+  }
 
-/**
- * Starts the collision detection loop.
- */
-startCollisionLoop() {
-  this.collisionInterval = setInterval(() => {
-    if (!isPaused) {
-      this.handleCollisions();
-    }
-  }, 20);
-}
+  /**
+   * Starts the collision detection loop.
+   */
+  startCollisionLoop() {
+    this.collisionInterval = setInterval(() => {
+      if (!isPaused) {
+        this.handleCollisions();
+      }
+    }, 20);
+  }
 
-/**
- * Handles all collision checks.
- */
-handleCollisions() {
-  this.checkJumpingOn();
-  this.checkCollisionsWithEnemy(this.level.enemies);
-  this.checkCollisionsWithCollectible(this.level.collectableObjects);
-}
+  /**
+   * Handles all collision checks.
+   */
+  handleCollisions() {
+    this.checkJumpingOn();
+    this.checkCollisionsWithEnemy(this.level.enemies);
+    this.checkCollisionsWithCollectible(this.level.collectableObjects);
+  }
 
   /**
    * Sets the animation state for all enemies.
@@ -93,13 +97,16 @@ handleCollisions() {
    */
   checkCollisionsWithEnemy(enemies) {
     enemies.forEach((enemy) => {
-      if (enemy.isDying) {
-        return;
-      }
+      if (enemy.isDying) return;
       if (this.character.isColliding(enemy)) {
+        const isEndboss = enemies.indexOf(enemy) === enemies.length - 1;
+        const damage = isEndboss ? 40 : 10;
         if (this.character.energy > 0) {
-          this.character.hit();
+          this.character.hit(damage);
           this.statusbar.setPercentage(this.character.energy);
+          if (isEndboss && !isMuted) {
+            sounds.dragonBoss.hurt.play();
+          }
         }
       }
     });
@@ -123,11 +130,16 @@ handleCollisions() {
   checkFireballCollisions() {
     this.flyingObjects.forEach((fireball) => {
       this.level.enemies.forEach((enemy) => {
-        if (fireball.isColliding(enemy)) {
+        if (fireball.isColliding(enemy) && !fireball.isBossFire) {
           enemy.die();
           fireball.shouldRemove = true;
         }
       });
+      if (fireball.isBossFire && fireball.isColliding(this.character)) {
+        this.character.hit(35);
+        this.statusbar.setPercentage(this.character.energy);
+        fireball.shouldRemove = true;
+      }
     });
   }
 
@@ -360,6 +372,9 @@ handleCollisions() {
    */
   addObjectsToMap(objects) {
     objects.forEach((obj) => {
+      if (obj instanceof FlyingObject) {
+        obj.otherDirection = obj.isMovingLeft;
+      }
       this.addToMap(obj);
     });
   }
