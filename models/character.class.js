@@ -1,3 +1,7 @@
+/**
+ * Represents the main character in the game.
+ * Extends the MovableObject class to provide movement, animations, and interactions.
+ */
 class Character extends MovableObject {
   imagesWalking = [
     "assets/img/elara/Walk/walk1.png",
@@ -72,6 +76,9 @@ class Character extends MovableObject {
   longIdleThreshold = 8000;
   isAttacking = false;
 
+  /**
+   * Initializes a new instance of the Character class and sets up its properties, animations, and behavior.
+   */
   constructor() {
     super();
     this.setObjectProperties();
@@ -154,19 +161,33 @@ class Character extends MovableObject {
    */
   handleMovement() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-      this.moveRight();
-      this.setOtherDirection(false);
-      this.resetIdleTimer();
+      this.handleRightMovement();
     }
     if (this.world.keyboard.LEFT && this.x > -680) {
-      this.moveLeft(this.speed);
-      this.setOtherDirection(true);
-      this.resetIdleTimer();
+      this.handleLeftMovement();
     }
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.jump();
       this.resetIdleTimer();
     }
+  }
+
+  /**
+   * Handles movement to the right.
+   */
+  handleRightMovement() {
+    this.moveRight();
+    this.setOtherDirection(false);
+    this.resetIdleTimer();
+  }
+
+  /**
+   * Handles movement to the left.
+   */
+  handleLeftMovement() {
+    this.moveLeft(this.speed);
+    this.setOtherDirection(true);
+    this.resetIdleTimer();
   }
 
   /**
@@ -281,7 +302,6 @@ class Character extends MovableObject {
 
   /**
    * Checks if the character jumped on an enemy.
-   * @method isJumpedOn
    * @param {MovableObject} mo - The movable object to check collision with.
    * @returns {boolean} - True if the character jumped on the enemy, false otherwise.
    */
@@ -292,6 +312,10 @@ class Character extends MovableObject {
     return this.isColliding(mo);
   }
 
+  /**
+   * Checks if the character is currently falling.
+   * @returns {boolean} - True if the character is falling, false otherwise.
+   */
   isCharacterFalling() {
     return this.speedY < 0;
   }

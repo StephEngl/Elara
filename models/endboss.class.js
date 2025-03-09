@@ -140,9 +140,8 @@ class Endboss extends MovableObject {
    */
   updateStateMachine() {
     if (!this.isActive || this.isPaused) return;
-    if (this.isActive && !this.hadFirstContact) {
-      this.changeBackgroundMusicToBossFight();
-      this.hadFirstContact = true; // Verhindern, dass die Musik mehrfach gewechselt wird
+    if (this.isFirstContact()) {
+      this.handleFirstContact();
     }
     if (this.isDead()) {
       this.handleDyingState();
@@ -153,9 +152,32 @@ class Endboss extends MovableObject {
       return;
     }
     if (this.isActive) {
-      const frame = this.currentImage % this.getCurrentAnimationLength();
-      this.handleStateSpecificLogic(frame);
+      this.handleActiveState();
     }
+  }
+
+  /**
+   * Checks if this is the first contact with the Endboss.
+   * @returns {boolean}
+   */
+  isFirstContact() {
+    return this.isActive && !this.hadFirstContact;
+  }
+
+  /**
+   * Handles the first contact with the Endboss.
+   */
+  handleFirstContact() {
+    this.changeBackgroundMusicToBossFight();
+    this.hadFirstContact = true;
+  }
+
+  /**
+   * Handles the active state of the Endboss.
+   */
+  handleActiveState() {
+    const frame = this.currentImage % this.getCurrentAnimationLength();
+    this.handleStateSpecificLogic(frame);
   }
 
   /**
@@ -208,20 +230,33 @@ class Endboss extends MovableObject {
    * @param {number} frame - The current frame of the animation.
    */
   handleIntroLogic(frame) {
-    if (frame === 0) {
-      if (!this.introRoarPlayed) {
-        this.audioEndbossRoar.play();
-        this.introRoarPlayed = true;
-      }
-    }
+    this.handleIntroRoar(frame);
     this.playAnimation(this.imagesIntro);
     this.moveLeft(this.speed);
     if (this.stateTimer++ > 8) {
-      this.changeState(this.EnemyState.IDLE);
-      this.introRoarPlayed = false;
-      this.introPlayed = true;
+      this.transitionToIdleState();
     }
   }
+
+  /**
+ * Handles the roar sound during the intro state.
+ * @param {number} frame - The current frame of the animation.
+ */
+handleIntroRoar(frame) {
+  if (frame === 0 && !this.introRoarPlayed) {
+    this.audioEndbossRoar.play();
+    this.introRoarPlayed = true;
+  }
+}
+
+/**
+ * Transitions the Endboss to the idle state after the intro is complete.
+ */
+transitionToIdleState() {
+  this.changeState(this.EnemyState.IDLE);
+  this.introRoarPlayed = false;
+  this.introPlayed = true;
+}
 
   /**
    * Handles the logic for the idle state.
