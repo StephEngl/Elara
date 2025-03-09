@@ -60,8 +60,8 @@ class Endboss extends MovableObject {
   };
   fireballCooldown = 2000; // 2 seconds between attacks
   lastFireballTime = 0;
-  currentAnimationFrame = 0;
-  lastFrameUpdate = 0;
+  currentImage = 0;
+  attackExecuted = false;
 
   constructor() {
     super();
@@ -168,6 +168,8 @@ class Endboss extends MovableObject {
   changeState(newState) {
     this.state = newState;
     this.stateTimer = 0;
+    this.currentImage = 0; // Wichtig: Zurücksetzen bei Zustandswechsel
+    this.attackExecuted = false;
   }
 
   handleIntroState() {
@@ -197,23 +199,17 @@ class Endboss extends MovableObject {
     }
   }
 
+
   handleAttackState() {
-    // this.playAnimation(this.imagesAttack);
-    // this.checkFirebreathAttack();
-
-    // // Angriffslogik hier
-    // if (this.stateTimer++ > 8) {
-    //   // 4 * 250ms = 1000ms
-    //   this.changeState(this.EnemyState.WALKING);
-    // }
     this.playAnimation(this.imagesAttack);
+    const attackFrame = this.currentImage % this.imagesAttack.length;
 
-    if (this.currentAnimationFrame === 2 && !this.attackExecuted) {
+    if (attackFrame >= 2 && !this.attackExecuted) {
       this.checkFirebreathAttack();
       this.attackExecuted = true;
     }
 
-    if (this.currentAnimationFrame >= this.imagesAttack.length - 1) {
+    if (attackFrame >= this.imagesAttack.length - 1) {
       this.resetAttackState();
     }
   }
@@ -239,11 +235,6 @@ class Endboss extends MovableObject {
     const fireball = new FlyingObject(this.x - 20, this.y + 230, true, true);
     world.flyingObjects.push(fireball);
     this.audioEndbossFire.play();
-  }
-
-  changeState(newState) {
-    this.state = newState;
-    this.stateTimer = 0;
   }
 
   isPlayerInRange() {
