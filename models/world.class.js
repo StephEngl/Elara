@@ -109,9 +109,6 @@ class World {
         if (this.character.energy > 0) {
           this.character.hit(damage);
           this.statusbar.setPercentage(this.character.energy);
-          if (isEndboss && !isMuted) {
-            sounds.dragonBoss.hurt.play();
-          }
         }
       }
     });

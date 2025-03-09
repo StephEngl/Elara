@@ -71,7 +71,6 @@ class Character extends MovableObject {
   idleTimer = 0;
   longIdleThreshold = 8000;
   isAttacking = false;
-  jumpedOnEnemy = false;
 
   constructor() {
     super();
@@ -287,24 +286,14 @@ class Character extends MovableObject {
    * @returns {boolean} - True if the character jumped on the enemy, false otherwise.
    */
   isJumpedOn(/** @type MovableObject */ mo) {
-    let isFalling = this.speedY < 0;
-    if (!isFalling) {
+    if (!this.isCharacterFalling() || mo instanceof Endboss) {
       return false;
     }
-    let charCollisionRect = this.getCurrentCollisionRect();
-    let moCollisionRect = mo.getCurrentCollisionRect();
-    if (charCollisionRect.y2 < moCollisionRect.y1) {
-      return false;
-    }
-    let charMid = (charCollisionRect.x1 + charCollisionRect.x2) / 2;
-    let moMid = (moCollisionRect.x1 + moCollisionRect.x2) / 2;
-    let tolerance = (charCollisionRect.x2 - charCollisionRect.x1) / 2;
-    let moBoundLeft = moMid - tolerance;
-    let moBoundRight = moMid + tolerance;
-    let horizontalOverlap = charMid >= moBoundLeft && charMid <= moBoundRight;
-    this.jumpedOnEnemy = horizontalOverlap;
-    
-    return this.jumpedOnEnemy;
+    return this.isColliding(mo);
+  }
+
+  isCharacterFalling() {
+    return this.speedY < 0;
   }
 
   /**
