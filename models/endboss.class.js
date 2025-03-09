@@ -60,6 +60,8 @@ class Endboss extends MovableObject {
   };
   fireballCooldown = 2000; // 2 seconds between attacks
   lastFireballTime = 0;
+  currentAnimationFrame = 0;
+  lastFrameUpdate = 0;
 
   constructor() {
     super();
@@ -163,6 +165,11 @@ class Endboss extends MovableObject {
     }
   }
 
+  changeState(newState) {
+    this.state = newState;
+    this.stateTimer = 0;
+  }
+
   handleIntroState() {
     this.audioEndbossRoar.play();
     this.playAnimation(this.imagesIntro);
@@ -176,9 +183,7 @@ class Endboss extends MovableObject {
   handleIdleState() {
     this.playAnimation(this.imagesIdle);
 
-    // Zustandsübergang nach 1.5 Sekunden
     if (this.stateTimer++ > 6) {
-      // 6 * 250ms = 1500ms
       this.changeState(this.EnemyState.WALKING);
     }
   }
@@ -193,23 +198,34 @@ class Endboss extends MovableObject {
   }
 
   handleAttackState() {
-    this.playAnimation(this.imagesAttack);
-    this.checkFirebreathAttack();
+    // this.playAnimation(this.imagesAttack);
+    // this.checkFirebreathAttack();
 
-    // Angriffslogik hier
-    if (this.stateTimer++ > 8) {
-      // 4 * 250ms = 1000ms
-      this.changeState(this.EnemyState.WALKING);
+    // // Angriffslogik hier
+    // if (this.stateTimer++ > 8) {
+    //   // 4 * 250ms = 1000ms
+    //   this.changeState(this.EnemyState.WALKING);
+    // }
+    this.playAnimation(this.imagesAttack);
+
+    if (this.currentAnimationFrame === 2 && !this.attackExecuted) {
+      this.checkFirebreathAttack();
+      this.attackExecuted = true;
+    }
+
+    if (this.currentAnimationFrame >= this.imagesAttack.length - 1) {
+      this.resetAttackState();
     }
   }
 
-  changeState(newState) {
-    this.state = newState;
-    this.stateTimer = 0;
+  resetAttackState() {
+    this.changeState(this.EnemyState.WALKING);
+    this.isAttacking = false;
+    this.attackExecuted = false;
   }
 
   checkFirebreathAttack() {
-    if (this.isPlayerInRange() && this.canFire()  && !isPaused) {
+    if (this.isPlayerInRange() && this.canFire() && !isPaused) {
       this.createDragonFire();
       this.lastFireballTime = Date.now();
     }
@@ -220,12 +236,7 @@ class Endboss extends MovableObject {
   }
 
   createDragonFire() {
-    const fireball = new FlyingObject(
-      this.x -20,
-      this.y + 230,
-      true,
-      true
-    );
+    const fireball = new FlyingObject(this.x - 20, this.y + 230, true, true);
     world.flyingObjects.push(fireball);
     this.audioEndbossFire.play();
   }

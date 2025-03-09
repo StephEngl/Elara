@@ -1,6 +1,6 @@
 class Light extends MovableObject {
   y = 0;
-  width = 500;
+  width = 1000;
   height = 400;
   speed = 0.1;
 
