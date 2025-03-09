@@ -9,6 +9,12 @@ class BlueSlime extends MovableObject {
     "assets/img/enemies/blue_slime/walk/walk7.png",
     "assets/img/enemies/blue_slime/walk/walk8.png",
   ];
+  imagesAttacking = [
+    "assets/img/enemies/blue_slime/attack/attack1.png",
+    "assets/img/enemies/blue_slime/attack/attack2.png",
+    "assets/img/enemies/blue_slime/attack/attack3.png",
+    "assets/img/enemies/blue_slime/attack/attack4.png",
+  ];
   imagesDying = [
     "assets/img/enemies/blue_slime/dead/dead1.png",
     "assets/img/enemies/blue_slime/dead/dead2.png",
@@ -24,6 +30,7 @@ class BlueSlime extends MovableObject {
 
   loadAllImages() {
     this.loadImages(this.imagesWalking);
+    this.loadImages(this.imagesAttacking);
     this.loadImages(this.imagesDying);
   }
 
@@ -55,6 +62,9 @@ class BlueSlime extends MovableObject {
     setInterval(() => {
       if (this.isDying) {
         this.playAnimation(this.imagesDying);
+      }
+      if (this.isPlayerInRange(100)) {
+        this.playAnimation(this.imagesAttacking);
       } else {
         this.playAnimation(this.imagesWalking);
       }

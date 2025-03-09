@@ -5,6 +5,11 @@ class LittleDragon extends MovableObject {
     "assets/img/enemies/small_dragon/Walk3.png",
     "assets/img/enemies/small_dragon/Walk4.png",
   ];
+  imagesAttacking = [
+    "assets/img/enemies/small_dragon/Attack1.png",
+    "assets/img/enemies/small_dragon/Attack2.png",
+    "assets/img/enemies/small_dragon/Attack3.png",
+  ];
   imagesDying = [
     "assets/img/enemies/small_dragon/Death1.png",
     "assets/img/enemies/small_dragon/Death2.png",
@@ -27,6 +32,7 @@ class LittleDragon extends MovableObject {
    */
   loadAllImages() {
     this.loadImages(this.imagesIdle);
+    this.loadImages(this.imagesAttacking);
     this.loadImages(this.imagesDying);
   }
 
@@ -61,6 +67,9 @@ class LittleDragon extends MovableObject {
     setInterval(() => {
       if (this.isDying) {
         this.playAnimation(this.imagesDying);
+      }
+      if (this.isPlayerInRange(150) && !this.isAboveGround()) {
+        this.playAnimation(this.imagesAttacking);
       } else {
         this.playAnimation(this.imagesIdle);
       }

@@ -58,6 +58,17 @@ class MovableObject extends DrawableObject {
     this.otherDirection = value;
   }
 
+    /**
+   * Checks if the player is in range of the Endboss.
+   * @returns {boolean} True if the player is in range, false otherwise.
+   */
+    isPlayerInRange(distance) {
+      if (!world || !world.character) {
+        return;
+      }
+      return Math.abs(this.x - world.character.x) < distance;
+    }
+
   /**
    * Handles the logic for when the character is hit, reducing energy based on conditions.
    */

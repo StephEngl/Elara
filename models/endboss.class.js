@@ -243,7 +243,7 @@ class Endboss extends MovableObject {
     this.playAnimation(this.imagesWalking);
     this.moveLeft(this.speed);
 
-    if (this.isPlayerInRange()) {
+    if (this.isPlayerInRange(180)) {
       this.changeState(this.EnemyState.ATTACKING);
     }
   }
@@ -298,14 +298,6 @@ class Endboss extends MovableObject {
     const fireball = new FlyingObject(this.x - 50, this.y + 230, true, true);
     world.flyingObjects.push(fireball);
     this.audioEndbossFire.play();
-  }
-
-  /**
-   * Checks if the player is in range of the Endboss.
-   * @returns {boolean} True if the player is in range, false otherwise.
-   */
-  isPlayerInRange() {
-    return Math.abs(this.x - world.character.x) < 180;
   }
 
   /**
