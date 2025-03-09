@@ -140,6 +140,10 @@ class Endboss extends MovableObject {
    */
   updateStateMachine() {
     if (!this.isActive || this.isPaused) return;
+    if (this.isActive && !this.hadFirstContact) {
+      this.changeBackgroundMusicToBossFight();
+      this.hadFirstContact = true; // Verhindern, dass die Musik mehrfach gewechselt wird
+    }
     if (this.isDead()) {
       this.handleDyingState();
       return;
@@ -336,5 +340,12 @@ class Endboss extends MovableObject {
       gameWon = true;
       stopGame();
     }, 1500);
+  }
+
+  /**
+   * Changes the background music to the boss fight music.
+   */
+  changeBackgroundMusicToBossFight() {
+    world.level.changeBackgroundMusic(sounds.environment.bgBossfight.src);
   }
 }

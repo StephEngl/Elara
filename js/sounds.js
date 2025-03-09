@@ -1,26 +1,26 @@
 let sounds = {
   character: {
     attack: new Audio("assets/audio/fireball-sound.mp3"),
-    hurt: new Audio("assets/audio/elara_hurting_sound.mp3"),
-    jump: new Audio("assets/audio/elara_jumping_sound.mp3"),
-    ko: new Audio("assets/audio/elara_defeated_sound.mp3"),
-    footsteps: new Audio("assets/audio/elara_footsteps.mp3"),
+    hurt: new Audio("assets/audio/elara-hurting-sound.mp3"),
+    jump: new Audio("assets/audio/elara-jumping-sound.mp3"),
+    ko: new Audio("assets/audio/elara-defeated-sound.mp3"),
+    footsteps: new Audio("assets/audio/elara-footsteps.mp3"),
   },
   blueSlime: {
-    ko: new Audio("assets/audio/slime_defeated.mp3"),
+    ko: new Audio("assets/audio/slime-defeated.mp3"),
   },
   littleDragon: {
-    ko: new Audio("assets/audio/littleDragon_defeated.mp3"),
+    ko: new Audio("assets/audio/littleDragon-defeated.mp3"),
   },
   dragonBoss: {
-    roar: new Audio("assets/audio/endboss_dragon_roar.mp3"),
-    attack: new Audio("assets/audio/endboss_dragon_fire_attack.mp3"),
-    hurt: new Audio("assets/audio/endboss_dragon_hurt.mp3"),
-    ko: new Audio("assets/audio/endboss_dragon_defeated.mp3"),
+    roar: new Audio("assets/audio/endboss-dragon-roar.mp3"),
+    attack: new Audio("assets/audio/endboss-dragon-fire-attack.mp3"),
+    hurt: new Audio("assets/audio/endboss-dragon-hurt.mp3"),
+    ko: new Audio("assets/audio/endboss-dragon-defeated.mp3"),
   },
   environment: {
     background: new Audio("assets/audio/bg-music-lvl1.mp3"),
-    owlHootings: new Audio(),
+    bgBossfight: new Audio("assets/audio/bg-music-boss-lvl1.mp3"),
   },
   collectibles: {
     crystal: new Audio("assets/audio/collectCrystal.mp3"),
@@ -62,7 +62,7 @@ function toggleSound() {
  * @param {HTMLElement} button - The sound button element.
  */
 function setSoundIconMuted(icon, button) {
-  icon.src = "assets/img/icons/speaker_mute.svg";
+  icon.src = "assets/img/icons/speaker-mute.svg";
   icon.alt = "Ton aus";
   button.setAttribute("aria-label", "Ton ein");
 }
@@ -73,7 +73,7 @@ function setSoundIconMuted(icon, button) {
  * @param {HTMLElement} button - The sound button element.
  */
 function setSoundIconUnmuted(icon, button) {
-  icon.src = "assets/img/icons/speaker_volume.svg";
+  icon.src = "assets/img/icons/speaker-volume.svg";
   icon.alt = "Ton ein";
   button.setAttribute("aria-label", "Ton aus");
 }

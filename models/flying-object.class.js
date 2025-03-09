@@ -1,14 +1,14 @@
 class FlyingObject extends MovableObject {
   imagesFireball = [
-    "img/Elara/mage_elara/Fire/fire1.png",
-    "img/Elara/mage_elara/Fire/fire2.png",
-    "img/Elara/mage_elara/Fire/fire3.png",
-    "img/Elara/mage_elara/Fire/fire4.png",
-    "img/Elara/mage_elara/Fire/fire5.png",
-    "img/Elara/mage_elara/Fire/fire6.png",
-    "img/Elara/mage_elara/Fire/fire7.png",
-    "img/Elara/mage_elara/Fire/fire8.png",
-    "img/Elara/mage_elara/Fire/fire9.png",
+    "assets/img/elara/Fire/fire1.png",
+    "assets/img/elara/Fire/fire2.png",
+    "assets/img/elara/Fire/fire3.png",
+    "assets/img/elara/Fire/fire4.png",
+    "assets/img/elara/Fire/fire5.png",
+    "assets/img/elara/Fire/fire6.png",
+    "assets/img/elara/Fire/fire7.png",
+    "assets/img/elara/Fire/fire8.png",
+    "assets/img/elara/Fire/fire9.png",
   ];
   imagesFireBreath = [
     "assets/img/enemies/endboss/dragon/Fire_Attack1.png",
