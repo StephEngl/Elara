@@ -1,3 +1,7 @@
+/**
+ * Represents the final boss enemy in the game.
+ * Extends the MovableObject class.
+ */
 class Endboss extends MovableObject {
   imagesIntro = [
     "assets/img/enemies/endboss/dragon/Walk1.png",
@@ -56,12 +60,15 @@ class Endboss extends MovableObject {
     HURT: "hurting",
     DYING: "dying",
   };
-  fireballCooldown = 2000; // 2 seconds between attacks
+  fireballCooldown = 2000;
   lastFireballTime = 0;
   currentImage = 0;
   introPlayed = false;
   attackExecuted = false;
 
+  /**
+   * Creates an instance of Endboss.
+   */
   constructor() {
     super();
     this.setImage(this.imagesIntro[1]);
@@ -75,7 +82,6 @@ class Endboss extends MovableObject {
 
   /**
    * Loads all images for the Endboss.
-   * @method loadAllImages
    */
   loadAllImages() {
     this.loadImages(this.imagesIntro);
@@ -88,7 +94,6 @@ class Endboss extends MovableObject {
 
   /**
    * Sets the object properties for the Endboss.
-   * @method setObjectProperties
    */
   setObjectProperties() {
     this.height = 600;
@@ -107,7 +112,6 @@ class Endboss extends MovableObject {
 
   /**
    * Loads audio files for endboss actions.
-   * @method loadAudio
    */
   loadAudio() {
     this.audioEndbossRoar = sounds.dragonBoss.roar;
@@ -116,34 +120,44 @@ class Endboss extends MovableObject {
     this.audioEndbossDefeated = sounds.dragonBoss.ko;
   }
 
+  /**
+   * Activates the Endboss, initializing its state machine.
+   */
   activate() {
     this.isActive = true;
     this.initializeStateMachine();
   }
 
+  /**
+   * Initializes the state machine by setting up a timer to update the state.
+   */
   initializeStateMachine() {
     setInterval(() => this.updateStateMachine(), 250);
   }
 
+  /**
+   * Updates the state machine of the Endboss based on various conditions.
+   */
   updateStateMachine() {
     if (!this.isActive || this.isPaused) return;
-
     if (this.isDead()) {
       this.handleDyingState();
       return;
     }
-
     if (this.isHurted) {
       this.handleHurtState();
       return;
     }
-
     if (this.isActive) {
       const frame = this.currentImage % this.getCurrentAnimationLength();
       this.handleStateSpecificLogic(frame);
     }
   }
 
+  /**
+   * Gets the length of the current animation based on the current state.
+   * @returns {number} The length of the current animation.
+   */
   getCurrentAnimationLength() {
     switch (this.state) {
       case this.EnemyState.INTRO:
@@ -156,39 +170,28 @@ class Endboss extends MovableObject {
         return this.imagesAttack.length;
       case this.EnemyState.DYING:
         return this.imagesDying.length;
-      default:
-        console.error("Unbekannter Zustand:", this.state);
-        return 0;
     }
   }
 
+  /**
+   * Handles the state-specific logic based on the current state and frame.
+   * @param {number} frame - The current frame of the animation.
+   */
   handleStateSpecificLogic(frame) {
-    switch (this.state) {
-      case this.EnemyState.INTRO:
-        this.handleIntroLogic(frame);
-        break;
-
-      case this.EnemyState.IDLE:
-        this.handleIdleLogic(frame);
-        break;
-
-      case this.EnemyState.WALKING:
-        this.handleWalkingLogic(frame);
-        break;
-
-      case this.EnemyState.ATTACKING:
-        this.handleAttackLogic(frame);
-        break;
-
-      case this.EnemyState.DYING:
-        // Dying hat keine frame-spezifische Logik, nur Animation
-        break;
-
-      default:
-        console.error("Ungültiger Zustand:", this.state);
-    }
+    const stateHandlers = {
+      [this.EnemyState.INTRO]: () => this.handleIntroLogic(frame),
+      [this.EnemyState.IDLE]: () => this.handleIdleLogic(frame),
+      [this.EnemyState.WALKING]: () => this.handleWalkingLogic(frame),
+      [this.EnemyState.ATTACKING]: () => this.handleAttackLogic(frame),
+      default: () => console.error("Ungültiger Zustand:", this.state),
+    };
+    (stateHandlers[this.state] || stateHandlers.default)();
   }
 
+  /**
+   * Changes the state of the Endboss to a new state.
+   * @param {string} newState - The new state to change to.
+   */
   changeState(newState) {
     this.state = newState;
     this.stateTimer = 0;
@@ -196,6 +199,10 @@ class Endboss extends MovableObject {
     this.attackExecuted = false;
   }
 
+  /**
+   * Handles the logic for the intro state.
+   * @param {number} frame - The current frame of the animation.
+   */
   handleIntroLogic(frame) {
     if (frame === 0) {
       if (!this.introRoarPlayed) {
@@ -205,7 +212,6 @@ class Endboss extends MovableObject {
     }
     this.playAnimation(this.imagesIntro);
     this.moveLeft(this.speed);
-
     if (this.stateTimer++ > 8) {
       this.changeState(this.EnemyState.IDLE);
       this.introRoarPlayed = false;
@@ -213,6 +219,10 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Handles the logic for the idle state.
+   * @param {number} frame - The current frame of the animation.
+   */
   handleIdleLogic(frame) {
     this.playAnimation(this.imagesIdle);
 
@@ -221,6 +231,10 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Handles the logic for the walking state.
+   * @param {number} frame - The current frame of the animation.
+   */
   handleWalkingLogic(frame) {
     this.playAnimation(this.imagesWalking);
     this.moveLeft(this.speed);
@@ -230,6 +244,10 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Handles the logic for the attacking state.
+   * @param {number} frame - The current frame of the animation.
+   */
   handleAttackLogic(frame) {
     this.playAnimation(this.imagesAttack);
     if (frame === 2 && !this.attackExecuted) {
@@ -242,12 +260,18 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Resets the attack state, changing the state back to walking.
+   */
   resetAttackState() {
     this.changeState(this.EnemyState.WALKING);
     this.isAttacking = false;
     this.attackExecuted = false;
   }
 
+  /**
+   * Checks if a firebreath attack can be executed and triggers it.
+   */
   checkFirebreathAttack() {
     if (this.canFire() && !isPaused) {
       this.createDragonFire();
@@ -255,25 +279,42 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Checks if the fireball cooldown has passed.
+   * @returns {boolean} True if the Endboss can fire a fireball, false otherwise.
+   */
   canFire() {
     return Date.now() - this.lastFireballTime > this.fireballCooldown;
   }
 
+  /**
+   * Creates a fireball and adds it to the game world.
+   */
   createDragonFire() {
     const fireball = new FlyingObject(this.x - 50, this.y + 230, true, true);
     world.flyingObjects.push(fireball);
     this.audioEndbossFire.play();
   }
 
+  /**
+   * Checks if the player is in range of the Endboss.
+   * @returns {boolean} True if the player is in range, false otherwise.
+   */
   isPlayerInRange() {
     return Math.abs(this.x - world.character.x) < 180;
   }
 
+  /**
+   * Handles the logic for the dying state.
+   */
   handleDyingState() {
     this.playAnimation(this.imagesDying);
     this.die();
   }
 
+  /**
+   * Handles the logic for the hurt state.
+   */
   handleHurtState() {
     this.playAnimation(this.imagesHurt);
     this.audioEndbossHurt.play();
@@ -286,7 +327,6 @@ class Endboss extends MovableObject {
 
   /**
    * Initiates the dying sequence for the Endboss.
-   * @method die
    */
   die() {
     this.isDying = true;
