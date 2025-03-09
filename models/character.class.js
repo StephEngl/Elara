@@ -1,86 +1,72 @@
 class Character extends MovableObject {
-  imagesIntro = [
-    "img/Elara/mage_elara/Idle/idle1.png",
-    "img/Elara/mage_elara/Idle/idle8.png",
-    "img/Elara/mage_elara/Idle/idle9.png",
-    "img/Elara/mage_elara/Idle/idle8.png",
-    "img/Elara/mage_elara/Idle/idle9.png",
-    "img/Elara/mage_elara/Idle/idle8.png",
-    "img/Elara/mage_elara/Idle/idle9.png",
-    "img/Elara/mage_elara/Idle/idle10.png",
-    "img/Elara/mage_elara/Idle/idle11.png",
-    "img/Elara/mage_elara/Idle/idle12.png",
-    "img/Elara/mage_elara/Idle/idle13.png",
-    "img/Elara/mage_elara/Idle/idle14.png",
-  ];
   imagesWalking = [
-    "img/Elara/mage_elara/Walk/walk1.png",
-    "img/Elara/mage_elara/Walk/walk2.png",
-    "img/Elara/mage_elara/Walk/walk3.png",
-    "img/Elara/mage_elara/Walk/walk4.png",
-    "img/Elara/mage_elara/Walk/walk5.png",
-    "img/Elara/mage_elara/Walk/walk6.png",
+    "assets/img/elara/Walk/walk1.png",
+    "assets/img/elara/Walk/walk2.png",
+    "assets/img/elara/Walk/walk3.png",
+    "assets/img/elara/Walk/walk4.png",
+    "assets/img/elara/Walk/walk5.png",
+    "assets/img/elara/Walk/walk6.png",
   ];
   imagesIdle = [
-    "img/Elara/mage_elara/Idle/idle1.png",
-    "img/Elara/mage_elara/Idle/idle9.png",
-    "img/Elara/mage_elara/Idle/idle10.png",
-    "img/Elara/mage_elara/Idle/idle11.png",
-    "img/Elara/mage_elara/Idle/idle12.png",
-    "img/Elara/mage_elara/Idle/idle13.png",
-    "img/Elara/mage_elara/Idle/idle14.png",
+    "assets/img/elara/Idle/idle1.png",
+    "assets/img/elara/Idle/idle9.png",
+    "assets/img/elara/Idle/idle10.png",
+    "assets/img/elara/Idle/idle11.png",
+    "assets/img/elara/Idle/idle12.png",
+    "assets/img/elara/Idle/idle13.png",
+    "assets/img/elara/Idle/idle14.png",
   ];
   imagesLongIdle = [
-    "img/Elara/mage_elara/Idle/idle1.png",
-    "img/Elara/mage_elara/Idle/idle2.png",
-    "img/Elara/mage_elara/Idle/idle3.png",
-    "img/Elara/mage_elara/Idle/idle4.png",
-    "img/Elara/mage_elara/Idle/idle5.png",
-    "img/Elara/mage_elara/Idle/idle6.png",
-    "img/Elara/mage_elara/Idle/idle7.png",
-    "img/Elara/mage_elara/Idle/idle8.png",
-    "img/Elara/mage_elara/Idle/idle9.png",
-    "img/Elara/mage_elara/Idle/idle10.png",
-    "img/Elara/mage_elara/Idle/idle11.png",
-    "img/Elara/mage_elara/Idle/idle12.png",
-    "img/Elara/mage_elara/Idle/idle13.png",
-    "img/Elara/mage_elara/Idle/idle14.png",
+    "assets/img/elara/Idle/idle1.png",
+    "assets/img/elara/Idle/idle2.png",
+    "assets/img/elara/Idle/idle3.png",
+    "assets/img/elara/Idle/idle4.png",
+    "assets/img/elara/Idle/idle5.png",
+    "assets/img/elara/Idle/idle6.png",
+    "assets/img/elara/Idle/idle7.png",
+    "assets/img/elara/Idle/idle8.png",
+    "assets/img/elara/Idle/idle9.png",
+    "assets/img/elara/Idle/idle10.png",
+    "assets/img/elara/Idle/idle11.png",
+    "assets/img/elara/Idle/idle12.png",
+    "assets/img/elara/Idle/idle13.png",
+    "assets/img/elara/Idle/idle14.png",
   ];
   imagesJump = [
-    "img/Elara/mage_elara/Jump/jump1.png",
-    "img/Elara/mage_elara/Jump/jump2.png",
-    "img/Elara/mage_elara/Jump/jump3.png",
-    "img/Elara/mage_elara/Jump/jump4.png",
-    "img/Elara/mage_elara/Jump/jump5.png",
-    "img/Elara/mage_elara/Jump/jump6.png",
-    "img/Elara/mage_elara/Jump/jump7.png",
+    "assets/img/elara/Jump/jump1.png",
+    "assets/img/elara/Jump/jump2.png",
+    "assets/img/elara/Jump/jump3.png",
+    "assets/img/elara/Jump/jump4.png",
+    "assets/img/elara/Jump/jump5.png",
+    "assets/img/elara/Jump/jump6.png",
+    "assets/img/elara/Jump/jump7.png",
   ];
   imagesHurt = [
-    "img/Elara/mage_elara/Hurt/hurt1.png",
-    "img/Elara/mage_elara/Hurt/hurt2.png",
-    "img/Elara/mage_elara/Hurt/hurt3.png",
-    "img/Elara/mage_elara/Hurt/hurt4.png",
+    "assets/img/elara/Hurt/hurt1.png",
+    "assets/img/elara/Hurt/hurt2.png",
+    "assets/img/elara/Hurt/hurt3.png",
+    "assets/img/elara/Hurt/hurt4.png",
   ];
   imagesDying = [
-    "img/Elara/mage_elara/Death/death1.png",
-    "img/Elara/mage_elara/Death/death2.png",
-    "img/Elara/mage_elara/Death/death3.png",
-    "img/Elara/mage_elara/Death/death4.png",
-    "img/Elara/mage_elara/Death/death5.png",
-    "img/Elara/mage_elara/Death/death6.png",
-    "img/Elara/mage_elara/Death/death7.png",
-    "img/Elara/mage_elara/Death/death8.png",
-    "img/Elara/mage_elara/Death/death9.png",
-    "img/Elara/mage_elara/Death/death10.png",
+    "assets/img/elara/Death/death1.png",
+    "assets/img/elara/Death/death2.png",
+    "assets/img/elara/Death/death3.png",
+    "assets/img/elara/Death/death4.png",
+    "assets/img/elara/Death/death5.png",
+    "assets/img/elara/Death/death6.png",
+    "assets/img/elara/Death/death7.png",
+    "assets/img/elara/Death/death8.png",
+    "assets/img/elara/Death/death9.png",
+    "assets/img/elara/Death/death10.png",
   ];
   imagesAttack = [
-    "img/Elara/mage_elara/Attack/attack1.png",
-    "img/Elara/mage_elara/Attack/attack2.png",
-    "img/Elara/mage_elara/Attack/attack3.png",
-    "img/Elara/mage_elara/Attack/attack4.png",
-    "img/Elara/mage_elara/Attack/attack5.png",
-    "img/Elara/mage_elara/Attack/attack6.png",
-    "img/Elara/mage_elara/Attack/attack7.png",
+    "assets/img/elara/Attack/attack1.png",
+    "assets/img/elara/Attack/attack2.png",
+    "assets/img/elara/Attack/attack3.png",
+    "assets/img/elara/Attack/attack4.png",
+    "assets/img/elara/Attack/attack5.png",
+    "assets/img/elara/Attack/attack6.png",
+    "assets/img/elara/Attack/attack7.png",
   ];
   idleTimer = 0;
   longIdleThreshold = 10000;
@@ -105,7 +91,7 @@ class Character extends MovableObject {
    * @method setObjectProperties
    */
   setObjectProperties() {
-    this.setImage("img/Elara/mage_elara/Jump/jump1.png");
+    this.setImage("assets/img/elara/Jump/jump1.png");
     this.y = 270;
     this.speed = 5;
     this.offset = {
@@ -121,7 +107,6 @@ class Character extends MovableObject {
    * @method loadAllImages
    */
   loadAllImages() {
-    this.loadImages(this.imagesIntro);
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesIdle);
     this.loadImages(this.imagesLongIdle);
