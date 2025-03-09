@@ -6,15 +6,6 @@ class Endboss extends MovableObject {
     "assets/img/enemies/endboss/dragon/Walk4.png",
     "assets/img/enemies/endboss/dragon/Walk5.png",
     "assets/img/enemies/endboss/dragon/Walk1.png",
-    "assets/img/enemies/endboss/dragon/Walk2.png",
-    "assets/img/enemies/endboss/dragon/Walk3.png",
-    "assets/img/enemies/endboss/dragon/Walk4.png",
-    "assets/img/enemies/endboss/dragon/Walk5.png",
-    "assets/img/enemies/endboss/dragon/Walk1.png",
-    "assets/img/enemies/endboss/dragon/Walk2.png",
-    "assets/img/enemies/endboss/dragon/Walk3.png",
-    "assets/img/enemies/endboss/dragon/Walk4.png",
-    "assets/img/enemies/endboss/dragon/Walk5.png",
     "assets/img/enemies/endboss/dragon/Attack1.png",
     "assets/img/enemies/endboss/dragon/Attack2.png",
     "assets/img/enemies/endboss/dragon/Attack3.png",
@@ -61,6 +52,7 @@ class Endboss extends MovableObject {
   fireballCooldown = 2000; // 2 seconds between attacks
   lastFireballTime = 0;
   currentImage = 0;
+  introPlayed = false;
   attackExecuted = false;
 
   constructor() {
@@ -83,6 +75,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.imagesIdle);
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesAttack);
+    this.loadImages(this.imagesHurt);
     this.loadImages(this.imagesDying);
   }
 
@@ -127,6 +120,9 @@ class Endboss extends MovableObject {
 
   updateStateMachine() {
     if (!this.isActive || this.isPaused) return;
+
+    console.log(this.state);
+
     if (this.isDying) {
       this.handleDyingState();
       return;
@@ -137,27 +133,58 @@ class Endboss extends MovableObject {
       return;
     }
 
-    if (this.isPlayerInRange()) {
-      this.changeState(this.EnemyState.ATTACKING);
-    } else {
-      this.changeState(this.EnemyState.WALKING);
+    if (this.isActive) {
+      // Berechne den aktuellen Frame für die Animation
+      const frame = this.currentImage % this.getCurrentAnimationLength();
+      this.handleStateSpecificLogic(frame);
     }
 
+    // // Zustandswechsel basierend auf Spieler-Position
+    // if (this.isPlayerInRange() && this.introPlayed) {
+    //   this.changeState(this.EnemyState.ATTACKING);
+    // } else {
+    //   this.changeState(this.EnemyState.WALKING);
+    // }
+  }
+
+  getCurrentAnimationLength() {
     switch (this.state) {
       case this.EnemyState.INTRO:
-        this.handleIntroState();
+        return this.imagesIntro.length;
+      case this.EnemyState.IDLE:
+        return this.imagesIdle.length;
+      case this.EnemyState.WALKING:
+        return this.imagesWalking.length;
+      case this.EnemyState.ATTACKING:
+        return this.imagesAttack.length;
+      case this.EnemyState.DYING:
+        return this.imagesDying.length;
+      default:
+        console.error("Unbekannter Zustand:", this.state);
+        return 0;
+    }
+  }
+
+  handleStateSpecificLogic(frame) {
+    switch (this.state) {
+      case this.EnemyState.INTRO:
+        this.handleIntroLogic(frame);
         break;
 
       case this.EnemyState.IDLE:
-        this.handleIdleState();
+        this.handleIdleLogic(frame);
         break;
 
       case this.EnemyState.WALKING:
-        this.handleWalkingState();
+        this.handleWalkingLogic(frame);
         break;
 
       case this.EnemyState.ATTACKING:
-        this.handleAttackState();
+        this.handleAttackLogic(frame);
+        break;
+
+      case this.EnemyState.DYING:
+        // Dying hat keine frame-spezifische Logik, nur Animation
         break;
 
       default:
@@ -166,23 +193,42 @@ class Endboss extends MovableObject {
   }
 
   changeState(newState) {
+    console.log(
+      "Vor Changestate - Zustand:",
+      this.state,
+      "Timer:",
+      this.stateTimer
+    );
     this.state = newState;
     this.stateTimer = 0;
     this.currentImage = 0; // Wichtig: Zurücksetzen bei Zustandswechsel
     this.attackExecuted = false;
+    console.log(
+      "nach Changestate - Zustand:",
+      this.state,
+      "Timer:",
+      this.stateTimer
+    );
   }
 
-  handleIntroState() {
-    this.audioEndbossRoar.play();
+  handleIntroLogic(frame) {
+    if (frame === 0) {
+      if (!this.introRoarPlayed) {
+        this.audioEndbossRoar.play();
+        this.introRoarPlayed = true;
+      }
+    }
     this.playAnimation(this.imagesIntro);
     this.moveLeft(this.speed);
 
     if (this.stateTimer++ > 8) {
       this.changeState(this.EnemyState.IDLE);
+      this.introRoarPlayed = false;
+      this.introPlayed = true;
     }
   }
 
-  handleIdleState() {
+  handleIdleLogic(frame) {
     this.playAnimation(this.imagesIdle);
 
     if (this.stateTimer++ > 6) {
@@ -190,7 +236,7 @@ class Endboss extends MovableObject {
     }
   }
 
-  handleWalkingState() {
+  handleWalkingLogic(frame) {
     this.playAnimation(this.imagesWalking);
     this.moveLeft(this.speed);
 
@@ -199,17 +245,16 @@ class Endboss extends MovableObject {
     }
   }
 
-
-  handleAttackState() {
+  handleAttackLogic(frame) {
     this.playAnimation(this.imagesAttack);
-    const attackFrame = this.currentImage % this.imagesAttack.length;
-
-    if (attackFrame >= 2 && !this.attackExecuted) {
+    if (frame === 2 && !this.attackExecuted) {
+      // Angriff ausführen, wenn der dritte Frame erreicht ist
       this.checkFirebreathAttack();
       this.attackExecuted = true;
     }
 
-    if (attackFrame >= this.imagesAttack.length - 1) {
+    if (frame >= this.imagesAttack.length - 1) {
+      // Nach Abschluss der Animation zurück zu Walking wechseln
       this.resetAttackState();
     }
   }
@@ -238,11 +283,15 @@ class Endboss extends MovableObject {
   }
 
   isPlayerInRange() {
-    return Math.abs(this.x - world.character.x) < 200;
+    return Math.abs(this.x - world.character.x) < 100;
   }
 
   handleDyingState() {
     this.playAnimation(this.imagesDying);
+  }
+
+  handleHurtState() {
+    this.playAnimation(this.imagesHurt);
   }
 
   /**
