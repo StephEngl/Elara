@@ -28,7 +28,6 @@ class LittleDragon extends MovableObject {
 
   /**
    * Loads all images for the LittleDragon.
-   * @method loadAllImages
    */
   loadAllImages() {
     this.loadImages(this.imagesIdle);
@@ -38,7 +37,6 @@ class LittleDragon extends MovableObject {
 
   /**
    * Sets the object properties for the LittleDragon.
-   * @method setObjectProperties
    */
   setObjectProperties(x) {
     this.setImage("assets/img/enemies/small_dragon/Idle1.png");
@@ -57,13 +55,11 @@ class LittleDragon extends MovableObject {
 
   /**
    * Animates the LittleDragon, including movement and animation.
-   * @method animate
    */
   animate() {
     setInterval(() => {
       this.moveLeft(this.speed, false, true);
     }, 1000 / 60);
-
     setInterval(() => {
       if (this.isDying) {
         this.playAnimation(this.imagesDying);
@@ -78,7 +74,6 @@ class LittleDragon extends MovableObject {
 
   /**
    * Initiates the dying sequence for the LittleDragon.
-   * @method die
    */
   die() {
     sounds.littleDragon.ko.play();

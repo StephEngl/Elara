@@ -1,3 +1,7 @@
+/**
+ * Represents a blue slime enemy.
+ * Extends the MovableObject class.
+ */
 class BlueSlime extends MovableObject {
   imagesWalking = [
     "assets/img/enemies/blue_slime/walk/walk1.png",
@@ -21,6 +25,10 @@ class BlueSlime extends MovableObject {
     "assets/img/enemies/blue_slime/dead/dead3.png",
   ];
 
+    /**
+   * Creates a BlueSlime instance.
+   * @param {number} x - The initial x-coordinate of the BlueSlime.
+   */
   constructor(x) {
     super();
     this.loadAllImages();
@@ -28,12 +36,19 @@ class BlueSlime extends MovableObject {
     this.animate();
   }
 
+    /**
+   * Loads all images for the BlueSlime.
+   */
   loadAllImages() {
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesAttacking);
     this.loadImages(this.imagesDying);
   }
 
+  /**
+   * Sets the object properties for the BlueSlime.
+   * @param {number} x - The initial x-coordinate of the BlueSlime.
+   */
   setObjectProperties(x) {
     this.setImage("assets/img/enemies/blue_slime/walk/walk1.png");
     this.y = 260;
@@ -52,13 +67,11 @@ class BlueSlime extends MovableObject {
   /**
    * Animates the BlueSlime's movement and appearance.
    * Handles walking and dying animations in separate intervals.
-   * @method animate
    */
   animate() {
     setInterval(() => {
       this.moveLeft(this.speed, false, true);
     }, 1000 / 60);
-
     setInterval(() => {
       if (this.isDying) {
         this.playAnimation(this.imagesDying);
@@ -74,7 +87,6 @@ class BlueSlime extends MovableObject {
   /**
    * Triggers the death sequence for the BlueSlime.
    * Plays a death sound and schedules the object for removal after 600ms.
-   * @method die
    */
   die() {
     sounds.blueSlime.ko.play();
