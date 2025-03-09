@@ -1,3 +1,7 @@
+/**
+ * Represents a small dragon enemy.
+ * Extends the MovableObject class.
+ */
 class LittleDragon extends MovableObject {
   imagesIdle = [
     "assets/img/enemies/small_dragon/Walk1.png",
@@ -19,6 +23,10 @@ class LittleDragon extends MovableObject {
     "assets/img/enemies/small_dragon/Death4.png",
   ];
 
+    /**
+   * Creates a LittleDragon instance.
+   * @param {number} x - The initial x-coordinate of the LittleDragon.
+   */
   constructor(x) {
     super();
     this.loadAllImages();
@@ -37,6 +45,7 @@ class LittleDragon extends MovableObject {
 
   /**
    * Sets the object properties for the LittleDragon.
+   * @param {number} x - The initial x-coordinate of the LittleDragon.
    */
   setObjectProperties(x) {
     this.setImage("assets/img/enemies/small_dragon/Idle1.png");

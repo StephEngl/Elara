@@ -1,7 +1,18 @@
+/**
+ * Represents a crystal object in the game.
+ * Extends the CollectableObject class.
+ */
 class Crystal extends CollectableObject {
   static lastX = 700;
   energyLevel;
 
+  /**
+   * Creates a Crystal instance.
+   * @param {number} [x] - The initial x-coordinate of the crystal. If not provided, it will be generated.
+   * @param {number} [y] - The initial y-coordinate of the crystal. If not provided, it will be randomly generated.
+   * @param {string} [imgSrc="assets/img/game_objects/fire-crystal.png"] - The image source for the crystal.
+   * @param {number} [energyLevel=1] - The energy level of the crystal.
+   */
   constructor(
     x,
     y,
@@ -17,7 +28,6 @@ class Crystal extends CollectableObject {
 
   /**
    * Generates an x position for the crystal based on the previous crystal's position.
-   * @method generateXPosition
    * @returns {number} The generated x position.
    */
   generateXPosition() {
@@ -26,6 +36,10 @@ class Crystal extends CollectableObject {
     return newX;
   }
 
+  /**
+   * Gets the energy level of the crystal.
+   * @returns {number} The energy level of the crystal.
+   */
   getEnergyLevel() {
     return this.energyLevel;
   }

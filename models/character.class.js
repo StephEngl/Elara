@@ -69,7 +69,7 @@ class Character extends MovableObject {
     "assets/img/elara/Attack/attack7.png",
   ];
   idleTimer = 0;
-  longIdleThreshold = 10000;
+  longIdleThreshold = 8000;
   isAttacking = false;
   jumpedOnEnemy = false;
 
@@ -82,8 +82,7 @@ class Character extends MovableObject {
     this.animate();
     this.defeatedAnimationFrame = 0;
     this.defeatedAnimationComplete = false;
-    this.deathAnimationInterval = null; // Intervall für die normale Todesanimation
-    this.finalDeathAnimationInterval = null; // Intervall für das schnelle Blinken
+    this.deathAnimationInterval = null;
   }
 
   /**

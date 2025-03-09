@@ -1,3 +1,7 @@
+/**
+ * @class World
+ * Represents the game world, handling game logic, drawing, and collision detection.
+ */
 class World {
   character = new Character();
   statusbar = new Statusbar();
@@ -9,6 +13,7 @@ class World {
   runInterval = null;
 
   /**
+   * Creates a World instance.
    * @param {HTMLCanvasElement} canvas - The canvas element to draw on.
    * @param {Keyboard} keyboard - The keyboard input handler.
    */
@@ -42,14 +47,13 @@ class World {
    */
   startMainLoop() {
     this.runInterval = setInterval(() => {
-      
       if (!isPaused) {
         if (this.character.x > 3200 && !this.endboss.isActive) {
           this.endboss.activate();
         }
         this.updateGameElements();
       }
-    }, 200);
+    }, 100);
   }
 
   /**
@@ -65,6 +69,7 @@ class World {
 
   /**
    * Starts the collision detection loop.
+   * @property {number} collisionInterval - Interval ID for the collision detection loop.
    */
   startCollisionLoop() {
     this.collisionInterval = setInterval(() => {
@@ -130,25 +135,58 @@ class World {
   checkFireballCollisions() {
     this.flyingObjects.forEach((fireball) => {
       this.level.enemies.forEach((enemy) => {
-        if (fireball.isColliding(enemy) && !fireball.isBossFire) {
-          if (enemy instanceof Endboss && enemy.energy > 0) {
-            enemy.hit(35);
-            enemy.isHurted = true;
-            console.log("Is hurted:", enemy);
-            console.log("ishurted:", enemy.isHurted);
-            
-          } else {
-            enemy.die();
-          }
-          fireball.shouldRemove = true;
-        }  
+        this.handleFireballCollision(fireball, enemy);
       });
-      if (fireball.isBossFire && fireball.isColliding(this.character)) {
-        this.character.hit(35);
-        this.statusbar.setPercentage(this.character.energy);
-        fireball.shouldRemove = true;
-      }
+      this.handleBossFireCollision(fireball);
     });
+  }
+
+  /**
+   * Handles collision logic between a fireball and an enemy.
+   * @param {FlyingObject} fireball - The fireball object.
+   * @param {MovableObject} enemy - The enemy object.
+   */
+  handleFireballCollision(fireball, enemy) {
+    if (this.isFireballCollidingWithEnemy(fireball, enemy)) {
+      this.applyFireballDamage(fireball, enemy);
+      fireball.shouldRemove = true;
+    }
+  }
+
+  /**
+   * Checks if a fireball is colliding with an enemy.
+   * @param {FlyingObject} fireball - The fireball object.
+   * @param {MovableObject} enemy - The enemy object.
+   * @returns {boolean} - True if the fireball is colliding with the enemy, false otherwise.
+   */
+  isFireballCollidingWithEnemy(fireball, enemy) {
+    return fireball.isColliding(enemy) && !fireball.isBossFire;
+  }
+
+  /**
+   * Applies damage to an enemy hit by a fireball.
+   * @param {FlyingObject} fireball - The fireball object.
+   * @param {MovableObject} enemy - The enemy object.
+   */
+  applyFireballDamage(fireball, enemy) {
+    if (enemy instanceof Endboss && enemy.energy > 0) {
+      enemy.hit(35);
+      enemy.isHurted = true;
+    } else {
+      enemy.die();
+    }
+  }
+
+  /**
+   * Handles collision logic between a boss fireball and the character.
+   * @param {FlyingObject} fireball - The boss's fireball object.
+   */
+  handleBossFireCollision(fireball) {
+    if (fireball.isBossFire && fireball.isColliding(this.character)) {
+      this.character.hit(35);
+      this.statusbar.setPercentage(this.character.energy);
+      fireball.shouldRemove = true;
+    }
   }
 
   /**
@@ -230,8 +268,10 @@ class World {
    */
   checkJumpingOn() {
     this.level.enemies.forEach((enemy) => {
+      if (enemy instanceof Endboss) {
+        return;
+      }
       if (this.character.isJumpedOn(enemy) && !enemy.isDying) {
-        console.log(`Elara jumped on ${enemy}`);
         enemy.die();
       }
     });
@@ -252,7 +292,7 @@ class World {
    */
   shouldCreateFireball() {
     const currentTime = Date.now();
-    const cooldownPeriod = 150;
+    const cooldownPeriod = 200;
     return (
       (this.keyboard.F || fireButtonPressed) &&
       this.crystalbar.collectedCrystals > 0 &&
@@ -265,9 +305,9 @@ class World {
    */
   createFireball() {
     this.character.playAnimation(this.character.imagesAttack);
+    sounds.character.attack.play();
     const fireball = this.createNewFireball();
     this.flyingObjects.push(fireball);
-    sounds.character.attack.play();
     this.decreaseCrystalbar();
     fireButtonPressed = false;
     this.lastFireballTime = Date.now();

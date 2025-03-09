@@ -1,7 +1,14 @@
+/**
+ * Represents the crystal bar in the game, displaying the number of collected crystals.
+ * Extends the DrawableObject class.
+ */
 class Crystalbar extends DrawableObject {
   collectedCrystals = 0;
   crystalImage = new Image();
 
+  /**
+   * Creates a Crystalbar instance.
+   */
   constructor() {
     super();
     this.crystalImage.src = "assets/img/game_objects/fire-crystal.png";
@@ -52,7 +59,6 @@ class Crystalbar extends DrawableObject {
 
   /**
    * Decreases the number of collected crystals.
-   * @method decreaseCrystalCount
    */
   decreaseCrystalCount() {
     this.collectedCrystals--;

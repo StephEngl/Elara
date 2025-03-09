@@ -1,3 +1,6 @@
+/**
+ * Represents a level in the game.
+ */
 class Level {
   enemies;
   lights;
@@ -7,6 +10,15 @@ class Level {
   backgroundMusic;
   collectableObjects;
 
+  /**
+   * Creates a Level instance.
+   * @param {MovableObject[]} enemies - An array of enemies for the level.
+   * @param {Light[]} lights - An array of lights for the level.
+   * @param {BackgroundObject[]} backgroundObjects - An array of background objects for the level.
+   * @param {BackgroundObject[]} foregroundObjects - An array of foreground objects for the level.
+   * @param {string} backgroundMusicSrc - The source URL of the background music.
+   * @param {CollectableObject[]} collectableObjects - An array of collectable objects for the level.
+   */
   constructor(
     enemies,
     lights,
@@ -26,7 +38,6 @@ class Level {
 
   /**
    * Plays the background music for the level.
-   * @method playBackgroundMusic
    */
   playBackgroundMusic() {
     if (!isMuted) {
@@ -36,7 +47,6 @@ class Level {
 
   /**
    * Stops the background music for the level.
-   * @method stopBackgroundMusic
    */
   stopBackgroundMusic() {
     this.backgroundMusic.pause();

@@ -6,6 +6,9 @@
 class MovableObject extends DrawableObject {
   lastHit;
 
+  /**
+   * Creates a MovableObject instance.
+   */
   constructor() {
     super();
     this.speed;
@@ -44,8 +47,7 @@ class MovableObject extends DrawableObject {
     }
     if (this instanceof Endboss) {
       return false;
-    }
-     else {
+    } else {
       return this.y < 280;
     }
   }
@@ -58,19 +60,21 @@ class MovableObject extends DrawableObject {
     this.otherDirection = value;
   }
 
-    /**
+  /**
    * Checks if the player is in range of the Endboss.
+   * @param {number} distance - The distance to check for player proximity.
    * @returns {boolean} True if the player is in range, false otherwise.
    */
-    isPlayerInRange(distance) {
-      if (!world || !world.character) {
-        return;
-      }
-      return Math.abs(this.x - world.character.x) < distance;
+  isPlayerInRange(distance) {
+    if (!world || !world.character) {
+      return;
     }
+    return Math.abs(this.x - world.character.x) < distance;
+  }
 
   /**
    * Handles the logic for when the character is hit, reducing energy based on conditions.
+   * @param {number} [damage=10] - The amount of damage to inflict.
    */
   hit(damage = 10) {
     if (!this.isHurt() && !this.isAboveGround() && !this.jumpedOnEnemy) {
@@ -79,7 +83,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Reduces the character's energy and updates the lastHit timestamp.
+   * Reduces movable object's energy and updates the lastHit timestamp.
+   * @param {number} damage - The amount of energy to reduce.
    */
   reduceEnergy(damage) {
     this.energy -= damage;
@@ -90,7 +95,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Checks if the character is currently hurt (recently hit)
+   * Checks if movable object is currently hurt (recently hit)
    * for giving back time for showing hurt-animation.
    * @returns {boolean} True if the character is hurt, false otherwise.
    */
@@ -126,18 +131,20 @@ class MovableObject extends DrawableObject {
     if (!this.isPaused) {
       this.x -= speed;
     }
-  }  
+  }
+
   /**
-  * Plays a sound if the game is not paused and not muted.
-  * @param {HTMLAudioElement} sound - The sound element to play.
-  * @returns {HTMLAudioElement | undefined} The sound element if played, undefined otherwise.
-  */
- playSound(sound) {
-   if (!this.world.isPaused && !isMuted) {
-     sound.play();
-     return sound;
-   }
- }
+   * Plays a sound if the game is not paused and not muted.
+   * @param {HTMLAudioElement} sound - The sound element to play.
+   * @returns {HTMLAudioElement | undefined} The sound element if played, undefined otherwise.
+   */
+  playSound(sound) {
+    if (!this.world.isPaused && !isMuted) {
+      sound.play();
+      return sound;
+    }
+  }
+
   /**
    * Plays an animation by cycling through a set of images.
    * @param {string[]} imagesToChange - An array of image paths to use for the animation.
