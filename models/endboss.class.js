@@ -39,6 +39,13 @@ class Endboss extends MovableObject {
     "assets/img/enemies/endboss/dragon/Death3.png",
     "assets/img/enemies/endboss/dragon/Death4.png",
     "assets/img/enemies/endboss/dragon/Death5.png",
+    "assets/img/enemies/endboss/dragon/Death5.png",
+    "assets/img/enemies/endboss/dragon/Death5.png",
+    "assets/img/enemies/endboss/dragon/Death5.png",
+    "assets/img/enemies/endboss/dragon/Death5.png",
+    "assets/img/enemies/endboss/dragon/Death5.png",
+    "assets/img/enemies/endboss/dragon/Death5.png",
+    "assets/img/enemies/endboss/dragon/Death5.png",
   ];
   hadFirstContact = false;
   EnemyState = {
@@ -123,7 +130,7 @@ class Endboss extends MovableObject {
 
     console.log(this.state);
 
-    if (this.isDying) {
+    if (this.isDead()) {
       this.handleDyingState();
       return;
     }
@@ -134,17 +141,9 @@ class Endboss extends MovableObject {
     }
 
     if (this.isActive) {
-      // Berechne den aktuellen Frame für die Animation
       const frame = this.currentImage % this.getCurrentAnimationLength();
       this.handleStateSpecificLogic(frame);
     }
-
-    // // Zustandswechsel basierend auf Spieler-Position
-    // if (this.isPlayerInRange() && this.introPlayed) {
-    //   this.changeState(this.EnemyState.ATTACKING);
-    // } else {
-    //   this.changeState(this.EnemyState.WALKING);
-    // }
   }
 
   getCurrentAnimationLength() {
@@ -254,7 +253,6 @@ class Endboss extends MovableObject {
     }
 
     if (frame >= this.imagesAttack.length - 1) {
-      // Nach Abschluss der Animation zurück zu Walking wechseln
       this.resetAttackState();
     }
   }
@@ -283,11 +281,12 @@ class Endboss extends MovableObject {
   }
 
   isPlayerInRange() {
-    return Math.abs(this.x - world.character.x) < 100;
+    return Math.abs(this.x - world.character.x) < 150;
   }
 
   handleDyingState() {
     this.playAnimation(this.imagesDying);
+    this.die();
   }
 
   handleHurtState() {
@@ -301,11 +300,11 @@ class Endboss extends MovableObject {
   die() {
     this.isDying = true;
     this.audioEndbossDefeated.play();
-    this.audioEndbossDefeated.playbackRate = 1.1;
+    this.audioEndbossDefeated.playbackRate = 1.5;
     setTimeout(() => {
       this.shouldRemove = true;
       gameWon = true;
       stopGame();
-    }, 900);
+    }, 2000);
   }
 }

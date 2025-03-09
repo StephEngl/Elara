@@ -131,9 +131,13 @@ class World {
     this.flyingObjects.forEach((fireball) => {
       this.level.enemies.forEach((enemy) => {
         if (fireball.isColliding(enemy) && !fireball.isBossFire) {
-          enemy.die();
+          if (enemy instanceof Endboss && enemy.energy > 0) {
+            enemy.hit(35);
+          } else {
+            enemy.die();
+          }
           fireball.shouldRemove = true;
-        }
+        }  
       });
       if (fireball.isBossFire && fireball.isColliding(this.character)) {
         this.character.hit(35);
@@ -385,7 +389,7 @@ class World {
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
+    // mo.drawFrame(this.ctx);
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

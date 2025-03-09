@@ -64,28 +64,28 @@ class DrawableObject {
  * @method drawFrame
  * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
  */
-  drawFrame(ctx) {
-    if (
-      this instanceof Character ||
-      this instanceof LittleDragon ||
-      this instanceof BlueSlime ||
-      this instanceof Endboss ||
-      this instanceof FlyingObject ||
-      this instanceof CollectableObject
-    ) {
-      ctx.beginPath();
-      ctx.lineWidth = "5";
-      ctx.strokeStyle = "transparent";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.lineWidth = "3";
-      ctx.strokeStyle = "pink";
-      let rect = this.getCurrentCollisionRect();
-      ctx.rect(rect.x1, rect.y1, rect.width, rect.height);
-      ctx.stroke();
-    }
-  }
+  // drawFrame(ctx) {
+  //   if (
+  //     this instanceof Character ||
+  //     this instanceof LittleDragon ||
+  //     this instanceof BlueSlime ||
+  //     this instanceof Endboss ||
+  //     this instanceof FlyingObject ||
+  //     this instanceof CollectableObject
+  //   ) {
+  //     ctx.beginPath();
+  //     ctx.lineWidth = "5";
+  //     ctx.strokeStyle = "transparent";
+  //     ctx.rect(this.x, this.y, this.width, this.height);
+  //     ctx.stroke();
+  //     ctx.beginPath();
+  //     ctx.lineWidth = "3";
+  //     ctx.strokeStyle = "teal";
+  //     let rect = this.getCurrentCollisionRect();
+  //     ctx.rect(rect.x1, rect.y1, rect.width, rect.height);
+  //     ctx.stroke();
+  //   }
+  // }
 
   /**
  * Gets the current collision rectangle.

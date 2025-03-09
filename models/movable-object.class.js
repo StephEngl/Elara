@@ -41,7 +41,11 @@ class MovableObject extends DrawableObject {
   isAboveGround() {
     if (this instanceof FlyingObject) {
       return true;
-    } else {
+    }
+    if (this instanceof Endboss) {
+      return false;
+    }
+     else {
       return this.y < 280;
     }
   }
@@ -58,7 +62,7 @@ class MovableObject extends DrawableObject {
    * Handles the logic for when the character is hit, reducing energy based on conditions.
    */
   hit(damage = 10) {
-    if (!this.isHurt() && !this.isAboveGround() && !this.elaraJumpedOnEnemy) {
+    if (!this.isHurt() && !this.isAboveGround() && !this.jumpedOnEnemy) {
       this.reduceEnergy(damage);
     }
   }
@@ -83,8 +87,6 @@ class MovableObject extends DrawableObject {
     let timePassed = new Date().getTime() - this.lastHit;
     timePassed = timePassed / 1000;
     let isHurted = timePassed < 0.8; //showing 4 images from hurt state (200ms)
-    if (isHurted) {
-    }
     return isHurted;
   }
 
