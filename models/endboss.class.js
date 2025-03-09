@@ -93,8 +93,8 @@ class Endboss extends MovableObject {
   setObjectProperties() {
     this.height = 600;
     this.width = 600;
-    this.speed = 20;
-    this.x = 1000; //3800
+    this.speed = 30;
+    this.x = 3800;
     this.y = -40;
     this.offset = {
       top: 300,
@@ -127,8 +127,6 @@ class Endboss extends MovableObject {
 
   updateStateMachine() {
     if (!this.isActive || this.isPaused) return;
-
-    console.log(this.state);
 
     if (this.isDead()) {
       this.handleDyingState();
@@ -192,22 +190,10 @@ class Endboss extends MovableObject {
   }
 
   changeState(newState) {
-    console.log(
-      "Vor Changestate - Zustand:",
-      this.state,
-      "Timer:",
-      this.stateTimer
-    );
     this.state = newState;
     this.stateTimer = 0;
-    this.currentImage = 0; // Wichtig: Zurücksetzen bei Zustandswechsel
+    this.currentImage = 0;
     this.attackExecuted = false;
-    console.log(
-      "nach Changestate - Zustand:",
-      this.state,
-      "Timer:",
-      this.stateTimer
-    );
   }
 
   handleIntroLogic(frame) {
@@ -247,7 +233,6 @@ class Endboss extends MovableObject {
   handleAttackLogic(frame) {
     this.playAnimation(this.imagesAttack);
     if (frame === 2 && !this.attackExecuted) {
-      // Angriff ausführen, wenn der dritte Frame erreicht ist
       this.checkFirebreathAttack();
       this.attackExecuted = true;
     }
@@ -264,7 +249,7 @@ class Endboss extends MovableObject {
   }
 
   checkFirebreathAttack() {
-    if (this.isPlayerInRange() && this.canFire() && !isPaused) {
+    if (this.canFire() && !isPaused) {
       this.createDragonFire();
       this.lastFireballTime = Date.now();
     }
@@ -275,13 +260,13 @@ class Endboss extends MovableObject {
   }
 
   createDragonFire() {
-    const fireball = new FlyingObject(this.x - 20, this.y + 230, true, true);
+    const fireball = new FlyingObject(this.x - 50, this.y + 230, true, true);
     world.flyingObjects.push(fireball);
     this.audioEndbossFire.play();
   }
 
   isPlayerInRange() {
-    return Math.abs(this.x - world.character.x) < 150;
+    return Math.abs(this.x - world.character.x) < 180;
   }
 
   handleDyingState() {
@@ -291,6 +276,12 @@ class Endboss extends MovableObject {
 
   handleHurtState() {
     this.playAnimation(this.imagesHurt);
+    this.audioEndbossHurt.play();
+
+    if (this.stateTimer++ > 2) {
+      this.isHurted = false;
+      this.changeState(this.EnemyState.WALKING);
+    }
   }
 
   /**
@@ -302,9 +293,8 @@ class Endboss extends MovableObject {
     this.audioEndbossDefeated.play();
     this.audioEndbossDefeated.playbackRate = 1.5;
     setTimeout(() => {
-      this.shouldRemove = true;
       gameWon = true;
       stopGame();
-    }, 2000);
+    }, 1500);
   }
 }

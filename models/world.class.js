@@ -37,14 +37,14 @@ class World {
     this.startCollisionLoop();
   }
 
-  /** this.character.x > 3200
+  /**
    * Starts the main game loop for background music, flying objects and cleaning up.
    */
   startMainLoop() {
     this.runInterval = setInterval(() => {
       
       if (!isPaused) {
-        if (this.character.x > 500 && !this.endboss.isActive) {
+        if (this.character.x > 3200 && !this.endboss.isActive) {
           this.endboss.activate();
         }
         this.updateGameElements();
@@ -133,6 +133,10 @@ class World {
         if (fireball.isColliding(enemy) && !fireball.isBossFire) {
           if (enemy instanceof Endboss && enemy.energy > 0) {
             enemy.hit(35);
+            enemy.isHurted = true;
+            console.log("Is hurted:", enemy);
+            console.log("ishurted:", enemy.isHurted);
+            
           } else {
             enemy.die();
           }

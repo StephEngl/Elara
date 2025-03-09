@@ -39,8 +39,8 @@ class FlyingObject extends MovableObject {
   setObjectProperties(x, y, isBossFire) {
     this.x = x;
     this.y = y;
-    this.width = isBossFire ? 200 : 50;
-    this.height = isBossFire ? 200 : 50;
+    this.width = isBossFire ? 250 : 50;
+    this.height = isBossFire ? 250 : 50;
     this.speedX = isBossFire ? 10 : 40;
   }
 
