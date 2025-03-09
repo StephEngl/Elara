@@ -1,11 +1,11 @@
 class Statusbar extends DrawableObject {
   imagesLifes = [
-    "img/Elara/statusbar/lifes/0.png",
-    "img/Elara/statusbar/lifes/20.png",
-    "img/Elara/statusbar/lifes/40.png",
-    "img/Elara/statusbar/lifes/60.png",
-    "img/Elara/statusbar/lifes/80.png",
-    "img/Elara/statusbar/lifes/100.png",
+    "assets/img/game_objects/statusbars/0.png",
+    "assets/img/game_objects/statusbars/20.png",
+    "assets/img/game_objects/statusbars/40.png",
+    "assets/img/game_objects/statusbars/60.png",
+    "assets/img/game_objects/statusbars/80.png",
+    "assets/img/game_objects/statusbars/100.png",
   ];
   percentage = 100;
 

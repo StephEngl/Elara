@@ -248,7 +248,6 @@ canvas {
 .orientation-dialog-container {
   width: 100vw;
   height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
   display: none;
@@ -274,16 +273,23 @@ canvas {
   .canvas_container {
     width: 100%;
   }
+
+  .mobile-buttons-right,
+  .control-buttons {
+    right: 30px;
+  }
 }
 
-@media only screen and (max-height: 480px) {
+@media only screen and (max-height: 600px) {
   h1 {
     margin-top: 10px;
     position: absolute;
-    top: 0;
+    bottom: 0;
+    left: 5%;
     font-size: 18px;
     color: antiquewhite;
     right: 16px;
+    z-index: 50;
   }
 
   canvas,
