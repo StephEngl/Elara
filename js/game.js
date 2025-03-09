@@ -292,9 +292,6 @@ window.addEventListener("keydown", (event) => {
     case "KeyP":
       togglePause();
       break;
-    default:
-      console.log("Unhandled key released:", event.code);
-      break;
   }
 });
 

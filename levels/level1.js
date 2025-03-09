@@ -1,5 +1,11 @@
 let level1;
 
+/**
+ * Initializes level 1 with game objects and configurations
+ * @function initLevel
+ * @description Creates level 1 with enemies, lights, background elements, collectibles, and audio
+ * @see Level
+ */
 function initLevel() {
   let usedPositions = [];
   level1 = new Level(
