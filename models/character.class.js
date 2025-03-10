@@ -75,6 +75,7 @@ class Character extends MovableObject {
   idleTimer = 0;
   longIdleThreshold = 8000;
   isAttacking = false;
+  lastFireballTime = 0;
 
   /**
    * Initializes a new instance of the Character class and sets up its properties, animations, and behavior.
@@ -126,6 +127,7 @@ class Character extends MovableObject {
    * @method loadAudio
    */
   loadAudio() {
+    this.audioCharakterAttack = sounds.character.attack;
     this.audioCharakterDefeated = sounds.character.ko;
     this.audioCharakterHit = sounds.character.hurt;
     this.audioCharakterJump = sounds.character.jump;
@@ -341,4 +343,53 @@ class Character extends MovableObject {
     this.audioCharakterDefeated.play();
     this.audioCharakterDefeated.playbackRate = 0.7;
   }
+
+  /**
+   * Checks if a fireball should be created and creates one if necessary.
+   */
+  checkFlyingObjects() {
+    if (this.shouldCreateFireball()) {
+      this.createFireball();
+    }
+  }
+
+  /**
+   * Checks if the conditions to create a fireball are met.
+   * @returns {boolean} True if a fireball should be created, false otherwise.
+   */
+  shouldCreateFireball() {
+    const currentTime = Date.now();
+    const cooldownPeriod = 200;
+    return (
+      (this.world.keyboard.F || fireButtonPressed) &&
+      this.world.crystalbar.collectedCrystals > 0 &&
+      currentTime - this.lastFireballTime >= cooldownPeriod
+    );
+  }
+
+  /**
+   * Creates a new fireball and adds it to the flyingObjects array.
+   */
+  createFireball() {
+    this.playAnimation(this.imagesAttack);
+    this.audioCharakterAttack.play();
+    const fireball = this.createNewFireball();
+    this.world.flyingObjects.push(fireball);
+    this.world.decreaseCrystalbar();
+    fireButtonPressed = false;
+    this.lastFireballTime = Date.now();
+  }
+
+    /**
+   * Creates a new FlyingObject (fireball).
+   * @returns {FlyingObject} The new FlyingObject.
+   */
+    createNewFireball() {
+      return new FlyingObject(
+        this.x + this.offset.right,
+        this.y + this.offset.top,
+        this.otherDirection
+      );
+    }
+
 }

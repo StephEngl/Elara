@@ -1,5 +1,4 @@
 /**
- * @class World
  * Represents the game world, handling game logic, drawing, and collision detection.
  */
 class World {
@@ -8,7 +7,6 @@ class World {
   crystalbar = new Crystalbar();
   level = level1;
   camera_x;
-  lastFireballTime = 0;
   flyingObjects = [];
   runInterval = null;
 
@@ -61,7 +59,7 @@ class World {
    */
   updateGameElements() {
     startBackgroundMusic();
-    this.checkFlyingObjects();
+    this.character.checkFlyingObjects();
     this.checkFireballCollisions();
     this.flyingObjects = this.removeObjectsFromGame(this.flyingObjects);
     this.level.enemies = this.removeObjectsFromGame(this.level.enemies);
@@ -145,7 +143,7 @@ class World {
    */
   handleFireballCollision(fireball, enemy) {
     if (this.isFireballCollidingWithEnemy(fireball, enemy)) {
-      this.applyFireballDamage(fireball, enemy);
+      this.applyFireballDamage(enemy);
       fireball.shouldRemove = true;
     }
   }
@@ -162,15 +160,14 @@ class World {
 
   /**
    * Applies damage to an enemy hit by a fireball.
-   * @param {FlyingObject} fireball - The fireball object.
    * @param {MovableObject} enemy - The enemy object.
    */
-  applyFireballDamage(fireball, enemy) {
+  applyFireballDamage(enemy) {
     if (enemy instanceof Endboss && enemy.energy > 0) {
       enemy.hit(35);
       enemy.isHurted = true;
     } else {
-      enemy.die();
+      enemy.reduceEnergy(100);
     }
   }
 
@@ -269,57 +266,9 @@ class World {
         return;
       }
       if (this.character.isJumpedOn(enemy) && !enemy.isDying) {
-        enemy.die();
+        enemy.reduceEnergy(100);
       }
     });
-  }
-
-  /**
-   * Checks if a fireball should be created and creates one if necessary.
-   */
-  checkFlyingObjects() {
-    if (this.shouldCreateFireball()) {
-      this.createFireball();
-    }
-  }
-
-  /**
-   * Checks if the conditions to create a fireball are met.
-   * @returns {boolean} True if a fireball should be created, false otherwise.
-   */
-  shouldCreateFireball() {
-    const currentTime = Date.now();
-    const cooldownPeriod = 200;
-    return (
-      (this.keyboard.F || fireButtonPressed) &&
-      this.crystalbar.collectedCrystals > 0 &&
-      currentTime - this.lastFireballTime >= cooldownPeriod
-    );
-  }
-
-  /**
-   * Creates a new fireball and adds it to the flyingObjects array.
-   */
-  createFireball() {
-    this.character.playAnimation(this.character.imagesAttack);
-    sounds.character.attack.play();
-    const fireball = this.createNewFireball();
-    this.flyingObjects.push(fireball);
-    this.decreaseCrystalbar();
-    fireButtonPressed = false;
-    this.lastFireballTime = Date.now();
-  }
-
-  /**
-   * Creates a new FlyingObject (fireball).
-   * @returns {FlyingObject} The new FlyingObject.
-   */
-  createNewFireball() {
-    return new FlyingObject(
-      this.character.x + this.character.offset.right,
-      this.character.y + this.character.offset.top,
-      this.character.otherDirection
-    );
   }
 
   /**
@@ -430,7 +379,6 @@ class World {
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
-    // mo.drawFrame(this.ctx);
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

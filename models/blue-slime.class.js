@@ -33,6 +33,7 @@ class BlueSlime extends MovableObject {
     super();
     this.loadAllImages();
     this.setObjectProperties(x);
+    this.loadAudio();
     this.animate();
   }
 
@@ -64,6 +65,14 @@ class BlueSlime extends MovableObject {
     this.otherDirection = true;
   }
 
+    /**
+   * Loads audio files for enemy actions.
+   * @method loadAudio
+   */
+    loadAudio() {
+      this.audioBlueSlimeDefeated = sounds.blueSlime.ko;
+    }
+
   /**
    * Animates the BlueSlime's movement and appearance.
    * Handles walking and dying animations in separate intervals.
@@ -89,7 +98,7 @@ class BlueSlime extends MovableObject {
    * Plays a death sound and schedules the object for removal after 600ms.
    */
   die() {
-    sounds.blueSlime.ko.play();
+    this.audioBlueSlimeDefeated.play();
     this.isDying = true;
     setTimeout(() => {
       this.shouldRemove = true;

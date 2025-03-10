@@ -3,7 +3,7 @@
  * Extends the MovableObject class.
  */
 class LittleDragon extends MovableObject {
-  imagesIdle = [
+  imagesWalking = [
     "assets/img/enemies/small_dragon/Walk1.png",
     "assets/img/enemies/small_dragon/Walk2.png",
     "assets/img/enemies/small_dragon/Walk3.png",
@@ -23,7 +23,7 @@ class LittleDragon extends MovableObject {
     "assets/img/enemies/small_dragon/Death4.png",
   ];
 
-    /**
+  /**
    * Creates a LittleDragon instance.
    * @param {number} x - The initial x-coordinate of the LittleDragon.
    */
@@ -31,6 +31,7 @@ class LittleDragon extends MovableObject {
     super();
     this.loadAllImages();
     this.setObjectProperties(x);
+    this.loadAudio();
     this.animate();
   }
 
@@ -38,7 +39,7 @@ class LittleDragon extends MovableObject {
    * Loads all images for the LittleDragon.
    */
   loadAllImages() {
-    this.loadImages(this.imagesIdle);
+    this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesAttacking);
     this.loadImages(this.imagesDying);
   }
@@ -48,7 +49,7 @@ class LittleDragon extends MovableObject {
    * @param {number} x - The initial x-coordinate of the LittleDragon.
    */
   setObjectProperties(x) {
-    this.setImage("assets/img/enemies/small_dragon/Idle1.png");
+    this.setImage("assets/img/enemies/small_dragon/Walk1.png");
     this.y = 310;
     this.x = x;
     this.offset = {
@@ -63,7 +64,16 @@ class LittleDragon extends MovableObject {
   }
 
   /**
+   * Loads audio files for enemy actions.
+   * @method loadAudio
+   */
+  loadAudio() {
+    this.audioLittleDragonDefeated = sounds.littleDragon.ko;
+  }
+
+  /**
    * Animates the LittleDragon, including movement and animation.
+   * Handles walking and dying animations in separate intervals.
    */
   animate() {
     setInterval(() => {
@@ -76,7 +86,7 @@ class LittleDragon extends MovableObject {
       if (this.isPlayerInRange(150) && !this.isAboveGround()) {
         this.playAnimation(this.imagesAttacking);
       } else {
-        this.playAnimation(this.imagesIdle);
+        this.playAnimation(this.imagesWalking);
       }
     }, 200);
   }
@@ -85,7 +95,7 @@ class LittleDragon extends MovableObject {
    * Initiates the dying sequence for the LittleDragon.
    */
   die() {
-    sounds.littleDragon.ko.play();
+    this.audioLittleDragonDefeated.play();
     this.isDying = true;
     setTimeout(() => {
       this.shouldRemove = true;
