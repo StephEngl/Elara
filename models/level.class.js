@@ -6,7 +6,7 @@ class Level {
   lights;
   backgroundObjects;
   foregroundObjects;
-  level_end_x = 3600;
+  level_end_x = 3800;
   backgroundMusic;
   collectableObjects;
 

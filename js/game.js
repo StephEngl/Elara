@@ -1,4 +1,5 @@
 let element;
+let fullscreenContainer;
 let world;
 let keyboard = new Keyboard();
 let fireButtonPressed = false;
@@ -12,6 +13,7 @@ let gameOver = false;
  */
 function init() {
   element = document.getElementById("canvas");
+  fullscreenContainer = document.getElementById("canvas_wrapper");
   getFromLocalStorage();
   showStartScreen();
 }
@@ -197,7 +199,7 @@ function clearAllIntervals() {
  * Toggles fullscreen mode.
  */
 function toggleFullscreen() {
-  isFullscreen() ? exitFullscreen() : enterFullscreen(element);
+  isFullscreen() ? exitFullscreen() : enterFullscreen(fullscreenContainer);
 }
 
 /**

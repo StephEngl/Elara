@@ -97,6 +97,7 @@ class Character extends MovableObject {
    */
   setObjectProperties() {
     this.setImage("assets/img/elara/Jump/jump1.png");
+    this.x = 50;
     this.y = 270;
     this.speed = 5;
     this.offset = {

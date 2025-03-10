@@ -8,6 +8,7 @@ class World {
   level = level1;
   flyingObjects = [];
   runInterval = null;
+  camera_x = 50;
 
   /**
    * Creates a World instance.
@@ -301,11 +302,11 @@ class World {
     const characterX = this.character.x;
 
     // Die Kamera soll sich erst bewegen, wenn der Charakter die Mitte des Canvas erreicht hat
-    let targetCameraX = -characterX + 200;
+    let targetCameraX = -characterX + 300;
 
     // // Begrenze die Kamera-Position, damit sie nicht über den Level hinausgeht
-    targetCameraX = Math.max(targetCameraX, -this.level.level_end_x + canvasWidth);
-    targetCameraX = Math.min(targetCameraX, 0);
+    targetCameraX = Math.max(targetCameraX, -4000 + canvasWidth);
+    // targetCameraX = Math.min(-680, targetCameraX);
 
     // Setze die Kamera-Position
     this.camera_x = targetCameraX;
