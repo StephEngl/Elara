@@ -7,6 +7,8 @@ body {
   font-family: "magical_neverland", Arial, Helvetica, sans-serif;
   height: 100vh;
   margin: 0;
+  color: #217221;
+  text-shadow: 0 0 black;
   background-image: url("assets/img/backgrounds/bg_forest.jpg");
   background-position: center;
 }
@@ -20,14 +22,6 @@ h2 {
   margin-top: 36px;
   text-align: center;
 }
-
-/* h2 {
-  font-size: 24px;
-  margin-top: 36px;
-  text-align: center;
-  color: #217221;
-  text-shadow: 0 0 black;
-} */
 
 p {
   font-size: 16px;
@@ -172,6 +166,7 @@ canvas {
   background-image: url("assets/img/game_objects/button.png");
   background-position: center;
   border: none;
+  color: #217221;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;

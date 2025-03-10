@@ -6,7 +6,6 @@ class World {
   statusbar = new Statusbar();
   crystalbar = new Crystalbar();
   level = level1;
-  camera_x;
   flyingObjects = [];
   runInterval = null;
 
@@ -100,7 +99,7 @@ class World {
    */
   checkCollisionsWithEnemy(enemies) {
     enemies.forEach((enemy) => {
-      if (enemy.isDying) return;
+      if (enemy.isDead()) return;
       if (this.character.isColliding(enemy)) {
         const isEndboss = enemies.indexOf(enemy) === enemies.length - 1;
         const damage = isEndboss ? 40 : 10;
@@ -285,6 +284,7 @@ class World {
    */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.updateCameraPosition();
     if (!isPaused) {
       this.drawGameElements();
     } else {
@@ -294,6 +294,21 @@ class World {
     requestAnimationFrame(() => {
       self.draw();
     });
+  }
+
+  updateCameraPosition() {
+    const canvasWidth = this.canvas.width;
+    const characterX = this.character.x;
+
+    // Die Kamera soll sich erst bewegen, wenn der Charakter die Mitte des Canvas erreicht hat
+    let targetCameraX = -characterX + 200;
+
+    // // Begrenze die Kamera-Position, damit sie nicht über den Level hinausgeht
+    targetCameraX = Math.max(targetCameraX, -this.level.level_end_x + canvasWidth);
+    targetCameraX = Math.min(targetCameraX, 0);
+
+    // Setze die Kamera-Position
+    this.camera_x = targetCameraX;
   }
 
   /**

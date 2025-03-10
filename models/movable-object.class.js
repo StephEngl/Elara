@@ -18,7 +18,6 @@ class MovableObject extends DrawableObject {
     this.speedY = 0;
     this.acceleration = 2.5;
     this.energy = 100;
-    this.isDying = false;
     this.soundPlayed = false;
     this.isPaused = false;
     this.isHurted = false;
@@ -73,11 +72,11 @@ class MovableObject extends DrawableObject {
     return Math.abs(this.x - world.character.x) < distance;
   }
 
-   /**
+  /**
    * Animates the little enemies except Endboss, including movement and animation.
    * Handles walking and dying animations in separate intervals.
    */
-   animateEnemies() {
+  animateEnemies() {
     setInterval(() => {
       if (!this.isDead()) {
         this.moveLeft(this.speed, false, true);
@@ -97,11 +96,11 @@ class MovableObject extends DrawableObject {
     }, 200);
   }
 
-   /**
-   * Handles the character's death state.
+  /**
+   * Handles the enemies death state.
    * @method handleDeathState
    */
-   handleDeathState(dyingTimeout) {
+  handleDeathState(dyingTimeout) {
     this.playAnimation(this.imagesDying);
     setTimeout(() => {
       this.shouldRemove = true;
@@ -147,7 +146,6 @@ class MovableObject extends DrawableObject {
    * @returns {boolean} True if the character is dead, false otherwise.
    */
   isDead() {
-    this.isDying = true;
     return this.energy == 0;
   }
 

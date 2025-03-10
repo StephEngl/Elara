@@ -63,7 +63,7 @@ class LittleDragon extends MovableObject {
     };
     this.speed = 0.3 + Math.random() * 0.4;
     this.otherDirection = true;
-    this.dyingTimeout = 600; // Nach 700ms (3,5 Bilder bei 200ms Intervall) wird das Objekt entfernt
+    this.dyingTimeout = 600;
   }
 
   /**

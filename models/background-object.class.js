@@ -12,7 +12,8 @@ class BackgroundObject extends MovableObject {
    * @param {number} x - The initial x-coordinate of the background object.
    */
   constructor(imgPath, x) {
-    super().setImage(imgPath);
+    super();
+    this.setImage(imgPath);
     this.x = x;
     this.y = 480 - this.height;
   }

@@ -31,7 +31,10 @@ class Crystal extends CollectableObject {
    * @returns {number} The generated x position.
    */
   generateXPosition() {
-    let newX = Crystal.lastX + 300 + Math.random() * 200;
+    let newX = Crystal.lastX + 250 + Math.random() * 200;
+    if (newX > 3000) {
+      newX = -500;
+    }
     Crystal.lastX = newX;
     return newX;
   }

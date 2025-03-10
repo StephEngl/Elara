@@ -143,7 +143,7 @@ function closeGameOverScreen() {
   gameOver = false;
   document.getElementById("game-over-container").style.display = "none";
   sounds.other.gameOver.pause();
-  exitFullscreen();
+  if (isFullscreen()) exitFullscreen();
 }
 
 /**
@@ -162,7 +162,7 @@ function closeWinScreen() {
   gameWon = false;
   document.getElementById("win-screen-container").style.display = "none";
   sounds.other.gameWon.pause();
-  exitFullscreen();
+  if (isFullscreen()) exitFullscreen();
 }
 
 /**
@@ -180,7 +180,9 @@ function stopGame() {
       showWinScreen();
       sounds.other.gameWon.play();
     }
-    toggleFullscreen();
+    if (isFullscreen()){
+      exitFullscreen();
+    }
   }, 1000);
 }
 
@@ -195,14 +197,6 @@ function clearAllIntervals() {
  * Toggles fullscreen mode.
  */
 function toggleFullscreen() {
-  let elementToFullscreen;
-  if (gameOver) {
-    elementToFullscreen = document.getElementById("game-over-container");
-    enterFullscreen(elementToFullscreen);
-  } else if (gameWon) {
-    elementToFullscreen = document.getElementById("win-screen-container");
-    enterFullscreen(elementToFullscreen);
-  } else
   isFullscreen() ? exitFullscreen() : enterFullscreen(element);
 }
 

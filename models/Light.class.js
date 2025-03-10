@@ -14,7 +14,8 @@ class Light extends MovableObject {
    * @param {number} x - The initial x-coordinate of the light.
    */
   constructor(imgPath, x) {
-    super().setImage(imgPath);
+    super();
+    this.setImage(imgPath);
     this.x = x;
     this.otherDirection = true;
     this.animate();

@@ -152,7 +152,7 @@ class Character extends MovableObject {
         this.handleMovement();
         this.updateIdleTimer();
       }
-      this.updateCameraPosition();
+      // this.updateCameraPosition();
     }, 1000 / 60);
   }
 
@@ -207,13 +207,13 @@ class Character extends MovableObject {
     this.idleTimer += 1000 / 60;
   }
 
-  /**
-   * Updates the camera position based on the character's position.
-   * @method updateCameraPosition
-   */
-  updateCameraPosition() {
-    this.world.camera_x = -this.x + 50;
-  }
+  // /**
+  //  * Updates the camera position based on the character's position.
+  //  * @method updateCameraPosition
+  //  */
+  // updateCameraPosition() {
+  //   this.world.camera_x = -this.x + 50;
+  // }
 
   /**
    * Sets up the animation interval for the character.
