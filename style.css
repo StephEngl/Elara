@@ -267,69 +267,6 @@ canvas {
   background: rgba(0, 0, 0, 0.5);
 }
 
-/* Smartphone */
-@media only screen and (max-width: 720px) {
-  canvas,
-  .canvas_container {
-    width: 100%;
-  }
-
-  .mobile-buttons-right,
-  .control-buttons {
-    right: 30px;
-  }
-}
-
-@media only screen and (max-height: 600px) {
-  h1 {
-    margin-top: 10px;
-    position: absolute;
-    bottom: 0;
-    left: 5%;
-    font-size: 18px;
-    color: antiquewhite;
-    right: 16px;
-    z-index: 50;
-  }
-
-  canvas,
-  .canvas_container {
-    height: 100vh;
-  }
-}
-
-@media (hover: none) and (orientation: portrait) {
-  .orientation-dialog-container,
-  #orientation-dialog {
-    display: flex;
-  }
-
-  .canvas_container,
-  h1 {
-    display: none;
-  }
-}
-
-@media (hover: none) and (orientation: landscape) {
-  .orientation-dialog-container,
-  #orientation-dialog {
-    display: none;
-  }
-
-  .mobile-buttons-left,
-  .mobile-buttons-right {
-    display: flex;
-  }
-
-  .canvas_container,
-  h1,
-  .mobile-buttons-left {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
 #game-over-container,
 #win-screen-container {
   background-image: url("assets/img/backgrounds/bg_game-over.jpg");
@@ -408,16 +345,4 @@ dialog > h2 {
 .impressum-link {
   position: absolute;
   bottom: 16px;
-}
-
-@media only screen and (max-width: 800px) {
-  .endscreen-buttons-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .dialog-container {
-    margin-top: -100px;
-  }
 }
