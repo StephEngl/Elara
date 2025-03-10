@@ -41,6 +41,11 @@
 }
 
 @media (hover: none) and (orientation: landscape) {
+  canvas,
+  .canvas_container {
+    width: 100%;
+  }
+  
   .orientation-dialog-container,
   #orientation-dialog {
     display: none;

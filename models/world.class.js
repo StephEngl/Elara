@@ -299,16 +299,28 @@ class World {
 
   updateCameraPosition() {
     const canvasWidth = this.canvas.width;
+    const deadzoneWidth = canvasWidth * 0.3;
+    const deadzoneOffset = 100;
     const characterX = this.character.x;
+    const characterRelativeX = characterX + this.camera_x;
+    let targetCameraX = this.camera_x;
 
-    // Die Kamera soll sich erst bewegen, wenn der Charakter die Mitte des Canvas erreicht hat
-    let targetCameraX = -characterX + 300;
+    const deadzoneRight = deadzoneWidth + deadzoneOffset;
 
-    // // Begrenze die Kamera-Position, damit sie nicht über den Level hinausgeht
-    targetCameraX = Math.max(targetCameraX, -4000 + canvasWidth);
-    // targetCameraX = Math.min(-680, targetCameraX);
+    // Linke Grenze der Deadzone (verschoben um den Offset)
+    const deadzoneLeft = 0 + deadzoneOffset;
 
-    // Setze die Kamera-Position
+    if (characterRelativeX > deadzoneRight) {
+        // Kamera folgt, wenn Charakter die rechte Grenze verlässt
+        targetCameraX = -(characterX - deadzoneRight);
+    } else if (characterRelativeX < deadzoneLeft) {
+        // Kamera folgt, wenn Charakter die linke Grenze verlässt
+        targetCameraX = -(characterX - deadzoneLeft);
+    }
+
+    targetCameraX = Math.max(targetCameraX, -this.level.level_end_x - canvasWidth
+    );
+    targetCameraX = Math.min(680, targetCameraX);
     this.camera_x = targetCameraX;
   }
 
