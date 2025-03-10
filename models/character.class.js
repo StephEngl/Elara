@@ -89,7 +89,6 @@ class Character extends MovableObject {
     this.animate();
     this.defeatedAnimationFrame = 0;
     this.defeatedAnimationComplete = false;
-    this.deathAnimationInterval = null;
   }
 
   /**
@@ -248,12 +247,38 @@ class Character extends MovableObject {
    */
   handleDeathState() {
     if (!this.defeatedAnimationComplete) {
+      this.playDefeatedSound();
       this.playDefeatedAnimation();
     } else {
       this.remove();
       gameOver = true;
       stopGame();
     }
+  }
+
+  /**
+   * Plays the death animation.
+   * @method playDefeatedAnimation
+   */
+  playDefeatedAnimation() {
+    if (this.defeatedAnimationFrame < this.imagesDying.length) {
+      this.img = this.imageCache[this.imagesDying[this.defeatedAnimationFrame]];
+      this.defeatedAnimationFrame++;
+    } else {
+      this.defeatedAnimationComplete = true;
+    }
+  }
+
+  /**
+   * Plays the sound when character is defeated.
+   * @method playDefeatedSound
+   */
+  playDefeatedSound() {
+    if (!this.soundPlayed) {
+    this.audioCharakterDefeated.play();
+    this.audioCharakterDefeated.playbackRate = 0.7;
+    this.soundPlayed = true;
+  }
   }
 
   /**
@@ -323,28 +348,6 @@ class Character extends MovableObject {
   }
 
   /**
-   * Plays the death animation.
-   * @method playDefeatedAnimation
-   */
-  playDefeatedAnimation() {
-    if (this.defeatedAnimationFrame < this.imagesDying.length) {
-      this.img = this.imageCache[this.imagesDying[this.defeatedAnimationFrame]];
-      this.defeatedAnimationFrame++;
-    } else {
-      this.defeatedAnimationComplete = true;
-    }
-  }
-
-  /**
-   * Plays the sound when character is defeated.
-   * @method playDefeatedSound
-   */
-  playDefeatedSound() {
-    this.audioCharakterDefeated.play();
-    this.audioCharakterDefeated.playbackRate = 0.7;
-  }
-
-  /**
    * Checks if a fireball should be created and creates one if necessary.
    */
   checkFlyingObjects() {
@@ -380,16 +383,15 @@ class Character extends MovableObject {
     this.lastFireballTime = Date.now();
   }
 
-    /**
+  /**
    * Creates a new FlyingObject (fireball).
    * @returns {FlyingObject} The new FlyingObject.
    */
-    createNewFireball() {
-      return new FlyingObject(
-        this.x + this.offset.right,
-        this.y + this.offset.top,
-        this.otherDirection
-      );
-    }
-
+  createNewFireball() {
+    return new FlyingObject(
+      this.x + this.offset.right,
+      this.y + this.offset.top,
+      this.otherDirection
+    );
+  }
 }

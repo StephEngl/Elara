@@ -25,7 +25,7 @@ class BlueSlime extends MovableObject {
     "assets/img/enemies/blue_slime/dead/dead3.png",
   ];
 
-    /**
+  /**
    * Creates a BlueSlime instance.
    * @param {number} x - The initial x-coordinate of the BlueSlime.
    */
@@ -34,10 +34,10 @@ class BlueSlime extends MovableObject {
     this.loadAllImages();
     this.setObjectProperties(x);
     this.loadAudio();
-    this.animate();
+    this.animateEnemies();
   }
 
-    /**
+  /**
    * Loads all images for the BlueSlime.
    */
   loadAllImages() {
@@ -61,47 +61,26 @@ class BlueSlime extends MovableObject {
       left: 50,
     };
     this.speed = 0.3 + Math.random() * 0.4;
-    this.isDying = false;
     this.otherDirection = true;
+    this.dyingTimeout = 600; // Nach 600ms (3 Bilder bei 200ms Intervall) wird das Objekt entfernt
   }
 
-    /**
+  /**
    * Loads audio files for enemy actions.
    * @method loadAudio
    */
-    loadAudio() {
-      this.audioBlueSlimeDefeated = sounds.blueSlime.ko;
-    }
-
-  /**
-   * Animates the BlueSlime's movement and appearance.
-   * Handles walking and dying animations in separate intervals.
-   */
-  animate() {
-    setInterval(() => {
-      this.moveLeft(this.speed, false, true);
-    }, 1000 / 60);
-    setInterval(() => {
-      if (this.isDying) {
-        this.playAnimation(this.imagesDying);
-      }
-      if (this.isPlayerInRange(100)) {
-        this.playAnimation(this.imagesAttacking);
-      } else {
-        this.playAnimation(this.imagesWalking);
-      }
-    }, 200);
+  loadAudio() {
+    this.audioBlueSlimeDefeated = sounds.blueSlime.ko;
   }
 
   /**
-   * Triggers the death sequence for the BlueSlime.
-   * Plays a death sound and schedules the object for removal after 600ms.
+   * Plays the sound when character is defeated.
+   * @method playDefeatedSound
    */
-  die() {
-    this.audioBlueSlimeDefeated.play();
-    this.isDying = true;
-    setTimeout(() => {
-      this.shouldRemove = true;
-    }, 600); // Nach 600ms (3 Bilder bei 200ms Intervall) wird das Objekt entfernt
+  playDefeatedSound() {
+    if (!this.soundPlayed) {
+      this.audioBlueSlimeDefeated.play();
+      this.soundPlayed = true;
+    }
   }
 }

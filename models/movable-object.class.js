@@ -19,6 +19,7 @@ class MovableObject extends DrawableObject {
     this.acceleration = 2.5;
     this.energy = 100;
     this.isDying = false;
+    this.soundPlayed = false;
     this.isPaused = false;
     this.isHurted = false;
   }
@@ -72,6 +73,41 @@ class MovableObject extends DrawableObject {
     return Math.abs(this.x - world.character.x) < distance;
   }
 
+   /**
+   * Animates the little enemies except Endboss, including movement and animation.
+   * Handles walking and dying animations in separate intervals.
+   */
+   animateEnemies() {
+    setInterval(() => {
+      if (!this.isDead()) {
+        this.moveLeft(this.speed, false, true);
+      }
+    }, 1000 / 60);
+    setInterval(() => {
+      if (this.isDead()) {
+        this.playDefeatedSound();
+        this.handleDeathState(this.dyingTimeout);
+      } else {
+        if (this.isPlayerInRange(100)) {
+          this.playAnimation(this.imagesAttacking);
+        } else {
+          this.playAnimation(this.imagesWalking);
+        }
+      }
+    }, 200);
+  }
+
+   /**
+   * Handles the character's death state.
+   * @method handleDeathState
+   */
+   handleDeathState(dyingTimeout) {
+    this.playAnimation(this.imagesDying);
+    setTimeout(() => {
+      this.shouldRemove = true;
+    }, dyingTimeout);
+  }
+
   /**
    * Handles the logic for when the character is hit, reducing energy based on conditions.
    * @param {number} [damage=10] - The amount of damage to inflict.
@@ -111,6 +147,7 @@ class MovableObject extends DrawableObject {
    * @returns {boolean} True if the character is dead, false otherwise.
    */
   isDead() {
+    this.isDying = true;
     return this.energy == 0;
   }
 

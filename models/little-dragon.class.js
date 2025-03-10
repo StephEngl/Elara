@@ -21,6 +21,9 @@ class LittleDragon extends MovableObject {
     "assets/img/enemies/small_dragon/Death4.png",
     "assets/img/enemies/small_dragon/Death4.png",
     "assets/img/enemies/small_dragon/Death4.png",
+    "assets/img/enemies/small_dragon/Death4.png",
+    "assets/img/enemies/small_dragon/Death4.png",
+    "assets/img/enemies/small_dragon/Death4.png",
   ];
 
   /**
@@ -32,7 +35,7 @@ class LittleDragon extends MovableObject {
     this.loadAllImages();
     this.setObjectProperties(x);
     this.loadAudio();
-    this.animate();
+    this.animateEnemies();
   }
 
   /**
@@ -59,8 +62,8 @@ class LittleDragon extends MovableObject {
       left: 30,
     };
     this.speed = 0.3 + Math.random() * 0.4;
-    this.isDying = false;
     this.otherDirection = true;
+    this.dyingTimeout = 600; // Nach 700ms (3,5 Bilder bei 200ms Intervall) wird das Objekt entfernt
   }
 
   /**
@@ -72,33 +75,13 @@ class LittleDragon extends MovableObject {
   }
 
   /**
-   * Animates the LittleDragon, including movement and animation.
-   * Handles walking and dying animations in separate intervals.
+   * Plays the sound when character is defeated.
+   * @method playDefeatedSound
    */
-  animate() {
-    setInterval(() => {
-      this.moveLeft(this.speed, false, true);
-    }, 1000 / 60);
-    setInterval(() => {
-      if (this.isDying) {
-        this.playAnimation(this.imagesDying);
-      }
-      if (this.isPlayerInRange(150) && !this.isAboveGround()) {
-        this.playAnimation(this.imagesAttacking);
-      } else {
-        this.playAnimation(this.imagesWalking);
-      }
-    }, 200);
-  }
-
-  /**
-   * Initiates the dying sequence for the LittleDragon.
-   */
-  die() {
-    this.audioLittleDragonDefeated.play();
-    this.isDying = true;
-    setTimeout(() => {
-      this.shouldRemove = true;
-    }, 800);
+  playDefeatedSound() {
+    if (!this.soundPlayed) {
+      this.audioLittleDragonDefeated.play();
+      this.soundPlayed = true;
+    }
   }
 }

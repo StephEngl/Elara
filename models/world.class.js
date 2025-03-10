@@ -265,7 +265,7 @@ class World {
       if (enemy instanceof Endboss) {
         return;
       }
-      if (this.character.isJumpedOn(enemy) && !enemy.isDying) {
+      if (this.character.isJumpedOn(enemy) && !enemy.isDead()) {
         enemy.reduceEnergy(100);
       }
     });
