@@ -77,6 +77,7 @@ class Render {
       this.addObjectsToMap(this.world.level.enemies);
       this.addObjectsToMap(this.world.flyingObjects);
     }
+    if (this.world.endboss.isActive) this.drawEndbossHearts(this.world.endboss);
     this.addToMap(this.world.character);
     this.addObjectsToMap(this.world.level.collectableObjects);
     this.addObjectsToMap(this.world.level.foregroundObjects);
@@ -95,6 +96,24 @@ class Render {
   drawLights() {
     this.addObjectsToMap(this.world.level.lights);
   }
+
+/**
+ * Draws the Endboss hearts.
+ * @param {Endboss} endboss - The Endboss instance.
+ */
+drawEndbossHearts(endboss) {
+  if (!endboss.isActive) return;
+
+  const spacing = 10;
+  let startX = endboss.x + (endboss.width / 2) - 60;
+  const yPos = endboss.y + 165;
+
+  for (let i = 0; i < endboss.hearts; i++) {
+    const xPos = startX + (i * (new Heart(0, 0).width + spacing));
+    const heart = new Heart(xPos, yPos);
+    heart.draw(this.ctx);
+  }
+}
 
   /**
    * Draws the fixed objects (statusbar, crystalbar).

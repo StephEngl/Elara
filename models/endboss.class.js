@@ -65,6 +65,7 @@ class Endboss extends MovableObject {
   currentImage = 0;
   introPlayed = false;
   attackExecuted = false;
+  hearts = 3;
 
   /**
    * Creates an instance of Endboss.
