@@ -1,5 +1,5 @@
-// let level1;
-// let level2;
+let level1;
+let level2;
 
 /**
  * Initializes level 1 with game objects and configurations
@@ -211,7 +211,7 @@ function initLevel() {
           new RedSlime(getUniqueRandomPosition(usedPositions)),
           new RedSlime(getUniqueRandomPosition(usedPositions)),
           new RedSlime(getUniqueRandomPosition(usedPositions)),
-          new Endboss(sounds.dragonBoss),
+          new Endboss(),
         ],
         [
           new Light("assets/img/backgrounds/lights/lights.png", 0),

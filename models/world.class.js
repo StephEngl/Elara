@@ -2,13 +2,13 @@
  * Represents the game world, handling game logic, drawing, and collision detection.
  */
 class World {
-  level = level1;
   character = new Character(this.level);
   heart = new Heart(20, 30);
   statusbar = new Statusbar();
   crystalbar = new Crystalbar();
   flyingObjects = [];
   runInterval = null;
+  level;
   camera_x = 50;
 
   /**
@@ -16,7 +16,8 @@ class World {
    * @param {HTMLCanvasElement} canvas - The canvas element to draw on.
    * @param {Keyboard} keyboard - The keyboard input handler.
    */
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard, currentLevel) {
+    this.setLevel(currentLevel);
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -25,6 +26,15 @@ class World {
     this.setWorld();
     this.draw();
     this.run();
+  }
+
+  setLevel(currentLevel) {
+    if (currentLevel == 1) {
+      this.level = level1;
+    }
+    if (currentLevel == 2) {
+      this.level = level2;
+    }
   }
 
   /**

@@ -377,6 +377,8 @@ transitionToIdleState() {
     this.audioEndbossDefeated.playbackRate = 1.5;
     setTimeout(() => {
       gameWon = true;
+      // this.isActive = false;
+      // this.isDying = false;
       stopGame();
     }, 1500);
   }

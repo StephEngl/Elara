@@ -17,12 +17,15 @@ function init() {
   element = document.getElementById("canvas");
   fullscreenContainer = document.getElementById("canvas_wrapper");
   getFromLocalStorage();
-  showStartScreen();
+  // if (!currentLevel == 2) {
+
+  // }
   if (currentLevel == 1) {
+    showStartScreen();
     aboveGroundY = 290;
   } else {
     aboveGroundY = 310;
-  };
+  }
 }
 
 /**
@@ -65,7 +68,7 @@ function startGame() {
   initLevel();
   setTimeout(() => {
     hideLoadingSpinner();
-    world = new World(element, keyboard);
+    world = new World(element, keyboard, currentLevel);
     handleSoundState();
   }, 1500);
 }
@@ -132,13 +135,13 @@ function togglePause() {
 function restartGame() {
   closeGameOverScreen();
   closeWinScreen();
-  init();
-  startGame();
 }
 
 function nextLevel() {
+  gameWon = false;
   currentLevel++;
-  restartGame();
+  init();
+  startGame();
 }
 
 /**
@@ -186,6 +189,7 @@ function stopGame() {
   setTimeout(() => {
     clearAllIntervals();
     stopBackgroundMusic();
+    if (currentLevel == 1) nextLevel();
     if (gameOver) {
       showGameOverScreen();
       sounds.other.gameOver.play();
