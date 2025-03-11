@@ -168,7 +168,8 @@ class World {
    * @returns {boolean} - True if the fireball is colliding with the enemy, false otherwise.
    */
   isFireballCollidingWithEnemy(fireball, enemy) {
-    return fireball.isColliding(enemy) && !fireball.isBossFire;
+    const isBossFire = fireball.fireType === 'firebreath' || fireball.fireType === 'foxfire';
+    return fireball.isColliding(enemy) && !isBossFire;
   }
 
   /**
@@ -176,7 +177,7 @@ class World {
    * @param {MovableObject} enemy - The enemy object.
    */
   applyFireballDamage(enemy) {
-    if (enemy instanceof Endboss && enemy.energy > 0) {
+    if ((enemy instanceof Endboss || enemy instanceof EndbossKitsune) && enemy.energy > 0) {
       enemy.reduceHeart();
       enemy.isHurted = true;
     } else {
@@ -189,7 +190,8 @@ class World {
    * @param {FlyingObject} fireball - The boss's fireball object.
    */
   handleBossFireCollision(fireball) {
-    if (fireball.isBossFire && fireball.isColliding(this.character)) {
+    const isBossFire = fireball.fireType === 'firebreath' || fireball.fireType === 'foxfire';
+    if (isBossFire && fireball.isColliding(this.character)) {
       this.character.hit(35);
       this.statusbar.setPercentage(this.character.energy);
       fireball.shouldRemove = true;

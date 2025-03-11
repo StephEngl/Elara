@@ -9,7 +9,6 @@ class EndbossKitsune extends MovableObject {
     "assets/img/enemies/endboss/kitsune/walk3.png",
     "assets/img/enemies/endboss/kitsune/walk4.png",
     "assets/img/enemies/endboss/kitsune/walk5.png",
-
   ];
   imagesIdle = [
     "assets/img/enemies/endboss/kitsune/idle1.png",
@@ -244,24 +243,24 @@ class EndbossKitsune extends MovableObject {
   }
 
   /**
- * Handles the roar sound during the intro state.
- * @param {number} frame - The current frame of the animation.
- */
-handleIntroRoar(frame) {
-  if (frame === 0 && !this.introRoarPlayed) {
-    this.audioEndbossRoar.play();
-    this.introRoarPlayed = true;
+   * Handles the roar sound during the intro state.
+   * @param {number} frame - The current frame of the animation.
+   */
+  handleIntroRoar(frame) {
+    if (frame === 0 && !this.introRoarPlayed) {
+      this.audioEndbossRoar.play();
+      this.introRoarPlayed = true;
+    }
   }
-}
 
-/**
- * Transitions the Endboss to the idle state after the intro is complete.
- */
-transitionToIdleState() {
-  this.changeState(this.EnemyState.IDLE);
-  this.introRoarPlayed = false;
-  this.introPlayed = true;
-}
+  /**
+   * Transitions the Endboss to the idle state after the intro is complete.
+   */
+  transitionToIdleState() {
+    this.changeState(this.EnemyState.IDLE);
+    this.introRoarPlayed = false;
+    this.introPlayed = true;
+  }
 
   /**
    * Handles the logic for the idle state.
@@ -295,7 +294,7 @@ transitionToIdleState() {
   handleAttackLogic(frame) {
     this.playAnimation(this.imagesAttack);
     if (frame === 2 && !this.attackExecuted) {
-      this.checkFirebreathAttack();
+      this.checkFoxfireAttack();
       this.attackExecuted = true;
     }
 
@@ -316,9 +315,9 @@ transitionToIdleState() {
   /**
    * Checks if a firebreath attack can be executed and triggers it.
    */
-  checkFirebreathAttack() {
+  checkFoxfireAttack() {
     if (this.canFire() && !isPaused) {
-      this.createDragonFire();
+      this.createFoxFire();
       this.lastFireballTime = Date.now();
     }
   }
@@ -334,8 +333,13 @@ transitionToIdleState() {
   /**
    * Creates a fireball and adds it to the game world.
    */
-  createDragonFire() {
-    const fireball = new FlyingObject(this.x - 50, this.y + 230, true, true);
+  createFoxFire() {
+    const fireball = new FlyingObject(
+      this.x,
+      this.y + 160,
+      true,
+      "foxfire"
+    );
     world.flyingObjects.push(fireball);
     this.audioEndbossFire.play();
   }

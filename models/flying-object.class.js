@@ -22,39 +22,75 @@ class FlyingObject extends MovableObject {
     "assets/img/enemies/endboss/dragon/Fire_Attack5.png",
     "assets/img/enemies/endboss/dragon/Fire_Attack6.png",
   ];
+  imagesFoxFire = [
+    "assets/img/enemies/endboss/kitsune/fire1.png",
+    "assets/img/enemies/endboss/kitsune/fire2.png",
+    "assets/img/enemies/endboss/kitsune/fire3.png",
+    "assets/img/enemies/endboss/kitsune/fire4.png",
+    "assets/img/enemies/endboss/kitsune/fire5.png",
+    "assets/img/enemies/endboss/kitsune/fire6.png",
+    "assets/img/enemies/endboss/kitsune/fire7.png",
+    "assets/img/enemies/endboss/kitsune/fire8.png",
+    "assets/img/enemies/endboss/kitsune/fire9.png",
+    "assets/img/enemies/endboss/kitsune/fire10.png",
+  ];
 
   /**
    * Creates a FlyingObject instance.
    * @param {number} x - The initial x-coordinate of the flying object.
    * @param {number} y - The initial y-coordinate of the flying object.
    * @param {boolean} isMovingLeft - Indicates whether the object is moving left.
-   * @param {boolean} [isBossFire=false] - Indicates whether the object is a boss's fire (uses different properties).
+   * @param {string} [fireType='fireball'] - Type of fire: 'fireball', 'firebreath', or 'foxfire'.
    */
-  constructor(x, y, isMovingLeft, isBossFire = false) {
+  constructor(x, y, isMovingLeft, fireType = "fireball") {
     super();
-    this.isBossFire = isBossFire;
+    this.fireType = fireType;
     this.otherDirection = isMovingLeft;
-    this.setObjectProperties(x, y, isBossFire);
-    this.loadImages(isBossFire ? this.imagesFireBreath : this.imagesFireball);
-    this.setImage(
-      isBossFire ? this.imagesFireBreath[0] : this.imagesFireball[0]
-    );
+    this.setObjectProperties(x, y, fireType);
+    const images = this.getImagesByType(fireType);
+    this.loadImages(images);
+    this.setImage(images[0]);
     this.currentImageIndex = 0;
-    this.fire(isBossFire ? this.imagesFireBreath : this.imagesFireball);
+    this.fire(images);
   }
 
   /**
-   * Sets the object properties for the flying object.
+   * Sets the object properties for the flying object based on fire type.
    * @param {number} x - The x-coordinate.
    * @param {number} y - The y-coordinate.
-   * @param {boolean} isBossFire - Indicates whether the object is a boss's fire.
+   * @param {string} fireType - Type of fire: 'fireball', 'firebreath', or 'foxfire'.
    */
-  setObjectProperties(x, y, isBossFire) {
+  setObjectProperties(x, y, fireType) {
     this.x = x;
     this.y = y;
-    this.width = isBossFire ? 250 : 50;
-    this.height = isBossFire ? 250 : 50;
-    this.speedX = isBossFire ? 10 : 40;
+    if (fireType === "firebreath") {
+      this.width = 250;
+      this.height = 250;
+      this.speedX = 10;
+    } else if (fireType === "foxfire") {
+      this.width = 100;
+      this.height = 100;
+      this.speedX = 20;
+    } else {
+      this.width = 50;
+      this.height = 50;
+      this.speedX = 40;
+    }
+  }
+
+  /**
+   * Returns the appropriate image array based on the fire type.
+   * @param {string} fireType - Type of fire: 'fireball', 'firebreath', or 'foxfire'.
+   * @returns {string[]} Array of image paths.
+   */
+  getImagesByType(fireType) {
+    if (fireType === "firebreath") {
+      return this.imagesFireBreath;
+    } else if (fireType === "foxfire") {
+      return this.imagesFoxFire;
+    } else {
+      return this.imagesFireball;
+    }
   }
 
   /**

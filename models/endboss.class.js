@@ -240,24 +240,24 @@ class Endboss extends MovableObject {
   }
 
   /**
- * Handles the roar sound during the intro state.
- * @param {number} frame - The current frame of the animation.
- */
-handleIntroRoar(frame) {
-  if (frame === 0 && !this.introRoarPlayed) {
-    this.audioEndbossRoar.play();
-    this.introRoarPlayed = true;
+   * Handles the roar sound during the intro state.
+   * @param {number} frame - The current frame of the animation.
+   */
+  handleIntroRoar(frame) {
+    if (frame === 0 && !this.introRoarPlayed) {
+      this.audioEndbossRoar.play();
+      this.introRoarPlayed = true;
+    }
   }
-}
 
-/**
- * Transitions the Endboss to the idle state after the intro is complete.
- */
-transitionToIdleState() {
-  this.changeState(this.EnemyState.IDLE);
-  this.introRoarPlayed = false;
-  this.introPlayed = true;
-}
+  /**
+   * Transitions the Endboss to the idle state after the intro is complete.
+   */
+  transitionToIdleState() {
+    this.changeState(this.EnemyState.IDLE);
+    this.introRoarPlayed = false;
+    this.introPlayed = true;
+  }
 
   /**
    * Handles the logic for the idle state.
@@ -331,7 +331,12 @@ transitionToIdleState() {
    * Creates a fireball and adds it to the game world.
    */
   createDragonFire() {
-    const fireball = new FlyingObject(this.x - 50, this.y + 230, true, true);
+    const fireball = new FlyingObject(
+      this.x - 50,
+      this.y + 230,
+      true,
+      "firebreath"
+    );
     world.flyingObjects.push(fireball);
     this.audioEndbossFire.play();
   }

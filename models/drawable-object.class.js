@@ -65,11 +65,12 @@ class DrawableObject {
   drawFrame(ctx) {
       if (
         this instanceof EndbossKitsune ||
-        this instanceof FlyingObject
+        this instanceof FlyingObject ||
+        this instanceof Character
       ) {
         ctx.beginPath();
-        ctx.lineWidth = "5";
-        ctx.strokeStyle = "blue";
+        ctx.lineWidth = "3";
+        ctx.strokeStyle = "transparent";
         ctx.rect(this.x, this.y, this.width, this.height);
         ctx.stroke();
         ctx.beginPath();
