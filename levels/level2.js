@@ -194,6 +194,7 @@ function initLevel() {
       new Crystal(),
       new Flower(-500),
       new Flower(3305),
-    ]
+    ],
+    ["level2"]
   );
 }

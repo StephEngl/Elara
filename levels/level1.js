@@ -17,7 +17,7 @@ function initLevel() {
       new BlueSlime(getUniqueRandomPosition(usedPositions)),
       new BlueSlime(getUniqueRandomPosition(usedPositions)),
       new BlueSlime(getUniqueRandomPosition(usedPositions)),
-      new Endboss(sounds.dragonBoss),
+      new Endboss(),
     ],
     [
       new Light("assets/img/backgrounds/lights/lights.png", 0),
@@ -89,6 +89,7 @@ function initLevel() {
       new Crystal(),
       new Flower(-500),
       new Flower(3305),
-    ]
+    ],
+    ["level1"]
   );
 }
