@@ -152,7 +152,6 @@ class Character extends MovableObject {
         this.handleMovement();
         this.updateIdleTimer();
       }
-      // this.updateCameraPosition();
     }, 1000 / 60);
   }
 
@@ -206,14 +205,6 @@ class Character extends MovableObject {
   updateIdleTimer() {
     this.idleTimer += 1000 / 60;
   }
-
-  // /**
-  //  * Updates the camera position based on the character's position.
-  //  * @method updateCameraPosition
-  //  */
-  // updateCameraPosition() {
-  //   this.world.camera_x = -this.x + 50;
-  // }
 
   /**
    * Sets up the animation interval for the character.
@@ -275,10 +266,10 @@ class Character extends MovableObject {
    */
   playDefeatedSound() {
     if (!this.soundPlayed) {
-    this.audioCharakterDefeated.play();
-    this.audioCharakterDefeated.playbackRate = 0.7;
-    this.soundPlayed = true;
-  }
+      this.audioCharakterDefeated.play();
+      this.audioCharakterDefeated.playbackRate = 0.7;
+      this.soundPlayed = true;
+    }
   }
 
   /**

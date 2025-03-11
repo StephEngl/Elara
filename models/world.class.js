@@ -2,10 +2,10 @@
  * Represents the game world, handling game logic, drawing, and collision detection.
  */
 class World {
-  character = new Character();
+  level = level2;
+  character = new Character(this.level);
   statusbar = new Statusbar();
   crystalbar = new Crystalbar();
-  level = level2;
   flyingObjects = [];
   runInterval = null;
   camera_x = 50;
@@ -31,6 +31,7 @@ class World {
    */
   setWorld() {
     this.character.setWorld(this);
+    if (this.level==level2) this.character.y = 310;
   }
 
   /**

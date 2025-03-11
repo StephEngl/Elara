@@ -4,26 +4,29 @@
  */
 class Medusa extends MovableObject {
   imagesWalking = [
-    "assets/img/enemies/small_dragon/Walk1.png",
-    "assets/img/enemies/small_dragon/Walk2.png",
-    "assets/img/enemies/small_dragon/Walk3.png",
-    "assets/img/enemies/small_dragon/Walk4.png",
+    "assets/img/enemies/medusa/Walk1.png",
+    "assets/img/enemies/medusa/Walk2.png",
+    "assets/img/enemies/medusa/Walk3.png",
+    "assets/img/enemies/medusa/Walk4.png",
   ];
   imagesAttacking = [
-    "assets/img/enemies/small_dragon/Attack1.png",
-    "assets/img/enemies/small_dragon/Attack2.png",
-    "assets/img/enemies/small_dragon/Attack3.png",
+    "assets/img/enemies/medusa/Attack1.png",
+    "assets/img/enemies/medusa/Attack2.png",
+    "assets/img/enemies/medusa/Attack3.png",
+    "assets/img/enemies/medusa/Attack4.png",
+    "assets/img/enemies/medusa/Attack5.png",
+    "assets/img/enemies/medusa/Attack6.png",
   ];
   imagesDying = [
-    "assets/img/enemies/small_dragon/Death1.png",
-    "assets/img/enemies/small_dragon/Death2.png",
-    "assets/img/enemies/small_dragon/Death3.png",
-    "assets/img/enemies/small_dragon/Death4.png",
-    "assets/img/enemies/small_dragon/Death4.png",
-    "assets/img/enemies/small_dragon/Death4.png",
-    "assets/img/enemies/small_dragon/Death4.png",
-    "assets/img/enemies/small_dragon/Death4.png",
-    "assets/img/enemies/small_dragon/Death4.png",
+    "assets/img/enemies/medusa/Death1.png",
+    "assets/img/enemies/medusa/Death2.png",
+    "assets/img/enemies/medusa/Death3.png",
+    "assets/img/enemies/medusa/Death4.png",
+    "assets/img/enemies/medusa/Death5.png",
+    "assets/img/enemies/medusa/Death6.png",
+    // "assets/img/enemies/medusa/Death4.png",
+    // "assets/img/enemies/medusa/Death4.png",
+    // "assets/img/enemies/medusa/Death4.png",
   ];
 
   /**
@@ -52,8 +55,8 @@ class Medusa extends MovableObject {
    * @param {number} x - The initial x-coordinate of the LittleDragon.
    */
   setObjectProperties(x) {
-    this.setImage("assets/img/enemies/small_dragon/Walk1.png");
-    this.y = 310;
+    this.setImage("assets/img/enemies/medusa/Walk1.png");
+    this.y = 330;
     this.x = x;
     this.offset = {
       top: 60,

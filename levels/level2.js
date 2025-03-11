@@ -10,10 +10,10 @@ function initLevel() {
   let usedPositions = [];
   level2 = new Level(
     [
-      // new LittleDragon(getUniqueRandomPosition(usedPositions)),
-      // new LittleDragon(getUniqueRandomPosition(usedPositions)),
-      // new LittleDragon(getUniqueRandomPosition(usedPositions)),
-      // new LittleDragon(getUniqueRandomPosition(usedPositions)),
+      new Medusa(getUniqueRandomPosition(usedPositions)),
+      new Medusa(getUniqueRandomPosition(usedPositions)),
+      new Medusa(getUniqueRandomPosition(usedPositions)),
+      new Medusa(getUniqueRandomPosition(usedPositions)),
       new RedSlime(getUniqueRandomPosition(usedPositions)),
       new RedSlime(getUniqueRandomPosition(usedPositions)),
       new RedSlime(getUniqueRandomPosition(usedPositions)),
