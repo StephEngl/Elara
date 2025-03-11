@@ -42,7 +42,7 @@ class Render {
     this.world.camera_x = targetCameraX;
   }
 
-    /**
+  /**
    * Calculates the target camera X position.
    * @param {number} characterRelativeX - The character's relative X position.
    * @param {number} characterX - The character's absolute X position.
@@ -97,29 +97,30 @@ class Render {
     this.addObjectsToMap(this.world.level.lights);
   }
 
-/**
- * Draws the Endboss hearts.
- * @param {Endboss} endboss - The Endboss instance.
- */
-drawEndbossHearts(endboss) {
-  if (!endboss.isActive) return;
+  /**
+   * Draws the Endboss hearts.
+   * @param {Endboss} endboss - The Endboss instance.
+   */
+  drawEndbossHearts(endboss) {
+    if (!endboss.isActive) return;
 
-  const spacing = 10;
-  let startX = endboss.x + (endboss.width / 2) - 60;
-  const yPos = endboss.y + 165;
+    const spacing = 10;
+    let startX = endboss.x + endboss.width / 2 - 60;
+    const yPos = endboss.y + 165;
 
-  for (let i = 0; i < endboss.hearts; i++) {
-    const xPos = startX + (i * (new Heart(0, 0).width + spacing));
-    const heart = new Heart(xPos, yPos);
-    heart.draw(this.ctx);
+    for (let i = 0; i < endboss.hearts; i++) {
+      const xPos = startX + i * (new Heart(0, 0).width + spacing);
+      const heart = new Heart(xPos, yPos);
+      heart.draw(this.ctx);
+    }
   }
-}
 
   /**
    * Draws the fixed objects (statusbar, crystalbar).
    */
   drawFixedObjects() {
     this.ctx.translate(-this.world.camera_x, 0);
+    this.addToMap(this.world.heart);
     this.addToMap(this.world.statusbar);
     this.addToMap(this.world.crystalbar);
     this.ctx.translate(this.world.camera_x, 0);

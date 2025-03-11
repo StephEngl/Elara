@@ -4,6 +4,7 @@
 class World {
   level = level2;
   character = new Character(this.level);
+  heart = new Heart(20, 30);
   statusbar = new Statusbar();
   crystalbar = new Crystalbar();
   flyingObjects = [];

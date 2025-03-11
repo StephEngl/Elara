@@ -12,8 +12,8 @@ class Heart extends DrawableObject {
     super();
     this.x = x;
     this.y = y;
-    this.width = 15;
-    this.height = 15;
-    this.setImage("assets/img/game_objects/heart.svg");
+    this.width = 25;
+    this.height = 25;
+    this.setImage("assets/img/game_objects/heart-status.svg");
   }
 }

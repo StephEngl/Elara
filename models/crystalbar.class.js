@@ -12,7 +12,7 @@ class Crystalbar extends DrawableObject {
   constructor() {
     super();
     this.crystalImage.src = "assets/img/game_objects/fire-crystal.png";
-    this.x = 190;
+    this.x = 210;
     this.y = 25;
     this.width = 30;
     this.height = 30;

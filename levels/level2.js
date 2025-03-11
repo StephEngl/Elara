@@ -72,7 +72,7 @@ function initLevel() {
       new BackgroundObject("assets/img/backgrounds/level-2-bg-layer/ground.png", 720 * 4),
       new BackgroundObject("assets/img/backgrounds/level-2-bg-layer/ground.png", 720 * 5),
     ],
-    ["assets/audio/bg-music-lvl1.mp3"],
+    ["assets/audio/bg-music-lvl2.mp3"],
     [
       new Crystal(300, 200, "assets/img/game_objects/fire-crystal.png"),
       new Crystal(400, 150, "assets/img/game_objects/fire-crystal.png"),
