@@ -117,7 +117,7 @@ class Render {
 
   setYpos(endboss) {
     if (endboss instanceof EndbossKitsune) {
-      return endboss.y;
+      return endboss.y + 50;
     } else {
       return endboss.y + 165;
     }
@@ -168,6 +168,7 @@ class Render {
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
+    mo.drawFrame(this.ctx);
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

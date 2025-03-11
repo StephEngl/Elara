@@ -107,10 +107,10 @@ class EndbossKitsune extends MovableObject {
     this.x = 3800;
     this.y = 140;
     this.offset = {
-      top: 300,
+      top: 100,
       right: 100,
-      bottom: 150,
-      left: 150,
+      bottom: 0,
+      left: 50,
     };
     this.otherDirection = true;
   }

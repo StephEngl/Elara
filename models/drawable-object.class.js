@@ -62,6 +62,25 @@ class DrawableObject {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
+  drawFrame(ctx) {
+      if (
+        this instanceof EndbossKitsune ||
+        this instanceof FlyingObject
+      ) {
+        ctx.beginPath();
+        ctx.lineWidth = "5";
+        ctx.strokeStyle = "blue";
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.lineWidth = "3";
+        ctx.strokeStyle = "teal";
+        let rect = this.getCurrentCollisionRect();
+        ctx.rect(rect.x1, rect.y1, rect.width, rect.height);
+        ctx.stroke();
+      }
+    }
+
   /**
    * Gets the current collision rectangle.
    * @returns {Object} - Object with x1, y1, width, height, x2, y2.
