@@ -1,45 +1,64 @@
+/**
+ * Class representing the rendering logic for the game.
+ */
 class Render {
+  /**
+   * Create a Render instance.
+   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+   * @param {HTMLCanvasElement} canvas - The canvas element.
+   * @param {World} world - The game world object.
+   */
   constructor(ctx, canvas, world) {
     this.ctx = ctx;
     this.canvas = canvas;
-    this.world = world; // Referenz zum world-Objekt
+    this.canvasWidth = this.canvas.width;
+    this.world = world;
+    this.deadzoneRight = this.canvasWidth * 0.3 + 100;
+    this.deadzoneLeft = 50;
   }
 
+  /**
+   * Clears the entire canvas.
+   */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
+  /**
+   * Updates the camera position based on the character's position.
+   */
   updateCameraPosition() {
-    const canvasWidth = this.canvas.width;
-    const deadzoneWidth = canvasWidth * 0.3;
-    const deadzoneOffset = 100;
     const characterX = this.world.character.x;
     const characterRelativeX = characterX + this.world.camera_x;
-    let targetCameraX = this.world.camera_x;
-
-    const deadzoneRight = deadzoneWidth + deadzoneOffset;
-
-    // Linke Grenze der Deadzone (verschoben um den Offset)
-    const deadzoneLeft = 0 + deadzoneOffset;
-
-    if (characterRelativeX > deadzoneRight) {
-      // Kamera folgt, wenn Charakter die rechte Grenze verlässt
-      targetCameraX = -(characterX - deadzoneRight);
-    } else if (characterRelativeX < deadzoneLeft) {
-      // Kamera folgt, wenn Charakter die linke Grenze verlässt
-      targetCameraX = -(characterX - deadzoneLeft);
-    }
-
+    let targetCameraX = this.calculateTargetCameraX(
+      characterRelativeX,
+      characterX
+    );
     targetCameraX = Math.max(
       targetCameraX,
-      -(this.world.level.level_end_x + canvasWidth)
+      -(this.world.level.level_end_x + this.canvasWidth)
     );
     targetCameraX = Math.min(680, targetCameraX);
     this.world.camera_x = targetCameraX;
   }
 
+    /**
+   * Calculates the target camera X position.
+   * @param {number} characterRelativeX - The character's relative X position.
+   * @param {number} characterX - The character's absolute X position.
+   * @returns {number} The calculated target camera X position.
+   */
+  calculateTargetCameraX(characterRelativeX, characterX) {
+    if (characterRelativeX > this.deadzoneRight) {
+      return -(characterX - this.deadzoneRight);
+    } else if (characterRelativeX < this.deadzoneLeft) {
+      return -(characterX - this.deadzoneLeft);
+    }
+    return this.world.camera_x;
+  }
+
   /**
-   * Draws the game elements.
+   * Draws all game elements.
    */
   drawGameElements() {
     this.ctx.translate(this.world.camera_x, 0);
