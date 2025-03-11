@@ -5,7 +5,7 @@ class World {
   character = new Character();
   statusbar = new Statusbar();
   crystalbar = new Crystalbar();
-  level = level1;
+  level = level2;
   flyingObjects = [];
   runInterval = null;
   camera_x = 50;
