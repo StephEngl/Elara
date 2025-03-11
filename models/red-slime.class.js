@@ -2,27 +2,27 @@
  * Represents a blue slime enemy.
  * Extends the MovableObject class.
  */
-class BlueSlime extends MovableObject {
+class RedSlime extends MovableObject {
   imagesWalking = [
-    "assets/img/enemies/blue_slime/walk/walk1.png",
-    "assets/img/enemies/blue_slime/walk/walk2.png",
-    "assets/img/enemies/blue_slime/walk/walk3.png",
-    "assets/img/enemies/blue_slime/walk/walk4.png",
-    "assets/img/enemies/blue_slime/walk/walk5.png",
-    "assets/img/enemies/blue_slime/walk/walk6.png",
-    "assets/img/enemies/blue_slime/walk/walk7.png",
-    "assets/img/enemies/blue_slime/walk/walk8.png",
+    "assets/img/enemies/red_slime/walk/walk1.png",
+    "assets/img/enemies/red_slime/walk/walk2.png",
+    "assets/img/enemies/red_slime/walk/walk3.png",
+    "assets/img/enemies/red_slime/walk/walk4.png",
+    "assets/img/enemies/red_slime/walk/walk5.png",
+    "assets/img/enemies/red_slime/walk/walk6.png",
+    "assets/img/enemies/red_slime/walk/walk7.png",
+    "assets/img/enemies/red_slime/walk/walk8.png",
   ];
   imagesAttacking = [
-    "assets/img/enemies/blue_slime/attack/attack1.png",
-    "assets/img/enemies/blue_slime/attack/attack2.png",
-    "assets/img/enemies/blue_slime/attack/attack3.png",
-    "assets/img/enemies/blue_slime/attack/attack4.png",
+    "assets/img/enemies/red_slime/attack/attack1.png",
+    "assets/img/enemies/red_slime/attack/attack2.png",
+    "assets/img/enemies/red_slime/attack/attack3.png",
+    "assets/img/enemies/red_slime/attack/attack4.png",
   ];
   imagesDying = [
-    "assets/img/enemies/blue_slime/dead/dead1.png",
-    "assets/img/enemies/blue_slime/dead/dead2.png",
-    "assets/img/enemies/blue_slime/dead/dead3.png",
+    "assets/img/enemies/red_slime/dead/dead1.png",
+    "assets/img/enemies/red_slime/dead/dead2.png",
+    "assets/img/enemies/red_slime/dead/dead3.png",
   ];
 
   /**
@@ -51,8 +51,8 @@ class BlueSlime extends MovableObject {
    * @param {number} x - The initial x-coordinate of the BlueSlime.
    */
   setObjectProperties(x) {
-    this.setImage("assets/img/enemies/blue_slime/walk/walk1.png");
-    this.y = 260;
+    this.setImage("assets/img/enemies/red_slime/walk/walk1.png");
+    this.y = 290;
     this.x = x;
     this.offset = {
       top: 120,
