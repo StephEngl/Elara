@@ -7,7 +7,7 @@ let isMuted = false;
 let isPaused = false;
 let gameWon = false;
 let gameOver = false;
-let currentLevel = 1;
+let currentLevel = 2;
 let aboveGroundY;
 
 /**
@@ -17,9 +17,6 @@ function init() {
   element = document.getElementById("canvas");
   fullscreenContainer = document.getElementById("canvas_wrapper");
   getFromLocalStorage();
-  // if (!currentLevel == 2) {
-
-  // }
   if (currentLevel == 1) {
     showStartScreen();
     aboveGroundY = 290;

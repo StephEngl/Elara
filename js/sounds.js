@@ -9,6 +9,9 @@ let sounds = {
   blueSlime: {
     ko: new Audio("assets/audio/slime-defeated.mp3"),
   },
+  medusa: {
+    ko: new Audio("assets/audio/medusa-defeated.mp3"),
+  },
   littleDragon: {
     ko: new Audio("assets/audio/littleDragon-defeated.mp3"),
   },
@@ -20,6 +23,7 @@ let sounds = {
   },
   environment: {
     background: new Audio("assets/audio/bg-music-lvl1.mp3"),
+    backgroundLvl2: new Audio("assets/audio/bg-music-lvl2.mp3"),
     bgBossfight: new Audio("assets/audio/bg-music-boss-lvl1.mp3"),
   },
   collectibles: {

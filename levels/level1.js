@@ -211,7 +211,7 @@ function initLevel() {
           new RedSlime(getUniqueRandomPosition(usedPositions)),
           new RedSlime(getUniqueRandomPosition(usedPositions)),
           new RedSlime(getUniqueRandomPosition(usedPositions)),
-          new Endboss(),
+          new EndbossKitsune(),
         ],
         [
           new Light("assets/img/backgrounds/lights/lights.png", 0),
@@ -348,27 +348,27 @@ function initLevel() {
           ),
           new BackgroundObject(
             "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            0
+            0, 10
           ),
           new BackgroundObject(
             "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720
+            720, 10
           ),
           new BackgroundObject(
             "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720 * 2
+            720 * 2, 10
           ),
           new BackgroundObject(
             "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720 * 3
+            720 * 3, 10
           ),
           new BackgroundObject(
             "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720 * 4
+            720 * 4, 10
           ),
           new BackgroundObject(
             "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720 * 5
+            720 * 5, 10
           ),
         ],
         ["assets/audio/bg-music-lvl2.mp3"],

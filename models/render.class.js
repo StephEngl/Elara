@@ -106,12 +106,20 @@ class Render {
 
     const spacing = 10;
     let startX = endboss.x + endboss.width / 2 - 60;
-    const yPos = endboss.y + 165;
+    const yPos = this.setYpos(endboss);
 
     for (let i = 0; i < endboss.hearts; i++) {
       const xPos = startX + i * (new Heart(0, 0).width + spacing);
       const heart = new Heart(xPos, yPos);
       heart.draw(this.ctx);
+    }
+  }
+
+  setYpos(endboss) {
+    if (endboss instanceof EndbossKitsune) {
+      return endboss.y;
+    } else {
+      return endboss.y + 165;
     }
   }
 

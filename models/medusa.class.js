@@ -24,14 +24,11 @@ class Medusa extends MovableObject {
     "assets/img/enemies/medusa/Death4.png",
     "assets/img/enemies/medusa/Death5.png",
     "assets/img/enemies/medusa/Death6.png",
-    // "assets/img/enemies/medusa/Death4.png",
-    // "assets/img/enemies/medusa/Death4.png",
-    // "assets/img/enemies/medusa/Death4.png",
   ];
 
   /**
-   * Creates a LittleDragon instance.
-   * @param {number} x - The initial x-coordinate of the LittleDragon.
+   * Creates a medusa instance.
+   * @param {number} x - The initial x-coordinate of the medusa.
    */
   constructor(x) {
     super();
@@ -42,7 +39,7 @@ class Medusa extends MovableObject {
   }
 
   /**
-   * Loads all images for the LittleDragon.
+   * Loads all images for the medusa.
    */
   loadAllImages() {
     this.loadImages(this.imagesWalking);
@@ -51,8 +48,8 @@ class Medusa extends MovableObject {
   }
 
   /**
-   * Sets the object properties for the LittleDragon.
-   * @param {number} x - The initial x-coordinate of the LittleDragon.
+   * Sets the object properties for the medusa.
+   * @param {number} x - The initial x-coordinate of the medusa.
    */
   setObjectProperties(x) {
     this.setImage("assets/img/enemies/medusa/Walk1.png");
@@ -74,7 +71,7 @@ class Medusa extends MovableObject {
    * @method loadAudio
    */
   loadAudio() {
-    this.audioLittleDragonDefeated = sounds.littleDragon.ko;
+    this.audiomedusaDefeated = sounds.medusa.ko;
   }
 
   /**
@@ -83,7 +80,7 @@ class Medusa extends MovableObject {
    */
   playDefeatedSound() {
     if (!this.soundPlayed) {
-      this.audioLittleDragonDefeated.play();
+      this.audiomedusaDefeated.play();
       this.soundPlayed = true;
     }
   }

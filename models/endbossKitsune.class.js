@@ -2,54 +2,58 @@
  * Represents the final boss enemy in the game.
  * Extends the MovableObject class.
  */
-class Endboss extends MovableObject {
+class EndbossKitsune extends MovableObject {
   imagesIntro = [
-    "assets/img/enemies/endboss/dragon/Walk1.png",
-    "assets/img/enemies/endboss/dragon/Walk2.png",
-    "assets/img/enemies/endboss/dragon/Walk3.png",
-    "assets/img/enemies/endboss/dragon/Walk4.png",
-    "assets/img/enemies/endboss/dragon/Walk5.png",
-    "assets/img/enemies/endboss/dragon/Walk1.png",
-    "assets/img/enemies/endboss/dragon/Attack1.png",
-    "assets/img/enemies/endboss/dragon/Attack2.png",
-    "assets/img/enemies/endboss/dragon/Attack3.png",
-    "assets/img/enemies/endboss/dragon/Attack4.png",
+    "assets/img/enemies/endboss/kitsune/walk1.png",
+    "assets/img/enemies/endboss/kitsune/walk2.png",
+    "assets/img/enemies/endboss/kitsune/walk3.png",
+    "assets/img/enemies/endboss/kitsune/walk4.png",
+    "assets/img/enemies/endboss/kitsune/walk5.png",
+
   ];
   imagesIdle = [
-    "assets/img/enemies/endboss/dragon/Idle1.png",
-    "assets/img/enemies/endboss/dragon/Idle2.png",
-    "assets/img/enemies/endboss/dragon/Idle3.png",
+    "assets/img/enemies/endboss/kitsune/idle1.png",
+    "assets/img/enemies/endboss/kitsune/idle2.png",
+    "assets/img/enemies/endboss/kitsune/idle3.png",
+    "assets/img/enemies/endboss/kitsune/idle4.png",
+    "assets/img/enemies/endboss/kitsune/idle5.png",
   ];
   imagesWalking = [
-    "assets/img/enemies/endboss/dragon/Walk1.png",
-    "assets/img/enemies/endboss/dragon/Walk2.png",
-    "assets/img/enemies/endboss/dragon/Walk3.png",
-    "assets/img/enemies/endboss/dragon/Walk4.png",
-    "assets/img/enemies/endboss/dragon/Walk5.png",
+    "assets/img/enemies/endboss/kitsune/walk1.png",
+    "assets/img/enemies/endboss/kitsune/walk2.png",
+    "assets/img/enemies/endboss/kitsune/walk3.png",
+    "assets/img/enemies/endboss/kitsune/walk4.png",
+    "assets/img/enemies/endboss/kitsune/walk5.png",
+    "assets/img/enemies/endboss/kitsune/walk6.png",
+    "assets/img/enemies/endboss/kitsune/walk7.png",
+    "assets/img/enemies/endboss/kitsune/walk8.png",
   ];
   imagesAttack = [
-    "assets/img/enemies/endboss/dragon/Attack1.png",
-    "assets/img/enemies/endboss/dragon/Attack2.png",
-    "assets/img/enemies/endboss/dragon/Attack3.png",
-    "assets/img/enemies/endboss/dragon/Attack4.png",
+    "assets/img/enemies/endboss/kitsune/attack1.png",
+    "assets/img/enemies/endboss/kitsune/attack2.png",
+    "assets/img/enemies/endboss/kitsune/attack3.png",
+    "assets/img/enemies/endboss/kitsune/attack4.png",
+    "assets/img/enemies/endboss/kitsune/attack5.png",
+    "assets/img/enemies/endboss/kitsune/attack6.png",
+    "assets/img/enemies/endboss/kitsune/attack7.png",
+    "assets/img/enemies/endboss/kitsune/attack8.png",
+    "assets/img/enemies/endboss/kitsune/attack9.png",
   ];
   imagesHurt = [
-    "assets/img/enemies/endboss/dragon/Hurt1.png",
-    "assets/img/enemies/endboss/dragon/Hurt2.png",
+    "assets/img/enemies/endboss/kitsune/hurt1.png",
+    "assets/img/enemies/endboss/kitsune/hurt2.png",
   ];
   imagesDying = [
-    "assets/img/enemies/endboss/dragon/Death1.png",
-    "assets/img/enemies/endboss/dragon/Death2.png",
-    "assets/img/enemies/endboss/dragon/Death3.png",
-    "assets/img/enemies/endboss/dragon/Death4.png",
-    "assets/img/enemies/endboss/dragon/Death5.png",
-    "assets/img/enemies/endboss/dragon/Death5.png",
-    "assets/img/enemies/endboss/dragon/Death5.png",
-    "assets/img/enemies/endboss/dragon/Death5.png",
-    "assets/img/enemies/endboss/dragon/Death5.png",
-    "assets/img/enemies/endboss/dragon/Death5.png",
-    "assets/img/enemies/endboss/dragon/Death5.png",
-    "assets/img/enemies/endboss/dragon/Death5.png",
+    "assets/img/enemies/endboss/kitsune/dead1.png",
+    "assets/img/enemies/endboss/kitsune/dead2.png",
+    "assets/img/enemies/endboss/kitsune/dead3.png",
+    "assets/img/enemies/endboss/kitsune/dead4.png",
+    "assets/img/enemies/endboss/kitsune/dead5.png",
+    "assets/img/enemies/endboss/kitsune/dead6.png",
+    "assets/img/enemies/endboss/kitsune/dead7.png",
+    "assets/img/enemies/endboss/kitsune/dead8.png",
+    "assets/img/enemies/endboss/kitsune/dead9.png",
+    "assets/img/enemies/endboss/kitsune/dead10.png",
   ];
   hadFirstContact = false;
   EnemyState = {
@@ -65,7 +69,7 @@ class Endboss extends MovableObject {
   currentImage = 0;
   introPlayed = false;
   attackExecuted = false;
-  hearts = 3;
+  hearts = 5;
 
   /**
    * Creates an instance of Endboss.
@@ -97,11 +101,11 @@ class Endboss extends MovableObject {
    * Sets the object properties for the Endboss.
    */
   setObjectProperties() {
-    this.height = 600;
-    this.width = 600;
+    this.height = 300;
+    this.width = 300;
     this.speed = 30;
     this.x = 3800;
-    this.y = -40;
+    this.y = 140;
     this.offset = {
       top: 300,
       right: 100,
