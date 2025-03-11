@@ -166,7 +166,7 @@ class World {
    */
   applyFireballDamage(enemy) {
     if (enemy instanceof Endboss && enemy.energy > 0) {
-      enemy.hit(35);
+      enemy.reduceHeart();
       enemy.isHurted = true;
     } else {
       enemy.reduceEnergy(100);

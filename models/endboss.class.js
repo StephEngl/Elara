@@ -358,6 +358,17 @@ transitionToIdleState() {
   }
 
   /**
+   * Reduces the number of hearts the Endboss has.
+   */
+  reduceHeart() {
+    if (this.hearts > 0) {
+      this.hearts--;
+    }
+
+    if (this.hearts <= 0) this.energy = 0;
+  }
+
+  /**
    * Initiates the dying sequence for the Endboss.
    */
   die() {
