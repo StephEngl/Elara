@@ -2,13 +2,7 @@
  * Represents a level in the game.
  */
 class Level {
-  enemies;
-  lights;
-  backgroundObjects;
-  foregroundObjects;
   level_end_x = 3800;
-  backgroundMusic;
-  collectableObjects;
 
   /**
    * Creates a Level instance.
@@ -25,7 +19,8 @@ class Level {
     backgroundObjects,
     foregroundObjects,
     backgroundMusicSrc,
-    collectableObjects
+    collectableObjects,
+    id
   ) {
     this.enemies = enemies;
     this.lights = lights;
@@ -34,6 +29,7 @@ class Level {
     this.backgroundMusic = new Audio(backgroundMusicSrc);
     this.backgroundMusic.loop = true;
     this.collectableObjects = collectableObjects;
+    this.levelId = id;
   }
 
   /**

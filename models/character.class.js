@@ -80,8 +80,9 @@ class Character extends MovableObject {
   /**
    * Initializes a new instance of the Character class and sets up its properties, animations, and behavior.
    */
-  constructor() {
+  constructor(level) {
     super();
+    this.level = level;
     this.setObjectProperties();
     this.loadAllImages();
     this.loadAudio();
@@ -97,6 +98,7 @@ class Character extends MovableObject {
    */
   setObjectProperties() {
     this.setImage("assets/img/elara/Jump/jump1.png");
+    this.x = 200;
     this.y = 270;
     this.speed = 5;
     this.offset = {
