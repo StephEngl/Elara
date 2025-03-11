@@ -7,6 +7,8 @@ let isMuted = false;
 let isPaused = false;
 let gameWon = false;
 let gameOver = false;
+let currentLevel = 1;
+let aboveGroundY;
 
 /**
  * Initializes the game by getting the canvas element and showing the start screen.
@@ -16,6 +18,11 @@ function init() {
   fullscreenContainer = document.getElementById("canvas_wrapper");
   getFromLocalStorage();
   showStartScreen();
+  if (currentLevel == 1) {
+    aboveGroundY = 290;
+  } else {
+    aboveGroundY = 310;
+  };
 }
 
 /**
@@ -129,6 +136,11 @@ function restartGame() {
   startGame();
 }
 
+function nextLevel() {
+  currentLevel++;
+  restartGame();
+}
+
 /**
  * Displays the game over screen.
  */
@@ -182,7 +194,7 @@ function stopGame() {
       showWinScreen();
       sounds.other.gameWon.play();
     }
-    if (isFullscreen()){
+    if (isFullscreen()) {
       exitFullscreen();
     }
   }, 1000);

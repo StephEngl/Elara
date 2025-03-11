@@ -70,8 +70,8 @@ class Endboss extends MovableObject {
   /**
    * Creates an instance of Endboss.
    */
-  constructor() {
-    super();
+  constructor(level) {
+    super(level);
     this.setImage(this.imagesIntro[1]);
     this.loadAllImages();
     this.loadAudio();

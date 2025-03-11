@@ -48,7 +48,7 @@ class MovableObject extends DrawableObject {
     if (this instanceof Endboss) {
       return false;
     } else {
-      return this.y < 310;
+      return this.y < aboveGroundY;
     }
   }
 

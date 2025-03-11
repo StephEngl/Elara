@@ -2,7 +2,7 @@
  * Represents the game world, handling game logic, drawing, and collision detection.
  */
 class World {
-  level = level2;
+  level = level1;
   character = new Character(this.level);
   heart = new Heart(20, 30);
   statusbar = new Statusbar();
@@ -32,7 +32,7 @@ class World {
    */
   setWorld() {
     this.character.setWorld(this);
-    if (this.level==level2) this.character.y = 310;
+    if (this.level.levelId == "level2") this.character.y = 310;
   }
 
   /**
