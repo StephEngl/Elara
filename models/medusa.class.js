@@ -61,7 +61,7 @@ class Medusa extends MovableObject {
       bottom: 50,
       left: 30,
     };
-    this.speed = 0.3 + Math.random() * 0.4;
+    this.speed = 0.5 + Math.random() * 0.4;
     this.otherDirection = true;
     this.dyingTimeout = 600;
   }

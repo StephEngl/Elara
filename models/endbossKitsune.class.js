@@ -63,7 +63,7 @@ class EndbossKitsune extends MovableObject {
     HURT: "hurting",
     DYING: "dying",
   };
-  fireballCooldown = 2000;
+  fireballCooldown = 1000;
   lastFireballTime = 0;
   currentImage = 0;
   introPlayed = false;
@@ -81,6 +81,7 @@ class EndbossKitsune extends MovableObject {
     this.setObjectProperties();
     this.state = this.EnemyState.INTRO;
     this.stateTimer = 0;
+    this.dyingAnimationPlayed = false;
     this.isActive = false;
   }
 
@@ -102,7 +103,7 @@ class EndbossKitsune extends MovableObject {
   setObjectProperties() {
     this.height = 300;
     this.width = 300;
-    this.speed = 30;
+    this.speed = 20;
     this.x = 3800;
     this.y = 140;
     this.offset = {
@@ -118,10 +119,9 @@ class EndbossKitsune extends MovableObject {
    * Loads audio files for endboss actions.
    */
   loadAudio() {
-    this.audioEndbossRoar = sounds.dragonBoss.roar;
-    this.audioEndbossHurt = sounds.dragonBoss.hurt;
-    this.audioEndbossFire = sounds.dragonBoss.attack;
-    this.audioEndbossDefeated = sounds.dragonBoss.ko;
+    this.audioEndbossLaugh = sounds.kitsune.laugh;
+    this.audioEndbossHurt = sounds.kitsune.hurt;
+    this.audioEndbossDefeated = sounds.kitsune.ko;
   }
 
   /**
@@ -136,7 +136,7 @@ class EndbossKitsune extends MovableObject {
    * Initializes the state machine by setting up a timer to update the state.
    */
   initializeStateMachine() {
-    setInterval(() => this.updateStateMachine(), 250);
+    setInterval(() => this.updateStateMachine(), 150);
   }
 
   /**
@@ -234,7 +234,7 @@ class EndbossKitsune extends MovableObject {
    * @param {number} frame - The current frame of the animation.
    */
   handleIntroLogic(frame) {
-    this.handleIntroRoar(frame);
+    this.handleIntroLaugh(frame);
     this.playAnimation(this.imagesIntro);
     this.moveLeft(this.speed);
     if (this.stateTimer++ > 8) {
@@ -246,9 +246,9 @@ class EndbossKitsune extends MovableObject {
    * Handles the roar sound during the intro state.
    * @param {number} frame - The current frame of the animation.
    */
-  handleIntroRoar(frame) {
+  handleIntroLaugh(frame) {
     if (frame === 0 && !this.introRoarPlayed) {
-      this.audioEndbossRoar.play();
+      this.audioEndbossLaugh.play();
       this.introRoarPlayed = true;
     }
   }
@@ -282,7 +282,7 @@ class EndbossKitsune extends MovableObject {
     this.playAnimation(this.imagesWalking);
     this.moveLeft(this.speed);
 
-    if (this.isPlayerInRange(180)) {
+    if (this.isPlayerInRange(200)) {
       this.changeState(this.EnemyState.ATTACKING);
     }
   }
@@ -334,22 +334,25 @@ class EndbossKitsune extends MovableObject {
    * Creates a fireball and adds it to the game world.
    */
   createFoxFire() {
-    const fireball = new FlyingObject(
-      this.x,
-      this.y + 160,
-      true,
-      "foxfire"
-    );
+    const fireball = new FlyingObject(this.x, this.y + 160, true, "foxfire");
     world.flyingObjects.push(fireball);
-    this.audioEndbossFire.play();
+    this.audioEndbossLaugh.play();
   }
 
   /**
    * Handles the logic for the dying state.
    */
   handleDyingState() {
+    if (!this.dyingAnimationPlayed) {
+      this.isDying = true;
+      this.audioEndbossDefeated.play();
+      this.dyingAnimationPlayed = true;
+    }
     this.playAnimation(this.imagesDying);
-    this.die();
+
+    if (this.currentImage >= this.imagesDying.length - 1) {
+      this.die();
+    }
   }
 
   /**
@@ -380,13 +383,11 @@ class EndbossKitsune extends MovableObject {
    * Initiates the dying sequence for the Endboss.
    */
   die() {
-    this.isDying = true;
-    this.audioEndbossDefeated.play();
-    this.audioEndbossDefeated.playbackRate = 1.5;
+    this.shouldRemove = true;
     setTimeout(() => {
       gameWon = true;
       stopGame();
-    }, 1500);
+    }, 500);
   }
 
   /**

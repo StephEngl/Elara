@@ -211,6 +211,7 @@ function initLevel() {
           new RedSlime(getUniqueRandomPosition(usedPositions)),
           new RedSlime(getUniqueRandomPosition(usedPositions)),
           new RedSlime(getUniqueRandomPosition(usedPositions)),
+          new RedSlime(getUniqueRandomPosition(usedPositions)),
           new EndbossKitsune(),
         ],
         [

@@ -21,6 +21,11 @@ let sounds = {
     hurt: new Audio("assets/audio/endboss-dragon-hurt.mp3"),
     ko: new Audio("assets/audio/endboss-dragon-defeated.mp3"),
   },
+  kitsune: {
+    laugh: new Audio("assets/audio/endboss-kitsune-laugh.mp3"),
+    hurt: new Audio("assets/audio/endboss-kitsune-hurt.mp3"),
+    ko: new Audio("assets/audio/endboss-kitsune-defeated.mp3"),
+  },
   environment: {
     background: new Audio("assets/audio/bg-music-lvl1.mp3"),
     backgroundLvl2: new Audio("assets/audio/bg-music-lvl2.mp3"),

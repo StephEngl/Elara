@@ -7,7 +7,7 @@ let isMuted = false;
 let isPaused = false;
 let gameWon = false;
 let gameOver = false;
-let currentLevel = 2;
+let currentLevel = 1;
 let aboveGroundY;
 
 /**
@@ -132,6 +132,9 @@ function togglePause() {
 function restartGame() {
   closeGameOverScreen();
   closeWinScreen();
+  gameWon = false;
+  init();
+  startGame();
 }
 
 function nextLevel() {
@@ -183,8 +186,7 @@ function closeWinScreen() {
  * Ends the game, clears intervals, stops background music, and shows the appropriate end screen.
  */
 function stopGame() {
-  setTimeout(() => {
-    clearAllIntervals();
+  clearAllIntervals();
     stopBackgroundMusic();
     if (currentLevel == 1) nextLevel();
     if (gameOver) {
@@ -194,11 +196,11 @@ function stopGame() {
     if (gameWon) {
       showWinScreen();
       sounds.other.gameWon.play();
+      currentLevel = 1;
     }
     if (isFullscreen()) {
       exitFullscreen();
     }
-  }, 1000);
 }
 
 /**
