@@ -67,7 +67,7 @@ function startGame() {
     hideLoadingSpinner();
     world = new World(element, keyboard, currentLevel);
     handleSoundState();
-  }, 1500);
+  }, 2000);
 }
 
 /**
@@ -188,7 +188,7 @@ function closeWinScreen() {
 function stopGame() {
   clearAllIntervals();
     stopBackgroundMusic();
-    if (currentLevel == 1) nextLevel();
+    if (currentLevel == 1 && !gameOver) nextLevel();
     if (gameOver) {
       showGameOverScreen();
       sounds.other.gameOver.play();
