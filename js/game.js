@@ -62,6 +62,7 @@ function startGame() {
   document.querySelector(".start-screen-container").style.display = "none";
   document.querySelector(".content").style.display = "flex";
   showLoadingSpinner();
+  clearAllIntervals();
   initLevel();
   setTimeout(() => {
     hideLoadingSpinner();
