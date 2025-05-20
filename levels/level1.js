@@ -9,389 +9,108 @@ let level2;
  */
 function initLevel() {
   let usedPositions = [];
+
+  const bgLayerFolder = currentLevel === 1 ? "level-1-bg-layer" : "level-2-bg-layer";
+  const xPositions = [];
+  for (let x = -720; x <= 720 * 5; x += 720) {
+    xPositions.push(x);
+  }
+
   switch (currentLevel) {
     case 1:
       level1 = new Level(
         [
-          new LittleDragon(getUniqueRandomPosition(usedPositions)),
-          new LittleDragon(getUniqueRandomPosition(usedPositions)),
-          new LittleDragon(getUniqueRandomPosition(usedPositions)),
-          new LittleDragon(getUniqueRandomPosition(usedPositions)),
-          new BlueSlime(getUniqueRandomPosition(usedPositions)),
-          new BlueSlime(getUniqueRandomPosition(usedPositions)),
-          new BlueSlime(getUniqueRandomPosition(usedPositions)),
+          ...Array(4).fill().map(() => new LittleDragon(getUniqueRandomPosition(usedPositions, 300))),
+          ...Array(3).fill().map(() => new BlueSlime(getUniqueRandomPosition(usedPositions, 300))),
           new Endboss(),
         ],
         [
-          new Light("assets/img/backgrounds/lights/lights.png", 0),
-          new Light("assets/img/backgrounds/lights/lights.png", 900),
-          new Light("assets/img/backgrounds/lights/lights.png", 1900),
-          new Light("assets/img/backgrounds/lights/lights.png", 2900),
-          new Light("assets/img/backgrounds/lights/lights.png", 3900),
-          new Light("assets/img/backgrounds/lights/lights.png", 4900),
-        ],
-        [
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/sky.png",
-            -720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/bg_decor.png",
-            -720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/middleground.png",
-            -720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/foreground.png",
-            -720
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/sky.png",
-            0
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/bg_decor.png",
-            0
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/middleground.png",
-            0
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/foreground.png",
-            0
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/sky.png",
-            720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/bg_decor.png",
-            720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/middleground.png",
-            720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/foreground.png",
-            720
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/sky.png",
-            720 * 2
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/bg_decor.png",
-            720 * 2
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/middleground.png",
-            720 * 2
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/foreground.png",
-            720 * 2
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/sky.png",
-            720 * 3
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/bg_decor.png",
-            720 * 3
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/middleground.png",
-            720 * 3
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/foreground.png",
-            720 * 3
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/sky.png",
-            720 * 4
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/bg_decor.png",
-            720 * 4
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/middleground.png",
-            720 * 4
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/foreground.png",
-            720 * 4
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/sky.png",
-            720 * 5
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/bg_decor.png",
-            720 * 5
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/middleground.png",
-            720 * 5
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/foreground.png",
-            720 * 5
+          ...[0, 900, 1900, 2900, 3900, 4900].map(
+            (pos) => new Light("assets/img/backgrounds/lights/lights.png", pos)
           ),
         ],
-        [
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/ground.png",
-            -720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/ground.png",
-            0
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/ground.png",
-            720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/ground.png",
-            720 * 2
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/ground.png",
-            720 * 3
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/ground.png",
-            720 * 4
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-1-bg-layer/ground.png",
-            720 * 5
-          ),
-        ],
+        createBackgroundObjects(bgLayerFolder, xPositions),
+        createGroundObjects(bgLayerFolder, xPositions), 
         ["assets/audio/bg-music-lvl1.mp3"],
         [
           new Crystal(300, 200, "assets/img/game_objects/fire-crystal.png"),
           new Crystal(400, 150, "assets/img/game_objects/fire-crystal.png"),
           new Crystal(500, 200, "assets/img/game_objects/fire-crystal.png"),
+          ...Array(4).fill().map(() => new Crystal()),
           new Crystal(
             3210,
             350,
             "assets/img/game_objects/fire-crystal-large.png",
             5
           ),
-          new Crystal(),
-          new Crystal(),
-          new Crystal(),
-          new Crystal(),
-          new Flower(-500),
-          new Flower(3305),
+          ...[-500, 3305].map(x => new Flower(x))
         ],
         ["level1"]
       );
       break;
     case 2:
       level2 = new Level(
-        [
-          new Medusa(getUniqueRandomPosition(usedPositions)),
-          new Medusa(getUniqueRandomPosition(usedPositions)),
-          new Medusa(getUniqueRandomPosition(usedPositions)),
-          new Medusa(getUniqueRandomPosition(usedPositions)),
-          new RedSlime(getUniqueRandomPosition(usedPositions)),
-          new RedSlime(getUniqueRandomPosition(usedPositions)),
-          new RedSlime(getUniqueRandomPosition(usedPositions)),
-          new RedSlime(getUniqueRandomPosition(usedPositions)),
+        [ ...Array(4).fill().map(() => new Medusa(getUniqueRandomPosition(usedPositions))),
+          ...Array(4).fill().map(() => new RedSlime(getUniqueRandomPosition(usedPositions))),
           new EndbossKitsune(),
         ],
-        [
-          new Light("assets/img/backgrounds/lights/lights.png", 0),
-          new Light("assets/img/backgrounds/lights/lights.png", 900),
-          new Light("assets/img/backgrounds/lights/lights.png", 1900),
-          new Light("assets/img/backgrounds/lights/lights.png", 2900),
-          new Light("assets/img/backgrounds/lights/lights.png", 3900),
-          new Light("assets/img/backgrounds/lights/lights.png", 4900),
+        [ ...[0, 900, 1900, 2900, 3900, 4900].map(
+          pos => new Light("assets/img/backgrounds/lights/lights.png", pos))
         ],
-        [
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/sky.png",
-            -720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/bg_decor.png",
-            -720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/middleground.png",
-            -720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/foreground.png",
-            -720
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/sky.png",
-            0
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/bg_decor.png",
-            0
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/middleground.png",
-            0
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/foreground.png",
-            0
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/sky.png",
-            720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/bg_decor.png",
-            720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/middleground.png",
-            720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/foreground.png",
-            720
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/sky.png",
-            720 * 2
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/bg_decor.png",
-            720 * 2
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/middleground.png",
-            720 * 2
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/foreground.png",
-            720 * 2
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/sky.png",
-            720 * 3
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/bg_decor.png",
-            720 * 3
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/middleground.png",
-            720 * 3
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/foreground.png",
-            720 * 3
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/sky.png",
-            720 * 4
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/bg_decor.png",
-            720 * 4
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/middleground.png",
-            720 * 4
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/foreground.png",
-            720 * 4
-          ),
-
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/sky.png",
-            720 * 5
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/bg_decor.png",
-            720 * 5
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/middleground.png",
-            720 * 5
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/foreground.png",
-            720 * 5
-          ),
-        ],
-        [
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            -720
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            0, 10
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720, 10
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720 * 2, 10
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720 * 3, 10
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720 * 4, 10
-          ),
-          new BackgroundObject(
-            "assets/img/backgrounds/level-2-bg-layer/ground.png",
-            720 * 5, 10
-          ),
-        ],
+        createBackgroundObjects(bgLayerFolder, xPositions),
+        createGroundObjects(bgLayerFolder, xPositions), 
         ["assets/audio/bg-music-lvl2.mp3"],
         [
-          new Crystal(300, 200, "assets/img/game_objects/fire-crystal.png"),
-          new Crystal(400, 150, "assets/img/game_objects/fire-crystal.png"),
-          new Crystal(500, 200, "assets/img/game_objects/fire-crystal.png"),
-          new Crystal(
-            3210,
-            350,
-            "assets/img/game_objects/fire-crystal-large.png",
-            5
-          ),
-          new Crystal(),
-          new Crystal(),
-          new Crystal(),
-          new Crystal(),
-          new Flower(-500),
-          new Flower(3305),
+          ...[ 
+                [300, 200, "assets/img/game_objects/fire-crystal.png"],
+                [400, 150, "assets/img/game_objects/fire-crystal.png"],
+                [500, 200, "assets/img/game_objects/fire-crystal.png"]
+              ].map(([x, y, img]) => new Crystal(x, y, img)),
+          ...Array(4).fill().map(() => new Crystal()),
+          ...[ 
+                [3210, 350],
+                [-400, 350]
+              ].map(([x, y]) => new Crystal(x, y, "assets/img/game_objects/fire-crystal-large.png", 5)),
+          ...[-500, 3305].map(x => new Flower(x))
         ],
         ["level2"]
       );
       break;
   }
+}
+
+/**
+ * Generates an array of BackgroundObject instances for the background layers.
+ * @param {string} folder - The folder name for the background layer images.
+ * @param {number[]} xPositions - The x positions for each tile.
+ * @returns {BackgroundObject[]} Array of background objects.
+ */
+function createBackgroundObjects(folder, xPositions) {
+  const layers = [
+    "sky.png",
+    "bg_decor.png",
+    "middleground.png",
+    "foreground.png"
+  ];
+  let objects = [];
+  for (let x of xPositions) {
+    for (let layer of layers) {
+      objects.push(
+        new BackgroundObject(`assets/img/backgrounds/${folder}/${layer}`, x)
+      );
+    }
+  }
+  return objects;
+}
+
+/**
+ * Generates an array of BackgroundObject instances for the ground layer.
+ * @param {string} folder - The folder name for the ground image.
+ * @param {number[]} xPositions - The x positions for each tile.
+ * @returns {BackgroundObject[]} Array of ground objects.
+ */
+function createGroundObjects(folder, xPositions) {
+  return xPositions.map(
+    x => new BackgroundObject(`assets/img/backgrounds/${folder}/ground.png`, x)
+  );
 }
