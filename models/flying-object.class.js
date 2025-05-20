@@ -98,7 +98,7 @@ class FlyingObject extends MovableObject {
    * @param {string[]} imagesAttack - Array of image paths for the animation.
    */
   fire(imagesAttack) {
-    const animationInterval = setInterval(() => {
+    const animationInterval = setGameInterval(() => {
       this.animateFireball(imagesAttack);
       this.updatePosition();
 

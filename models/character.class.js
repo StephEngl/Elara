@@ -148,7 +148,7 @@ class Character extends MovableObject {
    * @method startMovementInterval
    */
   startMovementInterval() {
-    setInterval(() => {
+    setGameInterval(() => {
       if (!this.isDead()) {
         this.handleMovement();
         this.updateIdleTimer();
@@ -212,7 +212,7 @@ class Character extends MovableObject {
    * @method startAnimationInterval
    */
   startAnimationInterval() {
-    setInterval(() => {
+    setGameInterval(() => {
       this.updateCharacterState();
     }, 200);
   }

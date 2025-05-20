@@ -136,7 +136,7 @@ class EndbossKitsune extends MovableObject {
    * Initializes the state machine by setting up a timer to update the state.
    */
   initializeStateMachine() {
-    setInterval(() => this.updateStateMachine(), 150);
+    setGameInterval(() => this.updateStateMachine(), 150);
   }
 
   /**

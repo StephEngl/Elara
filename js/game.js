@@ -9,6 +9,7 @@ let gameWon = false;
 let gameOver = false;
 let currentLevel = 1;
 let aboveGroundY;
+let gameIntervals = [];
 
 /**
  * Initializes the game by getting the canvas element and showing the start screen.
@@ -40,18 +41,23 @@ function showStartScreen() {
 /**
  * Generates a unique random position with a minimum distance from existing positions.
  * @param {number[]} usedPositions - Array of already used positions.
- * @param {number} [minDistance=300] - Minimum distance between positions.
+ * @param {number} [minDistance=200] - Minimum distance between positions.
  * @returns {number} The new unique random position.
  */
-function getUniqueRandomPosition(usedPositions, minDistance = 300) {
+function getUniqueRandomPosition(usedPositions, minDistance = 200) {
   let newPosition;
+  let tries = 0;
   do {
     newPosition = 500 + Math.random() * 3000;
+    tries++;
+    if (tries > 1000) {
+      console.error("Too much tries to get unique random enemy position!");
+      break;
+    }
   } while (
     usedPositions.some((pos) => Math.abs(pos - newPosition) < minDistance)
   );
   usedPositions.push(newPosition);
-
   return newPosition;
 }
 
@@ -63,12 +69,17 @@ function startGame() {
   document.querySelector(".content").style.display = "flex";
   showLoadingSpinner();
   clearAllIntervals();
+
+  if (world) {
+    world.stopWorld();
+  }
+
   initLevel();
   setTimeout(() => {
     hideLoadingSpinner();
     world = new World(element, keyboard, currentLevel);
     handleSoundState();
-  }, 2000);
+  }, 3000);
 }
 
 /**
@@ -138,6 +149,9 @@ function restartGame() {
   startGame();
 }
 
+/**
+ * Starts next level.
+ */
 function nextLevel() {
   gameWon = false;
   currentLevel++;
@@ -188,26 +202,35 @@ function closeWinScreen() {
  */
 function stopGame() {
   clearAllIntervals();
-    stopBackgroundMusic();
-    if (currentLevel == 1 && !gameOver) nextLevel();
-    if (gameOver) {
-      showGameOverScreen();
-      sounds.other.gameOver.play();
-    }
-    if (gameWon) {
-      showWinScreen();
-      sounds.other.gameWon.play();
-      currentLevel = 1;
-    }
-    if (isFullscreen()) {
-      exitFullscreen();
-    }
+  stopBackgroundMusic();
+  if (currentLevel == 1 && !gameOver) nextLevel();
+  if (gameOver) {
+    showGameOverScreen();
+    sounds.other.gameOver.play();
+    currentLevel = 1;
+  }
+  if (gameWon) {
+    showWinScreen();
+    sounds.other.gameWon.play();
+    currentLevel = 1;
+  }
+  if (isFullscreen()) {
+    exitFullscreen();
+  }
+}
+
+function setGameInterval(fn, ms) {
+  const id = setInterval(fn, ms);
+  gameIntervals.push(id);
+  return id;
 }
 
 /**
  * Clears all active intervals.
  */
 function clearAllIntervals() {
+  gameIntervals.forEach((id) => clearInterval(id));
+  gameIntervals = [];
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 

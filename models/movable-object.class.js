@@ -27,7 +27,7 @@ class MovableObject extends DrawableObject {
    * Applies gravity to the object, causing it to fall.
    */
   applyGravity() {
-    setInterval(() => {
+    setGameInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
@@ -77,12 +77,12 @@ class MovableObject extends DrawableObject {
    * Handles walking and dying animations in separate intervals.
    */
   animateEnemies() {
-    setInterval(() => {
+    setGameInterval(() => {
       if (!this.isDead()) {
         this.moveLeft(this.speed, false, true);
       }
     }, 1000 / 60);
-    setInterval(() => {
+    setGameInterval(() => {
       if (this.isDead()) {
         this.playDefeatedSound();
         this.handleDeathState(this.dyingTimeout);

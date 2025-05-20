@@ -25,7 +25,7 @@ class Light extends MovableObject {
    * Starts the animation for the light object.
    */
   animate() {
-    setInterval(() => {
+    setGameInterval(() => {
       this.moveLeft(this.speed);
     }, 1000 / 60);
   }

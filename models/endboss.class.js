@@ -133,7 +133,7 @@ class Endboss extends MovableObject {
    * Initializes the state machine by setting up a timer to update the state.
    */
   initializeStateMachine() {
-    setInterval(() => this.updateStateMachine(), 250);
+    setGameInterval(() => this.updateStateMachine(), 250);
   }
 
   /**
@@ -261,9 +261,8 @@ class Endboss extends MovableObject {
 
   /**
    * Handles the logic for the idle state.
-   * @param {number} frame - The current frame of the animation.
    */
-  handleIdleLogic(frame) {
+  handleIdleLogic() {
     this.playAnimation(this.imagesIdle);
 
     if (this.stateTimer++ > 6) {
@@ -273,9 +272,8 @@ class Endboss extends MovableObject {
 
   /**
    * Handles the logic for the walking state.
-   * @param {number} frame - The current frame of the animation.
    */
-  handleWalkingLogic(frame) {
+  handleWalkingLogic() {
     this.playAnimation(this.imagesWalking);
     this.moveLeft(this.speed);
 
@@ -376,7 +374,7 @@ class Endboss extends MovableObject {
   /**
    * Initiates the dying sequence for the Endboss.
    */
-  die() {
+  die() {    
     this.isDying = true;
     this.audioEndbossDefeated.play();
     this.audioEndbossDefeated.playbackRate = 1.5;
