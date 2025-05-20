@@ -198,27 +198,59 @@ function closeWinScreen() {
 }
 
 /**
- * Ends the game, clears intervals, stops background music, and shows the appropriate end screen.
+ * Ends the game, clears all intervals, stops background music,
+ * and displays the appropriate end screen depending on the game state.
  */
 function stopGame() {
   clearAllIntervals();
   stopBackgroundMusic();
-  if (currentLevel == 1 && !gameOver) nextLevel();
   if (gameOver) {
-    showGameOverScreen();
-    sounds.other.gameOver.play();
-    currentLevel = 1;
+    handleGameOver();
+    return;
   }
   if (gameWon) {
-    showWinScreen();
-    sounds.other.gameWon.play();
-    currentLevel = 1;
+    handleGameWon();
+    return;
   }
-  if (isFullscreen()) {
-    exitFullscreen();
-  }
+  if (currentLevel == 1) handleNextLevel();
 }
 
+/**
+ * Handles the game over sequence by showing the game over screen,
+ * playing the game over sound, resetting the level, and exiting fullscreen if necessary.
+ */
+function handleGameOver() {
+  showGameOverScreen();
+  sounds.other.gameOver.play();
+  currentLevel = 1;
+  if (isFullscreen()) exitFullscreen();
+}
+
+/**
+ * Handles the game win sequence by showing the win screen,
+ * playing the win sound, resetting the level, and exiting fullscreen if necessary.
+ */
+function handleGameWon() {
+  showWinScreen();
+  sounds.other.gameWon.play();
+  currentLevel = 1;
+  if (isFullscreen()) exitFullscreen();
+}
+
+/**
+ * Handles the transition to the next level and exits fullscreen if necessary.
+ */
+function handleNextLevel() {
+  nextLevel();
+  if (isFullscreen()) exitFullscreen();
+}
+
+/**
+ * Sets a game interval and tracks its ID for later clearing.
+ * @param {Function} fn - The function to execute at each interval.
+ * @param {number} ms - The interval time in milliseconds.
+ * @returns {number} The interval ID.
+ */
 function setGameInterval(fn, ms) {
   const id = setInterval(fn, ms);
   gameIntervals.push(id);
