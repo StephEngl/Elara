@@ -10,6 +10,7 @@ class World {
   runInterval = null;
   level;
   camera_x = 50;
+  running = true;
 
   /**
    * Creates a World instance.
@@ -28,6 +29,11 @@ class World {
     this.run();
   }
 
+  /**
+   * Sets the current level for the world based on the provided level number.
+   * Assigns the corresponding level object (level1 or level2) to this.level.
+   * @param {number} currentLevel - The number of the current level.
+   */
   setLevel(currentLevel) {
     if (currentLevel == 1) {
       this.level = level1;
@@ -57,7 +63,7 @@ class World {
    * Starts the main game loop for background music, flying objects and cleaning up.
    */
   startMainLoop() {
-    this.runInterval = setInterval(() => {
+    this.runInterval = setGameInterval(() => {
       if (!isPaused) {
         if (this.character.x > 3200 && !this.endboss.isActive) {
           this.endboss.activate();
@@ -83,7 +89,7 @@ class World {
    * @property {number} collisionInterval - Interval ID for the collision detection loop.
    */
   startCollisionLoop() {
-    this.collisionInterval = setInterval(() => {
+    this.collisionInterval = setGameInterval(() => {
       if (!isPaused) {
         this.handleCollisions();
       }
@@ -168,7 +174,8 @@ class World {
    * @returns {boolean} - True if the fireball is colliding with the enemy, false otherwise.
    */
   isFireballCollidingWithEnemy(fireball, enemy) {
-    const isBossFire = fireball.fireType === 'firebreath' || fireball.fireType === 'foxfire';
+    const isBossFire =
+      fireball.fireType === "firebreath" || fireball.fireType === "foxfire";
     return fireball.isColliding(enemy) && !isBossFire;
   }
 
@@ -177,7 +184,10 @@ class World {
    * @param {MovableObject} enemy - The enemy object.
    */
   applyFireballDamage(enemy) {
-    if ((enemy instanceof Endboss || enemy instanceof EndbossKitsune) && enemy.energy > 0) {
+    if (
+      (enemy instanceof Endboss || enemy instanceof EndbossKitsune) &&
+      enemy.energy > 0
+    ) {
       enemy.reduceHeart();
       enemy.isHurted = true;
     } else {
@@ -190,7 +200,8 @@ class World {
    * @param {FlyingObject} fireball - The boss's fireball object.
    */
   handleBossFireCollision(fireball) {
-    const isBossFire = fireball.fireType === 'firebreath' || fireball.fireType === 'foxfire';
+    const isBossFire =
+      fireball.fireType === "firebreath" || fireball.fireType === "foxfire";
     if (isBossFire && fireball.isColliding(this.character)) {
       this.character.hit(35);
       this.statusbar.setPercentage(this.character.energy);
@@ -299,6 +310,7 @@ class World {
    * Draws all game elements on the canvas.
    */
   draw() {
+    if (!this.running) return; // Stoppt die Schleife!
     this.render.clearCanvas();
     this.render.updateCameraPosition();
     if (!isPaused) {
@@ -310,5 +322,14 @@ class World {
     requestAnimationFrame(() => {
       self.draw();
     });
+  }
+
+  /**
+   * Stops the world's animation loop (draw()).
+   * Sets the running flag to false to end the draw() loop.
+   * Note: Other intervals are cleared separately via clearAllIntervals().
+   */
+  stopWorld() {
+    this.running = false;
   }
 }
