@@ -379,7 +379,6 @@ class Endboss extends MovableObject {
     this.audioEndbossDefeated.play();
     this.audioEndbossDefeated.playbackRate = 1.5;
     setTimeout(() => {
-      // gameWon = true;
       stopGame();
     }, 1500);
   }
