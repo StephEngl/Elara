@@ -238,12 +238,12 @@ class Character extends MovableObject {
    * @method handleDeathState
    */
   handleDeathState() {
+    gameOver = true;
     if (!this.defeatedAnimationComplete) {
       this.playDefeatedSound();
       this.playDefeatedAnimation();
     } else {
       this.remove();
-      gameOver = true;
       stopGame();
     }
   }
