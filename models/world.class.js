@@ -288,7 +288,7 @@ class World {
    */
   checkJumpingOn() {
     this.level.enemies.forEach((enemy) => {
-      if (enemy instanceof Endboss) {
+      if (enemy instanceof Endboss || enemy instanceof EndbossKitsune) {
         return;
       }
       if (this.character.isJumpedOn(enemy) && !enemy.isDead()) {
