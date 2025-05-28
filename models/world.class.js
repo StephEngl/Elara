@@ -294,6 +294,7 @@ class World {
         return;
       }
       if (this.character.isJumpedOn(enemy) && !enemy.isDead()) {
+        this.character.speedY = 15;
         enemy.reduceEnergy(100);
       }
     });
