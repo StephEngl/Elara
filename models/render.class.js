@@ -102,7 +102,7 @@ class Render {
    * @param {Endboss} endboss - The Endboss instance.
    */
   drawEndbossHearts(endboss) {
-    if (!endboss.isActive) return;
+    if (!endboss.isActive || gameOver === true) return;
 
     const spacing = 10;
     let startX = endboss.x + endboss.width / 2 - 60;
