@@ -218,6 +218,7 @@ function stopGame() {
  * playing the game over sound, resetting the level, and exiting fullscreen if necessary.
  */
 function handleGameOver() {
+  sounds.character.footsteps.muted = true;
   showGameOverScreen();
   sounds.other.gameOver.play();
   currentLevel = 1;
