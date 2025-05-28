@@ -269,7 +269,9 @@ class World {
         ? "crystal"
         : null;
     if (soundKey && !isMuted) {
-      sounds.collectibles[soundKey].play();
+      const itemSoundSource = sounds.collectibles[soundKey];
+      const itemSound = new Audio(itemSoundSource.src);
+      itemSound.play();
     }
   }
 
@@ -310,7 +312,7 @@ class World {
    * Draws all game elements on the canvas.
    */
   draw() {
-    if (!this.running) return; // Stoppt die Schleife!
+    if (!this.running) return; // stops draw loop!
     this.render.clearCanvas();
     this.render.updateCameraPosition();
     if (!isPaused) {
