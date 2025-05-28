@@ -327,14 +327,24 @@ dialog {
 }
 
 dialog > h2 {
-  margin-bottom: 36px;
+  margin-bottom: 0;
   font-weight: 100;
+}
+
+.info-dialog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.dialog-note {
+  margin-bottom: -8px;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
+  padding-top: 16px;
 }
 
 .impressum-link {

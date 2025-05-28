@@ -50,24 +50,29 @@
       <div class="start-screen-container">
         <div class="text-container">
           <h2>Willkommen zu Elara und der verzauberte Hain</h2>
+
+          <!-- Info Dialog -->
           <dialog id="dialog">
-            <h2>Tastenbelegung</h2>
-            <div class="keyboard-explanation-container">
-              <div class="key"><span>◀</span></div>
-              <div class="key key-space"><span>SPRUNG</span></div>
-              <div class="key"><span>▶</span></div>
-              <div class="key key-text"><span>F(ire)</span></div>
-              <div class="key key-text"><span>P(ause)</span></div>
+            <div class="info-dialog-container">
+              <h2>Tastenbelegung</h2>
+              <span class="dialog-note">Note: You will have the best gaming experience by using Google Chrome.</span>
+              <div class="keyboard-explanation-container">
+                <div class="key"><span>◀</span></div>
+                <div class="key key-space"><span>SPRUNG</span></div>
+                <div class="key"><span>▶</span></div>
+                <div class="key key-text"><span>F(ire)</span></div>
+                <div class="key key-text"><span>P(ause)</span></div>
+              </div>
+              <div class="button-container">
+                <button
+                  onclick="document.getElementById('dialog').close()"
+                  class="start-button">
+                  Schließen
+                </button>
             </div>
-            <div class="button-container">
-              <button
-                onclick="document.getElementById('dialog').close()"
-                class="start-button"
-              >
-                Schließen
-              </button>
-            </div>
+          </div>
           </dialog>
+
           <div class="start-screen-assets-container">
             <button onclick="startGame()" class="start-button" autofocus>
               Spiel starten
@@ -83,17 +88,20 @@
         <div class="impressum-link"><a href="impressum.html">Impressum</a></div>
       </div>
       <div class="content">
+
         <!-- Orientation Dialog -->
         <div class="orientation-dialog-container">
           <dialog id="orientation-dialog">
             <p>Please, turn your device to play</p>
           </dialog>
         </div>
+
         <!-- Main Screen -->
         <h1>Elara und der verzauberte Hain</h1>
         <div class="canvas_container">
           <div class="canvas_wrapper" id="canvas_wrapper">
             <canvas width="720px" height="480px" id="canvas"> </canvas>
+
             <!-- Loading Spinner -->
             <div id="loading-spinner" class="spellbook-container">
               <div class="spinner-content">
@@ -105,6 +113,7 @@
               </div>
               <div class="flame-effect"></div>
             </div>
+
             <!-- Mobile Buttons -->
             <div class="mobile-buttons-left">
               <button
@@ -164,6 +173,7 @@
                 />
               </button>
             </div>
+
             <!-- Controlbuttons -->
             <div class="control-buttons">
               <button
@@ -205,6 +215,7 @@
           </div>
         </div>
       </div>
+
       <!-- Game Over Screen -->
       <div id="game-over-container">
         <div class="dialog-container">
@@ -228,6 +239,7 @@
           </div>
         </div>
       </div>
+
       <!-- Win Screen -->
       <div id="win-screen-container">
         <div class="dialog-container">
