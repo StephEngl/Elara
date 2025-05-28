@@ -175,7 +175,6 @@ function closeGameOverScreen() {
   gameOver = false;
   document.getElementById("game-over-container").style.display = "none";
   sounds.other.gameOver.pause();
-  if (isFullscreen()) exitFullscreen();
 }
 
 /**
@@ -194,7 +193,6 @@ function closeWinScreen() {
   gameWon = false;
   document.getElementById("win-screen-container").style.display = "none";
   sounds.other.gameWon.pause();
-  if (isFullscreen()) exitFullscreen();
 }
 
 /**
@@ -242,7 +240,6 @@ function handleGameWon() {
  */
 function handleNextLevel() {
   nextLevel();
-  if (isFullscreen()) exitFullscreen();
 }
 
 /**
